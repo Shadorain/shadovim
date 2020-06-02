@@ -1,90 +1,92 @@
-" ----------------------------------------------------- "
-"                                                       "
-"                   NEOVIM CONFIG                       "
-"                                                       "
-" ----------------------------------------------------- "
+" ============================================================================== "
+"   _________.__                .___     .__       .__  __         .__           "
+"  /   _____/|  |__ _____     __| _/____ |__| ____ |__|/  |_ ___  _|__| _____    "
+"  \_____  \ |  |  \\__  \   / __ |/  _ \|  |/    \|  \   __\\  \/ /  |/     \   "
+"  /        \|   Y  \/ __ \_/ /_/ (  <_> )  |   |  \  ||  |   \   /|  |  Y Y  \  "
+" /_______  /|___|  (____  /\____ |\____/|__|___|  /__||__| /\ \_/ |__|__|_|  /  "
+"         \/      \/     \/      \/              \/         \/              \/   "
+" ============================================================================== "
 " ----- Plugs ----- " {{{
 call plug#begin('~/.local/share/nvim/plugged')
-    Plug 'masukomi/vim-markdown-folding'
-    "<--General
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-	Plug 'terryma/vim-multiple-cursors'
-    Plug 'junegunn/goyo.vim'
-    Plug 'liuchengxu/vim-which-key'
-    Plug 'https://github.com/chrisbra/Colorizer.git'
-    Plug 'itchyny/lightline.vim'
-    Plug 'godlygeek/tabular'
-    Plug 'mattn/calendar-vim'
-    Plug 'vifm/vifm.vim'
-    Plug 'vimwiki/vimwiki'
-    "Plug 'https://github.com/vimwiki/vimwiki.git'
-    Plug 'ChristianChiarulli/codi.vim'
-    "Plug 'metakirby5/codi.vim'
-    Plug 'ap/vim-css-color'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-    Plug 'unblevable/quick-scope'
-    "Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'tpope/vim-surround'
-    Plug 'sainnhe/lightline_foobar.vim'
-    "Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'justinmk/vim-sneak'
-    Plug 'mhinz/vim-startify'
-    "<--Git Integration
-    Plug 'mhinz/vim-signify'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb'
-    Plug 'junegunn/gv.vim'
-    "<--Nerd tree
-    Plug 'preservim/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'tpope/vim-commentary'
-    "<--Syntax
-    "Plug 'davidhalter/jedi-vim'
-    Plug 'vim-pandoc/vim-pandoc-syntax'
-    Plug 'justinmk/vim-syntax-extra'    
-    "<--Snippets
-    "Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-
+    "<--General-----------------------------------------------------------------------------------$
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "To have the plug right under this one
+    Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
+    Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
+    "<--Ease of use-------------------------------------------------------------------------------$
+    Plug 'unblevable/quick-scope' "Saves SO MUCH TIME when using the f/F keys, just use it!
+    Plug 'easymotion/vim-easymotion' "Highly advanced real time more efficient search! haha
+    Plug 'tpope/vim-surround' "Surrounds your braces, parens, quotes etc to save you a keypress
+    Plug 'tpope/vim-commentary' "Makes commenting 100x easier and better. Just use it ull see
+    "<--That Rice Stuff---------------------------------------------------------------------------$
+    Plug 'itchyny/lightline.vim' "Adds that sexy bar your seeing at bottom of ur vim window
+    Plug 'godlygeek/tabular' "Makes having sexy code so much easier: organized your tabbed stuff
+    Plug 'junegunn/goyo.vim' "Adds like a focus mode to vim, its quite nice tbh
+    Plug 'mhinz/vim-startify' "I find this to be one of the coolest, sexiest, and most useful plugs
+        "it allows for a start screen in vim with whatever the hell u want, and its amazing
+    "<--Git Integration---------------------------------------------------------------------------$
+    Plug 'mhinz/vim-signify' "Extremely useful, handles git changes/deletes/additions in a sidebar
+    Plug 'tpope/vim-fugitive' "`:Git`&`:G...` functionality, can do alot with this bad boy
+    Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
+    Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
+    "<--Syntax------------------------------------------------------------------------------------$
+    Plug 'plasticboy/vim-markdown' "Def keep if u use md. Comes quite in handy for alot of md stuff
+    Plug 'sheerun/vim-polyglot' "Adds some better syntax for quite a few languages
+    "<--Snippets----------------------------------------------------------------------------------$
+    Plug 'honza/vim-snippets' "Paired with coc-snippets; adds quite a few premade snippets
+    "<--Coc Suite (Most of it is handled by coc itself)-------------------------------------------$
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} "Massive suite with alotta good stuff!
+    "coc-clangd, coc-highlight, coc-lists, coc-python, coc-snippets, coc-todolists, coc-vimlsp, coc-yank
+    "<--Unused Plugins------------------------------------------------------------------$ {{{
+    " Plug 'justinmk/vim-sneak' "Tbh not yet sold on this guy, i kinda liked default s/S key
+    " Plug 'ChristianChiarulli/codi.vim' "Nice lil REPL for some langs, I dont use it much tho
+    " Plug 'justinmk/vim-syntax-extra' "Better syntax highlighting for some langs
+    " Plug 'vim-pandoc/vim-pandoc-syntax' "If you are to use latex or similar in vim (ofc you are!)
+    " Plug 'liuchengxu/vim-which-key' "Very goood for beginners to get used to using leader keys
+	" Plug 'terryma/vim-multiple-cursors' "Allows for multiple cursors, can just be done by default tho
+    " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' } "Eh dont use much
+    "<--Nerd tree---(Currently do not use anymore so have commented out)--------------------------$ {{{
+    " Plug 'mattn/calendar-vim' "niftly little plug that can interract with vimwiki diary!
+    " Plug 'preservim/nerdtree' "Base plugin: Opens a directory structure split for you to browse files
+    " Plug 'Xuyuanp/nerdtree-git-plugin' "Git integration into NerdTree
+    " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "Syntax highlighting for that NerdTree
+    " Plug 'ryanoasis/vim-devicons' "Some icons to make NerdTree a lil prettier (all bout that rice) "}}}
+    " }}}
 call plug#end()
-
+"<---Vim Plug Installer-------------------------------------------------------------$ {{{
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" }}}
 "}}}
 " ----- General ----- " {{{
-syntax enable
-set termguicolors
+"<--Colors----------------------------------------------------------------------$
+syntax enable "Allows for syntax highlighting
+set termguicolors "Allows for hex coloring
+set t_ut= "No idea lols
+colorscheme shado "Set your colorscheme here (mine not too bad)
+"<--Tab Settings----------------------------------------------------------------$
 set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-set number                     " Show current line number
-set relativenumber             " Show relative line numbers
+"<--Numbering-------------------------------------------------------------------$
+set number
+set relativenumber
 filetype plugin on
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
-set splitright
-nnoremap <silent> <leader>      :<C-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<C-u>WhichKey  ','<CR>
-set t_ut=
 set nocompatible
-colorscheme shado
-"set clipboard+=unnamedplus
 set foldmethod=marker
-"au BufRead,BufNewFile *.md		setfiletype md
+"set clipboard+=unnamedplus
 " --- Custom Key Commands! --- {{{
 " Copies selected text from split window and paste in other 
 vnoremap <F3> y<c-w>wp<c-w>gv
 " Turns off all line numbers
 nnoremap <F3> :set invnumber invrelativenumber<CR>
+
+"<---Fzf Commands--->
 map <C-f> <esc><esc>:Files!<CR>
 map <C-A-f> <esc><esc><C-w>v:Files!<CR>
 inoremap <C-f> <esc><esc>:BLines!<CR>
@@ -135,9 +137,14 @@ noremap <C-\>j <esc><esc>jyyPxVr=A #<esc>:Commentary<CR>
 " }}}
 "}}}
 " ----- Plug Config ----- " {{{
-" Plug >-- Snippets " {{{
-" COC Snippets
-"" <tab> to trigger and
+" Plug >-- CoC " {{{
+" Sets <Tab> as autocomplete menu down
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Sub-Plug >-- coc-snippets " {{{
 let g:UltiSnipsExpandTrigger = "<NUL>"
 inoremap <silent><expr> <C-l>
       \ pumvisible() ? coc#_select_confirm() :
@@ -151,32 +158,7 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-
-" Use <C-l> for trigger snippet expand.
-"imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-"vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-"let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-"let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-"imap <C-j> <Plug>(coc-snippets-expand-jump)
-
 " }}}
-" Plug >-- CoC " {{{
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "}}}
 " Plug >-- Sneak " {{{
 let g:sneak#prompt = '❱'
