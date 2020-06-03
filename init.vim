@@ -66,6 +66,9 @@ syntax enable "Allows for syntax highlighting
 set termguicolors "Allows for hex coloring
 set t_ut= "No idea lols
 colorscheme shado "Set your colorscheme here (mine not too bad)
+"<--Map Leader Key--------------------------------------------------------------$
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
 "<--Tab Settings----------------------------------------------------------------$
 set expandtab
 set shiftwidth=4
@@ -74,13 +77,13 @@ set tabstop=4
 "<--Numbering-------------------------------------------------------------------$
 set number
 set relativenumber
-filetype plugin on
-let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
+"<--Misc------------------------------------------------------------------------$
 set nocompatible
 set foldmethod=marker
+filetype plugin on
 "set clipboard+=unnamedplus
 " --- Custom Key Commands! --- {{{
+"<---General Keys--->
 " Copies selected text from split window and paste in other 
 vnoremap <F3> y<c-w>wp<c-w>gv
 " Turns off all line numbers
@@ -92,28 +95,17 @@ map <C-A-f> <esc><esc><C-w>v:Files!<CR>
 inoremap <C-f> <esc><esc>:BLines!<CR>
 nnoremap g<C-c> <esc><esc>:BCommits!<CR>
 
-" Remap arrow keys to resize splits
+"<---Arrow keys to resize splits--->
 nnoremap <silent><Up>    :resize +2<CR>
 nnoremap <silent><Down>  :resize -2<CR>
 nnoremap <silent><Left>  :vertical resize +2<CR>
 nnoremap <silent><Right> :vertical resize -2<CR>
 
-nmap <leader>bl :ls<CR>
-nmap <silent><leader>bn :bnext<CR>
-nmap <silent><leader>bp :bprevious<CR>
-nmap <silent><leader>bd :bdelete<CR>
-
-nmap <leader>ga :Gwrite<CR>
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gd :Gdiff<CR>
-nmap <leader>gc :Gcommit<CR>
-nmap <leader>gp :Gpush<CR>
-nmap <leader>gb :Gblame<CR>
-nmap <leader>gl :Glog<CR>
-
+"<---Adds semi colon to EOL--->
 inoremap <A-,> <Esc>A;<Esc>
 nnoremap <A-,> A;<Esc>
 
+"<---Split Management--->
 tnoremap <C-A-h> <C-\><C-N><C-w>h
 tnoremap <C-A-j> <C-\><C-N><C-w>j
 tnoremap <C-A-k> <C-\><C-N><C-w>k
@@ -126,15 +118,57 @@ nnoremap <C-A-h> <C-w>h
 nnoremap <C-A-j> <C-w>j
 nnoremap <C-A-k> <C-w>k
 nnoremap <C-A-l> <C-w>l
-
 map <leader>th <C-w>t<C-w>H
 map <leader>tk <C-w>t<C-w>K
 
-" Will create a commented line the size of the line below/above
-let @l='4lr#'
+"<---Create lines to split up files--->
 noremap <C-\>k <esc><esc>kyypxVr=A #<esc>:Commentary<CR>
 noremap <C-\>j <esc><esc>jyyPxVr=A #<esc>:Commentary<CR>
+
+"<---Leader Keybinds------------------------------------------------------$ {{{
+"Search and Replace
+nnoremap <leader>R <esc><esc>:%s///gcI<left><left><left><left><left>
+noremap <leader>S :Startify<CR>
+noremap <leader>T :tabnew<CR>
+"<---Buffer Commands--->
+nmap <leader>bl :ls<CR>
+nmap <silent><leader>bn :bnext<CR>
+nmap <silent><leader>bp :bprevious<CR>
+nmap <silent><leader>bd :bdelete<CR>
+"<---Git Commands--->
+nmap <leader>ga :Gwrite<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gp :Gpush<CR>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gB :Gbrowse<CR>
+nmap <leader>gl :Glog<CR>
+"<---Calendar(Left, Right, Bottom, Fullscreen)--->
+noremap <leader>cal :Calendar<CR>
+noremap <leader>car :CalendarVR<CR>
+noremap <leader>cab :CalendarH<CR>
+noremap <leader>caf :CalendarT<CR>
+"<---Commentary--->
+noremap <leader>// gcc
+"<---Split Extra(delete, balance)--->
+noremap Ww <C-W>c
+noremap Wb <C-W>=
+"<---VimWiki--->
+nmap <Leader>wb :VimwikiTabIndex<CR>
+noremap <leader>wd :VimwikiDeleteLink<CR>
+noremap <leader>wh :Vimwiki2HTML<CR>
+noremap <leader>whh :Vimwiki2HTMLBrowse<CR>
+noremap <leader>wi :VimwikiDiaryIndex<CR>
+noremap <leader>wr :VimwikiRenameLink<CR>
+noremap <leader>ws :VimwikiUISelect<CR>
+noremap <leader>wb :VimwikiTabIndex<CR>
+noremap <leader>ww :VimwikiIndex<CR>
+noremap <leader>wg :VimwikiDiaryGenerateLinks<CR>
+noremap <leader>wtt :n ~/vimwiki/Life/TODO.md<CR>
+noremap <leader>wtc :VimwikiToggleListItem^ddmaGo\<Esc>pI\<right>\<right>~~\<Esc>A~~\<Esc>^db'a
 " }}}
+"}}}
 "}}}
 " ----- Plug Config ----- " {{{
 " Plug >-- CoC " {{{
@@ -160,14 +194,10 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 " }}}
 "}}}
-" Plug >-- Sneak " {{{
-let g:sneak#prompt = '❱'
-"}}}
 " Plug >-- Startify " {{{
-let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_session_dir = '~/.config/nvim/session' "Directory for sessions
 let g:startify_enable_special = 0
-" let g:startify_session_autoload = 1
-" Lists
+"<---Lists--->
 let g:startify_lists = [
     \ { 'type': 'sessions',    'header': ['    Sessions']                    },
     \ { 'type': 'bookmarks',   'header': ['    Bookmarks']                   },
@@ -175,9 +205,9 @@ let g:startify_lists = [
     \ { 'type': 'dir',         'header': ['    Current Directory '.getcwd()] },
     \ ]
 
-" Bookmarks
+"<---Bookmarks(Tap key to enter)--->
 let g:startify_bookmarks = [
-    \ { 'nv' : '~/.config/nvim/init.vim'                                                         },
+    \ { 'nv': '~/.config/nvim/init.vim'                                                          },
     \ { 's' : '~/.config/sxhkd/sxhkdrc'                                                          },
     \ { 'b' : '~/.config/bspwm/bspwmrc'                                                          },
     \ { 'k' : '~/.config/kitty/kitty.conf'                                                       },
@@ -185,6 +215,7 @@ let g:startify_bookmarks = [
     \ { 'c' : '~/.config/picom.conf'                                                             },
     \ { 'S' : '~/Documents/PY-Projects/Shadochan/shadochan.py'                                   },
     \ { 'nc': '~/.config/nvim/colors/shado.vim'                                                  },
+    \ { 'nw': '~/.config/nvim/snippets/vimwiki.snippets'                                                  },
     \ { 'nl': '.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim'  },
     \ { 'w' : '~/vimwiki/index.md'                                                               },
     \ { 'm' : '~/.config/miscellaneous'                                                          },
@@ -201,7 +232,8 @@ let g:startify_bookmarks = [
     \ { 'ps':  '~/Pictures/Screenshots/'                                                         },
     \ { 'M' : '~/Music/'                                                                         },
     \ ]
-" Ascii Art
+    
+"<---Ascii Art(Displayed as title)--->
 let g:startify_custom_header = [
     \ '    _________  __                  ___                        __            ',       
     \ '   /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____     ',
@@ -210,58 +242,26 @@ let g:startify_custom_header = [
     \ '  /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /   ',
     \ '          \/       \/      \/      \/                    \/          \/     ',
     \ ]
-" Autostart nerdtree with Startify
-"autocmd VimEnter *                                                                 
-"    \   if !argc()                                                         
-"    \ |   Startify                                                         
-"    \ |   NERDTree                                                         
-"    \ |   wincmd w                                                         
-"    \ | endif
 " }}}
 " Plug >-- Signify " {{{
+"<---Signs(Are displayed on a side bar to show status)--->
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '_'
 let g:signify_sign_delete_first_line = '‾'
 let g:signify_sign_change            = '~'
-let g:signify_sign_show_count = 0 "-\
-let g:signify_sign_show_text = 1  "-+--- Gets rid of extra numbers
-" Jump through Hunks
-"nmap <leader>gj <plug>(signify-next-hunk)
-"nmap <leader>gk <plug>(signify-prev-hunk)
-"nmap <leader>gJ 9999<leader>gJ
-"nmap <leader>gK 9999<leader>gK
-" }}}
-" Plug >-- Fugitive/Rhubarb " {{{
-" }}}
-" Plug >-- FZF " {{{
-let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-    \ 'bg':      ['bg', 'Normal'],
-    \ 'hl':      ['fg', 'Comment'],
-    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-    \ 'hl+':     ['fg', 'Statement'],
-    \ 'info':    ['fg', 'PreProc'],
-    \ 'border':  ['fg', 'Ignore'],
-    \ 'prompt':  ['fg', 'Conditional'],
-    \ 'pointer': ['fg', 'Exception'],
-    \ 'marker':  ['fg', 'Keyword'],
-    \ 'spinner': ['fg', 'Label'],
-    \ 'header':  ['fg', 'Comment'] }
-" }}}
-" Plug >-- NERDTree " {{{
-"autocmd vimenter * NERDTree  " will auto open nerdtree
-map <C-t> :NERDTreeToggle<CR> 
-" maps ctrl+t to open nerdtree
+let g:signify_sign_show_count = 0 "\
+let g:signify_sign_show_text = 1  " Gets rid of extra numbers
+"<---Jump through Hunks--->
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
+nmap <leader>gJ 9999<leader>gJ
+nmap <leader>gK 9999<leader>gK
 " }}}
 " Plug >-- Lightline " {{{
 set laststatus=2
-
-if !has('gui_running')
-  set t_Co=256
-endif
 set noshowmode
 
+"<---Main Bar Configuration--->
 let g:lightline = { 
     \ 'colorscheme': 'deus',
     \ 'active': {
@@ -270,214 +270,40 @@ let g:lightline = {
     \   'right': [ [ 'lineinfo' ],
     \               [ 'percent' ] ]
     \ },
-    \ 'component_function': {
-    \   'gitbranch': 'FugitiveHead'
-    \ },
     \ }
 
+"<---Config for tabs--->
 let g:lightline.tabline = { 
             \ 'left': [ [ 'tabs' ] ],
             \ 'right': [ [  ] ] }
 
 " }}}
-" Plug >-- Vifm " {{{
-"map <Leader>vf :Vifm<CR>
-"map <Leader>vs :VsplitVifm<CR>
-"map <Leader>vh :SplitVifm<CR>
-"map <Leader>dv :DiffVifm<CR>
-"map <Leader>tv :TabVifm<CR>
-"let g:vifm_replace_netrw = 1                                                                  
-"let g:vifm_replace_netrw_cmd = '/home/shadow/.config/vifm/scripts/vifmrun'                    
-"let g:NERDTreeHijackNetrw = 1                                                                 
-"let g:loaded_netrw       = 1                                                                  
-"let g:loaded_netrwPlugin = 1
-" }}}
-" Plug >-- Codi " {{{
-" Change the color
-highlight CodiVirtualText guifg=cyan
-let g:codi#virtual_text_prefix = "❯ "
-
-let g:codi#aliases = {
-                   \ 'javascript.jsx': 'javascript',
-                   \ }
-" }}}
 " Plug >-- VimWiki " {{{
+"<---Sets to markdown instead of vimwiki syntax--->
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-"command! Diary VimwikiDiaryIndex
-"augroup vimwikigroup
-    "autocmd!
-    "" automatically update links on read diary
-    "autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
-"augroup end
+"<---Fixes diary on enter--->
+command! Diary VimwikiDiaryIndex
+augroup vimwikigroup
+    autocmd!
+    autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
+augroup end
 
+"<---Allows folding on specific header lvl--->
 set foldenable
-"let g:markdown_folding=2
 let g:vim_markdown_folding_level=6
-"let g:vimwiki_folding='syntax'
 
-"let g:vimwiki_listsyms = '✗○◐●✓'
+"<---General Settings--->
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
 " }}}
 " Plug >-- Quick Scope " {{{
-let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T']
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T'] "Will scope for find and until keys
+"<---Set color for qs--->
+highlight QuickScopePrimary guifg='#ff00ff' gui=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline
 "}}}
-" Plug >-- Markdown Preview " {{{
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 0
-let g:mkdp_browser = 'qutebrowser'
-set updatetime=100
-
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {}
-    \ }
-
-let g:mkdp_page_title = '「${name}」'
-nmap <F5> <Plug>MarkdownPreview
-"nmap <M-s> <Plug>MarkdownPreviewStop
-"nmap <C-p> <Plug>MarkdownPreviewToggle
-" }}}
-" Plug >-- Vim Which-Key " {{{
-" Hides statusbar while which-key is open
-call which_key#register('<Space>', "g:which_key_map")
-
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-nnoremap <silent> <leader> :silent WhichKey '<leader>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<leader>'<CR>
-
-" Define a separator
-let g:which_key_sep = '→'
-
-let g:which_key_map = {}
-
-" Search and Replace
-nnoremap <leader>R <esc><esc>:%s///gcI<left><left><left><left><left>
-let g:which_key_map['R'] = [ ':%s///gcI<left><left><left><left><left>' , 'Search & Replace' ]
-let g:which_key_map['S'] = [ ':Startify' , 'Startify' ]
-let g:which_key_map['V'] = [ ':Vifm' , 'Vifm' ]
-let g:which_key_map['Z'] = [ ':au ColorScheme * hi Normal ctermbg=none guibg=none<CR>' , 'BG Toggle' ]
-let g:which_key_map['T'] = [ ':tabnew', 'New Tab']
-" --- Setup Section --- " {{{
-" +Calendar {{{
-let g:which_key_map.c = {
-    \ 'name' : '+Calendar',
-    \ 'al' : [':Calendar'   , 'Calendar Left']      ,
-    \ 'ar' : [':CalendarVR' , 'Calendar Right']     ,
-    \ 'ab' : [':CalendarH'  , 'Calendar Bottom']    ,
-    \ 'af' : [':CalendarT'  , 'Calendar Full']      ,
-    \ }
-" }}}
-" +Startify {{{
-let g:which_key_map.s = {
-    \ 'name' : '+Startify',
-    \ 'n' :  [':n ~/.config/nvim/init.vim' , 'Init.vim'                          ],
-    \ 's' :  [':n ~/.config/sxhkd/sxhkdrc' , 'sxhkdrc'                           ],
-    \ 'b' :  [':n ~/.config/bspwm/bspwmrc' , 'bspwmrc'                           ],
-    \ 'k' :  [':n ~/.config/kitty/kitty.conf' , 'Kitty Conf'                     ],
-    \ 'p' :  [':n ~/.config/polybar/config' , 'Polybar Conf'                     ],
-    \ 'c' :  [':n ~/.config/picom.conf' , 'Picom Conf'                           ],
-    \ 'S' :  [':n ~/Documents/PY-Projects/Shadochan/shadochan.py' , 'Shadochan'  ],
-    \ 'w' :  [':n ~/vimwiki/index.md' , 'Vimwiki Index'                          ],
-    \ 'm' :  [':n ~/.config/miscellaneous' , 'Misc File'                         ],
-    \ 'r' :  [':n ~/.config/rofi/themes/onedark.rasi' , 'Rofi Theme'             ],
-    \ 'Z' :  [':n ~/.config/zsh/.zshrc' , 'zshrc'                                ],
-    \ 'z' :  [':n ~/.zshenv' , 'zshenv'                                          ],
-    \ 'd' :  [':n ~/Documents/' , '~/Documents/'                                 ],
-    \ 'ds':  [':n ~/Documents/SchoolWork/' , '~/Documents/SchoolWork/'           ],
-    \ 'dh':  [':n ~/Documents/HTB/' , '~/Documents/HTB/'                         ],
-    \ 'dc':  [':n ~/Documents/CTF/' , '~/Documents/CTF/'                         ],
-    \ 'D' :  [':n ~/Downloads/' , '~/Downloads/'                                 ],
-    \ 'ps':  [':n ~/Pictures/Screenshots/' , '~/Pictures/Screenshots/'           ],
-    \ 'P' :  [':n ~/Pictures/' , '~/Pictures/'                                   ],
-    \ 'M' :  [':n ~/Music/' , '~/Music/'                                         ],
-    \ 'sc':  [':n ~/Documents/Shadochan/' , '~/Documents/Shadochan/'             ],
-    \ }
-
-" }}}
-" +Commentary {{{
-let g:which_key_map['/'] = {
-    \ 'name' : '+Commenter' ,
-    \ '/' : ['Commentary'    , 'Toggles Comment']    ,
-    \ '$' : ['<Plug>NERDCommenterToEOL'     , 'Comment to EOL']     ,
-    \ 'A' : ['<Plug>NERDCommenterAppend'    , 'Append to EOL']      ,
-    \ 's' : ['<Plug>NERDCommenterSexy'      , 'Sexy']               ,
-    \ 'u' : ['<Plug>NERDCommenterUncomment' , 'Uncomment']          ,
-    \ 'y' : ['<Plug>NERDCommenterYank'      , 'Comment and Yank']   ,
-    \ }
-" }}}
-" +Windows {{{
-let g:which_key_map.W = {
-    \ 'name' : '+Windows' ,
-    \ 'w' : ['<C-W>w'     , 'Swap']                 ,
-    \ 'd' : ['<C-W>c'     , 'Delete split']         ,
-    \ 'h' : ['<C-W>h'     , 'Swap left']            ,
-    \ 'j' : ['<C-W>j'     , 'Swap below']           ,
-    \ 'l' : ['<C-W>l'     , 'Swap right']           ,
-    \ 'k' : ['<C-W>k'     , 'Swap up']              ,
-    \ 'H' : ['<C-W>5<'    , 'Expand left']          ,
-    \ 'J' : [':resize +5'  , 'Expand below']         ,
-    \ 'L' : ['<C-W>5>'    , 'Expand right']         ,
-    \ 'K' : [':resize -5'  , 'Expand up']            ,
-    \ '=' : ['<C-W>='     , 'Balance']              ,
-    \ 's' : ['<C-W>s'     , 'Split Horizontally']   ,
-    \ 'v' : ['<C-W>v'     , 'Split Vertically']     ,
-    \ }
-" }}}
-" +wiki {{{
-nmap <Leader>wb <Plug>VimwikiTabIndex
-let g:which_key_map.w = {
-    \ 'name' : '+Wiki' ,
-    \ 'd' : ['<Plug>VimwikiDeleteLink'  , 'Delete']        ,
-    \ 'h' : ['<Plug>Vimwiki2HTML'       , 'Convert to html']    ,
-    \ 'hh': ['<Plug>Vimwiki2HTMLBrowse' , 'Convert and browse'] ,
-    \ 'i' : ['<Plug>VimwikiDiaryIndex'  , 'Opens Diary']        ,
-    \ 'r' : ['<Plug>VimwikiRenameLink'  , 'Renames Link']       ,
-    \ 's' : ['<Plug>VimwikiUISelect'    , 'Select wiki']        ,
-    \ 'b' : ['<Plug>VimwikiTabIndex'    , 'Opens tab of index'] ,
-    \ 'w' : ['<Plug>VimwikiIndex'       , 'Opens index']        ,
-    \ 'g' : ['<Plug>VimwikiDiaryGenerateLinks', 'Generate Diary'],
-    \ 't' : {
-        \ 'name' : '+todo',
-        \ 'c' : ["<Plug>VimwikiToggleListItem^ddmaGo\<Esc>pI\<right>\<right>~~\<Esc>A~~\<Esc>^db'a" , 'Complete TODO']      ,
-        \ 't' : [':n ~/vimwiki/Life/TODO.md' , 'Open TODO']                 ,  
-        \ }
-    \ }
-" }}}
-" +lsp {{{
-let g:which_key_map.l = {
-      \ 'name' : '+lsp',
-      \ 'A' : [':<Plug>(coc-codeaction-selected)'     , 'Selection']        ,
-      \ 'f' : ['spacevim#lang#util#Format()'          , 'formatting']       ,
-      \ 'r' : ['spacevim#lang#util#FindReferences()'  , 'references']       ,
-      \ 'R' : ['spacevim#lang#util#Rename()'          , 'rename']           ,
-      \ 's' : ['spacevim#lang#util#DocumentSymbol()'  , 'document-symbol']  ,
-      \ 'S' : ['spacevim#lang#util#WorkspaceSymbol()' , 'workspace-symbol'] ,
-      \ 'g' : {
-        \ 'name': '+goto',
-        \ 'd' : ['spacevim#lang#util#Definition()'     , 'definition']      ,
-        \ 't' : ['spacevim#lang#util#TypeDefinition()' , 'type-definition'] ,
-        \ 'i' : ['spacevim#lang#util#Implementation()' , 'implementation']  ,
-        \ },
-      \ }
-" }}}
-"  }}}
-" }}}
 "}}}
 " ---------------------------------------------------- "
