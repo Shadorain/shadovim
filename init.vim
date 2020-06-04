@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'easymotion/vim-easymotion' "Highly advanced real time more efficient search! haha
     Plug 'tpope/vim-surround' "Surrounds your braces, parens, quotes etc to save you a keypress
     Plug 'tpope/vim-commentary' "Makes commenting 100x easier and better. Just use it ull see
+    Plug 'mattn/calendar-vim' "niftly little plug that can interract with vimwiki diary!
     "<--That Rice Stuff---------------------------------------------------------------------------$
     Plug 'itchyny/lightline.vim' "Adds that sexy bar your seeing at bottom of ur vim window
     Plug 'godlygeek/tabular' "Makes having sexy code so much easier: organized your tabbed stuff
@@ -45,7 +46,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 	" Plug 'terryma/vim-multiple-cursors' "Allows for multiple cursors, can just be done by default tho
     " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' } "Eh dont use much
     "<--Nerd tree---(Currently do not use anymore so have commented out)--------------------------$ {{{
-    " Plug 'mattn/calendar-vim' "niftly little plug that can interract with vimwiki diary!
     " Plug 'preservim/nerdtree' "Base plugin: Opens a directory structure split for you to browse files
     " Plug 'Xuyuanp/nerdtree-git-plugin' "Git integration into NerdTree
     " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "Syntax highlighting for that NerdTree
@@ -145,12 +145,11 @@ nmap <leader>gb :Gblame<CR>
 nmap <leader>gB :Gbrowse<CR>
 nmap <leader>gl :Glog<CR>
 "<---Calendar(Left, Right, Bottom, Fullscreen)--->
-noremap <leader>cal :Calendar<CR>
 noremap <leader>car :CalendarVR<CR>
 noremap <leader>cab :CalendarH<CR>
 noremap <leader>caf :CalendarT<CR>
 "<---Commentary--->
-noremap <leader>// gcc
+noremap <leader>// :Commentary<CR>
 "<---Split Extra(delete, balance)--->
 noremap Ww <C-W>c
 noremap Wb <C-W>=
