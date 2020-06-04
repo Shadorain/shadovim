@@ -82,6 +82,7 @@ set nocompatible
 set foldmethod=marker
 filetype plugin on
 "set clipboard+=unnamedplus
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " --- Custom Key Commands! --- {{{
 "<---General Keys--->
 " Copies selected text from split window and paste in other 
@@ -165,7 +166,7 @@ noremap <leader>wb :VimwikiTabIndex<CR>
 noremap <leader>ww :VimwikiIndex<CR>
 noremap <leader>wg :VimwikiDiaryGenerateLinks<CR>
 noremap <leader>wtt :n ~/vimwiki/Life/TODO.md<CR>
-noremap <leader>wtc :VimwikiToggleListItem^ddmaGo\<Esc>pI\<right>\<right>~~\<Esc>A~~\<Esc>^db'a
+noremap <leader>wtc :VimwikiToggleListItem^ddmaGo\<Esc>pI\<right>\<right>~~\<Esc>A~~\<Esc>^db'a<CR>
 " }}}
 "}}}
 "}}}
