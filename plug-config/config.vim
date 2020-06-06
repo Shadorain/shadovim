@@ -42,30 +42,33 @@ let g:startify_lists = [
 
 "<---Bookmarks(Tap key to enter)--->
 let g:startify_bookmarks = [
-    \ { 'nv': '~/.config/nvim/init.vim'                                                          },
-    \ { 's' : '~/.config/sxhkd/sxhkdrc'                                                          },
-    \ { 'b' : '~/.config/bspwm/bspwmrc'                                                          },
-    \ { 'k' : '~/.config/kitty/kitty.conf'                                                       },
-    \ { 'p' : '~/.config/polybar/config'                                                         },
-    \ { 'c' : '~/.config/picom.conf'                                                             },
-    \ { 'S' : '~/Documents/PY-Projects/Shadochan/shadochan.py'                                   },
-    \ { 'nc': '~/.config/nvim/colors/shado.vim'                                                  },
+    \ { 'nv': '~/.config/nvim/init.vim'                                                                   },
+    \ { 'np': '~/.config/nvim/plug-config/shadoplug.vim'                                                  },
+    \ { 'nc': '~/.config/nvim/plug-config/config.vim'                                                     },
+    \ { 'nk': '~/.config/nvim/shadobinds.vim'                                                             },
+    \ { 'ns': '~/.config/nvim/colors/shado.vim'                                                           },
     \ { 'nw': '~/.config/nvim/snippets/vimwiki.snippets'                                                  },
-    \ { 'nl': '.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim'  },
-    \ { 'w' : '~/vimwiki/index.md'                                                               },
-    \ { 'm' : '~/.config/miscellaneous'                                                          },
-    \ { 'r' : '~/.config/rofi/themes/onedark.rasi'                                               },
-    \ { 'za': '~/.config/zsh/zsh_aliases'                                                        },
-    \ { 'zc': '~/.config/zsh/.zshrc'                                                             },
-    \ { 'ze': '~/.zshenv'                                                                        },
-    \ { 'd' : '~/Documents/'                                                                     },
-    \ { 'ds': '~/Documents/SchoolWork/'                                                          },
-    \ { 'dh': '~/Documents/HTB/'                                                                 },
-    \ { 'dc': '~/Documents/Shadochan/'                                                           },
-    \ { 'D' : '~/Downloads/'                                                                     },
-    \ { 'pc' : '~/Pictures/'                                                                     },
-    \ { 'ps':  '~/Pictures/Screenshots/'                                                         },
-    \ { 'M' : '~/Music/'                                                                         },
+    \ { 'nl': '~/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim'         },
+    \ { 's' : '~/.config/sxhkd/sxhkdrc'                                                                   },
+    \ { 'b' : '~/.config/bspwm/bspwmrc'                                                                   },
+    \ { 'k' : '~/.config/kitty/kitty.conf'                                                                },
+    \ { 'p' : '~/.config/polybar/config'                                                                  },
+    \ { 'c' : '~/.config/picom.conf'                                                                      },
+    \ { 'S' : '~/Documents/PY-Projects/Shadochan/shadochan.py'                                            },
+    \ { 'w' : '~/vimwiki/index.md'                                                                        },
+    \ { 'm' : '~/.config/miscellaneous'                                                                   },
+    \ { 'r' : '~/.config/rofi/themes/onedark.rasi'                                                        },
+    \ { 'za': '~/.config/zsh/zsh_aliases'                                                                 },
+    \ { 'zc': '~/.config/zsh/.zshrc'                                                                      },
+    \ { 'ze': '~/.zshenv'                                                                                 },
+    \ { 'd' : '~/Documents/'                                                                              },
+    \ { 'ds': '~/Documents/SchoolWork/'                                                                   },
+    \ { 'dh': '~/Documents/HTB/'                                                                          },
+    \ { 'dc': '~/Documents/Shadochan/'                                                                    },
+    \ { 'D' : '~/Downloads/'                                                                              },
+    \ { 'pc': '~/Pictures/'                                                                               },
+    \ { 'ps': '~/Pictures/Screenshots/'                                                                   },
+    \ { 'M' : '~/Music/'                                                                                  },
     \ ]
     
 "<---Ascii Art(Displayed as title)--->
@@ -116,23 +119,18 @@ let g:lightline.tabline = {
 " Plug >-- VimWiki " {{{
 "<---Sets to markdown instead of vimwiki syntax--->
 let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+                      \ 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1}]
 
 "<---Fixes diary on enter--->
 command! Diary VimwikiDiaryIndex
-augroup vimwikigroup
-    autocmd!
-    autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
-augroup end
+" augroup vimwikigroup
+"     autocmd!
+"     autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
+" augroup end
 
 "<---Allows folding on specific header lvl--->
 set foldenable
 let g:vim_markdown_folding_level=6
-
-"<---General Settings--->
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_no_extensions_in_markdown = 1
-let g:vim_markdown_autowrite = 1
 " }}}
 " Plug >-- Quick Scope " {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T'] "Will scope for find and until keys

@@ -25,10 +25,6 @@ nnoremap <silent><Down>  :resize -2<CR>
 nnoremap <silent><Left>  :vertical resize +2<CR>
 nnoremap <silent><Right> :vertical resize -2<CR>
 "}}}
-"<---Adds semi colon to EOL---> {{{
-inoremap <A-,> <Esc>A;<Esc>
-nnoremap <A-,> A;<Esc>
-"}}}
 "<---Split Management---> {{{
 tnoremap <C-A-h> <C-\><C-N><C-w>h
 tnoremap <C-A-j> <C-\><C-N><C-w>j
@@ -57,6 +53,9 @@ nnoremap <leader>R <esc><esc>:%s///gcI<left><left><left><left><left>
 noremap <leader>S :Startify<CR>
 noremap <leader>T :tabnew<CR>
 "}}}
+"<---Adds semi colon to EOL---> {{{
+nnoremap <leader>; <esc>A;<esc>
+"}}}
 "<---Buffer Commands---> {{{
 nmap <leader>bl :ls<CR>
 nmap <silent><leader>bn :bnext<CR>
@@ -72,6 +71,9 @@ nmap <leader>gp :Gpush<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gB :Gbrowse<CR>
 nmap <leader>gl :Glog<CR>
+"}}}
+"<---Goyo--->
+nnoremap <leader>G :Goyo<CR>
 "}}}
 "<---Calendar(Left, Right, Bottom, Fullscreen)---> {{{
 noremap <leader>car :CalendarVR<CR>

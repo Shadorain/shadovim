@@ -20,6 +20,10 @@ endif
 set t_Co=256
 let g:colors_name = "shado"
 
+" let s:colors = {
+"     \ "red": get(s:overrides, "red", { "gui": "#E06C75", "cterm": "204", "cterm16": "1" }),
+"     \}
+
 " Transparent background
 au ColorScheme * hi Normal ctermbg=none guibg=none
 highlight SignColumn guibg=none
@@ -28,7 +32,6 @@ highlight SignColumn guibg=none
 hi Normal guifg=#dfb7e8 guibg=none
 " Cursor Color
 hi Cursor guifg=#dfb7e8 guibg=#6161b3 guisp=#6161b3
-
 
 " Visual Mode
 hi Visual guifg=#eed6ee guibg=#40408f guisp=#40408f
@@ -110,10 +113,10 @@ hi Error guifg=#ffe5ff guibg=#6e2323 guisp=#6e2323
 hi ErrorMsg guifg=#ffe5ff guibg=#d12245 guisp=#d12245
 
 " PMenu
-hi PMenu guifg=#eed6ee guibg=#3d3d6b guisp=#3d3d6b
-hi PMenuSbar guifg=#a883a8 guibg=#5b5b8a guisp=#5b5b8a
-hi PMenuSel guifg=#9ce0ba guibg=#25253b guisp=#25253b gui=bold,underline
-hi PMenuThumb guifg=#eed6ee guibg=#2e2e40 guisp=#2e2e40
+hi PMenu guifg=#eed6ee guibg=#1B1B29 guisp=#3d3d6b  "#3d3d6b
+hi PMenuSbar guifg=#a883a8 guibg=#2F2F4A guisp=#5b5b8a  "#5b5b8a
+hi PMenuSel guifg=#6876de guibg=#2F2F4A guisp=#2F2F4A gui=bold,underline  "#9ce0ba #25253b
+hi PMenuThumb guifg=#eed6ee guibg=#5b5b8a guisp=#2F2F4A  "#2e2e40
 " File Structure
 hi Directory guifg=#00bbff guibg=NONE
 " Splits

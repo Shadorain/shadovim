@@ -24,6 +24,7 @@ set number
 set relativenumber
 "<--Misc-------------------------------------------------------------------------------$
 set nocompatible
+set splitright
 set foldmethod=marker
 filetype plugin on
 "set clipboard+=unnamedplus
