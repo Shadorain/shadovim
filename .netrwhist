@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
-let g:netrw_dirhist_3='/home/shadow/.config/nvim/snips'
-let g:netrw_dirhist_2='/home/shadow/vimwiki/Life'
-let g:netrw_dirhist_1='/home/shadow'
