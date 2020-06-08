@@ -115,6 +115,19 @@ let g:lightline.tabline = {
             \ 'left': [ [ 'tabs' ] ],
             \ 'right': [ [  ] ] }
 
+let g:lightline.mode_map = {
+    \ 'n' : 'ノーマル',
+    \ 'i' : 'インサート',
+    \ 'R' : '代わる',
+    \ 'v' : 'ビジュアル',
+    \ 'V' : 'V-ライン',
+    \ "\<C-v>": 'V-ブロック',
+    \ 'c' : 'コマンド',
+    \ 's' : 'セレクト',
+    \ 'S' : 'S-ライン',
+    \ "\<C-s>": 'S-ブロック',
+    \ 't': 'ターミナル',
+    \ }
 " }}}
 " Plug >-- VimWiki " {{{
 "<---Sets to markdown instead of vimwiki syntax--->
