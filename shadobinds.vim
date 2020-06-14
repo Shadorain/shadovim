@@ -49,6 +49,7 @@ noremap <C-\>j <esc><esc>jyyPxVr=A #<esc>:Commentary<CR>
 "<---Misc---> {{{
 "Search and Replace
 nnoremap <leader>R <esc><esc>:%s///gcI<left><left><left><left><left>
+nnoremap <leader>r :nohl<CR>:redraw!<CR>
 "Open (Startify,NewTab)
 noremap <leader>S :Startify<CR>
 noremap <leader>T :tabnew<CR>
