@@ -13,6 +13,9 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Sub-Plug >-- coc-pairs " {{{
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"}}}
 " Sub-Plug >-- coc-snippets " {{{
 let g:UltiSnipsExpandTrigger = "<NUL>"
 inoremap <silent><expr> <C-l>
@@ -54,7 +57,7 @@ let g:startify_bookmarks = [
     \ { 'k' : '~/.config/kitty/kitty.conf'                                                                },
     \ { 'p' : '~/.config/polybar/config'                                                                  },
     \ { 'c' : '~/.config/picom.conf'                                                                      },
-    \ { 'S' : '~/Documents/PY-Projects/Shadochan/shadochan.py'                                            },
+    \ { 'S' : '~/.config/shadoplan/shadoplan.c'                                                           },
     \ { 'w' : '~/vimwiki/index.md'                                                                        },
     \ { 'm' : '~/.config/miscellaneous'                                                                   },
     \ { 'r' : '~/.config/rofi/themes/onedark.rasi'                                                        },
@@ -95,6 +98,17 @@ nmap <leader>gk <plug>(signify-prev-hunk)
 nmap <leader>gJ 9999<leader>gJ
 nmap <leader>gK 9999<leader>gK
 " }}}
+" Plug >-- Vim-Bookmarks " {{{
+"Highlighting and icon customization
+highlight BookmarkSign guibg=NONE guifg=#2f77a1
+highlight BookmarkLine guibg=NONE guifg=NONE
+highlight BookmarkAnnotationSign guibg=NONE guifg=#5d5daf
+highlight BookmarkAnnotationLine guibg=NONE guifg=NONE
+let g:bookmark_sign = ''
+let g:bookmark_highlight_lines = 1
+"rebind some overlaps with my marks setup (a,s,d,f)
+nmap <Leader>a <Plug>BookmarkShowAll
+"}}}
 " Plug >-- Lightline " {{{
 set laststatus=2
 set noshowmode

@@ -9,6 +9,7 @@
 "<--Shado Plugins---------------------------------------------------------------------------------$ {{{
 call plug#begin('~/.local/share/nvim/plugged')
     "<--General-----------------------------------------------------------------------------------$
+    Plug 'MattesGroeger/vim-bookmarks', "Plugin to bookmark lines of code
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "To have the plug right under this one
     Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
     Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
