@@ -30,6 +30,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
     Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
     "<--Syntax------------------------------------------------------------------------------------$
+    Plug 'neovimhaskell/haskell-vim' "Adds better syntax highlighting for Haskell
     Plug 'plasticboy/vim-markdown' "Def keep if u use md. Comes quite in handy for alot of md stuff
     Plug 'sheerun/vim-polyglot' "Adds some better syntax for quite a few languages
     "<--Snippets----------------------------------------------------------------------------------$

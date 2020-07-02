@@ -7,20 +7,47 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +9 vimwiki/Tech/Programming.md
-badd +1 ~/vimwiki/Tech/Assembly/setup.md
+badd +8 vimwiki/Tech/Programming.md
+badd +7 vimwiki/Tech/Assembly/setup.md
+badd +0 man://tc-basic(8)
+badd +1 Documents/Programming/Py/sock1httplesson.py
+badd +1 Documents/Programming/Assembly/Practice/first.o
+badd +0 Documents/Programming/Assembly/Practice/first.asm
 argglobal
 %argdel
 $argadd vimwiki/Tech/Programming.md
-edit ~/vimwiki/Tech/Assembly/setup.md
+edit Documents/Programming/Assembly/Practice/first.asm
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
 set nosplitbelow
 wincmd t
 set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
+exe 'vert 1resize ' . ((&columns * 105 + 105) / 210)
+exe 'vert 2resize ' . ((&columns * 104 + 105) / 210)
 argglobal
+setlocal fdm=marker
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 1 - ((0 * winheight(0) + 27) / 55)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+argglobal
+if bufexists("vimwiki/Tech/Assembly/setup.md") | buffer vimwiki/Tech/Assembly/setup.md | else | edit vimwiki/Tech/Assembly/setup.md | endif
 setlocal fdm=expr
 setlocal fde=Foldexpr_markdown(v:lnum)
 setlocal fmr={{{,}}}
@@ -29,12 +56,15 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 8 - ((7 * winheight(0) + 13) / 26)
+let s:l = 7 - ((4 * winheight(0) + 27) / 55)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
-normal! 014|
+7
+normal! 0
+wincmd w
+exe 'vert 1resize ' . ((&columns * 105 + 105) / 210)
+exe 'vert 2resize ' . ((&columns * 104 + 105) / 210)
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
