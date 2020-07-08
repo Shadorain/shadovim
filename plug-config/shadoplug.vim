@@ -23,13 +23,17 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'godlygeek/tabular' "Makes having sexy code so much easier: organized your tabbed stuff
     Plug 'junegunn/goyo.vim' "Adds like a focus mode to vim, its quite nice tbh
     Plug 'mhinz/vim-startify' "I find this to be one of the coolest, sexiest, and most useful plugs
-        "it allows for a start screen in vim with whatever the hell u want, and its amazing
+        "it allows for a start s2creen in vim with whatever the hell u want, and its amazing
     "<--Git Integration---------------------------------------------------------------------------$
-    Plug 'mhinz/vim-signify' "Extremely useful, handles git changes/deletes/additions in a sidebar
+    Plug 'airblade/vim-gitgutter'
+    " Plug 'mhinz/vim-signify' "Extremely useful, handles git changes/deletes/additions in a sidebar
     Plug 'tpope/vim-fugitive' "`:Git`&`:G...` functionality, can do alot with this bad boy
     Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
     Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
+    "<--LSP---------------------------------------------------------------------------------------$
     "<--Syntax------------------------------------------------------------------------------------$
+    " Plug 'alx741/vim-hindent' "More Sexy syntax for haskell babyyyy
+    " Plug 'alx741/vim-stylishask' "More Sexy syntax for haskell babyyyy x2!!!
     Plug 'neovimhaskell/haskell-vim' "Adds better syntax highlighting for Haskell
     Plug 'plasticboy/vim-markdown' "Def keep if u use md. Comes quite in handy for alot of md stuff
     Plug 'sheerun/vim-polyglot' "Adds some better syntax for quite a few languages

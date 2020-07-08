@@ -84,20 +84,32 @@ let g:startify_custom_header = [
     \ '          \/       \/      \/      \/                    \/          \/     ',
     \ ]
 " }}}
-" Plug >-- Signify " {{{
-"<---Signs(Are displayed on a side bar to show status)--->
-let g:signify_sign_add               = '+'
-let g:signify_sign_delete            = '_'
-let g:signify_sign_delete_first_line = '‾'
-let g:signify_sign_change            = '~'
-let g:signify_sign_show_count = 0 "\
-let g:signify_sign_show_text = 1  " Gets rid of extra numbers
-"<---Jump through Hunks--->
-nmap <leader>gj <plug>(signify-next-hunk)
-nmap <leader>gk <plug>(signify-prev-hunk)
-nmap <leader>gJ 9999<leader>gJ
-nmap <leader>gK 9999<leader>gK
-" }}}
+" Plug >-- Git Gutter " {{{
+let g:gitgutter_sign_added              = '+'  "'⏽'
+let g:gitgutter_sign_modified           = '~'  "'⏽'
+let g:gitgutter_sign_removed            = '-'  "'契'
+let g:gitgutter_sign_removed_first_line = '-_'  "'契'
+let g:gitgutter_sign_modified_removed   = '-~'  "'⏽'
+
+let g:gitgutter_enabled = 1
+"Colors
+highlight GitGutterAdd    guifg=#37d4a7 ctermfg=2
+highlight GitGutterChange guifg=#2f77a1 ctermfg=3
+"}}}
+"" Plug >-- Signify " {{{
+""<---Signs(Are displayed on a side bar to show status)--->
+"let g:signify_sign_add               = '+'
+"let g:signify_sign_delete            = '_'
+"let g:signify_sign_delete_first_line = '‾'
+"let g:signify_sign_change            = '~'
+"let g:signify_sign_show_count = 0 "\
+"let g:signify_sign_show_text = 1  " Gets rid of extra numbers
+""<---Jump through Hunks--->
+"nmap <leader>gj <plug>(signify-next-hunk)
+"nmap <leader>gk <plug>(signify-prev-hunk)
+"nmap <leader>gJ 9999<leader>gJ
+"nmap <leader>gK 9999<leader>gK
+"" }}}
 " Plug >-- Vim-Bookmarks " {{{
 "Highlighting and icon customization
 highlight BookmarkSign guibg=NONE guifg=#2f77a1

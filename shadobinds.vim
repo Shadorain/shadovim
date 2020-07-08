@@ -65,13 +65,20 @@ nmap <silent><leader>bd :bdelete<CR>
 "}}}
 "<---Git Commands---> {{{
 nmap <leader>ga :Gwrite<CR>
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gst :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gc :Gcommit<CR>
-nmap <leader>gp :Gpush<CR>
+nmap <leader>gp :Git push<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gB :Gbrowse<CR>
-nmap <leader>gl :Glog<CR>
+nmap <leader>glo :Git log<CR>
+nmap <leader>gl :Git pull<CR>
+nmap <leader>gr :GRemove<CR>
+nmap <leader>gt :GitGutterSignsToggle<CR>
+nmap <leader>gs <Plug>(GitGutterStageHunk)<CR>
+nmap <leader>gu <Plug>(GitGutterUndoHunk)<CR>
+nmap <leader>gv :GV<CR>
+nmap <leader>gV :GV!<CR>
 "}}}
 "<---Goyo--->
 nnoremap <leader>G :Goyo<CR>
