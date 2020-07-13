@@ -28,10 +28,14 @@ let g:colors_name = "shado"
 au ColorScheme * hi Normal ctermbg=none guibg=none
 highlight SignColumn guibg=none
 
+" set cursorline
+" set cursorcolumn
 " Foreground
 hi Normal guifg=#dfb7e8 guibg=none
 " Cursor Color
 hi Cursor guifg=#dfb7e8 guibg=#6161b3 guisp=#6161b3
+hi CursorLine guibg=#1B1B29 guisp=#6161b3
+hi CursorColumn guibg=#1B1B29 guisp=#6161b3
 
 " Visual Mode
 hi Visual guifg=#eed6ee guibg=#40408f guisp=#40408f
@@ -61,7 +65,7 @@ hi DiffAdd guifg=#37d4a7 guibg=none guisp=#2c9465
 hi DiffChange guifg=#2f77a1 guibg=none guisp=#2f77a1
 
 " Comments
-hi Comment guifg=#37d4a7 guibg=NONE
+hi Comment guifg=#6272a4 guibg=NONE
 hi Todo guifg=#302b30 guibg=#eba4e9 guisp=#eba4e9
 
 " Special
@@ -138,8 +142,6 @@ hi taglisttagname guifg=#6875ed guibg=NONE
 hi user2 guifg=#6060a0 guibg=#35355e guisp=#35355e
 hi user1 guifg=#e5fff3 guibg=#35355e guisp=#35355e
 
-"hi CursorColumn guifg=none guibg=#2F2F4A
-"
 "hi CTagsMember -- no settings --
 "hi CTagsGlobalConstant -- no settings --
 "hi CTagsImport -- no settings --
