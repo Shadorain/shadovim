@@ -59,9 +59,9 @@ nnoremap <leader>; <esc>A;<esc>
 "}}}
 "<---Buffer Commands---> {{{
 nmap <leader>bl :ls<CR>
-nmap <silent><leader>bn :bnext<CR>
+nmap <silent><leader>bb :bnext<CR>
 nmap <silent><leader>bp :bprevious<CR>
-nmap <silent><leader>bd :bdelete<CR>
+nmap <silent><leader>bk :bdelete<CR>
 "}}}
 "<---Git Commands---> {{{
 nmap <leader>ga :Gwrite<CR>
@@ -80,7 +80,7 @@ nmap <leader>gu <Plug>(GitGutterUndoHunk)<CR>
 nmap <leader>gv :GV<CR>
 nmap <leader>gV :GV!<CR>
 "}}}
-"<---Goyo--->
+"<---Goyo---> {{{
 nnoremap <leader>G :Goyo<CR>
 "}}}
 "<---Calendar(Left, Right, Bottom, Fullscreen)---> {{{
