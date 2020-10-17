@@ -14,6 +14,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
     Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
     "<--Ease of use-------------------------------------------------------------------------------$
+    Plug 'makerj/vim-pdf'
     Plug 'unblevable/quick-scope' "Saves SO MUCH TIME when using the f/F keys, just use it!
     Plug 'easymotion/vim-easymotion' "Highly advanced real time more efficient search! haha
     Plug 'tpope/vim-commentary' "Makes commenting 100x easier and better. Just use it ull see

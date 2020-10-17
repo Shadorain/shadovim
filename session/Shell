@@ -1,0 +1,110 @@
+let SessionLoad = 1
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+silent only
+cd ~/ShadoSH
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +37 parsing.c
+badd +6 builtins.c
+badd +5 types.h
+badd +1 shadosh.c
+argglobal
+%argdel
+$argadd types.h
+edit shadosh.c
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+set nosplitbelow
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 109 + 88) / 176)
+exe '2resize ' . ((&lines * 19 + 28) / 56)
+exe 'vert 2resize ' . ((&columns * 66 + 88) / 176)
+exe '3resize ' . ((&lines * 34 + 28) / 56)
+exe 'vert 3resize ' . ((&columns * 66 + 88) / 176)
+argglobal
+setlocal fdm=marker
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+65
+normal! zo
+85
+normal! zo
+let s:l = 79 - ((13 * winheight(0) + 27) / 54)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+79
+normal! 06|
+wincmd w
+argglobal
+if bufexists("types.h") | buffer types.h | else | edit types.h | endif
+setlocal fdm=marker
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 8 - ((7 * winheight(0) + 9) / 19)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+8
+normal! 0
+wincmd w
+argglobal
+if bufexists("parsing.c") | buffer parsing.c | else | edit parsing.c | endif
+setlocal fdm=marker
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 37 - ((25 * winheight(0) + 17) / 34)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+37
+normal! 018|
+wincmd w
+exe 'vert 1resize ' . ((&columns * 109 + 88) / 176)
+exe '2resize ' . ((&lines * 19 + 28) / 56)
+exe 'vert 2resize ' . ((&columns * 66 + 88) / 176)
+exe '3resize ' . ((&lines * 34 + 28) / 56)
+exe 'vert 3resize ' . ((&columns * 66 + 88) / 176)
+tabnext 1
+if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOFI
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

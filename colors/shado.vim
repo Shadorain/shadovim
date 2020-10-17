@@ -114,8 +114,6 @@ hi Structure guifg=#329090 guibg=NONE
 hi Debug guifg=#bc6bd0 guibg=NONE
 hi WarningMsg guifg=#ffe5ff guibg=#a83e32 guisp=#a83e32
 hi Error guifg=#ffe5ff guibg=#6e2323 guisp=#6e2323
-hi ErrorMsg guifg=#ffe5ff guibg=#d12245 guisp=#d12245
-
 " PMenu
 hi PMenu guifg=#eed6ee guibg=#1B1B29 guisp=#3d3d6b  "#3d3d6b
 hi PMenuSbar guifg=#a883a8 guibg=#2F2F4A guisp=#5b5b8a  "#5b5b8a

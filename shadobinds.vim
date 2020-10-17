@@ -17,7 +17,7 @@ nnoremap <F3> :set invnumber invrelativenumber<CR>
 map <C-f> <esc><esc>:Files!<CR>
 map <C-A-f> <esc><esc><C-w>v:Files!<CR>
 inoremap <C-f> <esc><esc>:BLines!<CR>
-nnoremap g<C-c> <esc><esc>:BCommits!<CR>
+nnoremap <leader>bc <esc><esc>:BCommits!<CR>
 "}}}
 "<---Arrow keys to resize splits---> {{{
 nnoremap <silent><Up>    :resize +2<CR>
@@ -40,6 +40,8 @@ nnoremap <C-A-k> <C-w>k
 nnoremap <C-A-l> <C-w>l
 map <leader>th <C-w>t<C-w>H
 map <leader>tk <C-w>t<C-w>K
+map <leader>h <C-w>h
+map <leader>k <C-w>k
 "}}}
 "<---Create lines to split up files---> {{{
 noremap <C-\>k <esc><esc>kyypxVr=A #<esc>:Commentary<CR>
@@ -54,14 +56,15 @@ nnoremap <leader>r :nohl<CR>:redraw!<CR>
 noremap <leader>S :Startify<CR>
 noremap <leader>T :tabnew<CR>
 "}}}
-"<---Adds semi colon to EOL---> {{{
+"<--- C Lang ---> {{{
 nnoremap <leader>; <esc>A;<esc>
+nnoremap <leader>mk :make \| cw
 "}}}
 "<---Buffer Commands---> {{{
 nmap <leader>bl :ls<CR>
 nmap <silent><leader>bb :bnext<CR>
-nmap <silent><leader>bp :bprevious<CR>
-nmap <silent><leader>bk :bdelete<CR>
+nmap <silent><leader>bn :bprevious<CR>
+nmap <silent><leader>bk :bp\|bd # <CR>
 "}}}
 "<---Git Commands---> {{{
 nmap <leader>ga :Gwrite<CR>
