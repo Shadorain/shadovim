@@ -7,22 +7,17 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +37 parsing.c
-badd +6 builtins.c
-badd +5 types.h
-badd +1 shadosh.c
+badd +42 shadosh.h
+badd +1 parse.y
+badd +17 parse.l
 argglobal
 %argdel
-$argadd types.h
-edit shadosh.c
+$argadd history.c
+edit parse.y
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 1wincmd h
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
 wincmd w
 set nosplitbelow
 wincmd t
@@ -30,11 +25,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 109 + 88) / 176)
-exe '2resize ' . ((&lines * 19 + 28) / 56)
-exe 'vert 2resize ' . ((&columns * 66 + 88) / 176)
-exe '3resize ' . ((&lines * 34 + 28) / 56)
-exe 'vert 3resize ' . ((&columns * 66 + 88) / 176)
+exe 'vert 1resize ' . ((&columns * 114 + 117) / 235)
+exe 'vert 2resize ' . ((&columns * 120 + 117) / 235)
 argglobal
 setlocal fdm=marker
 setlocal fde=0
@@ -44,19 +36,15 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-65
-normal! zo
-85
-normal! zo
-let s:l = 79 - ((13 * winheight(0) + 27) / 54)
+let s:l = 59 - ((40 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-79
-normal! 06|
+59
+normal! 012|
 wincmd w
 argglobal
-if bufexists("types.h") | buffer types.h | else | edit types.h | endif
+if bufexists("parse.l") | buffer parse.l | else | edit parse.l | endif
 setlocal fdm=marker
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -65,35 +53,16 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 8 - ((7 * winheight(0) + 9) / 19)
+let s:l = 19 - ((18 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
-normal! 0
+19
+normal! 021|
 wincmd w
-argglobal
-if bufexists("parsing.c") | buffer parsing.c | else | edit parsing.c | endif
-setlocal fdm=marker
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 37 - ((25 * winheight(0) + 17) / 34)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-37
-normal! 018|
-wincmd w
-exe 'vert 1resize ' . ((&columns * 109 + 88) / 176)
-exe '2resize ' . ((&lines * 19 + 28) / 56)
-exe 'vert 2resize ' . ((&columns * 66 + 88) / 176)
-exe '3resize ' . ((&lines * 34 + 28) / 56)
-exe 'vert 3resize ' . ((&columns * 66 + 88) / 176)
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 114 + 117) / 235)
+exe 'vert 2resize ' . ((&columns * 120 + 117) / 235)
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

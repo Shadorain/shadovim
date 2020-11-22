@@ -6,6 +6,41 @@
 "   \______  /\____/|___|  /__|  |__\___  / /\ \_/ |__|__|_|  /
 "          \/            \/        /_____/  \/              \/ 
 " ================================================================$
+" Plug >-- Undofile " {{{
+set undofile
+set backupdir=~/.config/nvim/backups/
+set undodir=~/.config/nvim/backups/undo/
+" }}}
+" Plug >-- Floaterm " {{{
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.5
+let g:floaterm_height=0.4
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1
+" }}}
+" Plug >-- FZF " {{{
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+" Hide status bar while using fzf commands                                                                          
+if has('nvim') || has('gui_running')
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
+endif
+" }}}
 " Plug >-- CoC " {{{
 " Sets <Tab> as autocomplete menu down
 inoremap <silent><expr> <TAB>
@@ -54,24 +89,13 @@ let g:startify_bookmarks = [
     \ { 'nl': '~/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim'         },
     \ { 's' : '~/.config/sxhkd/sxhkdrc'                                                                   },
     \ { 'b' : '~/.config/bspwm/bspwmrc'                                                                   },
-    \ { 'k' : '~/.config/kitty/kitty.conf'                                                                },
-    \ { 'p' : '~/.config/polybar/config'                                                                  },
+    \ { 'p' : '~/.config/shadobar/config-xmonad'                                                                  },
     \ { 'c' : '~/.config/picom.conf'                                                                      },
-    \ { 'S' : '~/.config/shadoplan/shadoplan.c'                                                           },
-    \ { 'w' : '~/vimwiki/index.md'                                                                        },
-    \ { 'm' : '~/.config/miscellaneous'                                                                   },
-    \ { 'r' : '~/.config/rofi/themes/onedark.rasi'                                                        },
     \ { 'za': '~/.config/zsh/zsh_aliases'                                                                 },
     \ { 'zc': '~/.config/zsh/.zshrc'                                                                      },
     \ { 'ze': '~/.zshenv'                                                                                 },
-    \ { 'd' : '~/Documents/'                                                                              },
-    \ { 'ds': '~/Documents/SchoolWork/'                                                                   },
     \ { 'dh': '~/Documents/HTB/'                                                                          },
-    \ { 'dc': '~/Documents/Shadochan/'                                                                    },
     \ { 'D' : '~/Downloads/'                                                                              },
-    \ { 'pc': '~/Pictures/'                                                                               },
-    \ { 'ps': '~/Pictures/Screenshots/'                                                                   },
-    \ { 'M' : '~/Music/'                                                                                  },
     \ ]
     
 "<---Ascii Art(Displayed as title)--->
@@ -177,4 +201,8 @@ let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T'] "Will scope for find and unti
 highlight QuickScopePrimary guifg='#ff00ff' gui=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline
 "}}}
+" Package >-- Termdebug " {{{
+packadd! termdebug
+let g:termdebug_wide = 1
+" }}}
 " ----------------------------------------------------------------$

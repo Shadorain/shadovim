@@ -27,6 +27,7 @@ set nocompatible
 set splitright
 set foldmethod=marker
 filetype plugin on
+
 "set clipboard+=unnamedplus
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " -------------------------------------------------------------------------------------$

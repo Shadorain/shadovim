@@ -3,8 +3,8 @@
 "  /   _____/|  |__ _____     __| _/____   ___  _|__| _____     "
 "  \_____  \ |  |  \\__  \   / __ |/  _ \  \  \/ /  |/     \    "
 "  /        \|   Y  \/ __ \_/ /_/ (  <_> )  \   /|  |  Y Y  \   "
-" /_______  /|___|  (____  /\____ |\____/ /\ \_/ |__|__|_|  /  "
-"         \/      \/     \/      \/       \/              \/   "
+" /_______  /|___|  (____  /\____ |\____/ /\ \_/ |__|__|_|  /   "
+"         \/      \/     \/      \/       \/              \/    "
 " ------------------------------------------------------------- "
 " Vim color file - shado.vim
 " Author: Shadorain
@@ -20,9 +20,24 @@ endif
 set t_Co=256
 let g:colors_name = "shado"
 
-" let s:colors = {
-"     \ "red": get(s:overrides, "red", { "gui": "#E06C75", "cterm": "204", "cterm16": "1" }),
-"     \}
+" 16 Bit colors
+let g:terminal_color_0 = '#6272a4'
+let g:terminal_color_1 = '#F37F97'
+let g:terminal_color_2 = '#5ADECD'
+let g:terminal_color_3 = '#8897F4'
+let g:terminal_color_4 = '#bd93f9'
+let g:terminal_color_5 = '#ff79c6'
+let g:terminal_color_6 = '#8be9fd'
+let g:terminal_color_7 = '#bfaae3'
+" Bright
+let g:terminal_color_8  = '#6272a4'
+let g:terminal_color_9  = '#FF4971'
+let g:terminal_color_10 = '#18E3C8'
+let g:terminal_color_11 = '#8897F4'
+let g:terminal_color_12 = '#bd93f9'
+let g:terminal_color_13 = '#ff79c6'
+let g:terminal_color_14 = '#8be9fd'
+let g:terminal_color_15 = '#bfaae3'
 
 " Transparent background
 au ColorScheme * hi Normal ctermbg=none guibg=none
@@ -48,6 +63,9 @@ hi Search guifg=#302b30 guibg=#dfb7e8
 hi IncSearch guifg=#dfb7e8 guibg=#de286e guisp=#8897F4 gui=underline,bold
 " Title Text
 hi Title guifg=#8897F4 guibg=NONE gui=bold
+" Floaterm
+hi FloatermNC guifg=#6161b3
+hi FloatermBorder guifg=#ff79c6
 " Folds
 hi Folded guifg=#42128f guibg=none guisp=#42128f gui=italic
 hi FoldColumn guifg=#7676cd guibg=#2e292e guisp=#2e292e

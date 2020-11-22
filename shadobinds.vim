@@ -14,10 +14,12 @@ vnoremap <F3> y<c-w>wp<c-w>gv
 nnoremap <F3> :set invnumber invrelativenumber<CR>
 "}}}
 "<---Fzf Commands---> {{{
-map <C-f> <esc><esc>:Files!<CR>
-map <C-A-f> <esc><esc><C-w>v:Files!<CR>
-inoremap <C-f> <esc><esc>:BLines!<CR>
-nnoremap <leader>bc <esc><esc>:BCommits!<CR>
+map <C-f> <esc><esc>:Files<CR>
+map <leader>fr <esc><esc>:Files<CR>
+map <C-A-f> <esc><esc><C-w>v:Files<CR>
+inoremap <C-f> <esc><esc>:BLines<CR>
+nnoremap <leader>bc <esc><esc>:BCommits<CR>
+nnoremap <leader>bv <esc><esc>:Buffers<CR>
 "}}}
 "<---Arrow keys to resize splits---> {{{
 nnoremap <silent><Up>    :resize +2<CR>
@@ -38,8 +40,8 @@ nnoremap <C-A-h> <C-w>h
 nnoremap <C-A-j> <C-w>j
 nnoremap <C-A-k> <C-w>k
 nnoremap <C-A-l> <C-w>l
-map <leader>th <C-w>t<C-w>H
-map <leader>tk <C-w>t<C-w>K
+" map <leader>th <C-w>t<C-w>H
+" map <leader>tk <C-w>t<C-w>K
 map <leader>h <C-w>h
 map <leader>k <C-w>k
 "}}}
@@ -58,13 +60,44 @@ noremap <leader>T :tabnew<CR>
 "}}}
 "<--- C Lang ---> {{{
 nnoremap <leader>; <esc>A;<esc>
-nnoremap <leader>mk :make \| cw
+nnoremap <leader>mk :make \| cw<CR>
+tnoremap <Esc> <Esc><C-\><C-n>
+
+function! s:Dbger()
+    Termdebug
+    vertical resize -40
+    startinsert
+endfunction
+command! Dbger call s:Dbger()
+nnoremap <leader>gdb :Dbger<CR>
 "}}}
+"<--- Floaterm ---> {{{
+nnoremap <silent><leader>bm :FloatermToggle<CR>
+tnoremap <silent><leader>bm <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent><leader>b, :FloatermNew --wintype=normal --height=8<CR>
+tnoremap <silent><leader>b, <C-\><C-n>:FloatermNew --wintype=normal --height=8<CR>
+tnoremap <silent><leader>bb <C-\><C-n>:FloatermPrev<CR>
+tnoremap <silent><leader>bb <C-\><C-n>:FloatermNext<CR>
+tnoremap <silent><leader>bk <C-\><C-n>:FloatermKill <CR>
+" }}}
 "<---Buffer Commands---> {{{
 nmap <leader>bl :ls<CR>
 nmap <silent><leader>bb :bnext<CR>
 nmap <silent><leader>bn :bprevious<CR>
 nmap <silent><leader>bk :bp\|bd # <CR>
+nnoremap <leader>b1 :b 1<CR>
+nnoremap <leader>b2 :b 2<CR>
+nnoremap <leader>b3 :b 3<CR>
+nnoremap <leader>b4 :b 4<CR>
+nnoremap <leader>b5 :b 5<CR>
+nnoremap <leader>b6 :b 6<CR>
+nnoremap <leader>b7 :b 7<CR>
+nnoremap <leader>b8 :b 8<CR>
+nnoremap <leader>b9 :b 9<CR>
+" Buff menu
+set wildchar=<Tab> wildmenu wildmode=full
+set wildcharm=<C-Z>
+" nnoremap <leader>bm :b <C-Z>
 "}}}
 "<---Git Commands---> {{{
 nmap <leader>ga :Gwrite<CR>

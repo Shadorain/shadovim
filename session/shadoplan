@@ -7,7 +7,7 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +11 shadomenu.c
+badd +29 shadomenu.c
 badd +24 shadoplan.c
 badd +10 options.c
 badd +1 Makefile
@@ -18,7 +18,7 @@ badd +2 shadomenu.h
 argglobal
 %argdel
 $argadd shadomenu.h
-edit shadomenu.c
+edit shadoplan.c
 set splitbelow splitright
 set nosplitbelow
 wincmd t
@@ -35,12 +35,12 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 29 - ((28 * winheight(0) + 27) / 55)
+let s:l = 23 - ((6 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-29
-normal! 08|
+23
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
