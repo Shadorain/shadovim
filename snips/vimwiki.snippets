@@ -29,19 +29,22 @@ endsnippet
 
 # Resources
 snippet rsrc "Snippet for resources"
-# Topic: $1 (`!v strftime("%b %d, %Y")`)
-* $2
+# $1 (`!v strftime("%b %d, %Y")`)
+## $2
+* $4
 
-## Sub Topic: $3
+## $5
 * $4
 
 ## Sources
 * [$4]($5)
 endsnippet
+
 snippet st: "Quick Snippet for 'Sub Topic:'" bA
-## Sub Topic: $1
+## $1
 * $2
 endsnippet
+
 snippet ln "New link" b
 * [$1]($2)
 endsnippet
