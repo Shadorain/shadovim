@@ -108,6 +108,29 @@ let g:startify_custom_header = [
     \ '  /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /   ',
     \ '          \/       \/      \/      \/                    \/          \/     ',
     \ ]
+
+" Grouped bookmark lists 
+" function! s:bookmarks1()
+"   return [
+"         \ { 'line': 'file1', 'cmd': 'edit file1' },
+"         \ { 'line': 'file2', 'cmd': 'edit file2' },
+"         \ ]
+" endfunction
+
+" function! s:bookmarks2()
+"   return [
+"         \ { 'line': 'file3', 'cmd': 'edit file3' },
+"         \ { 'line': 'file4', 'cmd': 'edit file4' },
+"         \ ]
+" endfunction
+
+" let g:startify_lists = [
+"       \ { 'header': ['   MRU'],            'type': 'files' },
+"       \ { 'header': ['   MRU '. getcwd()], 'type': 'dir' },
+"       \ { 'header': ['   Sessions'],       'type': 'sessions' },
+"       \ { 'header': ['   Bookmarks 1'],    'type': function('s:bookmarks1') },
+"       \ { 'header': ['   Bookmarks 2'],    'type': function('s:bookmarks2') },
+"       \ ]
 " }}}
 " Plug >-- Git Gutter " {{{
 let g:gitgutter_sign_added              = '+'  "'⏽'
@@ -143,6 +166,7 @@ highlight BookmarkAnnotationSign guibg=NONE guifg=#5d5daf
 highlight BookmarkAnnotationLine guibg=NONE guifg=NONE
 let g:bookmark_sign = ''
 let g:bookmark_highlight_lines = 1
+let g:bookmark_save_per_working_dir = 1
 "rebind some overlaps with my marks setup (a,s,d,f)
 nmap <Leader>a <Plug>BookmarkShowAll
 "}}}

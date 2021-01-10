@@ -61,6 +61,7 @@ hi CursorLineNr guifg=#de286e guibg=none
 hi Search guifg=#302b30 guibg=#dfb7e8
 " Search and Replace
 hi IncSearch guifg=#dfb7e8 guibg=#de286e guisp=#8897F4 gui=underline,bold
+
 " Title Text
 hi Title guifg=#8897F4 guibg=NONE gui=bold
 " Floaterm
@@ -77,10 +78,10 @@ hi StatusLineNC guifg=#1B1B29 guibg=#35355e guisp=#35355e
 " Non Text extra characters
 hi NonText guifg=#73daff guibg=NONE
 " Diff (Text, Delete, Add, Change)
-hi DiffText guifg=#e3d3eb guibg=#4d254d guisp=#4d254d
-hi DiffDelete guifg=#de286e guibg=none guisp=#c9083f
 hi DiffAdd guifg=#37d4a7 guibg=none guisp=#2c9465
 hi DiffChange guifg=#2f77a1 guibg=none guisp=#2f77a1
+hi DiffDelete guifg=#de286e guibg=none guisp=#c9083f
+hi DiffText guifg=#e3d3eb guibg=#4d254d guisp=#4d254d
 
 " Comments
 hi Comment guifg=#6272a4 guibg=NONE
