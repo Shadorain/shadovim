@@ -33,6 +33,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
     Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
     "<--LSP---------------------------------------------------------------------------------------$
+    Plug 'rust-lang/rust.vim'
+    Plug 'arzg/vim-rust-syntax-ext'
+    Plug 'jeaye/color_coded'
     "<--Syntax------------------------------------------------------------------------------------$
     " Plug 'alx741/vim-hindent' "More Sexy syntax for haskell babyyyy
     " Plug 'alx741/vim-stylishask' "More Sexy syntax for haskell babyyyy x2!!!
