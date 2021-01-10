@@ -1,0 +1,45 @@
+# ----------------------------------------------------------------------------- 
+# Snippet options:    
+#    
+#       b - Beginning of line.    
+#       i - In-word expansion.    
+#       w - Word boundary.     
+#       r - Regular expression    
+#       e - Custom context snippet    
+#       A - Snippet will be triggered automatically, when condition matches.    
+# ----------------------------------------------------------------------------- 
+
+# Simple Main
+snippet main "Simple main function"
+int main (void) {
+	$1
+	return 0;
+}
+endsnippet
+
+# Main Args
+snippet amain "Main function with args"
+int main (int argc, char *argc[]) {
+	$1
+	return 0;
+}
+endsnippet
+
+# If
+snippet if "Simple if statement"
+if ($1) { $2 }
+endsnippet
+
+# If Else
+snippet ife "If else"
+if ($1) { 
+	$2 
+} else { $3 }
+endsnippet
+
+# Typical for
+snippet for "Basic for loop"
+for (int i = 0; i < $1; i++) { 
+	$2 
+}
+endsnippet

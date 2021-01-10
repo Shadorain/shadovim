@@ -143,6 +143,7 @@ highlight BookmarkAnnotationSign guibg=NONE guifg=#5d5daf
 highlight BookmarkAnnotationLine guibg=NONE guifg=NONE
 let g:bookmark_sign = ''
 let g:bookmark_highlight_lines = 1
+let g:bookmark_save_per_working_dir = 1
 "rebind some overlaps with my marks setup (a,s,d,f)
 nmap <Leader>a <Plug>BookmarkShowAll
 "}}}

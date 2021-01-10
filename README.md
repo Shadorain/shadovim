@@ -17,6 +17,5 @@ pip3 install neovim
 Now that shadovim is installed on the system, we have to do some final patching up withing nvim itself!
 1. Open `nvim` and run `:PlugInstall` and allow it to install the few plugins
   - if this step does not work then try opening and closing nvim once more, or make sure that vim-plug is properly installed
-2. Then close it (:q) and open `nvim` again, this time run this command: (will install all the COC packages, remove what you will not use from this list now)
+3. Then close it and open `nvim` again, this time run this command: (will install all the coc-packages)
     ```:CocInstall coc-calc coc-clangd coc-cmake coc-highlight coc-markdownlint coc-git coc-fzf-preview coc-html coc-json coc-sh coc-tabnine coc-texlab coc-vimlsp coc-yaml coc-yank coc-snippets```
-3. Finally, close nvim and reopen once more... all the plugins should now be installed!
