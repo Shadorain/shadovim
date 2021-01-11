@@ -57,13 +57,14 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi Folded guifg=#53606e guibg=NONE
   hi FoldColumn guifg=#53606e guibg=NONE
   hi MatchWord guifg=#0f5bca guibg=NONE
+  hi MatchParen guifg=#8be9fd guibg=NONE
   hi Signify guifg=#4484d1 guibg=NONE
   hi Ignore guifg=#53606e guibg=NONE
 
-  hi PMenu guifg=#eed6ee guibg=#1B1B29 guisp=#3d3d6b
-  hi PMenuSbar guifg=#a883a8 guibg=#2F2F4A guisp=#5b5b8a
-  hi PMenuSel guifg=#6876de guibg=#2F2F4A guisp=#2F2F4A gui=bold,underline
-  hi PMenuThumb guifg=#eed6ee guibg=#5b5b8a guisp=#2F2F4A
+  hi Pmenu guifg=#eed6ee guibg=#1B1B29 guisp=#3d3d6b
+  hi PmenuSbar guifg=#a883a8 guibg=#2F2F4A guisp=#5b5b8a
+  hi PmenuSel guifg=#6876de guibg=#2F2F4A guisp=#2F2F4A gui=bold,underline
+  hi PmenuThumb guifg=#eed6ee guibg=#5b5b8a guisp=#2F2F4A
 
   hi Error guifg=#292a30 guibg=#6e2323
   hi ErrorMsg guifg=#ff8170 guibg=NONE
@@ -252,7 +253,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi! link goVarAssign LocalIdent
   hi! link goVarDefs IdentifierDef
   " }}}
-  " Go {{{
+  " Help command {{{
   hi! link helpCommand helpExample
   hi! link helpExample markdownCode
   hi! link helpHeadline Title

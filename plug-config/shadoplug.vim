@@ -25,7 +25,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'godlygeek/tabular' "Makes having sexy code so much easier: organized your tabbed stuff
     Plug 'junegunn/goyo.vim' "Adds like a focus mode to vim, its quite nice tbh
     Plug 'mhinz/vim-startify' "I find this to be one of the coolest, sexiest, and most useful plugs
-        "it allows for a start s2creen in vim with whatever the hell u want, and its amazing
+        "it allows for a start s2creen in vim with whatever the heck u want, and its amazing
     "<--Git Integration---------------------------------------------------------------------------$
     Plug 'airblade/vim-gitgutter'
     " Plug 'mhinz/vim-signify' "Extremely useful, handles git changes/deletes/additions in a sidebar
