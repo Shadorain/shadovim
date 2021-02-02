@@ -207,8 +207,8 @@ let g:lightline.mode_map = {
 " }}}
 " Plug >-- VimWiki " {{{
 "<---Sets to markdown instead of vimwiki syntax--->
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1}]
+" let g:vimwiki_list = [{'path': '~/vimwiki/',
+"                       \ 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1}]
 
 "<---Fixes diary on enter--->
 command! Diary VimwikiDiaryIndex

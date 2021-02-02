@@ -66,7 +66,11 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi PmenuSel guifg=#6876de guibg=#2F2F4A guisp=#2F2F4A gui=bold,underline
   hi PmenuThumb guifg=#eed6ee guibg=#5b5b8a guisp=#2F2F4A
 
-  hi Error guifg=#292a30 guibg=#6e2323
+  hi FloatermNC guifg=#6161b3
+  hi FloatermBorder guifg=#ff79c6
+
+  " hi Error guifg=#292a30 guibg=#6e2323
+  hi Error guifg=#ac2958 guibg=NONE
   hi ErrorMsg guifg=#ff8170 guibg=NONE
   hi ModeMsg guifg=#fca1e7 guibg=NONE
   hi MoreMsg guifg=#ff7ab2 guibg=NONE

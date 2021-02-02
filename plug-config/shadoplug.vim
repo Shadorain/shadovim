@@ -13,7 +13,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'MattesGroeger/vim-bookmarks', "Plugin to bookmark lines of code
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "To have the plug right under this one
     Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
-    Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
+    Plug 'vim-scripts/genutils'
+    Plug 'albfan/vim-breakpts'
+    " Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
     "<--Ease of use-------------------------------------------------------------------------------$
     Plug 'makerj/vim-pdf'
     Plug 'unblevable/quick-scope' "Saves SO MUCH TIME when using the f/F keys, just use it!
@@ -35,7 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     "<--LSP---------------------------------------------------------------------------------------$
     Plug 'rust-lang/rust.vim'
     Plug 'arzg/vim-rust-syntax-ext'
-    Plug 'jeaye/color_coded'
+    " Plug 'jeaye/color_coded'
     "<--Syntax------------------------------------------------------------------------------------$
     " Plug 'alx741/vim-hindent' "More Sexy syntax for haskell babyyyy
     " Plug 'alx741/vim-stylishask' "More Sexy syntax for haskell babyyyy x2!!!

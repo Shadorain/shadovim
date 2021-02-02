@@ -38,4 +38,3 @@ Finally for lightline, we simply need to link our custom theme on top of an exis
 ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim 
  ```
 
->>>>>>> d18b103238500f8b7fd3a9989411ef72d040f4bc
