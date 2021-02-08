@@ -59,17 +59,22 @@ noremap <leader>S :Startify<CR>
 noremap <leader>T :tabnew<CR>
 "}}}
 "<--- C Lang ---> {{{
-nnoremap <leader>; <esc>A;<esc>
-nnoremap <leader>mk :make \| cw<CR>
-tnoremap <Esc> <Esc><C-\><C-n>
+"<---- Cscope ----> {{{
+noremap <leader>ss <esc>:cs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>sc <esc>:cs find c <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>sg <esc>:cs find g <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>se <esc>:cs find e <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>sf <esc>:cs find f <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>si <esc>:cs find i ^<C-R>=expand("<cword>")<CR><CR>
+noremap <leader>sd <esc>:cs find d <C-R>=expand("<cword>")<CR><CR>
 
-function! s:Dbger()
-    Termdebug
-    vertical resize -40
-    startinsert
-endfunction
-command! Dbger call s:Dbger()
-nnoremap <leader>gdb :Dbger<CR>
+noremap <leader>sss <esc>:scs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>ssc <esc>:scs find c <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>ssg <esc>:scs find g <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>sse <esc>:scs find e <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>ssf <esc>:scs find f <C-R>=expand("<cword>")<CR><CR>
+noremap <leader>ssi <esc>:scs find i ^<C-R>=expand("<cword>")<CR><CR>
+noremap <leader>ssd <esc>:scs find d <C-R>=expand("<cword>")<CR><CR>
 "}}}
 "<--- Floaterm ---> {{{
 nnoremap <silent><leader>bm :FloatermToggle<CR>

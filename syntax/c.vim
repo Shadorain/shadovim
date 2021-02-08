@@ -1,7 +1,7 @@
 syn match Braces display "[;{}()\[\]]"
 syn match Ops display '[+-/*%^&!=><:|?]'
 syn match Data "\v(\.|-\>)@<=[A-Za-z0-9_]+"
-syn match MacroNames "\v[A-Z_]{3,}"
+syn match MacroNames "\v[A-Z0-9_]{3,}"
 " Options: #48D1CC, #5A4FCF, #6A5ACD, #FF1476, #7851a9, #6c2d60
 highlight Braces guifg=#ac2958 guibg=NONE 
 highlight Ops guifg=#f49ac2 guibg=NONE

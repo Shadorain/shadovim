@@ -1,4 +1,5 @@
 " =========================================================================================$
+
 "    _________.__                .___            .__                       .__         
 "   /   _____/|  |__ _____     __| _/____ ______ |  |  __ __  ____   ___  _|__| _____  
 "   \_____  \ |  |  \\__  \   / __ |/  _ \\____ \|  | |  |  \/ ___\  \  \/ /  |/     \ 
@@ -15,13 +16,13 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
     Plug 'vim-scripts/genutils'
     Plug 'albfan/vim-breakpts'
-    " Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
+    "" Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
     "<--Ease of use-------------------------------------------------------------------------------$
-    Plug 'makerj/vim-pdf'
+    "" Plug 'makerj/vim-pdf'
     Plug 'unblevable/quick-scope' "Saves SO MUCH TIME when using the f/F keys, just use it!
     Plug 'easymotion/vim-easymotion' "Highly advanced real time more efficient search! haha
     Plug 'tpope/vim-commentary' "Makes commenting 100x easier and better. Just use it ull see
-    Plug 'mattn/calendar-vim' "niftly little plug that can interract with vimwiki diary!
+    "" Plug 'mattn/calendar-vim' "niftly little plug that can interract with vimwiki diary!
     "<--That Rice Stuff---------------------------------------------------------------------------$
     Plug 'itchyny/lightline.vim' "Adds that sexy bar your seeing at bottom of ur vim window
     Plug 'godlygeek/tabular' "Makes having sexy code so much easier: organized your tabbed stuff
@@ -31,9 +32,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     "<--Git Integration---------------------------------------------------------------------------$
     Plug 'airblade/vim-gitgutter'
     " Plug 'mhinz/vim-signify' "Extremely useful, handles git changes/deletes/additions in a sidebar
-    Plug 'tpope/vim-fugitive' "`:Git`&`:G...` functionality, can do alot with this bad boy
-    Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
-    Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
+    "" Plug 'tpope/vim-fugitive' "`:Git`&`:G...` functionality, can do alot with this bad boy
+    "" Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
+    "" Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
     "<--LSP---------------------------------------------------------------------------------------$
     Plug 'rust-lang/rust.vim'
     Plug 'arzg/vim-rust-syntax-ext'
@@ -41,7 +42,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     "<--Syntax------------------------------------------------------------------------------------$
     " Plug 'alx741/vim-hindent' "More Sexy syntax for haskell babyyyy
     " Plug 'alx741/vim-stylishask' "More Sexy syntax for haskell babyyyy x2!!!
-    Plug 'neovimhaskell/haskell-vim' "Adds better syntax highlighting for Haskell
+    "" Plug 'neovimhaskell/haskell-vim' "Adds better syntax highlighting for Haskell
     Plug 'plasticboy/vim-markdown' "Def keep if u use md. Comes quite in handy for alot of md stuff
     Plug 'sheerun/vim-polyglot' "Adds some better syntax for quite a few languages
     "<--Snippets----------------------------------------------------------------------------------$

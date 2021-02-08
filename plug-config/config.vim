@@ -6,6 +6,10 @@
 "   \______  /\____/|___|  /__|  |__\___  / /\ \_/ |__|__|_|  /
 "          \/            \/        /_____/  \/              \/ 
 " ================================================================$
+" Config >-- Cscope " {{{
+if filereadable("cscope.out")
+  cs add cscope.out
+" }}}
 " Plug >-- Undofile " {{{
 set undofile
 set backupdir=~/.config/nvim/backups/
