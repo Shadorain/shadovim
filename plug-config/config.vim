@@ -9,6 +9,7 @@
 " Config >-- Cscope " {{{
 if filereadable("cscope.out")
   cs add cscope.out
+endif
 " }}}
 " Plug >-- Undofile " {{{
 set undofile
