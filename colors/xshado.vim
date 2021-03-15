@@ -140,7 +140,8 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   hi Directory guifg=#ff7ab2 guibg=NONE
   hi Debug guifg=#bc6bd0 guibg=NONE
-  hi NonText guifg=#E9729D guibg=NONE
+  hi NonText guifg=#2f3037 guibg=NONE
+  " hi NonText guifg=#E9729D guibg=NONE
 
   hi Underlined guifg=#458FAA guibg=NONE gui=underline
   hi SpellBad guifg=NONE guibg=NONE gui=undercurl

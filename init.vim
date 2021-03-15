@@ -11,7 +11,7 @@ syntax enable "Allows for syntax highlighting
 set termguicolors "Allows for hex coloring
 set t_ut= "No idea lols
 colorscheme xshado
-" colorscheme shado "Set your colorscheme here (mine not too bad)
+set listchars=space:·
 "<--Map Leader Key---------------------------------------------------------------------$
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','

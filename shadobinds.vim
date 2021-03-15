@@ -12,6 +12,15 @@
 vnoremap <F3> y<c-w>wp<c-w>gv
 " Turns off all line numbers
 nnoremap <F3> :set invnumber invrelativenumber<CR>
+" Similar use as with `C`/`D`, copies to end of line instead of full line
+nnoremap Y y$
+" Refresh vim without restarting (cscope too)
+nnoremap <F5> :source ~/.config/nvim/init.vim<CR>:source ~/.config/nvim/plug-config/config.vim<CR>:source ~/.config/nvim/shadobinds.vim<CR>:source ~/.config/nvim/colors/xshado.vim<CR>
+nnoremap <F6> :!cscope -Rbq<CR>:cd reset<CR><CR> 
+"}}}
+"<---Tabout---> {{{
+inoremap <expr> <C-l> getline('.')[col('.')-1] =~? '[]>)}''"`]' ? '<Right>' : '<Right>' 
+": '<Tab>'
 "}}}
 "<---Fzf Commands---> {{{
 map <C-f> <esc><esc>:Files<CR>
@@ -20,6 +29,7 @@ map <C-A-f> <esc><esc><C-w>v:Files<CR>
 inoremap <C-f> <esc><esc>:BLines<CR>
 nnoremap <leader>bc <esc><esc>:BCommits<CR>
 nnoremap <leader>bv <esc><esc>:Buffers<CR>
+nnoremap <C-b> <esc><esc>:Buffers<CR>
 "}}}
 "<---Arrow keys to resize splits---> {{{
 nnoremap <silent><Up>    :resize +2<CR>
@@ -49,6 +59,10 @@ map <leader>k <C-w>k
 noremap <C-\>k <esc><esc>kyypxVr=A #<esc>:Commentary<CR>
 noremap <C-\>j <esc><esc>jyyPxVr=A #<esc>:Commentary<CR>
 "}}}
+"<---Hop---> {{{
+" nnoremap <C-c>h :HopChar1<CR>
+lua vim.api.nvim_set_keymap('n', '<C-c>h', "<cmd>lua require'hop'.hint_char1()<cr>", {})
+"}}}
 "<--Leader Keybinds---------------------------------------------------------------------------------$
 "<---Misc---> {{{
 "Search and Replace
@@ -75,6 +89,7 @@ noremap <leader>sse <esc>:scs find e <C-R>=expand("<cword>")<CR><CR>
 noremap <leader>ssf <esc>:scs find f <C-R>=expand("<cword>")<CR><CR>
 noremap <leader>ssi <esc>:scs find i ^<C-R>=expand("<cword>")<CR><CR>
 noremap <leader>ssd <esc>:scs find d <C-R>=expand("<cword>")<CR><CR>
+"}}}
 "}}}
 "<--- Floaterm ---> {{{
 nnoremap <silent><leader>bm :FloatermToggle<CR>

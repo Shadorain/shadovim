@@ -16,11 +16,15 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
     Plug 'vim-scripts/genutils'
     Plug 'albfan/vim-breakpts'
+    Plug 'felipec/notmuch-vim'
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } "browser integration with shadovim!!
     "" Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
     "<--Ease of use-------------------------------------------------------------------------------$
     "" Plug 'makerj/vim-pdf'
     Plug 'unblevable/quick-scope' "Saves SO MUCH TIME when using the f/F keys, just use it!
-    Plug 'easymotion/vim-easymotion' "Highly advanced real time more efficient search! haha
+    Plug 'phaazon/hop.nvim' "An easy motion sort of wrapper that is even faster
+    Plug 'justinmk/vim-sneak' "Tbh not yet sold on this guy, i kinda liked default s/S key even tho they useless
+    " Plug 'easymotion/vim-easymotion' "Highly advanced real time more efficient search! haha
     Plug 'tpope/vim-commentary' "Makes commenting 100x easier and better. Just use it ull see
     "" Plug 'mattn/calendar-vim' "niftly little plug that can interract with vimwiki diary!
     "<--That Rice Stuff---------------------------------------------------------------------------$
@@ -52,7 +56,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     "coc-clangd, coc-highlight, coc-lists, coc-python, coc-snippets, coc-todolists, coc-vimlsp, coc-yank
     "<--Unused Plugins------------------------------------------------------------------$ {{{
     " Plug 'tpope/vim-surround' "Surrounds your braces, parens, quotes etc to save you a keypress
-    " Plug 'justinmk/vim-sneak' "Tbh not yet sold on this guy, i kinda liked default s/S key
     " Plug 'ChristianChiarulli/codi.vim' "Nice lil REPL for some langs, I dont use it much tho
     " Plug 'justinmk/vim-syntax-extra' "Better syntax highlighting for some langs
     " Plug 'vim-pandoc/vim-pandoc-syntax' "If you are to use latex or similar in vim (ofc you are!)
