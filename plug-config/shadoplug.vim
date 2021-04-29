@@ -12,12 +12,19 @@ call plug#begin('~/.local/share/nvim/plugged')
     "<--General-----------------------------------------------------------------------------------$
     Plug 'voldikss/vim-floaterm'
     Plug 'MattesGroeger/vim-bookmarks', "Plugin to bookmark lines of code
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "To have the plug right under this one
-    Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
+    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "To have the plug right under this one
+    " Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'vim-scripts/genutils'
     Plug 'albfan/vim-breakpts'
     Plug 'felipec/notmuch-vim'
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } "browser integration with shadovim!!
+    Plug 'mileszs/ack.vim'
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    " Plug 'wakatime/vim-wakatime'
     "" Plug 'vimwiki/vimwiki' "Probably my fav plug, use it daily for all my notes, its quite amazing
     "<--Ease of use-------------------------------------------------------------------------------$
     "" Plug 'makerj/vim-pdf'
@@ -53,7 +60,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'honza/vim-snippets' "Paired with coc-snippets; adds quite a few premade snippets
     "<--Coc Suite (Most of it is handled by coc itself)-------------------------------------------$
     Plug 'neoclide/coc.nvim', {'branch': 'release'} "Massive suite with alotta good stuff!
-    "coc-clangd, coc-highlight, coc-lists, coc-python, coc-snippets, coc-todolists, coc-vimlsp, coc-yank
+    "coc-clangd, coc-highlight, coc-lists, coc-python, coc-snippets, coc-yank, coc-pairs
     "<--Unused Plugins------------------------------------------------------------------$ {{{
     " Plug 'tpope/vim-surround' "Surrounds your braces, parens, quotes etc to save you a keypress
     " Plug 'ChristianChiarulli/codi.vim' "Nice lil REPL for some langs, I dont use it much tho

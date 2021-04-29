@@ -14,22 +14,34 @@ vnoremap <F3> y<c-w>wp<c-w>gv
 nnoremap <F3> :set invnumber invrelativenumber<CR>
 " Similar use as with `C`/`D`, copies to end of line instead of full line
 nnoremap Y y$
-" Refresh vim without restarting (cscope too)
+" Refresh vim without restarting (cscope too): doesn't work well at all lol
 nnoremap <F5> :source ~/.config/nvim/init.vim<CR>:source ~/.config/nvim/plug-config/config.vim<CR>:source ~/.config/nvim/shadobinds.vim<CR>:source ~/.config/nvim/colors/xshado.vim<CR>
 nnoremap <F6> :!cscope -Rbq<CR>:cd reset<CR><CR> 
+
+nnoremap <C-j> ddkPJ
+"}}}
+"<---Project Management---> {{{
+" nnoremap <C-/> <esc>:vimgrep
 "}}}
 "<---Tabout---> {{{
 inoremap <expr> <C-l> getline('.')[col('.')-1] =~? '[]>)}''"`]' ? '<Right>' : '<Right>' 
 ": '<Tab>'
 "}}}
-"<---Fzf Commands---> {{{
-map <C-f> <esc><esc>:Files<CR>
-map <leader>fr <esc><esc>:Files<CR>
-map <C-A-f> <esc><esc><C-w>v:Files<CR>
-inoremap <C-f> <esc><esc>:BLines<CR>
-nnoremap <leader>bc <esc><esc>:BCommits<CR>
-nnoremap <leader>bv <esc><esc>:Buffers<CR>
-nnoremap <C-b> <esc><esc>:Buffers<CR>
+"<---Telescope/Fzf Commands---> {{{
+map <C-f> <esc><cmd>Telescope find_files<cr>
+map <leader>fr <esc><cmd>Telescope find_files<cr>
+map <C-A-f> <esc><esc><C-w>v<cmd>Telescope find_files<CR>
+inoremap <C-f> <esc><esc><cmd>Telescope live_grep<CR>
+nnoremap <leader>bv <esc><esc><cmd>Telescope buffers<CR>
+nnoremap <C-b> <esc><esc><cmd>Telescope buffers<CR>
+nnoremap <leader>bc <esc><esc><cmd>Telescope git_commits<CR>
+" map <C-f> <esc><esc>:Files<CR>
+" map <leader>fr <esc><esc>:Files<CR>
+" map <C-A-f> <esc><esc><C-w>v:Files<CR>
+" inoremap <C-f> <esc><esc>:BLines<CR>
+" nnoremap <leader>bc <esc><esc>:BCommits<CR>
+" nnoremap <leader>bv <esc><esc>:Buffers<CR>
+" nnoremap <C-b> <esc><esc>:Buffers<CR>
 "}}}
 "<---Arrow keys to resize splits---> {{{
 nnoremap <silent><Up>    :resize +2<CR>
@@ -61,7 +73,7 @@ noremap <C-\>j <esc><esc>jyyPxVr=A #<esc>:Commentary<CR>
 "}}}
 "<---Hop---> {{{
 " nnoremap <C-c>h :HopChar1<CR>
-lua vim.api.nvim_set_keymap('n', '<C-c>h', "<cmd>lua require'hop'.hint_char1()<cr>", {})
+" lua vim.api.nvim_set_keymap('n', '<C-c>h', "<cmd>lua require'hop'.hint_char1()<cr>", {})
 "}}}
 "<--Leader Keybinds---------------------------------------------------------------------------------$
 "<---Misc---> {{{
@@ -123,7 +135,7 @@ set wildcharm=<C-Z>
 nmap <leader>ga :Gwrite<CR>
 nmap <leader>gst :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
-nmap <leader>gc :Gcommit<CR>
+nmap <leader>gc :Telescope git_commits<CR>
 nmap <leader>gp :Git push<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gB :Gbrowse<CR>

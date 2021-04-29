@@ -24,6 +24,7 @@ set tabstop=4
 set number
 set relativenumber
 "<--Misc-------------------------------------------------------------------------------$
+set path=$PWD/**
 set nocompatible
 set splitright
 set foldmethod=marker

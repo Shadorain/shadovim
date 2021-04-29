@@ -149,6 +149,8 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi SpellLocal guifg=NONE guibg=NONE gui=undercurl
   hi SpellRare guifg=NONE guibg=NONE gui=undercurl
 
+  " Telescope
+  hi TelescopeBorder guifg=#bd93f9
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function

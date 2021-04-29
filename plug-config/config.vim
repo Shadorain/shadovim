@@ -6,10 +6,40 @@
 "   \______  /\____/|___|  /__|  |__\___  / /\ \_/ |__|__|_|  /
 "          \/            \/        /_____/  \/              \/ 
 " ================================================================$
+" Config >-- IndentLine " {{{
+"let g:indentLine_color_gui = '#E9729D'
+""let g:indentLine_char_list = ['|'] ", '¦', '┆', '┊']
+"let g:indentLine_char = '|'
+"let g:indentLine_concealcursor = 'inc'
+"let g:indentLine_conceallevel = 2
+" }}}
 " Config >-- Cscope " {{{
 if filereadable("cscope.out")
   cs add cscope.out
 endif
+" }}}
+" Config >-- Ack " {{{
+" Use ripgrep for searching ⚡️
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --type-not sql -> Avoid huge sql file dumps as it slows down the search
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
+
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+
+" Maps <C-/> so we're ready to type the search keyword
+nnoremap <C-_> <esc>:Ack!<Space>
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
 " }}}
 " Plug >-- Undofile " {{{
 set undofile
@@ -23,6 +53,59 @@ let g:floaterm_height=0.4
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
 let g:floaterm_title=0
+" }}}
+" Plug >-- Telescope " {{{
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=always',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_position = "bottom",
+    prompt_prefix = "❱ ",
+    selection_caret = "❱ ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_defaults = {
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    width = 0.75,
+    preview_cutoff = 120,
+    results_height = 1,
+    results_width = 0.3,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    use_less = false,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  }
+}
+EOF
 " }}}
 " Plug >-- FZF " {{{
 " Customize fzf colors to match your color scheme
@@ -70,7 +153,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<C-l>'
+let g:coc_snippet_prev = '<C-h>'
 " }}}
 "}}}
 " Plug >-- Startify " {{{
@@ -91,10 +175,11 @@ let g:startify_bookmarks = [
     \ { 'nc': '~/.config/nvim/plug-config/config.vim'                                                     },
     \ { 'nk': '~/.config/nvim/shadobinds.vim'                                                             },
     \ { 'ns': '~/.config/nvim/colors/shado.vim'                                                           },
-    \ { 'nx': '~/.config/nvim/colors/xshado.vim'                                                           },
+    \ { 'nx': '~/.config/nvim/colors/xshado.vim'                                                          },
     \ { 'nw': '~/.config/nvim/snippets/vimwiki.snippets'                                                  },
     \ { 'nl': '~/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim'         },
     \ { 's' : '~/.config/sxhkd/sxhkdrc'                                                                   },
+    \ { 'x' : '~/.xmonad/xmonad.hs'                                                                       },
     \ { 'b' : '~/.config/bspwm/bspwmrc'                                                                   },
     \ { 'p' : '~/.config/shadobar/config-xmonad'                                                          },
     \ { 'c' : '~/.config/picom.conf'                                                                      },
@@ -150,7 +235,7 @@ let g:gitgutter_enabled = 1
 highlight GitGutterAdd    guifg=#37d4a7 ctermfg=2
 highlight GitGutterChange guifg=#2f77a1 ctermfg=3
 "}}}
-"" Plug >-- Signify " {{{
+" Plug >-- Signify " {{{
 ""<---Signs(Are displayed on a side bar to show status)--->
 "let g:signify_sign_add               = '+'
 "let g:signify_sign_delete            = '_'
