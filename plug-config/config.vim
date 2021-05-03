@@ -269,12 +269,14 @@ set noshowmode
 let g:lightline = { 
     \ 'colorscheme': 'deus',
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \       [ 'filename', 'helloworld' ] ],
-    \   'right': [ [ 'lineinfo' ],
-    \               [ 'percent' ] ]
+    \   'left':   [ [ 'mode' ], [ 'filename' ] ],
+    \   'right':  [ [ 'lineinfo' ], [ 'percent' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
     \ },
     \ }
+" \   'middle': [ [ 'mode' ] ],  doesn't work :facepalm:
 
 "<---Config for tabs--->
 let g:lightline.tabline = { 

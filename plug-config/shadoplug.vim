@@ -43,7 +43,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     "<--Git Integration---------------------------------------------------------------------------$
     Plug 'airblade/vim-gitgutter'
     " Plug 'mhinz/vim-signify' "Extremely useful, handles git changes/deletes/additions in a sidebar
-    "" Plug 'tpope/vim-fugitive' "`:Git`&`:G...` functionality, can do alot with this bad boy
+    Plug 'tpope/vim-fugitive' "`:Git`&`:G...` functionality, can do alot with this bad boy
     "" Plug 'tpope/vim-rhubarb' "Adds on to fugitives functionality
     "" Plug 'junegunn/gv.vim' "View your git commits in a nice vim window
     "<--LSP---------------------------------------------------------------------------------------$
