@@ -7,7 +7,7 @@
 "         \/      \/     \/      \/              \/         \/              \/   
 " =====================================================================================$
 "<--Colors-----------------------------------------------------------------------------$
-syntax enable "Allows for syntax highlighting
+syntax on "Allows for syntax highlighting
 set termguicolors "Allows for hex coloring
 set t_ut= "No idea lols
 colorscheme xshado

@@ -90,6 +90,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi DiffText guifg=#e3d3eb guibg=#4d254d guisp=#4d254d
 
   hi Comment guifg=#6272a4 guibg=NONE
+  hi Conceal guifg=#6272a4 guibg=NONE
 
   hi Special guifg=#5d5daf guibg=NONE
   hi SpecialComment guifg=#bc6bd0 guibg=NONE

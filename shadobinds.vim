@@ -19,6 +19,11 @@ nnoremap <F5> :source ~/.config/nvim/init.vim<CR>:source ~/.config/nvim/plug-con
 nnoremap <F6> :!cscope -Rbq<CR>:cd reset<CR><CR> 
 
 nnoremap <C-j> ddkPJ
+inoremap jk <Esc>
+inoremap kj <Esc>
+inoremap kk <Esc>
+inoremap jj <Esc>
+inoremap ;; <Esc>A;<Esc>
 "}}}
 "<---Project Management---> {{{
 " nnoremap <C-/> <esc>:vimgrep

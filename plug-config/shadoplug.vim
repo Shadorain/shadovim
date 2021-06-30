@@ -14,6 +14,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'MattesGroeger/vim-bookmarks', "Plugin to bookmark lines of code
     " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "To have the plug right under this one
     " Plug 'junegunn/fzf.vim' "Allows for some sweet fuzzy finding within vim without having to exit
+    Plug 'vhyrro/neorg'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'

@@ -6,6 +6,16 @@
 "   \______  /\____/|___|  /__|  |__\___  / /\ \_/ |__|__|_|  /
 "          \/            \/        /_____/  \/              \/ 
 " ================================================================$
+" NEORG " {{{
+lua << EOF
+require('neorg').setup {
+  load = {
+    ["core.defaults"] = {}, -- Enable all the default functionality
+    ["core.norg.concealer"] = {} -- Load the module responsible for converting text into icons
+  }
+}
+EOF
+" }}}
 " Config >-- IndentLine " {{{
 "let g:indentLine_color_gui = '#E9729D'
 ""let g:indentLine_char_list = ['|'] ", '¦', '┆', '┊']
