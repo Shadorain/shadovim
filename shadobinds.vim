@@ -7,6 +7,26 @@
 "          \/      \/     \/      \/          \/        \/      \/    \/  \/              \/ 
 " ==================================================================================================$
 "<--General Bindings--------------------------------------------------------------------------------$
+"<---Top 5 Remaps (that I didn't have already...)---> {{{
+" keep screen centered...
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ'z
+
+" Undo breakpoints
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" Moving text
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+"}}}
 "<---General Keys---> {{{
 " Copies selected text from split window and paste in other 
 vnoremap <F3> y<c-w>wp<c-w>gv
@@ -19,10 +39,10 @@ nnoremap <F5> :source ~/.config/nvim/init.vim<CR>:source ~/.config/nvim/plug-con
 nnoremap <F6> :!cscope -Rbq<CR>:cd reset<CR><CR> 
 
 nnoremap <C-j> ddkPJ
-inoremap jk <Esc>
-inoremap kj <Esc>
-inoremap kk <Esc>
-inoremap jj <Esc>
+" inoremap jk <Esc>
+" inoremap kj <Esc>
+" inoremap kk <Esc>
+" inoremap jj <Esc>
 inoremap ;; <Esc>A;<Esc>
 "}}}
 "<---Project Management---> {{{
@@ -70,7 +90,7 @@ nnoremap <C-A-l> <C-w>l
 " map <leader>th <C-w>t<C-w>H
 " map <leader>tk <C-w>t<C-w>K
 map <leader>h <C-w>h
-map <leader>k <C-w>k
+" map <leader>k <C-w>k
 "}}}
 "<---Create lines to split up files---> {{{
 noremap <C-\>k <esc><esc>kyypxVr=A #<esc>:Commentary<CR>
