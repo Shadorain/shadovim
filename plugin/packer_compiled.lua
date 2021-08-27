@@ -69,13 +69,113 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["ack.vim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/ack.vim"
+  },
+  genutils = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/genutils"
+  },
+  ["goyo.vim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/goyo.vim"
+  },
+  ["hop.nvim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/hop.nvim"
+  },
+  ["lightline.vim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/lightline.vim"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/nvim-dap"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-lspinstall"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/shadow/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/shadow/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+  },
+  ["popup.nvim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["quick-scope"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/quick-scope"
+  },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/rust-tools.nvim"
+  },
+  ["rust.vim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/rust.vim"
+  },
+  tabular = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/tabular"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-bookmarks"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-bookmarks"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-commentary"
+  },
+  ["vim-floaterm"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+  },
+  ["vim-gitgutter"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-gitgutter"
+  },
+  ["vim-markdown"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-markdown"
+  },
+  ["vim-polyglot"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-polyglot"
+  },
+  ["vim-rust-syntax-ext"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-rust-syntax-ext"
+  },
+  ["vim-sneak"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-sneak"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/start/vim-snippets"
   },
   ["vim-startify"] = {
     loaded = true,

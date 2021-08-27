@@ -30,8 +30,8 @@ vim.g.loaded_remote_plugins = false
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
 --- Load after vim is fully loaded
 vim.defer_fn(function()
-	require('binds')
 	require('config')
+	require('binds')
 	require('plugins')
 
 	vim.opt.shadafile = ""
