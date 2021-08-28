@@ -73,6 +73,20 @@ return require('packer').startup(function(use)
   				setup_servers()
   				vim.cmd("bufdo e")
 			end
+            local nvim_lsp = require "lspconfig"
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            nvim_lsp.rust_analyzer.setup {
+              capabilities = capabilities,
+              on_attach = on_attach,
+              settings = {
+                ["rust-analyzer"] = {
+                  cargo = { loadOutDirsFromCheck = true },
+                  procMacro = { enable = true },
+                },
+              },
+            }
+            require("rust-tools").setup {}
 		end,
 		requires = "nvim-lspconfig",
 		event = "ColorScheme"
@@ -81,21 +95,6 @@ return require('packer').startup(function(use)
 		module = "lsp_signature"
 	}
 	use { "nvim-lua/lsp_extensions.nvim" }
-
-    local nvim_lsp = require "lspconfig"
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    nvim_lsp.rust_analyzer.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        ["rust-analyzer"] = {
-          cargo = { loadOutDirsFromCheck = true },
-          procMacro = { enable = true },
-        },
-      },
-    }
-    require("rust-tools").setup {}
 	--- }}}
 	--- [[ Completion ]] {{{
 	use { "hrsh7th/nvim-cmp",
