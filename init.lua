@@ -30,9 +30,9 @@ vim.g.loaded_remote_plugins = false
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
 --- Load after vim is fully loaded
 vim.defer_fn(function()
+	require('plugins')
 	require('config')
 	require('binds')
-	require('plugins')
 
 	vim.opt.shadafile = ""
 	vim.cmd [[
@@ -42,15 +42,14 @@ vim.defer_fn(function()
 		filetype on
 		filetype plugin indent on
 		PackerLoad nvim-treesitter
-	]]
+    ]]
 
 	vim.defer_fn(function()
-		vim.cmd [[ 
-            set t_ut=
-            
-            colorscheme xshado
-			silent! bufdo e
-		]]
+	    vim.cmd [[
+		    set t_ut=
+		    colorscheme xshado
+		    silent! bufdo e
+	    ]]
 	end, 15)
 end, 0)
 --- }}}

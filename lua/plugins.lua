@@ -300,7 +300,7 @@ return require('packer').startup(function(use)
     use { 'mileszs/ack.vim' }               --- searcher
 
     -- [[ Miscellaneous ]]
-    use { 'mhinz/vim-startify', opt = true } --- Start Screen
+    use { 'mhinz/vim-startify' }             --- Start Screen
     use { "jghauser/mkdir.nvim",             --- Make directory
 		config = function() require('mkdir') end,
 		event = "BufWritePre"
