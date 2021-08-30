@@ -8,11 +8,11 @@
 " =========================================================================== ]]
 -- [[ Startup ]] ------------------------------------------------------------ ]]
 --- Load later {{{
-vim.cmd [[
-    syntax off
-    filetype off
-    filetype plugin indent off
-]]
+-- vim.cmd [[
+--     syntax off
+--     filetype off
+--     filetype plugin indent off
+-- ]]
 --- }}}
 --- Speed up {{{
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
@@ -29,10 +29,10 @@ vim.g.loaded_remote_plugins = false
 --- Sourcing {{{
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
 --- Load after vim is fully loaded
-vim.defer_fn(function()
-	require('plugins')
+-- vim.defer_fn(function()
 	require('config')
 	require('binds')
+	require('plugins')
 
 	vim.opt.shadafile = ""
 	vim.cmd [[
@@ -43,14 +43,15 @@ vim.defer_fn(function()
 		filetype plugin indent on
 		PackerLoad nvim-treesitter
     ]]
+    vim.opt.termguicolors = true
 
-	vim.defer_fn(function()
+	-- vim.defer_fn(function()
 	    vim.cmd [[
 		    set t_ut=
 		    colorscheme xshado
 		    silent! bufdo e
 	    ]]
-	end, 15)
-end, 0)
+	-- end, 15)
+-- end, 0)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]

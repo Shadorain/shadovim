@@ -35,7 +35,6 @@ vim.opt.showmode = false
 vim.opt.conceallevel = 0
 vim.opt.listchars = 'space:·'
 vim.opt.virtualedit = "block"
-vim.opt.termguicolors = true
 vim.opt.mouse = 'a'
 vim.opt.mousefocus = true
 vim.opt.ruler = true
@@ -46,11 +45,11 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = 'marker'
 
 -- Scroll margin
---vim.opt.scrolloff = 4
+-- vim.opt.scrolloff = 4
 
 -- Encoding
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
+-- vim.opt.encoding = 'utf-8'
+-- vim.opt.fileencoding = 'utf-8'
 
 -- Splits
 vim.opt.splitright = true
@@ -125,41 +124,6 @@ require('telescope').setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   }
 }
---- }}}
---- Startify {{{
-vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
-vim.g.startify_enable_special = 0
-
-vim.g.startify_lists = {
-    { type = 'sessions',  header = {'    Sessions'}                              },
-    { type = 'bookmarks', header = {'    Bookmarks'}                             },
-    { type = 'files',     header = {'    Files'}                                 },
-    { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()} },
-}
-
-vim.g.startify_bookmarks = {
-    { nv = '~/.config/nvim/init.lua'          },
-    { np = '~/.config/nvim/lua/plugins.lua'   },
-    { nc = '~/.config/nvim/lua/config.lua'    },
-    { nk = '~/.config/nvim/lua/binds.vim'     },
-    { ns = '~/.config/nvim/colors/shado.vim'  },
-    { nx = '~/.config/nvim/colors/xshado.vim' },
-    { x  = '~/.xmonad/xmonad.hs'              },
-    { p  = '~/.config/shadobar/config-xmonad' },
-    { c  = '~/.config/picom.conf'             },
-    { za = '~/.zsh_aliases'                   },
-    { zc = '~/.zshrc'                         },
-    { ze = '~/.zshenv'                        },
-}
-
-vim.g.startify_custom_header = {[[
-       _________  __                  ___                        __               
-      /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____        
-      \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \       
-      /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \      
-     /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___| _/      
-             \/       \/      \/      \/                    \/          \/        
- ]]}
 --- }}}
 --- Git Gutter {{{
 vim.g.gitgutter_enabled = 1

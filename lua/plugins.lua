@@ -89,7 +89,6 @@ return require('packer').startup(function(use)
             require("rust-tools").setup {}
 		end,
 		requires = "nvim-lspconfig",
-		event = "ColorScheme"
     }
 	use { "ray-x/lsp_signature.nvim",   --- signature hints
 		module = "lsp_signature"
@@ -254,7 +253,6 @@ return require('packer').startup(function(use)
 	}
 	use { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" }
     use { "windwp/nvim-autopairs",
-		event = "ColorScheme",
 		config = function()
 			require('nvim-autopairs').setup { check_ts = true }
 			require('nvim-autopairs.completion.cmp').setup({
@@ -279,7 +277,7 @@ return require('packer').startup(function(use)
     use { 'godlygeek/tabular' }           --- tabbing
     use { 'mfussenegger/nvim-dap' }       --- debugging
     -- use { 'honza/vim-snippets' }       --- snippets
-    use { "L3MON4D3/LuaSnip", module = "cmp", } --- snippets
+    use { "L3MON4D3/LuaSnip", module = "cmp" } --- snippets
 
     -- [[ Make it pretty ]]
     use { 'kyazdani42/nvim-web-devicons' }      --- icons
@@ -300,14 +298,56 @@ return require('packer').startup(function(use)
     use { 'mileszs/ack.vim' }               --- searcher
 
     -- [[ Miscellaneous ]]
-    use { 'mhinz/vim-startify' }             --- Start Screen
+    use { 'mhinz/vim-startify',             --- Start Screen
+    --- Startify {{{
+		config = function() 
+            vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
+            vim.g.startify_enable_special = 0
+            vim.g.startify_lists = {
+                { type = 'sessions',  header = {'    Sessions'}                              },
+                { type = 'bookmarks', header = {'    Bookmarks'}                             },
+                { type = 'files',     header = {'    Files'}                                 },
+                { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()} },
+            }
+            vim.g.startify_bookmarks = {
+                { nv = '~/.config/nvim/init.lua'          },
+                { np = '~/.config/nvim/lua/plugins.lua'   },
+                { nc = '~/.config/nvim/lua/config.lua'    },
+                { nk = '~/.config/nvim/lua/binds.vim'     },
+                { ns = '~/.config/nvim/colors/shado.vim'  },
+                { nx = '~/.config/nvim/colors/xshado.vim' },
+                { x  = '~/.xmonad/xmonad.hs'              },
+                { p  = '~/.config/shadobar/config-xmonad' },
+                { c  = '~/.config/picom.conf'             },
+                { za = '~/.zsh_aliases'                   },
+                { zc = '~/.zshrc'                         },
+                { ze = '~/.zshenv'                        },
+            }
+            vim.cmd([[
+                let g:startify_custom_header = [
+                    \\ '    _________  __                  ___                        __            ',       
+                    \\ '   /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____     ',
+                    \\ '   \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \    ',
+                    \\ '   /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \   ',
+                    \\ '  /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /   ',
+                    \\ '          \/       \/      \/      \/                    \/          \/     ',
+                    \\ ]
+            ]])
+
+            -- vim.g.startify_custom_header = {[[
+  -- _________  __                  ___                        __         
+ -- /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____  
+ -- \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \ 
+ -- /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \
+-- /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___| _/
+        -- \/       \/      \/      \/                    \/          \/  
+            --  ]]}
+		end,
+    --- }}}
+	}
     use { "jghauser/mkdir.nvim",             --- Make directory
 		config = function() require('mkdir') end,
 		event = "BufWritePre"
-	}
-    use { "jghauser/follow-md-links.nvim",   --- Follow Markdown Links
-  		config = function() require('follow-md-links') end,
-  		event = "ColorScheme"
 	}
 end)
 -- [[ ----------------------------------------------------------------------- ]]
