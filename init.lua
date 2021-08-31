@@ -29,29 +29,34 @@ vim.g.loaded_remote_plugins = false
 --- Sourcing {{{
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
 --- Load after vim is fully loaded
+vim.opt.termguicolors = true
+vim.cmd [[
+	syntax enable
+	colorscheme xshado
+]]
+
+require('plugins')
+require('config')
+require('binds')
+
 -- vim.defer_fn(function()
-	require('config')
-	require('binds')
-	require('plugins')
+vim.opt.shadafile = ""
+vim.cmd [[
+	rshada!
+	doautocmd BufRead
+	filetype on
+	filetype plugin indent on
+]]
 
-	vim.opt.shadafile = ""
+vim.defer_fn(function()
 	vim.cmd [[
-		rshada!
-		doautocmd BufRead
-		syntax enable
-		filetype on
-		filetype plugin indent on
+		set t_ut=
+		silent! bufdo e
+		PackerLoad lightline.vim
 		PackerLoad nvim-treesitter
-    ]]
-    vim.opt.termguicolors = true
-
-	-- vim.defer_fn(function()
-	    vim.cmd [[
-		    set t_ut=
-		    colorscheme xshado
-		    silent! bufdo e
-	    ]]
-	-- end, 15)
+		colorscheme xshado
+	]]
+end, 15)
 -- end, 0)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]

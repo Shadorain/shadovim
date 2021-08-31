@@ -173,18 +173,55 @@ vim.g.lightline.tabline = {
 }
 -- Mode mappings
 vim.g.lightline.mode_map = {
-    n =  'ノーマル',
-    i = 'インサート',
-    R = '代わる',
-    v = 'ビジュアル',
-    V = 'V-ライン',
-    ["<C-v>"] = 'V-ブロック',
-    c = 'コマンド',
-    s = 'セレクト',
-    S = 'S-ライン',
-    ["<C-s>"] = 'S-ブロック',
-    t = 'ターミナル',
+    n = "ノーマル",
+    i = "インサート",
+    R = "代わる",
+    v = "ビジュアル",
+    V = "V-ライン",
+    ["<C-v>"] = "V-ブロック",
+    c = "コマンド",
+    s = "セレクト",
+    S = "S-ライン",
+    ["<C-s>"] = "S-ブロック",
+    t = "ターミナル",
 }
+--- }}}
+--- Startify {{{
+vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
+vim.g.startify_enable_special = 0
+
+vim.g.startify_lists = {
+    { type = 'sessions',  header = {'    Sessions'}                              },
+    { type = 'bookmarks', header = {'    Bookmarks'}                             },
+    { type = 'files',     header = {'    Files'}                                 },
+    { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()} },
+}
+
+vim.g.startify_bookmarks = {
+    { nv = '~/.config/nvim/init.lua'          },
+    { np = '~/.config/nvim/lua/plugins.lua'   },
+    { nc = '~/.config/nvim/lua/config.lua'    },
+    { nk = '~/.config/nvim/lua/binds.vim'     },
+    { ns = '~/.config/nvim/colors/shado.vim'  },
+    { nx = '~/.config/nvim/colors/xshado.vim' },
+    { x  = '~/.xmonad/xmonad.hs'              },
+    { p  = '~/.config/shadobar/config-xmonad' },
+    { c  = '~/.config/picom.conf'             },
+    { za = '~/.zsh_aliases'                   },
+    { zc = '~/.zshrc'                         },
+    { ze = '~/.zshenv'                        },
+}
+
+vim.g.startify_custom_header = vim.split([[ 
+#||>================---------------------------------------------================<||#
+ \"      _________  __                  ___                        __             "/       
+  "     /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____      " 
+  "     \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \     " 
+  "     /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \    " 
+  "    /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /    " 
+ /"            \/       \/      \/      \/                    \/          \/      "\
+#||>================---------------------------------------------================<||#
+    ]], "\n", true)
 --- }}}
 -- --- Quick Scope {{{
 -- cmd("let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T']")

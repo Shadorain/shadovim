@@ -33,63 +33,89 @@ return require('packer').startup(function(use)
 
     -- [[ Coding ]]
 	--- [[ LSP ]] {{{
-    use { 'neovim/nvim-lspconfig' }
-    use { 'kabouzeid/nvim-lspinstall', --- native LSP
-        config = function()
-			local lspconfig, lspinstall = require('lspconfig'), require('lspinstall')
-			local configurations = require('lsp_config')
-			local installed_servers = lspinstall.installed_servers()
-			lspinstall.setup()
+    use { 'neovim/nvim-lspconfig',
+        -- config = function()
+        --     local servers = { 'clangd', 'rust_analyzer' }
+        --     for _, lsp in ipairs(servers) do
+        --       nvim_lsp[lsp].setup {
+        --         on_attach = on_attach,
+        --         flags = { debounce_text_changes = 150, }
+        --       }
+        --     end
 
-			local setup_servers = function()
-				for _, server in ipairs(installed_servers) do
-  					lspconfig[server].setup(vim.tbl_extend("force", configurations[server] or {}, {
-  						on_attach = function(_, bufnr)
-							local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  							local opts = { noremap = true, silent = true }
-
-  							buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  							buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  							buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  							buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  							buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  							buf_set_keymap("n", "<Leader>da", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  							buf_set_keymap("n", "<Leader>dr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  							buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  							buf_set_keymap("n", "<Leader>rf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  							buf_set_keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  							buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-							vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  							vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  							require('lsp_signature').on_attach({ hint_prefix = " ", })
-  						end
-  					}))
-				end
-			end
-			setup_servers()
-
-			-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-			lspinstall.post_install_hook = function()
-  				setup_servers()
-  				vim.cmd("bufdo e")
-			end
-            local nvim_lsp = require "lspconfig"
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
-            nvim_lsp.rust_analyzer.setup {
-              capabilities = capabilities,
-              on_attach = on_attach,
-              settings = {
-                ["rust-analyzer"] = {
-                  cargo = { loadOutDirsFromCheck = true },
-                  procMacro = { enable = true },
-                },
-              },
-            }
-            require("rust-tools").setup {}
-		end,
-		requires = "nvim-lspconfig",
+        --     local nvim_lsp = require'lspconfig'
+        --     local on_attach = function(client) require'completion'.on_attach(client) end
+        --     nvim_lsp.rust_analyzer.setup({
+        --         on_attach=on_attach,
+        --         settings = {
+        --             ["rust-analyzer"] = {
+        --                 assist = {
+        --                     importGranularity = "module",
+        --                     importPrefix = "by_self",
+        --                 },
+        --                 cargo = { loadOutDirsFromCheck = true },
+        --                 procMacro = { enable = true },
+        --             }
+        --         }
+        --     })
+        -- end
     }
+    -- use { 'kabouzeid/nvim-lspinstall', --- native LSP
+    --     config = function()
+			-- local lspconfig, lspinstall = require('lspconfig'), require('lspinstall')
+			-- local configurations = require('lsp_config')
+			-- local installed_servers = lspinstall.installed_servers()
+			-- lspinstall.setup()
+
+			-- local setup_servers = function()
+				-- for _, server in ipairs(installed_servers) do
+  					-- lspconfig[server].setup(vim.tbl_extend("force", configurations[server] or {}, {
+  						-- on_attach = function(_, bufnr)
+							-- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  							-- local opts = { noremap = true, silent = true }
+
+  							-- buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+  							-- buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  							-- buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  							-- buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  							-- buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  							-- buf_set_keymap("n", "<Leader>da", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+  							-- buf_set_keymap("n", "<Leader>dr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+  							-- buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  							-- buf_set_keymap("n", "<Leader>rf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  							-- buf_set_keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  							-- buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+							-- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  							-- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  							-- require('lsp_signature').on_attach({ hint_prefix = " ", })
+  						-- end
+  					-- }))
+				-- end
+			-- end
+			-- setup_servers()
+
+			-- -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+			-- lspinstall.post_install_hook = function()
+  				-- setup_servers()
+  				-- vim.cmd("bufdo e")
+			-- end
+    --         local nvim_lsp = require "lspconfig"
+    --         local capabilities = vim.lsp.protocol.make_client_capabilities()
+    --         capabilities.textDocument.completion.completionItem.snippetSupport = true
+    --         nvim_lsp.rust_analyzer.setup {
+    --           capabilities = capabilities,
+    --           on_attach = on_attach,
+    --           settings = {
+    --             ["rust-analyzer"] = {
+    --               cargo = { loadOutDirsFromCheck = true },
+    --               procMacro = { enable = true },
+    --             },
+    --           },
+    --         }
+    --         require("rust-tools").setup {}
+		-- end,
+		-- requires = "nvim-lspconfig",
+    -- }
 	use { "ray-x/lsp_signature.nvim",   --- signature hints
 		module = "lsp_signature"
 	}
@@ -259,7 +285,8 @@ return require('packer').startup(function(use)
   				map_cr = true,
   				map_complete = true,
 			})
-		end
+		end,
+		after = { "nvim-treesitter" }
 	}
     --- }}}
     --- [[ Languages ]]
@@ -298,53 +325,7 @@ return require('packer').startup(function(use)
     use { 'mileszs/ack.vim' }               --- searcher
 
     -- [[ Miscellaneous ]]
-    use { 'mhinz/vim-startify',             --- Start Screen
-    --- Startify {{{
-		config = function() 
-            vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
-            vim.g.startify_enable_special = 0
-            vim.g.startify_lists = {
-                { type = 'sessions',  header = {'    Sessions'}                              },
-                { type = 'bookmarks', header = {'    Bookmarks'}                             },
-                { type = 'files',     header = {'    Files'}                                 },
-                { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()} },
-            }
-            vim.g.startify_bookmarks = {
-                { nv = '~/.config/nvim/init.lua'          },
-                { np = '~/.config/nvim/lua/plugins.lua'   },
-                { nc = '~/.config/nvim/lua/config.lua'    },
-                { nk = '~/.config/nvim/lua/binds.vim'     },
-                { ns = '~/.config/nvim/colors/shado.vim'  },
-                { nx = '~/.config/nvim/colors/xshado.vim' },
-                { x  = '~/.xmonad/xmonad.hs'              },
-                { p  = '~/.config/shadobar/config-xmonad' },
-                { c  = '~/.config/picom.conf'             },
-                { za = '~/.zsh_aliases'                   },
-                { zc = '~/.zshrc'                         },
-                { ze = '~/.zshenv'                        },
-            }
-            vim.cmd([[
-                let g:startify_custom_header = [
-                    \\ '    _________  __                  ___                        __            ',       
-                    \\ '   /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____     ',
-                    \\ '   \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \    ',
-                    \\ '   /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \   ',
-                    \\ '  /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /   ',
-                    \\ '          \/       \/      \/      \/                    \/          \/     ',
-                    \\ ]
-            ]])
-
-            -- vim.g.startify_custom_header = {[[
-  -- _________  __                  ___                        __         
- -- /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____  
- -- \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \ 
- -- /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \
--- /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___| _/
-        -- \/       \/      \/      \/                    \/          \/  
-            --  ]]}
-		end,
-    --- }}}
-	}
+    use { 'mhinz/vim-startify' }             --- Start Screen
     use { "jghauser/mkdir.nvim",             --- Make directory
 		config = function() require('mkdir') end,
 		event = "BufWritePre"
