@@ -31,16 +31,25 @@ return require('packer').startup(function(use)
     -- [[ Packer ]]
     use { 'wbthomason/packer.nvim' }
 
+    -- [[ Utility ]]
+    use { 'MattesGroeger/vim-bookmarks' } --- bookmarks
+    use { 'tpope/vim-commentary' }        --- commenting
+    use { 'voldikss/vim-floaterm' }       --- Terminal
+    use { 'vim-scripts/genutils' }        --- general utilities
+    use { 'godlygeek/tabular' }           --- tabbing
+    -- use { 'mfussenegger/nvim-dap' }       --- debugging
+    use { 'L3MON4D3/LuaSnip', module = 'completion' } --- snippets
+
     -- [[ Coding ]]
 	--- [[ LSP ]] {{{
     use { 'neovim/nvim-lspconfig',
         -- config = function()
         --     local servers = { 'clangd', 'rust_analyzer' }
         --     for _, lsp in ipairs(servers) do
-        --       nvim_lsp[lsp].setup {
-        --         on_attach = on_attach,
-        --         flags = { debounce_text_changes = 150, }
-        --       }
+        --         nvim_lsp[lsp].setup {
+        --             on_attach = on_attach,
+        --             flags = { debounce_text_changes = 150, }
+        --         }
         --     end
 
         --     local nvim_lsp = require'lspconfig'
@@ -122,44 +131,17 @@ return require('packer').startup(function(use)
 	use { "nvim-lua/lsp_extensions.nvim" }
 	--- }}}
 	--- [[ Completion ]] {{{
-	use { "hrsh7th/nvim-cmp",
-		config = function()
-			local cmp = require('cmp')
-			cmp.setup {
-				completion = { completeopt = "menuone,noselect", },
-    			snippet = {
-      				expand = function(args)
-						require('luasnip').lsp_expand(args.body)
-      				end
-    			},
-    			mapping = {
-      				["<C-p>"] = cmp.mapping.select_prev_item(),
-      				["<C-n>"] = cmp.mapping.select_next_item(),
-      				["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      				["<C-u>"] = cmp.mapping.scroll_docs(4),
-      				["<C-Space>"] = cmp.mapping.complete(),
-      				["<C-c>"] = cmp.mapping.close(),
-      				["<CR>"] = cmp.mapping.confirm({
-        				behavior = cmp.ConfirmBehavior.Replace,
-        				select = false,
-      				})
-    			},
-    			sources = {
-      				{ name = "buffer" }, { name = "nvim_lua" },
-					{ name = "nvim_lsp" }, { name = "luasnip" },
-					{ name = "calc" }, { name = "path" },
-    			},
-  			}
-		end,
-		requires = {
-			{ "hrsh7th/cmp-buffer", after = "nvim-cmp", },
-			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp", },
-			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp", },
-			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", },
-			{ "hrsh7th/cmp-calc", after = "nvim-cmp", },
-			{ "hrsh7th/cmp-path", after = "nvim-cmp", },
-		},
-	}
+	use { 'nvim-lua/completion-nvim' }
+	-- use { "hrsh7th/nvim-cmp",
+	-- 	requires = {
+	-- 		{ "hrsh7th/cmp-buffer", after = "nvim-cmp", },
+	-- 		{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp", },
+	-- 		{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp", },
+	-- 		{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", },
+	-- 		{ "hrsh7th/cmp-calc", after = "nvim-cmp", },
+	-- 		{ "hrsh7th/cmp-path", after = "nvim-cmp", },
+	-- 	},
+	-- }
     --- }}}
     --- [[ Treesitter ]] {{{
     use { 'nvim-treesitter/nvim-treesitter', --- treesitter
@@ -175,7 +157,7 @@ return require('packer').startup(function(use)
     			filetype = "markdown",
 			}
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = "all",
+				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown" },
 				highlight = { enable = true },
 				incremental_selection = {
 					enable = true,
@@ -277,14 +259,14 @@ return require('packer').startup(function(use)
 		requires = { { "Olical/aniseed", after = "nvim-treesitter" } },
 		after = "nvim-treesitter",
 	}
-	use { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" }
+	use { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle", after = "nvim-treesitter" }
     use { "windwp/nvim-autopairs",
 		config = function()
 			require('nvim-autopairs').setup { check_ts = true }
-			require('nvim-autopairs.completion.cmp').setup({
-  				map_cr = true,
-  				map_complete = true,
-			})
+			-- require('nvim-autopairs.completion.cmp').setup({
+  				-- map_cr = true,
+  				-- map_complete = true,
+			-- })
 		end,
 		after = { "nvim-treesitter" }
 	}
@@ -296,16 +278,6 @@ return require('packer').startup(function(use)
     use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
     use { 'plasticboy/vim-markdown' }  --- markdown
 
-    -- [[ Utility ]]
-    use { 'MattesGroeger/vim-bookmarks' } --- bookmarks
-    use { 'tpope/vim-commentary' }        --- commenting
-    use { 'voldikss/vim-floaterm' }       --- Terminal
-    use { 'vim-scripts/genutils' }        --- general utilities
-    use { 'godlygeek/tabular' }           --- tabbing
-    use { 'mfussenegger/nvim-dap' }       --- debugging
-    -- use { 'honza/vim-snippets' }       --- snippets
-    use { "L3MON4D3/LuaSnip", module = "cmp" } --- snippets
-
     -- [[ Make it pretty ]]
     use { 'kyazdani42/nvim-web-devicons' }      --- icons
     use { 'itchyny/lightline.vim', opt = true } --- Statusbar
@@ -315,13 +287,68 @@ return require('packer').startup(function(use)
     -- [[ Git integration ]]
     use { 'nvim-lua/popup.nvim' }
     use { 'nvim-lua/plenary.nvim' }
-    use { 'airblade/vim-gitgutter' }
+    -- GitSigns {{{
+    use { 'lewis6991/gitsigns.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('gitsigns').setup {
+                signs = {
+                    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+                    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+                    delete       = {hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                    topdelete    = {hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                    changedelete = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+                },
+                signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+                numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+                linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+                word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+                keymaps = { -- Default keymap options
+                    noremap = true,
+                    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+                    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+                    ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+                    ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+                    ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+                    ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+                    ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+                    ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+                    ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+                    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+                    ['n <leader>hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
+                    ['n <leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
+                    -- Text objects
+                    ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+                    ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+                },
+                watch_index = { interval = 1000, follow_files = true },
+                attach_to_untracked = true,
+                current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+                current_line_blame_formatter_opts = { relative_time = false },
+                sign_priority = 6,
+                update_debounce = 100,
+                status_formatter = nil,
+                max_file_length = 40000,
+                preview_config = {
+                    -- Options passed to nvim_open_win
+                    border = 'single',
+                    style = 'minimal',
+                    relative = 'cursor',
+                    row = 0,
+                    col = 1
+                },
+                use_internal_diff = true,  -- If vim.diff or luajit is present
+                yadm = { enable = false },
+            }
+        end
+    }
+    -- }}}
 
     -- [[ Finders ]]
     use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
     use { 'unblevable/quick-scope' }        --- horizonal movement
-    use { 'phaazon/hop.nvim' }              --- vertical movement
-    use { 'justinmk/vim-sneak' }            --- both movement
+    -- use { 'phaazon/hop.nvim' }              --- vertical movement
+    -- use { 'justinmk/vim-sneak' }            --- both movement
     use { 'mileszs/ack.vim' }               --- searcher
 
     -- [[ Miscellaneous ]]

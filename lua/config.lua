@@ -63,6 +63,9 @@ vim.opt.undofile = true
 vim.opt.undodir = "/home/shadow/.local/cache/nvim/undo/"
 vim.opt.backupdir= "/home/shadow/.local/cache/nvim/backups/"
 
+-- Completion
+vim.opt.completeopt = "menuone,noinsert,noselect"
+
 cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
 --- }}}
 -- }}}
@@ -125,29 +128,7 @@ require('telescope').setup{
   }
 }
 --- }}}
---- Git Gutter {{{
-vim.g.gitgutter_enabled = 1
-
--- Icons
-vim.g.gitgutter_sign_added              = '+'
-vim.g.gitgutter_sign_modified           = '~'
-vim.g.gitgutter_sign_removed            = '-'
-vim.g.gitgutter_sign_removed_first_line = '-_'
-vim.g.gitgutter_sign_modified_removed   = '-~'
-
--- Colors
-cmd('highlight GitGutterAdd    guifg=#37d4a7 ctermfg=2')
-cmd('highlight GitGutterChange guifg=#2f77a1 ctermfg=3')
---- }}}
 --- Vim Bookmarks {{{
--- Colors
-cmd [[
-    highlight BookmarkSign guibg=NONE guifg=#2f77a1
-    highlight BookmarkLine guibg=NONE guifg=NONE
-    highlight BookmarkAnnotationSign guibg=NONE guifg=#5d5daf
-    highlight BookmarkAnnotationLine guibg=NONE guifg=NONE
-]]
--- Icons
 vim.g.bookmark_sign = ''
 vim.g.bookmark_highlight_lines = 1
 vim.g.bookmark_save_per_working_dir = 1
@@ -223,13 +204,9 @@ vim.g.startify_custom_header = vim.split([[
 #||>================---------------------------------------------================<||#
     ]], "\n", true)
 --- }}}
--- --- Quick Scope {{{
--- cmd("let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T']")
--- vim.cmd [[
---   highlight QuickScopePrimary guifg='#ff00ff' gui=underline
---   highlight QuickScopeSecondary guifg='#5fffff' gui=underline
--- ]]
--- --- }}}
+--- Quick Scope {{{
+cmd("let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T']")
+--- }}}
 --- Termdebug {{{
 cmd('packadd! termdebug')
 vim.g.termdebug_wide = 1

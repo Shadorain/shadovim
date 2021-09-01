@@ -106,8 +106,8 @@ map('n', '<leader>T', ':tabnew<CR>')   -- New tab
 --- }}}
 --- Buffers {{{
 map('n', '<leader>bl', ':ls<CR>')
-map('n', '<leader>bb', ':bnext<CR>')
-map('n', '<leader>bn', ':bprevious<CR>')
+map('n', '<leader>bb', ':bnext<CR>', { silent = true })
+map('n', '<leader>bn', ':bprevious<CR>', { silent = true } )
 map('n', '<leader>bk', ':bp\\|bd # <CR>')
 map('n', '<leader>b1', ':b 1<CR>')
 map('n', '<leader>b2', ':b 2<CR>')

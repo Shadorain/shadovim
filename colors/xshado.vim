@@ -152,6 +152,34 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9
+
+  " Startify
+  hi link StartifyBracket Delimiter
+  hi link StartifyFile Identifier
+  hi link StartifyFooter Title
+  hi link StartifyHeader Type
+  hi link StartifyNumber Number
+  hi link StartifyPath Directory
+  hi link StartifySection Statement
+  hi link StartifySelect Title
+  hi link StartifySlash Delimiter
+  hi link StartifySpecial Comment
+  hi link StartifyVar StartifyPath
+
+  " GitSigns
+  hi link GitSignsAdd DiffAdd
+  hi link GitSignsChange DiffChange
+  hi link GitSignsDelete DiffDelete
+
+  " QuickScope
+  hi link QuickScopePrimary Function
+  hi link QuickScopeSecondary TelescopeBorder
+
+  " Vim Bookmarks
+  hi BookmarkSign guibg=NONE guifg=#2f77a1
+  hi BookmarkLine guibg=NONE guifg=NONE
+  hi BookmarkAnnotationSign guibg=NONE guifg=#5d5daf
+  hi BookmarkAnnotationLine guibg=NONE guifg=NONE
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function
@@ -202,7 +230,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi markdownDelimiter guifg=#78c2b3 guibg=NONE gui=NONE cterm=NONE
   hi markdownCode guifg=#dabaff guibg=#393b44 gui=NONE cterm=NONE
   " }}}
-  " Misc {{{
+" Misc {{{
   hi! link Terminal Normal
   hi! link TabLine StatusLineNC
   hi! link TabLineFill StatusLineNC
@@ -226,7 +254,6 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi! link ALEVirtualTextError ErrorMsg
   hi! link ALEVirtualTextWarning WarningMsg
   hi! link Searchlight IncSearch
-  " }}}
   " Signify {{{
   hi! link SignifySignAdd Signify
   hi! link SignifySignChange Signify
@@ -369,6 +396,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi! link typescriptVariable Keyword
   hi! link typescriptVariableDeclaration IdentifierDef
   " }}}
+" }}}
   unlet s:t_Co
   finish
 endif

@@ -31,6 +31,6 @@ Now that shadovim is installed on the system, we have to do some final patching 
 
 Finally for lightline, we simply need to link our custom theme on top of an existing one since lightline doesn't handle custom themes well.
 ```bash
-ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/deus.vim 
+ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/site/pack/packer/opt/lightline.vim/autoload/lightline/colorscheme/deus.vim 
  ```
 

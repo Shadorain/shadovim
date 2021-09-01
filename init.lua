@@ -57,6 +57,8 @@ vim.defer_fn(function()
 		colorscheme xshado
 	]]
 end, 15)
+require('lsp_config')
+vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
 -- end, 0)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]
