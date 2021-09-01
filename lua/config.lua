@@ -71,18 +71,18 @@ cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions
 -- }}}
 -- [[ Plugin Settings ]] ---------------------------------------------------- ]]
 -- {{{
---- Ack {{{
-vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
-vim.g.ack_autoclose = 1
-vim.g.ack_use_cword_for_empty_search = 1
+-- --- Ack {{{
+-- vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
+-- vim.g.ack_autoclose = 1
+-- vim.g.ack_use_cword_for_empty_search = 1
 
-cmd('cnoreabbrev Ack Ack!')
+-- cmd('cnoreabbrev Ack Ack!')
 
--- Navigate quickfix list
-vim.api.nvim_set_keymap('n', "<C-_>", "<esc>:Ack!<Space>", { noremap = true })
-vim.api.nvim_set_keymap('n', "[q", ":cprevious<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', "]q", ":cnext<CR>", { noremap = true, silent = true })
---- }}}
+-- -- Navigate quickfix list
+-- vim.api.nvim_set_keymap('n', "<C-_>", "<esc>:Ack!<Space>", { noremap = true })
+-- vim.api.nvim_set_keymap('n', "[q", ":cprevious<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', "]q", ":cnext<CR>", { noremap = true, silent = true })
+-- --- }}}
 --- Floaterm {{{
 vim.g.floaterm_autoinsert = 1
 vim.g.floaterm_width = 0.5

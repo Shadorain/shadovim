@@ -38,11 +38,12 @@ return require('packer').startup(function(use)
     use { 'vim-scripts/genutils' }        --- general utilities
     use { 'godlygeek/tabular' }           --- tabbing
     -- use { 'mfussenegger/nvim-dap' }       --- debugging
-    use { 'L3MON4D3/LuaSnip', module = 'completion' } --- snippets
+    -- use { 'L3MON4D3/LuaSnip', module = 'completion' } --- snippets
 
     -- [[ Coding ]]
+    use { 'neoclide/coc.nvim', branch = 'release' }
 	--- [[ LSP ]] {{{
-    use { 'neovim/nvim-lspconfig',
+    -- use { 'neovim/nvim-lspconfig',
         -- config = function()
         --     local servers = { 'clangd', 'rust_analyzer' }
         --     for _, lsp in ipairs(servers) do
@@ -68,7 +69,7 @@ return require('packer').startup(function(use)
         --         }
         --     })
         -- end
-    }
+    -- }
     -- use { 'kabouzeid/nvim-lspinstall', --- native LSP
     --     config = function()
 			-- local lspconfig, lspinstall = require('lspconfig'), require('lspinstall')
@@ -125,13 +126,13 @@ return require('packer').startup(function(use)
 		-- end,
 		-- requires = "nvim-lspconfig",
     -- }
-	use { "ray-x/lsp_signature.nvim",   --- signature hints
-		module = "lsp_signature"
-	}
-	use { "nvim-lua/lsp_extensions.nvim" }
+	-- use { "ray-x/lsp_signature.nvim",   --- signature hints
+	-- 	module = "lsp_signature"
+	-- }
+	-- use { "nvim-lua/lsp_extensions.nvim" }
 	--- }}}
 	--- [[ Completion ]] {{{
-	use { 'nvim-lua/completion-nvim' }
+	-- use { 'nvim-lua/completion-nvim' }
 	-- use { "hrsh7th/nvim-cmp",
 	-- 	requires = {
 	-- 		{ "hrsh7th/cmp-buffer", after = "nvim-cmp", },

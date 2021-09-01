@@ -35,6 +35,7 @@ vim.cmd [[
 	colorscheme xshado
 ]]
 
+vim.cmd('source ./lua/cocsetup.vim')
 require('plugins')
 require('config')
 require('binds')
@@ -57,8 +58,8 @@ vim.defer_fn(function()
 		colorscheme xshado
 	]]
 end, 15)
-require('lsp_config')
-vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
+-- require('lsp_config')
+-- vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
 -- end, 0)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]
