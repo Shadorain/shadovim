@@ -35,7 +35,7 @@ vim.cmd [[
 	colorscheme xshado
 ]]
 
-vim.cmd('source ./lua/cocsetup.vim')
+vim.cmd('source ~/.config/nvim/lua/cocsetup.vim')
 require('plugins')
 require('config')
 require('binds')
@@ -55,6 +55,7 @@ vim.defer_fn(function()
 		silent! bufdo e
 		PackerLoad lightline.vim
 		PackerLoad nvim-treesitter
+		lua require'colorizer'.setup()
 		colorscheme xshado
 	]]
 end, 15)

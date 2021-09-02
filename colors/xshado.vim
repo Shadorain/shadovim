@@ -41,7 +41,6 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
         \ '#bd93f9', '#E9729D', '#F18FB0', '#f1c4e0', '#a8899c', '#B52A5B',
         \ '#FF4971', '#8897F4', '#bd93f9', '#E9729D', '#F18FB0', '#f1c4e0']
   hi Normal guifg=#dfb7e8 guibg=none
-  " hi None guifg=#dfdfe0 guibg=NONE
 
   hi Cursor guifg=#dfb7e8 guibg=#6161b3 guisp=#6161b3
   hi CursorLine guibg=#1B1B29 guisp=#6161b3
@@ -60,11 +59,6 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi MatchParen guifg=#8be9fd guibg=NONE
   hi Signify guifg=#4484d1 guibg=NONE
   hi Ignore guifg=#53606e guibg=NONE
-
-  hi Pmenu guifg=#eed6ee guibg=#1B1B29 guisp=#3d3d6b
-  hi PmenuSbar guifg=#a883a8 guibg=#2F2F4A guisp=#5b5b8a
-  hi PmenuSel guifg=#6876de guibg=#2F2F4A guisp=#2F2F4A gui=bold,underline
-  hi PmenuThumb guifg=#eed6ee guibg=#5b5b8a guisp=#2F2F4A
 
   hi FloatermNC guifg=#6161b3
   hi FloatermBorder guifg=#ff79c6
@@ -149,6 +143,16 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi SpellCap guifg=NONE guibg=NONE gui=undercurl
   hi SpellLocal guifg=NONE guibg=NONE gui=undercurl
   hi SpellRare guifg=NONE guibg=NONE gui=undercurl
+
+  hi Pmenu guifg=#eed6ee guibg=NONE
+  hi PmenuSbar guifg=#a883a8 guibg=NONE
+  hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline,standout
+  hi PmenuThumb guifg=#eed6ee guibg=NONE
+
+  " CoC
+  hi CocFloating guibg=NONE guifg=#bd93f9 blend=50
+  hi CocFloatingBorder guibg=#bd93f9 guifg=#bd93f9
+  hi CocErrorHighlight guifg=#de286e guibg=NONE gui=bold
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9

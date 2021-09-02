@@ -53,10 +53,10 @@ map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>')
 --- }}}
 --- Splits {{{
 -- Resizing
-map('n', '<silent><Up>',    ':resize +2<CR>')
-map('n', '<silent><Down>',  ':resize -2<CR>')
-map('n', '<silent><Left>',  ':vertical resize +2<CR>')
-map('n', '<silent><Right>', ':vertical resize -2<CR>')
+map('n', '<Up>',    ':resize +2<CR>', { noremap = true, silent = true })
+map('n', '<Down>',  ':resize -2<CR>', { noremap = true, silent = true })
+map('n', '<Left>',  ':vertical resize +2<CR>', { noremap = true, silent = true })
+map('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 
 -- Split Management
 map('t', '<C-A-h>', '<C-\\><C-N><C-w>h')
@@ -105,19 +105,20 @@ map('n', '<leader>S', ':Startify<CR>') -- Startify
 map('n', '<leader>T', ':tabnew<CR>')   -- New tab
 --- }}}
 --- Buffers {{{
-map('n', '<leader>bl', ':ls<CR>')
-map('n', '<leader>bb', ':bnext<CR>', { silent = true })
-map('n', '<leader>bn', ':bprevious<CR>', { silent = true } )
-map('n', '<leader>bk', ':bp\\|bd # <CR>')
-map('n', '<leader>b1', ':b 1<CR>')
-map('n', '<leader>b2', ':b 2<CR>')
-map('n', '<leader>b3', ':b 3<CR>')
-map('n', '<leader>b4', ':b 4<CR>')
-map('n', '<leader>b5', ':b 5<CR>')
-map('n', '<leader>b6', ':b 6<CR>')
-map('n', '<leader>b7', ':b 7<CR>')
-map('n', '<leader>b8', ':b 8<CR>')
-map('n', '<leader>b9', ':b 9<CR>')
+map('n', '<leader>bl', ':ls<CR>', { noremap = true, silent = true })
+map('n', '<leader>bb', ':bnext<CR>', { noremap = true, silent = true })
+map('n', '<leader>bn', ':bprevious<CR>', { noremap = true, silent = true })
+-- map('n', '<leader>bk', ':bp \\|bd # <CR>', { noremap = true, silent = true })
+map('n', '<leader>bk', ':bd<CR>', { noremap = true, silent = true })
+map('n', '<leader>b1', ':b 1<CR>', { noremap = true, silent = true })
+map('n', '<leader>b2', ':b 2<CR>', { noremap = true, silent = true })
+map('n', '<leader>b3', ':b 3<CR>', { noremap = true, silent = true })
+map('n', '<leader>b4', ':b 4<CR>', { noremap = true, silent = true })
+map('n', '<leader>b5', ':b 5<CR>', { noremap = true, silent = true })
+map('n', '<leader>b6', ':b 6<CR>', { noremap = true, silent = true })
+map('n', '<leader>b7', ':b 7<CR>', { noremap = true, silent = true })
+map('n', '<leader>b8', ':b 8<CR>', { noremap = true, silent = true })
+map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
 
 -- Buffer menu
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
@@ -126,13 +127,13 @@ cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- Plugins {{{
 map('n', '<leader>G', ':Goyo<CR>')
 ---- Floaterm {{{
-map('n', '<silent><leader>bm', ':FloatermToggle<CR>')
-map('t', '<silent><leader>bm', '<C-\\><C-n>:FloatermToggle<CR>')
-map('n', '<silent><leader>b,', ':FloatermNew --wintype=normal --height=8<CR>')
-map('t', '<silent><leader>b,', '<C-\\><C-n>:FloatermNew --wintype=normal --height=8<CR>')
-map('t', '<silent><leader>bn', '<C-\\><C-n>:FloatermPrev<CR>')
-map('t', '<silent><leader>bb', '<C-\\><C-n>:FloatermNext<CR>')
-map('t', '<silent><leader>bk', '<C-\\><C-n>:FloatermKill<CR>')
+map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
+map('t', '<leader>bm', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true })
+map('n', '<leader>b,', ':FloatermNew --wintype=normal --height=8<CR>', { noremap = true, silent = true })
+map('t', '<leader>b,', '<C-\\><C-n>:FloatermNew --wintype=normal --height=8<CR>', { noremap = true, silent = true })
+map('t', '<leader>bn', '<C-\\><C-n>:FloatermPrev<CR>', { noremap = true, silent = true })
+map('t', '<leader>bb', '<C-\\><C-n>:FloatermNext<CR>', { noremap = true, silent = true })
+map('t', '<leader>bk', '<C-\\><C-n>:FloatermKill<CR>', { noremap = true, silent = true })
 ---- }}}
 ---- Commentary {{{
 map('n', '<leader>//', ':Commentary<CR>')

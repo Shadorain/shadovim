@@ -1,0 +1,51 @@
+{
+  "dialog.floatBorderHighlight": "CocFloatingBorder",
+  "dialog.floatHighlight": "CocFloatingBorder",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "markdown",
+    "json",
+    "clangd"
+  ],
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+  "clangd.path": "/home/shadow/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
+  "languageserver": {
+    "haskell": {
+      "command": "ghcide",
+      "args": [
+        "--lsp"
+      ],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ]
+    }
+  },
+  "languageserver": {
+    "clangd": {
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp,", "h", "hpp"]
+    }
+  },
+  "languageserver": {
+    "rust": {
+      "command": "rust-analyzer",
+      "filetypes": ["rust"],
+      "rootPatterns": ["Cargo.toml"]
+    }
+  },
+  "languageserver": {
+    "lua": {
+      "command": "lua-lsp",
+      "filetypes": ["lua"]
+    }
+  }
+}

@@ -37,117 +37,13 @@ return require('packer').startup(function(use)
     use { 'voldikss/vim-floaterm' }       --- Terminal
     use { 'vim-scripts/genutils' }        --- general utilities
     use { 'godlygeek/tabular' }           --- tabbing
-    -- use { 'mfussenegger/nvim-dap' }       --- debugging
-    -- use { 'L3MON4D3/LuaSnip', module = 'completion' } --- snippets
+    use { 'honza/vim-snippets' } -- snippets
 
     -- [[ Coding ]]
     use { 'neoclide/coc.nvim', branch = 'release' }
-	--- [[ LSP ]] {{{
-    -- use { 'neovim/nvim-lspconfig',
-        -- config = function()
-        --     local servers = { 'clangd', 'rust_analyzer' }
-        --     for _, lsp in ipairs(servers) do
-        --         nvim_lsp[lsp].setup {
-        --             on_attach = on_attach,
-        --             flags = { debounce_text_changes = 150, }
-        --         }
-        --     end
-
-        --     local nvim_lsp = require'lspconfig'
-        --     local on_attach = function(client) require'completion'.on_attach(client) end
-        --     nvim_lsp.rust_analyzer.setup({
-        --         on_attach=on_attach,
-        --         settings = {
-        --             ["rust-analyzer"] = {
-        --                 assist = {
-        --                     importGranularity = "module",
-        --                     importPrefix = "by_self",
-        --                 },
-        --                 cargo = { loadOutDirsFromCheck = true },
-        --                 procMacro = { enable = true },
-        --             }
-        --         }
-        --     })
-        -- end
-    -- }
-    -- use { 'kabouzeid/nvim-lspinstall', --- native LSP
-    --     config = function()
-			-- local lspconfig, lspinstall = require('lspconfig'), require('lspinstall')
-			-- local configurations = require('lsp_config')
-			-- local installed_servers = lspinstall.installed_servers()
-			-- lspinstall.setup()
-
-			-- local setup_servers = function()
-				-- for _, server in ipairs(installed_servers) do
-  					-- lspconfig[server].setup(vim.tbl_extend("force", configurations[server] or {}, {
-  						-- on_attach = function(_, bufnr)
-							-- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  							-- local opts = { noremap = true, silent = true }
-
-  							-- buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  							-- buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  							-- buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  							-- buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  							-- buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  							-- buf_set_keymap("n", "<Leader>da", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  							-- buf_set_keymap("n", "<Leader>dr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  							-- buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  							-- buf_set_keymap("n", "<Leader>rf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  							-- buf_set_keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  							-- buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-							-- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  							-- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  							-- require('lsp_signature').on_attach({ hint_prefix = " ", })
-  						-- end
-  					-- }))
-				-- end
-			-- end
-			-- setup_servers()
-
-			-- -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-			-- lspinstall.post_install_hook = function()
-  				-- setup_servers()
-  				-- vim.cmd("bufdo e")
-			-- end
-    --         local nvim_lsp = require "lspconfig"
-    --         local capabilities = vim.lsp.protocol.make_client_capabilities()
-    --         capabilities.textDocument.completion.completionItem.snippetSupport = true
-    --         nvim_lsp.rust_analyzer.setup {
-    --           capabilities = capabilities,
-    --           on_attach = on_attach,
-    --           settings = {
-    --             ["rust-analyzer"] = {
-    --               cargo = { loadOutDirsFromCheck = true },
-    --               procMacro = { enable = true },
-    --             },
-    --           },
-    --         }
-    --         require("rust-tools").setup {}
-		-- end,
-		-- requires = "nvim-lspconfig",
-    -- }
-	-- use { "ray-x/lsp_signature.nvim",   --- signature hints
-	-- 	module = "lsp_signature"
-	-- }
-	-- use { "nvim-lua/lsp_extensions.nvim" }
-	--- }}}
-	--- [[ Completion ]] {{{
-	-- use { 'nvim-lua/completion-nvim' }
-	-- use { "hrsh7th/nvim-cmp",
-	-- 	requires = {
-	-- 		{ "hrsh7th/cmp-buffer", after = "nvim-cmp", },
-	-- 		{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp", },
-	-- 		{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp", },
-	-- 		{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", },
-	-- 		{ "hrsh7th/cmp-calc", after = "nvim-cmp", },
-	-- 		{ "hrsh7th/cmp-path", after = "nvim-cmp", },
-	-- 	},
-	-- }
-    --- }}}
     --- [[ Treesitter ]] {{{
     use { 'nvim-treesitter/nvim-treesitter', --- treesitter
         run = ':TSUpdate',
-        opt = true,
         config = function()
             local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 			parser_configs.markdown = {
@@ -348,12 +244,10 @@ return require('packer').startup(function(use)
     -- [[ Finders ]]
     use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
     use { 'unblevable/quick-scope' }        --- horizonal movement
-    -- use { 'phaazon/hop.nvim' }              --- vertical movement
-    -- use { 'justinmk/vim-sneak' }            --- both movement
     use { 'mileszs/ack.vim' }               --- searcher
 
     -- [[ Miscellaneous ]]
-    use { 'mhinz/vim-startify' }             --- Start Screen
+    use { 'mhinz/vim-startify' } --- Start Screen
     use { "jghauser/mkdir.nvim",             --- Make directory
 		config = function() require('mkdir') end,
 		event = "BufWritePre"

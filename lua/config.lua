@@ -66,6 +66,9 @@ vim.opt.backupdir= "/home/shadow/.local/cache/nvim/backups/"
 -- Completion
 vim.opt.completeopt = "menuone,noinsert,noselect"
 
+-- Update times
+vim.opt.updatetime = 100
+
 cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
 --- }}}
 -- }}}
