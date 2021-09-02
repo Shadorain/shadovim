@@ -56,6 +56,12 @@ return require('packer').startup(function(use)
 			}
 			require('nvim-treesitter.configs').setup {
 				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown" },
+				rainbow = {
+				    enable = true,
+				    extended_mode = true,
+				    max_file_lines = 1000,
+				    colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#f1c4e0' },  
+				},
 				highlight = { enable = true },
 				incremental_selection = {
 					enable = true,
@@ -168,109 +174,13 @@ return require('packer').startup(function(use)
 		end,
 		after = { "nvim-treesitter" }
 	}
+	use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
     --- }}}
     --- [[ Languages ]]
     use { 'sheerun/vim-polyglot' }     --- *
     use { 'rust-lang/rust.vim' }       --- rust!
     use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
-    use { 'simrat39/rust-tools.nvim',  --- rust: loads of tools
-        setup = function() 
-            local opts = {
-                tools = { -- rust-tools options
-                    -- Automatically set inlay hints (type hints)
-                    autoSetHints = true,
-
-                    -- Whether to show hover actions inside the hover window
-                    -- This overrides the default hover handler 
-                    hover_with_actions = true,
-
-                    runnables = {
-                        -- whether to use telescope for selection menu or not
-                        use_telescope = true
-
-                        -- rest of the opts are forwarded to telescope
-                    },
-
-                    debuggables = {
-                        -- whether to use telescope for selection menu or not
-                        use_telescope = true
-
-                        -- rest of the opts are forwarded to telescope
-                    },
-
-                    -- These apply to the default RustSetInlayHints command
-                    inlay_hints = {
-
-                        -- Only show inlay hints for the current line
-                        only_current_line = false,
-
-                        -- Event which triggers a refersh of the inlay hints.
-                        -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
-                        -- not that this may cause  higher CPU usage.
-                        -- This option is only respected when only_current_line and
-                        -- autoSetHints both are true.
-                        only_current_line_autocmd = "CursorHold",
-
-                        -- wheter to show parameter hints with the inlay hints or not
-                        show_parameter_hints = true,
-
-                        -- prefix for parameter hints
-                        parameter_hints_prefix = "<- ",
-
-                        -- prefix for all the other hints (type, chaining)
-                        other_hints_prefix = "=> ",
-
-                        -- whether to align to the length of the longest line in the file
-                        max_len_align = false,
-
-                        -- padding from the left if max_len_align is true
-                        max_len_align_padding = 1,
-
-                        -- whether to align to the extreme right or not
-                        right_align = false,
-
-                        -- padding from the right if right_align is true
-                        right_align_padding = 7,
-
-                        -- The color of the hints
-                        highlight = "Comment",
-                    },
-
-                    hover_actions = {
-                        -- the border that is used for the hover window
-                        -- see vim.api.nvim_open_win()
-                        border = {
-                            {"╭", "FloatBorder"}, {"─", "FloatBorder"},
-                            {"╮", "FloatBorder"}, {"│", "FloatBorder"},
-                            {"╯", "FloatBorder"}, {"─", "FloatBorder"},
-                            {"╰", "FloatBorder"}, {"│", "FloatBorder"}
-                        },
-
-                        -- whether the hover action window gets automatically focused
-                        auto_focus = false
-                    },
-
-                    -- settings for showing the crate graph based on graphviz and the dot
-                    -- command
-                    crate_graph = {
-                        -- Backend used for displaying the graph
-                        -- see: https://graphviz.org/docs/outputs/
-                        -- default: x11
-                        backend = "x11",
-                        -- where to store the output, nil for no output stored (relative
-                        -- path from pwd)
-                        -- default: nil
-                        output = nil,
-                        -- true for all crates.io and external crates, false only the local
-                        -- crates
-                        -- default: true
-                        full = true,
-                    }
-                },
-            }
-            require('rust-tools').setup(opts)
-        end
-    }
+    use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
     use { 'plasticboy/vim-markdown' }  --- markdown
 
     -- [[ Make it pretty ]]
