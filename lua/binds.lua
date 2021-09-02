@@ -18,9 +18,12 @@ local cmd = vim.cmd
 -- [[ General Bindings ]] --------------------------------------------------- ]]
 --- Utility {{{
 -- Keep screen centered
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
+map('n', 'n', 'nzzzv:Beacon<CR>')
+map('n', 'N', 'Nzzzv:Beacon<CR>')
 -- map('n', 'J', 'mzJ\'z')
+
+-- Show cursor
+map('n', 'Q', ':Beacon<CR>', { noremap = true, silent = true })
 
 -- Undo breakpoints
 -- map('i', ',', ',<c-q>u')

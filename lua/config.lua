@@ -65,6 +65,9 @@ vim.opt.backupdir= "/home/shadow/.local/cache/nvim/backups/"
 
 -- Completion
 vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.pumwidth = 15
+vim.opt.pumheight = 7
+vim.opt.pumblend = 20
 
 -- Update times
 vim.opt.updatetime = 100
@@ -213,6 +216,16 @@ cmd("let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T']")
 --- Termdebug {{{
 cmd('packadd! termdebug')
 vim.g.termdebug_wide = 1
+--- }}}
+--- Beacon {{{
+vim.g.beacon_minimal_jump = 2
+vim.g.beacon_size = 30
+vim.g.beacon_shrink = 1
+vim.g.beacon_timeout = 1000
+
+vim.cmd [[
+    hi Beacon guibg=#bd93f9
+]]
 --- }}}
 -- --- Neorg {{{
 -- require('neorg').setup {

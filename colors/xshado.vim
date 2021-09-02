@@ -144,10 +144,10 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi SpellLocal guifg=NONE guibg=NONE gui=undercurl
   hi SpellRare guifg=NONE guibg=NONE gui=undercurl
 
-  hi Pmenu guifg=#eed6ee guibg=NONE
-  hi PmenuSbar guifg=#a883a8 guibg=NONE
-  hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline,standout
-  hi PmenuThumb guifg=#eed6ee guibg=NONE
+  hi Pmenu guifg=#eed6ee guibg=NONE blend=0
+  hi PmenuSbar guifg=#a883a8 guibg=NONE blend=0
+  hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline,standout blend=0
+  hi PmenuThumb guifg=#eed6ee guibg=NONE blend=0
 
   " CoC
   hi CocFloating guibg=NONE guifg=#bd93f9 blend=50
