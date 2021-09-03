@@ -31,17 +31,17 @@ Shadovim has a very simple file tree, the main content is handled in the
 
 ```bash
 .
-├── init.lua           # All initializing and sourcing
+├── init.lua             # All initializing and sourcing
 └── lua
-    ├── binds.lua      # Any keybinds
-    ├── cocsetup.vim   # CoC setup
-    ├── config.lua     # General and plugin configuration settings
-    ├── lsp_config.lua # Will be used later for native lsp setup
-    └── plugins.lua    # Packer setup and plugin defining
+    ├── binds.lua        # Any keybinds
+    ├── cocsetup.vim     # CoC setup
+    ├── config.lua       # General and plugin configuration settings
+    ├── lsp_config.lua   # Will be used later for native lsp setup
+    └── plugins.lua      # Packer setup and plugin defining
 ```
 
 All snippets can be added in the `snips/` directory. Any syntax files in
-the `syntax/` directory. Coc's setup file's: `coc-settings.json` and
+the `syntax/` directory. Coc's setup files: `coc-settings.json` and
 `settings.json`.
 
 Finished
