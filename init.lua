@@ -53,8 +53,8 @@ vim.defer_fn(function()
 	vim.cmd [[
 		set t_ut=
 		silent! bufdo e
-		PackerLoad lightline.vim
 		PackerLoad nvim-treesitter
+		PackerLoad lightline.vim
 		lua require'colorizer'.setup()
 		colorscheme xshado
 	]]

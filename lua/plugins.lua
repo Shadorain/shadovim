@@ -185,7 +185,7 @@ return require('packer').startup(function(use)
 
     -- [[ Make it pretty ]]
     use { 'kyazdani42/nvim-web-devicons' }      --- icons
-    use { 'itchyny/lightline.vim', opt = true } --- Statusbar
+    use { 'itchyny/lightline.vim' }             --- Statusbar
     use { 'junegunn/goyo.vim' }                 --- focus
     use { "norcalli/nvim-colorizer.lua" }       --- Colorizer
 

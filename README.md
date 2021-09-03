@@ -1,36 +1,59 @@
 shadovim
 ==========
 
-A repo to hold all my up to date nvim configuration files
+A neovim setup for the shadow warriors. Speed through the light with the
+power of shadovim built on the new Lua based neovim!
 
 Installation
 ==============
 
-- 
-- This will cp your current neovim config folder to `~/.nvim.bkp`
-- Installs neovim libraries to python3 and npm
-- Installs vim-plug plugin manager for vim
+Installing shadovim is relatively simple. Make sure you have Nvim v0.6.0
+or higher (install and build from nightly source).
+
+Simply clone the repository, change directory to it, give the setup script
+execute permissions, and run it and it will setup shadovim no problem!
+It is well documented and has error checking as well to make sure you know
+what happened if it errors. To configure the plugins you want installed by
+CoC edit the `coc_list` variable at the top of the `./setup` script.
+
 ```bash
-git clone https://github.com/Shadorain/shadovim
-mv $HOME/.config/nvim/ ~/.nvim.bkp/
-mv shadovim/ $HOME/.config/nvim/
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-npm install neovim
-pip3 install neovim
+❱  git clone https://github.com/Shadorain/shadovim ~/.config/nvim
+❱  cd ~/.config/nvim/
+❱  chmod +x ./setup
+❱  ./setup
 ```
 
-Now that shadovim is installed on the system, we have to do some final patching up withing nvim itself!
-1. Open `nvim` and run `:PlugInstall` and allow it to install the few plugins
-  - if this step does not work then try opening and closing nvim once more, or make sure that vim-plug is properly installed
-2. Then close it (:q) and open `nvim` again, this time run this command: (will install all the COC packages, remove what you will not use from this list now)
-```
-:CocInstall coc-clangd coc-highlight coc-git coc-sh coc-tabnine coc-yank coc-snippets coc-pairs 
-```
-3. Then close it and open `nvim` again, this time run this command: (will install all the coc-packages)
+General Content
+=================
 
-Finally for lightline, we simply need to link our custom theme on top of an existing one since lightline doesn't handle custom themes well.
+Shadovim has a very simple file tree, the main content is handled in the
+`lua/` directory:
+
 ```bash
-ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/site/pack/packer/opt/lightline.vim/autoload/lightline/colorscheme/deus.vim 
- ```
+.
+├── init.lua           # All initializing and sourcing
+└── lua
+    ├── binds.lua      # Any keybinds
+    ├── cocsetup.vim   # CoC setup
+    ├── config.lua     # General and plugin configuration settings
+    ├── lsp_config.lua # Will be used later for native lsp setup
+    └── plugins.lua    # Packer setup and plugin defining
+```
 
+All snippets can be added in the `snips/` directory. Any syntax files in
+the `syntax/` directory. Coc's setup file's: `coc-settings.json` and
+`settings.json`.
+
+Finished
+=============
+
+Here are some cool screenshots of it in action!
+
+![Rust+completion shadovim](.scrots/rust.png)
+![C shadovim](.scrots/c.png)
+
+You now have a fully setup Shadovim configuration! With shadotheme and
+a bunch of other cool perks under your sleeves! To see all the power it has
+there is no better way that to read the source, it is all in there!
+
+I hope you enjoy!
