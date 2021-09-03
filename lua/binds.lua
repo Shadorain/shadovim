@@ -18,8 +18,8 @@ local cmd = vim.cmd
 -- [[ General Bindings ]] --------------------------------------------------- ]]
 --- Utility {{{
 -- Keep screen centered
-map('n', 'n', 'nzzzv:Beacon<CR>')
-map('n', 'N', 'Nzzzv:Beacon<CR>')
+map('n', 'n', 'nzzzv:Beacon<CR>', { noremap = true, silent = true })
+map('n', 'N', 'Nzzzv:Beacon<CR>', { noremap = true, silent = true })
 -- map('n', 'J', 'mzJ\'z')
 
 -- Show cursor

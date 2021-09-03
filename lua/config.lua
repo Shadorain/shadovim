@@ -14,7 +14,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ','
 --- }}}
 --- Tab Configuration {{{
-vim.opt.expandtab = true
+vim.cmd('set expandtab')
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -71,6 +71,10 @@ vim.opt.pumblend = 20
 
 -- Update times
 vim.opt.updatetime = 100
+
+-- Cursor Line Nr
+cmd('set cursorline')
+cmd('set cursorlineopt=number')
 
 cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
 --- }}}
@@ -188,7 +192,7 @@ vim.g.startify_bookmarks = {
     { nv = '~/.config/nvim/init.lua'          },
     { np = '~/.config/nvim/lua/plugins.lua'   },
     { nc = '~/.config/nvim/lua/config.lua'    },
-    { nk = '~/.config/nvim/lua/binds.vim'     },
+    { nk = '~/.config/nvim/lua/binds.lua'     },
     { ns = '~/.config/nvim/colors/shado.vim'  },
     { nx = '~/.config/nvim/colors/xshado.vim' },
     { x  = '~/.xmonad/xmonad.hs'              },

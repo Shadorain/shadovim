@@ -33,20 +33,20 @@ let g:terminal_color_14 = '#F18FB0'
 let g:terminal_color_15 = '#f1c4e0'
 
 " Transparent background
-au ColorScheme * hi Normal ctermbg=none guibg=none
-highlight SignColumn guibg=none
+au ColorScheme * hi Normal ctermbg=NONE guibg=NONE
+highlight SignColumn guibg=NONE
 
 if (has('termguicolors') && &termguicolors) || has('gui_running')
   let g:terminal_ansi_colors = ['#140a1d', '#B52A5B', '#FF4971', '#8897F4',
         \ '#bd93f9', '#E9729D', '#F18FB0', '#f1c4e0', '#a8899c', '#B52A5B',
         \ '#FF4971', '#8897F4', '#bd93f9', '#E9729D', '#F18FB0', '#f1c4e0']
-  hi Normal guifg=#dfb7e8 guibg=none
+  hi Normal guifg=#dfb7e8 guibg=NONE
 
   hi Cursor guifg=#dfb7e8 guibg=#6161b3 guisp=#6161b3
   hi CursorLine guibg=#1B1B29 guisp=#6161b3
   hi CursorColumn guibg=#1B1B29 guisp=#6161b3
-  hi CursorLineNr guifg=#de286e guibg=none
   hi LineNr guifg=#a1a1dd guibg=NONE
+  hi CursorLineNr guifg=#de286e guibg=NONE
 
   hi Search guifg=#8be9fd guibg=NONE gui=bold  "#302b30
   hi IncSearch guifg=#8be9fd guibg=NONE guisp=#8897F4 gui=bold
@@ -78,9 +78,9 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi VertSplit guifg=#1B1B29 guibg=#35355E guisp=#35355e
   hi WildMenu guifg=#eed6ee guibg=#5d5daf
 
-  hi DiffAdd guifg=#37d4a7 guibg=none guisp=#2c9465
-  hi DiffChange guifg=#2f77a1 guibg=none guisp=#2f77a1
-  hi DiffDelete guifg=#de286e guibg=none guisp=#c9083f
+  hi DiffAdd guifg=#37d4a7 guibg=NONE guisp=#2c9465
+  hi DiffChange guifg=#2f77a1 guibg=NONE guisp=#2f77a1
+  hi DiffDelete guifg=#de286e guibg=NONE guisp=#c9083f
   hi DiffText guifg=#e3d3eb guibg=#4d254d guisp=#4d254d
 
   hi Comment guifg=#6272a4 guibg=NONE
@@ -89,7 +89,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi Special guifg=#5d5daf guibg=NONE
   hi SpecialComment guifg=#bc6bd0 guibg=NONE
   hi SpecialKey guifg=#a048ed guibg=NONE
-  hi SpecialChar guifg=#bc6bd0 guibg=none
+  hi SpecialChar guifg=#bc6bd0 guibg=NONE
   hi Tag guifg=#bc6bd0 guibg=NONE
   hi Delimiter guifg=#bc6bd0 guibg=NONE
 
