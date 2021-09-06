@@ -11,7 +11,7 @@ if [[ ! -d "~/.local/share/nvim/site/pack/packer/start/packer.nvim" ]]; then
      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     if [[ $? -ne 0 ]]; then
         echo "<== | Error: Cloning packer repositiory failed | ==>"
-        echo " -- Check your internet conneciton, and try again --"
+        echo " -- Check your internet connection, and try again --"
         exit 1
     fi
 else
@@ -20,8 +20,8 @@ fi
 
 # Install all packer packages with PackerSync from inside nvim
 echo "*== | Installing packer plugins |==*"
-echo " -- NVim will open to install some packer plugins in a second. --"
-echo " -- When it is complete, exit nvim (q). Setup will resume after --"
+echo " -- Nvim will open to install some packer plugins in a second. --"
+echo " -- When it is complete, exit nvim (:q). Setup will resume after --"
 echo " --- Hit ENTER to continue... ---"
 read input
 nvim -c ":PackerSync"
