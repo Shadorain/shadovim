@@ -27,7 +27,7 @@ read input
 
 # Overwrite with a link my colorscheme on top of existing default one for lightline.vim
 echo "*== | Installing lightline.vim theme | ==*"
-ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/site/pack/packer/opt/lightline.vim/autoload/lightline/colorscheme/deus.vim
+ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/site/pack/packer/start/lightline.vim/autoload/lightline/colorscheme/deus.vim
 if [[ $? -ne 0 ]]; then
     echo "<== | Error: failed to link colorscheme file | ==>"
     exit 1
