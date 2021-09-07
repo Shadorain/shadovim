@@ -156,8 +156,28 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   " LSP
   hi link LspDiagnosticsSignError Error
   hi link LspDiagnosticsSignWarning WarningMsg
-  hi link LspDiagnosticsSignHint MoreMsg
-  hi link LspDiagnosticsSignInformation MoreMsg
+  hi link LspDiagnosticsSignInformation ModeMsg
+  hi link LspDiagnosticsSignHint PreProc
+  hi link LspDiagnosticsDefaultError Error
+  hi link LspDiagnosticsDefaultWarning WarningMsg
+  hi link LspDiagnosticsDefaultInformation ModeMsg
+  hi link LspDiagnosticsDefaultHint PreProc
+  hi link LspDiagnosticsVirtualTextError Error
+  hi link LspDiagnosticsVirtualTextWarning WarningMsg
+  hi link LspDiagnosticsVirtualTextInformation ModeMsg
+  hi link LspDiagnosticsVirtualTextHint PreProc
+  hi link LspDiagnosticsFloatingError Error
+  hi link LspDiagnosticsFloatingWarning WarningMsg
+  hi link LspDiagnosticsFloatingInformation ModeMsg
+  hi link LspDiagnosticsFloatingHint PreProc
+  hi link LspDiagnosticsError Error
+  hi link LspDiagnosticsWarning WarningMsg
+  hi link LspDiagnosticsInformation ModeMsg
+  hi link LspDiagnosticsHint PreProc
+  hi link LspDiagnosticsUnderlineError Error
+  hi link LspDiagnosticsUnderlineWarning WarningMsg
+  hi link LspDiagnosticsUnderlineInformation ModeMsg
+  hi link LspDiagnosticsUnderlineHint PreProc
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9

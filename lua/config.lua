@@ -70,7 +70,7 @@ vim.opt.pumheight = 7
 vim.opt.pumblend = 20
 
 -- Update times
-vim.opt.updatetime = 100
+vim.opt.updatetime = 150
 
 -- Cursor Line Nr
 cmd('set cursorline')

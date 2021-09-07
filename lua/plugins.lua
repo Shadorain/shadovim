@@ -37,15 +37,15 @@ return require('packer').startup(function(use)
 	}
 
     -- [[ Utility ]]
-    use { 'nvim-lua/plenary.nvim' }       --- general utilities
-    use { 'MattesGroeger/vim-bookmarks' } --- bookmarks
-    use { 'tpope/vim-commentary' }        --- commenting
-    use { 'voldikss/vim-floaterm' }       --- Terminal
-    use { 'vim-scripts/genutils' }        --- general utilities
-    use { 'godlygeek/tabular' }           --- tabbing
-    use { 'honza/vim-snippets' }          --- snippets
-    use { 'DanilaMihailov/beacon.nvim' }  --- cursor beacon
-    use { 'mfussenegger/nvim-dap' }       --- debugging
+    use { 'nvim-lua/plenary.nvim' }        --- general utilities
+    use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
+    use { 'tpope/vim-commentary' }         --- commenting
+    use { 'voldikss/vim-floaterm' }        --- Terminal
+    use { 'vim-scripts/genutils' }         --- general utilities
+    use { 'godlygeek/tabular' }            --- tabbing
+    use { 'rafamadriz/friendly-snippets' } --- snippets
+    use { 'DanilaMihailov/beacon.nvim' }   --- cursor beacon
+    use { 'mfussenegger/nvim-dap' }        --- debugging
 
     -- [[ Git integration ]]
     use { 'nvim-lua/popup.nvim' }
@@ -109,8 +109,8 @@ return require('packer').startup(function(use)
 
     -- [[ Coding ]]
     --- [[ LSP & Completion ]] {{{
-    use { 'L3MON4D3/LuaSnip' }      --- Snippets manager
     use { 'neovim/nvim-lspconfig' } --- Native LSP
+    use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
     use { 'hrsh7th/nvim-cmp',       --- Autocompletion
         config = function()
             local cmp = require('cmp')
@@ -118,32 +118,23 @@ return require('packer').startup(function(use)
                 preselect = cmp.PreselectMode.None,
                 snippet = { expand = function(args) require('luasnip').lsp_expand(args.body) end },
                 mapping = {
-                    ["<C-m>"] = cmp.mapping.select_prev_item(),
+                    ["<C-j>"] = cmp.mapping.select_prev_item(),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-u>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-c>"] = cmp.mapping.close(),
                     ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
-                    -- ['<Tab>'] = function()
-                    --   if vim.fn.pumvisible() == 1 then
-                    --       cmp.mapping.select_next_item()
-                    --   -- elseif luasnip.expand_or_jumpable() then
-                    --   --     vim.cmd('<Plug>luasnip-expand-or-jump')
-                    --   end
-                    -- end,
-                    -- ['<S-Tab>'] = function(fallback)
-                    --   if vim.fn.pumvisible() == 1 then
-                    --       cmp.mapping.select_prev_item()
-                    --   -- elseif luasnip.expand_or_jumpable() then
-                    --   --     vim.cmd('<Plug>luasnip-jump-prev')
-                    --   end
-                    -- end,
+                },
+                documentation = {
+                    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				    winhighlight = 'FloatBorder:TelescopeBorder',  
                 },
                 sources = {
                     { name = "luasnip"  }, { name = "nvim_lua" },
                     { name = "nvim_lsp" }, { name = "calc" },
                     { name = "path"     }, { name = "buffer" },
+                    { name = "cmp_tabnine" },
                 },
                 formatting = {
                     format = function(entry, vim_item)
@@ -154,6 +145,7 @@ return require('packer').startup(function(use)
                           luasnip = "[S]",
                           calc = "[C]",
                           path = "[P]",
+                          cmp_tabnine = "[T]",
                       })[entry.source.name]
                       return vim_item
                     end,
@@ -167,6 +159,7 @@ return require('packer').startup(function(use)
             { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+            { 'L3MON4D3/LuaSnip' },
         },
     }
     use { 'onsails/lspkind-nvim' }
