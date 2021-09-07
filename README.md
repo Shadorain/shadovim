@@ -6,6 +6,9 @@ power of shadovim built on the new Lua based neovim! With the highly
 overpowered native LSP, built in auto-completion, snippets, menus and so
 much more, you will unleash the power of a hundred million shadows!
 
+> P.S: even I am shocked by how absolutely fast the LSP, completion,
+>  and startup is. Threw me for a wonderful surprise!
+
 Installation
 ==============
 
@@ -43,13 +46,25 @@ Shadovim has a very simple file tree, the main content is handled in the
 All snippets can be added in the `snips/` directory. Any syntax files in
 the `syntax/` directory.
 
-Finished
+Show off
 =============
 
 Here are some cool screenshots of it in action!
 
-![Rust+completion shadovim](.scrots/rust.png)
-![C shadovim](.scrots/c.png)
+### Lsp Errors
+![lsp_errors](.scrots/lsp_errors.png)
+
+### Completion
+![completion](.scrots/completion.png)
+
+### Git Signs
+![gitsigns](.scrots/gitsigns.png)
+
+### Hover Documents & Colorizer
+![hover_colorizer](.scrots/colorizer_hover.png)
+
+### Symbol Outline Clang
+![symbol_outline_c](.scrots/symbols_c.png)
 
 You now have a fully setup Shadovim configuration! With shadotheme and
 a bunch of other cool perks under your sleeves! To see all the power it has

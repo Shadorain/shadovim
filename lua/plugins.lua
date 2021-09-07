@@ -170,7 +170,6 @@ return require('packer').startup(function(use)
         },
     }
     use { 'onsails/lspkind-nvim' }
-    use { 'glepnir/lspsaga.nvim', requires = 'neovim/nvim-lspconfig' } --- Sexy UI for LSP
 	use { 'ray-x/lsp_signature.nvim', module = 'lsp_signature' }
 	use { "simrat39/symbols-outline.nvim",
 		setup = function()
@@ -200,7 +199,6 @@ return require('packer').startup(function(use)
     --- [[ Treesitter ]] {{{
     use { 'nvim-treesitter/nvim-treesitter', --- treesitter
         run = ':TSUpdate',
-        -- after = 'impatient.nvim',
         config = function()
             local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 			parser_configs.markdown = {

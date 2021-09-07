@@ -47,7 +47,8 @@ function M.setup()
 end
 -- }}}
 -- Sign defining {{{
-local signs = { Error = "× ", Warning = " ", Hint = " ", Information = " " }
+-- local signs = { Error = "× ", Warning = " ", Hint = " ", Information = " " }
+local signs = { Error = "⌦ ", Warning = "🞜 ", Hint = "", Information = "🞧 " }
 for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -88,10 +89,6 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 })
 -- }}}
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({border="rounded", focusable=false})]]
--- }}}
--- LspSaga {{{
-local saga = require 'lspsaga'
-saga.init_lsp_saga()
 -- }}}
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
