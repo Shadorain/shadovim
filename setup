@@ -1,9 +1,6 @@
 #!/bin/bash
 # A setup script to install shadovim fast and easy!
 
-# List of CoC Plugins to install, add or remove what you want.
-coc_list="coc-clangd coc-pairs coc-rls coc-rust-analyzer coc-sh coc-tabnine coc-yank coc-snippets coc-vimlsp"
-
 # Install packer the top lua plugin manager for new neovim
 echo "*== | Installing packer | ==*"
 if [[ ! -d "~/.local/share/nvim/site/pack/packer/start/packer.nvim" ]]; then
@@ -27,17 +24,6 @@ read input
 nvim -c ":PackerSync"
 echo "#== | If that failed, rerun this script (Ctrl+c), else hit ENTER to continue... | ==#"
 read input
-
-# Install CoC Plugins
-if [[ ! -z $coc_list ]]; then
-    echo "*== | Installing CoC plugins | ==*"
-    echo " -- Remember to exit when complete --"
-    echo " --- Hit ENTER to continue... ---"
-    read input
-    nvim -c ":CocInstall ${coc_list}"
-    echo "#== | If that failed, rerun this script (Ctrl+c), else hit ENTER to continue... | ==#"
-    read input
-fi
 
 # Overwrite with a link my colorscheme on top of existing default one for lightline.vim
 echo "*== | Installing lightline.vim theme | ==*"
