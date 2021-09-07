@@ -52,18 +52,43 @@ Show off
 Here are some cool screenshots of it in action!
 
 ### Lsp Errors
+
+Colors the text inside the popup window with red for error and pink for warning,
+with proper symbols on the side. Hints get shown in the windows as well if any
+exist!
+
 ![lsp_errors](.scrots/lsp_errors.png)
+![lsp_warnings](.scrots/lsp_warnings.png)
 
 ### Completion
+
+Full autocompletion menu with icons and descriptors for the source where the
+completion is coming from, and special documentation blocks that are fully
+configurable to explain the completion entry!
+
 ![completion](.scrots/completion.png)
 
 ### Git Signs
+
+Track your changes with git indicators on the side. [ Green:Add, Blue:Change,
+Red:Delete].
+
 ![gitsigns](.scrots/gitsigns.png)
 
 ### Hover Documents & Colorizer
+
+Colorizer that highlights the colors in the text with the color written.
+Hover menu for documentation and whatever else!
+
 ![hover_colorizer](.scrots/colorizer_hover.png)
 
-### Symbol Outline Clang
+### Symbol Outline
+
+An in depth symbol analysis of the file, with previews, keybinds and many
+more options.
+
+> This is a C file. Works in all filetypes with lsp support too!
+
 ![symbol_outline_c](.scrots/symbols_c.png)
 
 You now have a fully setup Shadovim configuration! With shadotheme and
