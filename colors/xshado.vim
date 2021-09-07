@@ -63,7 +63,6 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi FloatermNC guifg=#6161b3
   hi FloatermBorder guifg=#ff79c6
 
-  " hi Error guifg=#292a30 guibg=#6e2323
   hi Error guifg=#ac2958 guibg=NONE
   hi ErrorMsg guifg=#ff8170 guibg=NONE
   hi ModeMsg guifg=#fca1e7 guibg=NONE
@@ -78,10 +77,10 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi VertSplit guifg=#1B1B29 guibg=#35355E guisp=#35355e
   hi WildMenu guifg=#eed6ee guibg=#5d5daf
 
-  hi DiffAdd guifg=#37d4a7 guibg=NONE guisp=#2c9465
-  hi DiffChange guifg=#2f77a1 guibg=NONE guisp=#2f77a1
-  hi DiffDelete guifg=#de286e guibg=NONE guisp=#c9083f
-  hi DiffText guifg=#e3d3eb guibg=#4d254d guisp=#4d254d
+  hi DiffAdd guifg=#37d4a7 guibg=NONE gui=NONE guisp=#2c9465
+  hi DiffChange guifg=#2f77a1 guibg=NONE gui=NONE guisp=#2f77a1
+  hi DiffDelete guifg=#de286e guibg=NONE gui=NONE guisp=#c9083f
+  hi DiffText guifg=#e3d3eb guibg=#4d254d gui=NONE guisp=#4d254d
 
   hi Comment guifg=#6272a4 guibg=NONE
   hi Conceal guifg=#6272a4 guibg=NONE
@@ -144,15 +143,21 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi SpellLocal guifg=NONE guibg=NONE gui=undercurl
   hi SpellRare guifg=NONE guibg=NONE gui=undercurl
 
-  hi Pmenu guifg=#eed6ee guibg=NONE blend=0
+  " hi Pmenu guifg=#eed6ee guibg=NONE blend=0
+  " hi Pmenu guifg=#7887ff guibg=NONE blend=0
+  hi Pmenu guifg=#9ca7ff guibg=NONE blend=0
   hi PmenuSbar guifg=#a883a8 guibg=NONE blend=0
   hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline,standout blend=0
   hi PmenuThumb guifg=#eed6ee guibg=NONE blend=0
 
-  " CoC
-  hi CocFloating guibg=NONE guifg=#bd93f9 blend=50
-  hi CocFloatingBorder guibg=#bd93f9 guifg=#bd93f9
-  hi CocErrorHighlight guifg=#de286e guibg=NONE gui=bold
+  hi NormalFloat guibg=NONE
+  hi link FloatBorder Directory
+
+  " LSP
+  hi link LspDiagnosticsSignError Error
+  hi link LspDiagnosticsSignWarning WarningMsg
+  hi link LspDiagnosticsSignHint MoreMsg
+  hi link LspDiagnosticsSignInformation MoreMsg
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9

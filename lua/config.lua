@@ -81,18 +81,18 @@ cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions
 -- }}}
 -- [[ Plugin Settings ]] ---------------------------------------------------- ]]
 -- {{{
--- --- Ack {{{
--- vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
--- vim.g.ack_autoclose = 1
--- vim.g.ack_use_cword_for_empty_search = 1
+--- Ack {{{
+vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
+vim.g.ack_autoclose = 1
+vim.g.ack_use_cword_for_empty_search = 1
 
--- cmd('cnoreabbrev Ack Ack!')
+cmd('cnoreabbrev Ack Ack!')
 
--- -- Navigate quickfix list
--- vim.api.nvim_set_keymap('n', "<C-_>", "<esc>:Ack!<Space>", { noremap = true })
--- vim.api.nvim_set_keymap('n', "[q", ":cprevious<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', "]q", ":cnext<CR>", { noremap = true, silent = true })
--- --- }}}
+-- Navigate quickfix list
+vim.api.nvim_set_keymap('n', "<C-_>", "<esc>:Ack!<Space>", { noremap = true })
+vim.api.nvim_set_keymap('n', "[q", ":cprevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "]q", ":cnext<CR>", { noremap = true, silent = true })
+--- }}}
 --- Floaterm {{{
 vim.g.floaterm_autoinsert = 1
 vim.g.floaterm_width = 0.5
@@ -231,40 +231,40 @@ vim.cmd [[
     hi Beacon guibg=#bd93f9
 ]]
 --- }}}
--- --- Rust-tools {{{
--- local opts = {
---     tools = {
---         autoSetHints = true,
---         hover_with_actions = true,
---         parent_module = true,
---         join_lines = true,
---         runnables = { use_telescope = true },
---         debuggables = { use_telescope = true },
---         inlay_hints = {
---             only_current_line = false,
---             only_current_line_autocmd = "CursorHold",
---             show_parameter_hints = true,
---             parameter_hints_prefix = "<- ",
---             other_hints_prefix = "=> ",
---             max_len_align = false,
---             max_len_align_padding = 1,
---             right_align = false,
---             right_align_padding = 7,
---             highlight = "Comment",
---         },
---         hover_actions = {
---             auto_focus = false,
---             border = {
---                 {"╭", "FloatBorder"}, {"─", "FloatBorder"},
---                 {"╮", "FloatBorder"}, {"│", "FloatBorder"},
---                 {"╯", "FloatBorder"}, {"─", "FloatBorder"},
---                 {"╰", "FloatBorder"}, {"│", "FloatBorder"}
---             }
---         },
---     },
--- }
--- require('rust-tools').setup({})
--- --- }}}
+--- Rust-tools {{{
+local opts = {
+    tools = {
+        autoSetHints = true,
+        hover_with_actions = true,
+        parent_module = true,
+        join_lines = true,
+        runnables = { use_telescope = true },
+        debuggables = { use_telescope = true },
+        inlay_hints = {
+            only_current_line = false,
+            only_current_line_autocmd = "CursorHold",
+            show_parameter_hints = true,
+            parameter_hints_prefix = "≣ ",
+            other_hints_prefix = "❰ ",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "Comment",
+        },
+        hover_actions = {
+            auto_focus = false,
+            border = {
+                {"╭", "FloatBorder"}, {"─", "FloatBorder"},
+                {"╮", "FloatBorder"}, {"│", "FloatBorder"},
+                {"╯", "FloatBorder"}, {"─", "FloatBorder"},
+                {"╰", "FloatBorder"}, {"│", "FloatBorder"}
+            }
+        },
+    },
+}
+require('rust-tools').setup(opts)
+--- }}}
 -- --- Neorg {{{
 -- require('neorg').setup {
 --   load = {
