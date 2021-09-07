@@ -35,10 +35,10 @@ vim.cmd [[
 	colorscheme xshado
 ]]
 
-vim.cmd('source ~/.config/nvim/lua/cocsetup.vim')
 require('plugins')
 require('config')
 require('binds')
+require('lsp_config')
 
 -- vim.defer_fn(function()
 vim.opt.shadafile = ""
@@ -53,14 +53,13 @@ vim.defer_fn(function()
 	vim.cmd [[
 		set t_ut=
 		silent! bufdo e
-		PackerLoad nvim-treesitter
+		PackerLoad impatient.nvim
 		PackerLoad lightline.vim
+		PackerLoad nvim-treesitter
 		lua require'colorizer'.setup()
 		colorscheme xshado
 	]]
 end, 15)
--- require('lsp_config')
--- vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
 -- end, 0)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]
