@@ -7,13 +7,6 @@
 "          \/         \/                 \/ 
 " =========================================================================== ]]
 -- [[ Startup ]] ------------------------------------------------------------ ]]
---- Load later {{{
--- vim.cmd [[
---     syntax off
---     filetype off
---     filetype plugin indent off
--- ]]
---- }}}
 --- Speed up {{{
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
 vim.opt.shadafile = "NONE"
@@ -27,26 +20,20 @@ vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
 --- }}}
 --- Sourcing {{{
---> [[[ Credits to Vhyrro for these tips here ]]] <--
---- Load after vim is fully loaded
-vim.opt.termguicolors = true
-vim.cmd [[
-	syntax enable
-	colorscheme xshado
-]]
-
 require('plugins')
 require('config')
 require('binds')
 require('lsp_config')
 
--- vim.defer_fn(function()
 vim.opt.shadafile = ""
+vim.opt.termguicolors = true
 vim.cmd [[
 	rshada!
 	doautocmd BufRead
 	filetype on
 	filetype plugin indent on
+	syntax enable
+	colorscheme xshado
 ]]
 
 vim.defer_fn(function()
@@ -57,9 +44,7 @@ vim.defer_fn(function()
 		PackerLoad lightline.vim
 		PackerLoad nvim-treesitter
 		lua require'colorizer'.setup()
-		colorscheme xshado
 	]]
 end, 15)
--- end, 0)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]

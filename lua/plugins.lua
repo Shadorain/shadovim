@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
 	}
 
     -- [[ Utility ]]
+    use { 'nvim-lua/plenary.nvim' }       --- general utilities
     use { 'MattesGroeger/vim-bookmarks' } --- bookmarks
     use { 'tpope/vim-commentary' }        --- commenting
     use { 'voldikss/vim-floaterm' }       --- Terminal
@@ -48,7 +49,6 @@ return require('packer').startup(function(use)
 
     -- [[ Git integration ]]
     use { 'nvim-lua/popup.nvim' }
-    use { 'nvim-lua/plenary.nvim' } --- General Utilities
     -- GitSigns {{{
     use { 'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
@@ -125,20 +125,20 @@ return require('packer').startup(function(use)
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-c>"] = cmp.mapping.close(),
                     ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
-                    ['<Tab>'] = function()
-                      if vim.fn.pumvisible() == 1 then
-                          cmp.mapping.select_next_item()
-                      elseif luasnip.expand_or_jumpable() then
-                          vim.cmd('<Plug>luasnip-expand-or-jump')
-                      end
-                    end,
-                    ['<S-Tab>'] = function(fallback)
-                      if vim.fn.pumvisible() == 1 then
-                          cmp.mapping.select_prev_item()
-                      elseif luasnip.expand_or_jumpable() then
-                          vim.cmd('<Plug>luasnip-jump-prev')
-                      end
-                    end,
+                    -- ['<Tab>'] = function()
+                    --   if vim.fn.pumvisible() == 1 then
+                    --       cmp.mapping.select_next_item()
+                    --   -- elseif luasnip.expand_or_jumpable() then
+                    --   --     vim.cmd('<Plug>luasnip-expand-or-jump')
+                    --   end
+                    -- end,
+                    -- ['<S-Tab>'] = function(fallback)
+                    --   if vim.fn.pumvisible() == 1 then
+                    --       cmp.mapping.select_prev_item()
+                    --   -- elseif luasnip.expand_or_jumpable() then
+                    --   --     vim.cmd('<Plug>luasnip-jump-prev')
+                    --   end
+                    -- end,
                 },
                 sources = {
                     { name = "luasnip"  }, { name = "nvim_lua" },
@@ -200,7 +200,7 @@ return require('packer').startup(function(use)
     --- [[ Treesitter ]] {{{
     use { 'nvim-treesitter/nvim-treesitter', --- treesitter
         run = ':TSUpdate',
-        after = 'impatient.nvim',
+        -- after = 'impatient.nvim',
         config = function()
             local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 			parser_configs.markdown = {
