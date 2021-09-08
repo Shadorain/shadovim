@@ -33,7 +33,7 @@ vim.cmd [[
 	filetype on
 	filetype plugin indent on
 	syntax enable
-	colorscheme xshado
+	colorscheme shado
 ]]
 
 vim.defer_fn(function()
