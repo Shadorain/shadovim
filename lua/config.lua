@@ -189,18 +189,19 @@ vim.g.startify_lists = {
 }
 
 vim.g.startify_bookmarks = {
-    { nv = '~/.config/nvim/init.lua'          },
-    { np = '~/.config/nvim/lua/plugins.lua'   },
-    { nc = '~/.config/nvim/lua/config.lua'    },
-    { nk = '~/.config/nvim/lua/binds.lua'     },
-    { ns = '~/.config/nvim/colors/shado.vim'  },
-    { nx = '~/.config/nvim/colors/xshado.vim' },
-    { x  = '~/.xmonad/xmonad.hs'              },
-    { p  = '~/.config/shadobar/config-xmonad' },
-    { c  = '~/.config/picom.conf'             },
-    { za = '~/.zsh_aliases'                   },
-    { zc = '~/.zshrc'                         },
-    { ze = '~/.zshenv'                        },
+    { nv = '~/.config/nvim/init.lua'           },
+    { np = '~/.config/nvim/lua/plugins.lua'    },
+    { nc = '~/.config/nvim/lua/config.lua'     },
+    { nk = '~/.config/nvim/lua/binds.lua'      },
+    { nl = '~/.config/nvim/lua/lsp_config.lua' },
+    { ns = '~/.config/nvim/colors/shado.vim'   },
+    { nx = '~/.config/nvim/colors/xshado.vim'  },
+    { x  = '~/.xmonad/xmonad.hs'               },
+    { p  = '~/.config/shadobar/config-xmonad'  },
+    { c  = '~/.config/picom.conf'              },
+    { za = '~/.zsh_aliases'                    },
+    { zc = '~/.zshrc'                          },
+    { ze = '~/.zshenv'                         },
 }
 
 vim.g.startify_custom_header = vim.split([[ 
@@ -226,10 +227,6 @@ vim.g.beacon_minimal_jump = 2
 vim.g.beacon_size = 30
 vim.g.beacon_shrink = 1
 vim.g.beacon_timeout = 1000
-
-vim.cmd [[
-    hi Beacon guibg=#bd93f9
-]]
 --- }}}
 --- Rust-tools {{{
 local opts = {
