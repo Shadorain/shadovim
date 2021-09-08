@@ -89,7 +89,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({border="rounded", focusable=false})]]
+vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="rounded", focusable=false})]]
 -- }}}
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
