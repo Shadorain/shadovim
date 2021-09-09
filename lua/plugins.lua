@@ -288,10 +288,10 @@ return require('packer').startup(function(use)
     				persist_queries = false, -- Whether the query persists across vim sessions
     				keybindings = {
       					toggle_query_editor = 'o',
-      					toggle_hl_groups = 'i',
+      					toggle_hl_groups = 'I',
+      					toggle_language_display = 'i',
       					toggle_injected_languages = 't',
       					toggle_anonymous_nodes = 'a',
-      					toggle_language_display = 'I',
       					focus_language = 'f',
       					unfocus_language = 'F',
       					update = 'R',
@@ -310,7 +310,6 @@ return require('packer').startup(function(use)
 		requires = { { 'Olical/aniseed', after = 'nvim-treesitter' } },
 		after = 'nvim-treesitter',
 	}
-	use { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' }
 	use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
 	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
     use { 'windwp/nvim-autopairs',

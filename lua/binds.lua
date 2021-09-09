@@ -129,6 +129,7 @@ cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- }}}
 --- Plugins {{{
 map('n', '<leader>G', ':Goyo<CR>')
+map('n', '<leader>th', ':TSHighlightCapturesUnderCursor<CR>')
 ---- Floaterm {{{
 map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
 map('t', '<leader>bm', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true })

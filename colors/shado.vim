@@ -91,7 +91,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi Delimiter guifg=#bc6bd0 guibg=NONE
 
   " Function "
-  hi Identifier guifg=#cd9ad9 guibg=NONE
+  hi Identifier guifg=#b488bf guibg=NONE
   hi Function guifg=#e086e0 guibg=NONE
 
   " Statements "
@@ -104,19 +104,19 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi Keyword guifg=#ff7ab2 guibg=NONE gui=bold
   
   " Constant "
-  hi Constant guifg=#de286e guibg=NONE
+  hi Constant guifg=#8897F4 guibg=NONE
   hi Character guifg=#eba4e9 guibg=NONE
   hi Float guifg=#f72d7c guibg=NONE
   hi Number guifg=#de286e guibg=NONE
   " hi String guifg=#bd93f9 guibg=NONE
-  hi String guifg=#6050dc guibg=NONE
+  hi String guifg=#8677d9 guibg=NONE
   hi StringDelimiter guifg=#bd93f9 guibg=NONE
   hi Boolean guifg=#6875ed guibg=NONE
 
   " PreProc "
   hi PreProc guifg=#849be0 guibg=NONE
   hi Define guifg=#6a5acd guibg=NONE
-  hi Include guifg=#6a5acd guibg=NONE
+  hi Include guifg=#8677d9 guibg=NONE
   hi PreCondit guifg=#ab506e guibg=NONE
   hi Macro guifg=#6a5acd guibg=NONE
 
@@ -150,6 +150,12 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   hi NormalFloat guibg=NONE
   hi link FloatBorder Directory
+
+  " Treesitter
+  hi link TSInclude Define
+  hi TSField guifg=#E9729D guibg=NONE
+  hi link TSVariable Identifier
+  hi link TSParameter Pmenu
 
   " LSP
   hi link LspDiagnosticsSignError Error
