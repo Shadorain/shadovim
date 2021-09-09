@@ -142,8 +142,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi SpellRare guifg=NONE guibg=NONE gui=undercurl
 
   " hi Pmenu guifg=#eed6ee guibg=NONE blend=0
-  " hi Pmenu guifg=#7887ff guibg=NONE blend=0
-  hi Pmenu guifg=#9ca7ff guibg=NONE blend=0
+  hi Pmenu guifg=#8677d9 guibg=NONE blend=0
   hi PmenuSbar guifg=#a883a8 guibg=NONE blend=0
   hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline,standout blend=0
   hi PmenuThumb guifg=#eed6ee guibg=NONE blend=0
@@ -153,9 +152,9 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   " Treesitter
   hi link TSInclude Define
-  hi TSField guifg=#E9729D guibg=NONE
   hi link TSVariable Identifier
-  hi link TSParameter Pmenu
+  hi TSField guifg=#E9729D guibg=NONE
+  hi TSParameter guifg=#9ca7ff guibg=NONE
 
   " LSP
   hi link LspDiagnosticsSignError Error
