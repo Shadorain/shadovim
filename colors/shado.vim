@@ -10,7 +10,7 @@
 set background=dark
 hi clear
 let s:t_Co = exists('&t_Co') && !empty(&t_Co) && &t_Co > 1 ? &t_Co : 2
-let g:colors_name = 'xshado'
+let g:colors_name = 'shado'
 
 " 16 Bit colors
 let g:terminal_color_0 = '#140a1d'
@@ -32,8 +32,10 @@ let g:terminal_color_14 = '#F18FB0'
 let g:terminal_color_15 = '#f1c4e0'
 
 " Transparent background
-au ColorScheme * hi Normal ctermbg=NONE guibg=NONE
-highlight SignColumn guibg=NONE
+au ColorScheme * hi Normal ctermbg=NONE guibg=#111119
+hi SignColumn guibg=#111119
+hi LineNr guifg=#a1a1dd guibg=#111119
+hi CursorLineNr guifg=#de286e guibg=#111119
 
 if (has('termguicolors') && &termguicolors) || has('gui_running')
   let g:terminal_ansi_colors = ['#140a1d', '#B52A5B', '#FF4971', '#8897F4',
@@ -44,8 +46,6 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi Cursor guifg=#dfb7e8 guibg=#6161b3 guisp=#6161b3
   hi CursorLine guibg=#1B1B29 guisp=#6161b3
   hi CursorColumn guibg=#1B1B29 guisp=#6161b3
-  hi LineNr guifg=#a1a1dd guibg=NONE
-  hi CursorLineNr guifg=#de286e guibg=NONE
 
   hi Search guifg=#8be9fd guibg=NONE gui=bold  "#302b30
   hi IncSearch guifg=#8be9fd guibg=NONE guisp=#8897F4 gui=bold
@@ -155,6 +155,8 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link TSVariable Identifier
   hi TSField guifg=#E9729D guibg=NONE
   hi TSParameter guifg=#9ca7ff guibg=NONE
+  hi link TSWarning WarningMsg
+  hi link TSDanger Error
 
   " LSP
   hi link LspDiagnosticsSignError Error

@@ -106,6 +106,9 @@ map('n', '<leader>r', ':nohl<CR>:redraw!<CR>')
 -- Open
 map('n', '<leader>S', ':Startify<CR>') -- Startify
 map('n', '<leader>T', ':tabnew<CR>')   -- New tab
+
+-- Transparent Button
+map('n', '<leader>i', ':TransparentToggle<CR>', { noremap = true, silent = true }) 
 --- }}}
 --- Buffers {{{
 map('n', '<leader>bl', ':ls<CR>', { noremap = true, silent = true })

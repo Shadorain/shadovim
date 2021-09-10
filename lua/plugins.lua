@@ -113,6 +113,12 @@ return require('packer').startup(function(use)
     use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
     use { 'hrsh7th/nvim-cmp',       --- Autocompletion
         config = function()
+            local has_words_before = function()
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+            end
+
+            local luasnip = require('luasnip')
             local cmp = require('cmp')
             cmp.setup {
                 preselect = cmp.PreselectMode.None,
@@ -125,6 +131,30 @@ return require('packer').startup(function(use)
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-c>"] = cmp.mapping.close(),
                     ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if vim.fn.pumvisible() == 1 then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n', true)
+                        elseif has_words_before() and luasnip.expand_or_jumpable() then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
+                        else fallback() end
+                    end, { 'i', 's' }),
+                    ['<S-Tab>'] = cmp.mapping(function()
+                        if vim.fn.pumvisible() == 1 then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n', true)
+                        elseif luasnip.jumpable(-1) then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
+                        end
+                    end, { 'i', 's' }),
+                    ['<C-l>'] = cmp.mapping(function()
+                        if has_words_before() and luasnip.expand_or_jumpable() then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
+                        else fallback() end
+                    end, { 'i', 's' }),
+                    ['<C-h>'] = cmp.mapping(function()
+                        if luasnip.jumpable(-1) then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
+                        else fallback() end
+                    end, { 'i', 's' }),
                 },
                 documentation = {
                     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
@@ -207,7 +237,7 @@ return require('packer').startup(function(use)
 				    enable = true,
 				    extended_mode = true,
 				    max_file_lines = 1000,
-				    colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#f1c4e0' },  
+				    colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },  
 				},
 				highlight = { enable = true },
 				incremental_selection = {
@@ -318,10 +348,30 @@ return require('packer').startup(function(use)
 			require('nvim-autopairs.completion.cmp').setup({
   				map_cr = true, map_complete = true,
 			})
+			-- local npairs = require'nvim-autopairs'
+            -- local Rule   = require'nvim-autopairs.rule'
+            -- npairs.add_rules {
+              -- Rule(' ', ' ') :with_pair(function (opts)
+                  -- local pair = opts.line:sub(opts.col - 1, opts.col)
+                  -- return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+                -- end),
+              -- Rule('( ', ' )') :with_pair(function() return false end)
+                  -- :with_move(function(opts)
+                      -- return opts.prev_char:match('.%)') ~= nil
+                  -- end) :use_key(')'),
+              -- Rule('{ ', ' }') :with_pair(function() return false end)
+                  -- :with_move(function(opts)
+                      -- return opts.prev_char:match('.%}') ~= nil
+                  -- end) :use_key('}'),
+              -- Rule('[ ', ' ]') :with_pair(function() return false end)
+                  -- :with_move(function(opts)
+                      -- return opts.prev_char:match('.%]') ~= nil
+                  -- end) :use_key(']')
+            -- }
 		end,
         break_line_filetype = nil,
         pairs_map = {
-            ["'"] = "'",
+            ["'"] = ">",
             ['"'] = '"',
             ['('] = ')',
             ['['] = ']',
@@ -347,6 +397,13 @@ return require('packer').startup(function(use)
     use { 'itchyny/lightline.vim' }             --- Statusbar
     use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
     use { 'junegunn/goyo.vim' }                 --- focus
+    use { 'xiyaowong/nvim-transparent',         --- transparency
+        require("transparent").setup({
+            enable = true,
+            extra_groups = {},
+            exclude = {},
+        })
+    }
 
     -- [[ Finders ]]
     use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc

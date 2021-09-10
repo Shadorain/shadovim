@@ -27,6 +27,7 @@ require('lsp_config')
 
 vim.opt.shadafile = ""
 vim.opt.termguicolors = true
+vim.g.colors_name = "shado"
 vim.cmd [[
 	rshada!
 	doautocmd BufRead

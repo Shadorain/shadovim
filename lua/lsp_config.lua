@@ -133,7 +133,28 @@ local on_attach = function(client, bufnr)
 
     vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false })
     vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false })
-    require('lsp_signature').on_attach({ hint_prefix = " " })
+    require "lsp_signature".on_attach({
+        bind = true,
+        floating_window = true,
+        floating_window_above_cur_line = true,
+        fix_pos = false,
+        hint_enable = true,
+        hint_prefix = " ",
+        hint_scheme = "String",
+        use_lspsaga = false,
+        hi_parameter = "ModeMsg",
+        max_height = 12,
+        max_width = 120,
+        transparency = 80,
+        handler_opts = { border = "rounded" },
+        trigger_on_newline = false,
+        debug = false,
+        padding = '',
+        shadow_blend = 36,
+        shadow_guibg = 'Black',
+        timer_interval = 200,
+        toggle_key = '<M-f>',
+    })
     -- Lspkind {{{
     require('lspkind').init({
         with_text = false,
@@ -170,9 +191,9 @@ local on_attach = function(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(
         [[
-            hi LspReferenceRead  gui=bold guibg=#41495A
-            hi LspReferenceText  gui=bold guibg=#41495A
-            hi LspReferenceWrite gui=bold guibg=#41495A
+            hi LspReferenceRead  gui=bold guibg=#1b1b29 blend=10
+            hi LspReferenceText  gui=bold guibg=#1b1b29 blend=10
+            hi LspReferenceWrite gui=bold guibg=#1b1b29 blend=10
             augroup lsp_document_highlight
             autocmd! * <buffer>
             autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
