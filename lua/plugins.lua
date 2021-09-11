@@ -148,12 +148,16 @@ return require('packer').startup(function(use)
                     ['<C-l>'] = cmp.mapping(function()
                         if has_words_before() and luasnip.expand_or_jumpable() then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
-                        else fallback() end
+                        else
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, true, true), '', true)
+                        end
                     end, { 'i', 's' }),
                     ['<C-h>'] = cmp.mapping(function()
                         if luasnip.jumpable(-1) then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
-                        else fallback() end
+                        else
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Left>', true, true, true), '', true)
+                        end
                     end, { 'i', 's' }),
                 },
                 documentation = {
@@ -403,27 +407,6 @@ return require('packer').startup(function(use)
             extra_groups = {},
             exclude = {},
         })
-    }
-    use {'lukas-reineke/indent-blankline.nvim', event="BufReadPost",
-	    config = function()
-            vim.cmd[[hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=nocombine]]
-            vim.cmd[[hi IndentBlanklineIndent2 guifg=#1b1b29 guibg=NONE blend=nocombine]]
-            vim.cmd[[hi IndentBlanklineIndent3 guifg=#1b1b29 guibg=NONE blend=nocombine]]
-            vim.cmd[[hi IndentBlanklineIndent4 guifg=#1b1b29 guibg=NONE blend=nocombine]]
-            vim.cmd[[hi IndentBlanklineIndent5 guifg=#1b1b29 guibg=NONE blend=nocombine]]
-            vim.cmd[[hi IndentBlanklineIndent6 guifg=#1b1b29 guibg=NONE blend=nocombine]]
-		    vim.g.indentLine_enabled = 1
-		    vim.g.indent_blankline_char = "▏"
-		    vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer", "norg" }
-		    vim.g.indent_blankline_buftype_exclude =  { "terminal", "norg", "TelescopePrompt", "Startify" }
-		    require('indent_blankline').setup {
-	            char_highlight_list = {
-	                "IndentBlanklineIndent1", "IndentBlanklineIndent2",
-                    "IndentBlanklineIndent3", "IndentBlanklineIndent4",
-                    "IndentBlanklineIndent5", "IndentBlanklineIndent6",
-	            },
-		    }
-	    end
     }
 
     -- [[ Finders ]]
