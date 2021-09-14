@@ -205,7 +205,7 @@ end
 -- }}}
 -- Lsp Init {{{
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'rust_analyzer' }
+local servers = { 'clangd', 'rust_analyzer', 'vuels', 'cssls', 'html' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
