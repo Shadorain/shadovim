@@ -122,10 +122,12 @@ return require('packer').startup(function(use)
             local cmp = require('cmp')
             cmp.setup {
                 preselect = cmp.PreselectMode.None,
+                completion = { completeopt = "menuone,noselect,noinsert" },
                 snippet = { expand = function(args) require('luasnip').lsp_expand(args.body) end },
                 mapping = {
                     ["<C-j>"] = cmp.mapping.select_prev_item(),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ['<C-m>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-u>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
@@ -385,7 +387,7 @@ return require('packer').startup(function(use)
         },
         disable_filetype = { 'TelescopePrompt' },
         -- ignore alphanumeric, operators, quote, curly brace, and square bracket
-        ignored_next_char = "[%w%.%+%-%=%/%,\"'{}%[%]]",
+        -- ignored_next_char = "[%w%.%+%-%=%/%,\"'{}%[%]]",
 		after = 'nvim-treesitter'
 	}
     --- }}}

@@ -155,6 +155,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link TSVariable Identifier
   hi TSField guifg=#E9729D guibg=NONE
   hi TSParameter guifg=#9ca7ff guibg=NONE
+  hi link TSPunctSpecial Include
   hi link TSWarning WarningMsg
   hi link TSDanger Error
 

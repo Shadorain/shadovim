@@ -64,7 +64,7 @@ vim.opt.undodir = "/home/shadow/.local/cache/nvim/undo/"
 vim.opt.backupdir= "/home/shadow/.local/cache/nvim/backups/"
 
 -- Completion
-vim.opt.completeopt = "menuone,noinsert,noselect"
+-- vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.opt.pumwidth = 15
 vim.opt.pumheight = 7
 vim.opt.pumblend = 20
