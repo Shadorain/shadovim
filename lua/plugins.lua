@@ -238,7 +238,7 @@ return require('packer').startup(function(use)
     			filetype = "markdown",
 			}
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown", "css", "vue", "html" },
+				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown", "css", "vue", "html", "tsx", "typescript" },
 				rainbow = {
 				    enable = true,
 				    extended_mode = true,
