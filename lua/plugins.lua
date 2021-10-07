@@ -379,13 +379,6 @@ return require('packer').startup(function(use)
         run = ':TSUpdate',
         config = function()
             local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-			parser_configs.markdown = {
-				install_info = {
-        			url = "https://github.com/ikatyang/tree-sitter-markdown",
-        			files = {"src/parser.c", "src/scanner.cc"}
-    			},
-    			filetype = "markdown",
-			}
 			parser_configs.norg = {
                 install_info = {
                     url = "https://github.com/nvim-neorg/tree-sitter-norg",
@@ -394,7 +387,7 @@ return require('packer').startup(function(use)
                 },
             }
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown", "css", "vue", "html", "tsx", "typescript", "norg" },
+				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg" },
 				rainbow = {
 				    enable = true,
 				    extended_mode = true,
