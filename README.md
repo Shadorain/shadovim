@@ -95,4 +95,4 @@ You now have a fully setup Shadovim configuration! With shadotheme and
 a bunch of other cool perks under your sleeves! To see all the power it has
 there is no better way that to read the source, it is all in there!
 
-I hope you enjoy!
+I hope you enjoy! God bless 😊
