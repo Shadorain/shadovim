@@ -44,14 +44,24 @@ map('n', 'Y', 'y$')
 
 -- Reverse Join ('J')
 map('n', '<C-j>', 'ddkPJ')
+
 ---- Telescope {{{
 map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>')
-map('n', '<leader>fr', '<esc><cmd>Telescope find_files<cr>')
 map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>')
 map('i', '<C-f>', '<esc><cmd>Telescope live_grep<cr>')
 map('n', '<leader>bv', '<esc><cmd>Telescope buffers<cr>')
 map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>')
 map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>')
+
+map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>')
+map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>')
+map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>')
+map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>')
+map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>')
+map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>')
+map('n', '<leader>thl', '<cmd>Telescope highlights<cr>')
+map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>')
+map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>')
 ---- }}}
 --- }}}
 --- Splits {{{
@@ -109,13 +119,16 @@ map('n', '<leader>T', ':tabnew<CR>')   -- New tab
 
 -- Transparent Button
 map('n', '<leader>i', ':TransparentToggle<CR>', { noremap = true, silent = true }) 
+
+-- File Browser
+map('n', '<leader>fr', ':lua require("mod").file_browser()<CR>', { noremap = true, silent = true }) 
 --- }}}
 --- Buffers {{{
-map('n', '<leader>bl', ':ls<CR>', { noremap = true, silent = true })
-map('n', '<leader>bb', ':bnext<CR>', { noremap = true, silent = true })
-map('n', '<leader>bn', ':bprevious<CR>', { noremap = true, silent = true })
--- map('n', '<leader>bk', ':bp \\|bd # <CR>', { noremap = true, silent = true })
-map('n', '<leader>bk', ':bd<CR>', { noremap = true, silent = true })
+map('n', '<leader>bl', ':ls<CR>',  { noremap = true, silent = true })
+map('n', '<leader>bb', ':bn<CR>',  { noremap = true, silent = true })
+map('n', '<leader>bn', ':bp<CR>',  { noremap = true, silent = true })
+map('n', '<leader>bk', ':BD<CR>',  { noremap = true, silent = true }) -- delete from list
+map('n', '<leader>bu', ':BUN<CR>', { noremap = true, silent = true }) -- unload mem
 map('n', '<leader>b1', ':b 1<CR>', { noremap = true, silent = true })
 map('n', '<leader>b2', ':b 2<CR>', { noremap = true, silent = true })
 map('n', '<leader>b3', ':b 3<CR>', { noremap = true, silent = true })
@@ -128,11 +141,10 @@ map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
 
 -- Buffer menu
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
---vim.opt.wcm = '<C-Z>'
 --- }}}
 --- Plugins {{{
 map('n', '<leader>G', ':Goyo<CR>')
-map('n', '<leader>th', ':TSHighlightCapturesUnderCursor<CR>')
+map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
 ---- Floaterm {{{
 map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
 map('t', '<leader>bm', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true })

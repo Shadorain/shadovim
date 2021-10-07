@@ -158,6 +158,23 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link TSPunctSpecial Include
   hi link TSWarning WarningMsg
   hi link TSDanger Error
+  hi link TSError Error
+  " Treesitter Markdown
+  hi htmlH1 guifg=#bd93f9
+  hi htmlH2 guifg=#8897F4
+  hi htmlH3 guifg=#F18FB0
+  hi htmlH4 guifg=#E9729D
+  hi htmlH5 guifg=#FF4971
+  hi htmlH6 guifg=#B52A5B
+  hi mkdHeading guifg=#8677d9
+  " colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },  
+  hi mkdListItem guifg=#c081fa
+  hi mkdListItemLine guifg=#b488bf
+  hi mkdNonListItemBlock guifg=#eba4e9
+  hi mkdItalic guifg=#b488bf gui=bold
+  hi htmlItalic gui=bold
+  hi link mkdCode Comment
+  hi link mkdCodeDelimiter htmlH5
 
   " LSP
   hi link LspDiagnosticsSignError Error

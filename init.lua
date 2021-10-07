@@ -45,6 +45,7 @@ vim.defer_fn(function()
 		PackerLoad lightline.vim
 		PackerLoad nvim-treesitter
 		lua require'colorizer'.setup()
+		colorscheme shado
 	]]
 end, 15)
 --- }}}

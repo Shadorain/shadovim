@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
 	}
 
     -- [[ Utility ]]
+    -- use { 'tamago324/lir.nvim' }           --- file explorer
     use { 'nvim-lua/plenary.nvim' }        --- general utilities
     use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
     use { 'tpope/vim-commentary' }         --- commenting
@@ -46,6 +47,154 @@ return require('packer').startup(function(use)
     use { 'rafamadriz/friendly-snippets' } --- snippets
     use { 'DanilaMihailov/beacon.nvim' }   --- cursor beacon
     use { 'mfussenegger/nvim-dap' }        --- debugging
+    use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
+    -- use { 'cohama/lexima.vim' }         --- autoclosing (till autopairs gets any better)
+    use { 'jiangmiao/auto-pairs',          --- autoclosing (till autopairs gets any better)
+        config = function()
+            vim.cmd [[
+              let g:AutoPairsFlyMode = 1
+              let g:AutoPairsShortcutBackInsert = '<M-C-v>'
+              let g:AutoPairsShortcutFastWrap = '<M-S-n>'
+              let g:AutoPairsMapCh = 0
+              let g:AutoPairsMoveCharacter = "()[]{}\"'"
+              au FileType rust let b:AutoPairs = AutoPairsDefine({'\w\zs<': '>', '\W\zs|': '|', '/*': '*/', "\W\zs\'": ''})
+            ]]
+        end
+    }
+    -- Neorg {{{
+    use { 'nvim-neorg/neorg', branch = 'unstable',
+        config = function()
+			require('neorg').setup {
+				load = {
+					["core.defaults"] = {}, -- Load all the defaults
+					["core.norg.concealer"] = {}, -- Allows the use of icons
+					["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+					["core.integrations.treesitter"] = {
+                        config = {
+                            highlights = {
+                                Unordered = {
+                                    List = {
+                                        ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
+                                        ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
+                                        ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
+                                    },
+                                    Link = {
+                                        ["1"] = "+htmlh1", ["2"] = "+htmlh2",
+                                        ["3"] = "+htmlh3", ["4"] = "+htmlh4",
+                                        ["5"] = "+htmlh5", ["6"] = "+htmlh6",
+                                    },
+                                },
+                                Ordered = {
+                                    List = {
+                                        ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
+                                        ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
+                                        ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
+                                    },
+                                    Link = {
+                                        ["1"] = "+htmlh1", ["2"] = "+htmlh2",
+                                        ["3"] = "+htmlh3", ["4"] = "+htmlh4",
+                                        ["5"] = "+htmlh5", ["6"] = "+htmlh6",
+                                    },
+                                },
+                                Quote = {
+                                    ["1"] = { [""] = "+htmlH1", Content = "+htmlH1" },
+                                    ["2"] = { [""] = "+htmlH2", Content = "+htmlH2" },
+                                    ["3"] = { [""] = "+htmlH3", Content = "+htmlH3" },
+                                    ["4"] = { [""] = "+htmlH4", Content = "+htmlH4" },
+                                    ["5"] = { [""] = "+htmlH5", Content = "+htmlH5" },
+                                    ["6"] = { [""] = "+htmlH6", Content = "+htmlH6" },
+                                },
+                                Definition = {
+                                    [""] = "+Exception",
+                                    End = "+Exception",
+                                    Title = "+TSStrong",
+                                    -- TODO: figure out odd highlighting of ranged tag when using TSNone
+                                    Content = "+TSEmphasis",
+                                },
+                                TodoItem = {
+                                    ["1"] = {
+                                        [""] = "+NeorgUnorderedList1",
+                                        Undone = "+StringDelimiter",
+                                        Pending = "+TSPunctDelimiter",
+                                        Done = "+TSString",
+                                    },
+                                    ["2"] = {
+                                        [""] = "+NeorgUnorderedList2",
+                                        Undone = "+StringDelimiter",
+                                        Pending = "+TSPunctDelimiter",
+                                        Done = "+TSString",
+                                    },
+                                    ["3"] = {
+                                        [""] = "+NeorgUnorderedList3",
+                                        Undone = "+StringDelimiter",
+                                        Pending = "+TSPunctDelimiter",
+                                        Done = "+TSString",
+                                    },
+                                    ["4"] = {
+                                        [""] = "+NeorgUnorderedList4",
+                                        Undone = "+StringDelimiter",
+                                        Pending = "+TSPunctDelimiter",
+                                        Done = "+TSString",
+                                    },
+                                    ["5"] = {
+                                        [""] = "+NeorgUnorderedList5",
+                                        Undone = "+StringDelimiter",
+                                        Pending = "+TSPunctDelimiter",
+                                        Done = "+TSString",
+                                    },
+                                    ["6"] = {
+                                        [""] = "+NeorgUnorderedList6",
+                                        Undone = "+StringDelimiter",
+                                        Pending = "+TSPunctDelimiter",
+                                        Done = "+TSString",
+                                    },
+                                },
+                                EscapeSequence = "+TSType",
+                                StrongParagraphDelimiter = "+Comment",
+                                WeakParagraphDelimiter = "+Comment",
+                                HorizontalLine = "+htmlH4",
+                                Marker = { [""] = "+Structure", Title = "+TSStrong" },
+                                Tag = {
+                                    Begin = "+TSKeyword",
+                                    ["End"] = "+TSKeyword",
+                                    Name = { [""] = "+Normal", Word = "+TSKeyword" },
+                                    Parameter = "+TSType",
+                                    Content = "+Normal",
+                                },
+                                Insertion = {
+                                    [""] = "cterm=bold gui=bold",
+                                    Prefix = "+TSPunctDelimiter",
+                                    Variable = {
+                                        [""] = "+TSString",
+                                        Value = "+TSPunctDelimiter",
+                                    },
+                                    Item = "+TSNamespace",
+                                    Parameters = "+TSComment",
+                                },
+                                EscapeSequence = "+TSType",
+                            }
+                        }
+                    },
+					["core.norg.dirman"] = { -- Manage Neorg directories
+						config = {
+							workspaces = {
+								main   = "~/dev/neorg",
+								work   = "~/dev/neorg/work",
+								school = "~/dev/neorg/school",
+							},
+							autochdir = false,
+							autodetect = false
+						}
+					},
+					-- ["core.integrations.telescope"] = {},
+					["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
+				},
+			    logger = { level = "warn" },
+			}
+		end,
+		after = "nvim-treesitter"
+	}
+	-- }}}
 
     -- [[ Git integration ]]
     use { 'nvim-lua/popup.nvim' }
@@ -170,7 +319,7 @@ return require('packer').startup(function(use)
                     { name = "luasnip"  }, { name = "nvim_lua" },
                     { name = "nvim_lsp" }, { name = "calc" },
                     { name = "path"     }, { name = "buffer" },
-                    { name = "cmp_tabnine" },
+                    { name = "neorg"    }, { name = "cmp_tabnine" },
                 },
                 formatting = {
                     format = function(entry, vim_item)
@@ -237,8 +386,15 @@ return require('packer').startup(function(use)
     			},
     			filetype = "markdown",
 			}
+			parser_configs.norg = {
+                install_info = {
+                    url = "https://github.com/nvim-neorg/tree-sitter-norg",
+                    files = { "src/parser.c", "src/scanner.cc" },
+                    branch = "main"
+                },
+            }
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown", "css", "vue", "html", "tsx", "typescript" },
+				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "markdown", "css", "vue", "html", "tsx", "typescript", "norg" },
 				rainbow = {
 				    enable = true,
 				    extended_mode = true,
@@ -265,7 +421,7 @@ return require('packer').startup(function(use)
         			enable = true,
         			keymaps = { [','] = 'textsubjects-smart', }
     			},
-				autopairs = { enable = true },
+				-- autopairs = { enable = true },
 				textobjects = {
     				select = {
       	  	  	  	  	enable = true,
@@ -348,12 +504,12 @@ return require('packer').startup(function(use)
 	}
 	use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
 	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-    use { 'windwp/nvim-autopairs',
-		config = function()
-			require('nvim-autopairs').setup { check_ts = true }
-			require('nvim-autopairs.completion.cmp').setup({
-  				map_cr = true, map_complete = true,
-			})
+    -- use { 'windwp/nvim-autopairs',
+		-- config = function()
+			-- require('nvim-autopairs').setup { check_ts = true }
+			-- require('nvim-autopairs.completion.cmp').setup({
+  				-- map_cr = true, map_complete = true,
+			-- })
 			-- local npairs = require'nvim-autopairs'
             -- local Rule   = require'nvim-autopairs.rule'
             -- npairs.add_rules {
@@ -374,22 +530,22 @@ return require('packer').startup(function(use)
                       -- return opts.prev_char:match('.%]') ~= nil
                   -- end) :use_key(']')
             -- }
-		end,
-        break_line_filetype = nil,
-        pairs_map = {
-            ["'"] = ">",
-            ['"'] = '"',
-            ['('] = ')',
-            ['['] = ']',
-            ['{'] = '}',
-            ['`'] = '`',
-            ['<'] = '>',
-        },
-        disable_filetype = { 'TelescopePrompt' },
-        -- ignore alphanumeric, operators, quote, curly brace, and square bracket
-        -- ignored_next_char = "[%w%.%+%-%=%/%,\"'{}%[%]]",
-		after = 'nvim-treesitter'
-	}
+		-- end,
+        -- break_line_filetype = nil,
+        -- pairs_map = {
+        --     ["'"] = ">",
+        --     ['"'] = '"',
+        --     ['('] = ')',
+        --     ['['] = ']',
+        --     ['{'] = '}',
+        --     ['`'] = '`',
+        --     ['<'] = '>',
+        -- },
+        -- disable_filetype = { 'TelescopePrompt' },
+        -- -- ignore alphanumeric, operators, quote, curly brace, and square bracket
+        -- -- ignored_next_char = "[%w%.%+%-%=%/%,\"'{}%[%]]",
+		-- after = 'nvim-treesitter'
+	-- }
     --- }}}
     --- [[ Languages ]]
     use { 'sheerun/vim-polyglot' }     --- *

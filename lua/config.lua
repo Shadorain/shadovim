@@ -18,6 +18,9 @@ vim.cmd('set expandtab')
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
+cmd('au FileType norg set shiftwidth=2')
+cmd('au FileType norg set tabstop=2')
+cmd('au FileType norg set softtabstop=2')
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 vim.opt.autoindent = true
@@ -32,13 +35,17 @@ vim.opt.relativenumber = true
 vim.opt.path = '$PWD/**'
 vim.opt.cmdheight = 2
 vim.opt.showmode = false
-vim.opt.conceallevel = 0
+vim.opt.conceallevel = 2
 vim.opt.listchars = 'space:·'
 vim.opt.virtualedit = "block"
 vim.opt.mouse = 'a'
 vim.opt.mousefocus = true
 vim.opt.ruler = true
 vim.opt.inccommand = "split"
+
+-- Vim Spell
+cmd('au FileType markdown setlocal spell spelllang=en_us')
+cmd('au FileType norg setlocal spell spelllang=en_us')
 
 -- Folds
 vim.opt.foldenable = true
@@ -102,40 +109,73 @@ vim.g.floaterm_autoclose = 1
 vim.g.floaterm_title = 0
 --- }}}
 --- Telescope {{{
-require('telescope').setup{
-  defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--color=always',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
-    -- prompt_position = "bottom",
-    prompt_prefix = "❱ ",
-    selection_caret = "❱ ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "reset",
-    sorting_strategy = "descending",
-    layout_strategy = "horizontal",
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    color_devicons = true,
-    use_less = false,
-    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+---- Dont preview binary files
+local previewers = require('telescope.previewers')
+local Job = require('plenary.job')
+local new_maker = function(filepath, bufnr, opts)
+  filepath = vim.fn.expand(filepath)
+  Job:new({
+    command = 'file',
+    args = { '--mime-type', '-b', filepath },
+    on_exit = function(j)
+      local mime_type = vim.split(j:result()[1], '/')[1]
+      if mime_type == "text" then
+        previewers.buffer_previewer_maker(filepath, bufnr, opts)
+      else
+        -- maybe we want to write something to the buffer here
+        vim.schedule(function()
+          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { 'BINARY' })
+        end)
+      end
+    end
+  }):sync()
+end
 
-    -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-  }
+local actions = require('telescope.actions')
+require('telescope').setup{
+    defaults = {
+        buffer_previewer_maker = new_maker,
+        mappings = {
+            i = {
+                ["<esc>"] = actions.close,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-j>"] = actions.move_selection_next,
+            },
+        },
+        vimgrep_arguments = {
+          'rg', '--color=always', '--no-heading',
+          '--with-filename', '--line-number',
+          '--column', '--smart-case'
+        },
+        prompt_prefix = "❱ ",
+        selection_caret = "❱ ",
+        entry_prefix = "  ",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        sorting_strategy = "descending",
+        layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.8, height = 0.5,
+            preview_width = 0.6,
+            prompt_position = "bottom",
+        },
+        file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+        file_ignore_patterns = {},
+        generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+        border = {},
+        -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
+        results_title = '',
+        preview_title = '',
+        winblend = 30,
+        previewer = true,
+        color_devicons = true,
+        use_less = false,
+        set_env = { ['COLORTERM'] = 'truecolor' },
+        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    }
 }
 --- }}}
 --- Vim Bookmarks {{{
@@ -193,6 +233,7 @@ vim.g.startify_bookmarks = {
     { np = '~/.config/nvim/lua/plugins.lua'    },
     { nc = '~/.config/nvim/lua/config.lua'     },
     { nk = '~/.config/nvim/lua/binds.lua'      },
+    { nm = '~/.config/nvim/lua/mod.lua'      },
     { nl = '~/.config/nvim/lua/lsp_config.lua' },
     { ns = '~/.config/nvim/colors/shado.vim'   },
     { nx = '~/.config/nvim/colors/shado.vim'   },
@@ -262,6 +303,77 @@ local opts = {
 }
 require('rust-tools').setup(opts)
 --- }}}
+-- --- Lir {{{
+-- local actions = require'lir.actions'
+-- local mark_actions = require 'lir.mark.actions'
+-- local clipboard_actions = require'lir.clipboard.actions'
+
+-- require'lir'.setup {
+--     show_hidden_files = false,
+--     devicons_enable = true,
+--     mappings = {
+--         ['l']     = actions.edit,
+--         ['<C-s>'] = actions.split,
+--         ['<C-v>'] = actions.vsplit,
+--         ['<C-t>'] = actions.tabedit,
+
+--         ['h']     = actions.up,
+--         ['q']     = actions.quit,
+
+--         ['K']     = actions.mkdir,
+--         ['N']     = actions.newfile,
+--         ['R']     = actions.rename,
+--         ['@']     = actions.cd,
+--         ['Y']     = actions.yank_path,
+--         ['.']     = actions.toggle_show_hidden,
+--         ['D']     = actions.delete,
+
+--         ['J'] = function()
+--             mark_actions.toggle_mark()
+--             vim.cmd('normal! j')
+--         end,
+--         ['C'] = clipboard_actions.copy,
+--         ['X'] = clipboard_actions.cut,
+--         ['P'] = clipboard_actions.paste,
+--     },
+--     float = {
+--         winblend = 0,
+--         win_opts = function()
+--           local width = math.floor(vim.o.columns * 0.8)
+--           local height = math.floor(vim.o.lines * 0.8)
+--           return {
+--             border = require("lir.float.helper").make_border_opts({
+--               "╭", "─", "╮", "│", "╯", "─", "╰", "│",
+--             }, "TelescopeBorder"),
+--             width = width,
+--             height = height,
+--             row = 1,
+--             col = math.floor((vim.o.columns - width) / 2),
+--           }
+--         end,
+--     },
+--     hide_cursor = true,
+-- }
+
+-- require'nvim-web-devicons'.set_icon({
+--     lir_folder_icon = {
+--         icon = "",
+--         color = "#7ebae4",
+--         name = "LirFolderNode"
+--     }
+-- })
+
+-- -- use visual mode
+-- function _G.LirSettings()
+--     vim.api.nvim_buf_set_keymap(0, 'x', 'J', ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>', {noremap = true, silent = true})
+--     vim.api.nvim_echo({{vim.fn.expand('%:p'), 'Normal'}}, false, {})
+-- end
+
+-- vim.cmd [[augroup lir-settings]]
+-- vim.cmd [[  autocmd!]]
+-- vim.cmd [[  autocmd Filetype lir :lua LirSettings()]]
+-- vim.cmd [[augroup END]]
+-- --- }}}
 -- --- Neorg {{{
 -- require('neorg').setup {
 --   load = {
