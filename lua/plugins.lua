@@ -61,6 +61,27 @@ return require('packer').startup(function(use)
             ]]
         end
     }
+    use {'lukas-reineke/indent-blankline.nvim', event="Colorscheme",
+       config = function()
+            vim.cmd[[hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=10]]
+            vim.cmd[[hi IndentBlanklineIndent2 guifg=#1b1b29 guibg=NONE blend=10]]
+            vim.cmd[[hi IndentBlanklineIndent3 guifg=#1b1b29 guibg=NONE blend=10]]
+            vim.cmd[[hi IndentBlanklineIndent4 guifg=#1b1b29 guibg=NONE blend=10]]
+            vim.cmd[[hi IndentBlanklineIndent5 guifg=#1b1b29 guibg=NONE blend=10]]
+            vim.cmd[[hi IndentBlanklineIndent6 guifg=#1b1b29 guibg=NONE blend=10]]
+           vim.g.indentLine_enabled = 1
+           vim.g.indent_blankline_char = "▏"
+           vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer", "norg" }
+           vim.g.indent_blankline_buftype_exclude =  { "terminal", "norg", "TelescopePrompt", "Startify" }
+           require('indent_blankline').setup {
+               char_highlight_list = {
+                   "IndentBlanklineIndent1", "IndentBlanklineIndent2",
+                    "IndentBlanklineIndent3", "IndentBlanklineIndent4",
+                    "IndentBlanklineIndent5", "IndentBlanklineIndent6",
+               },
+           }
+       end
+    }
     -- Neorg {{{
     use { 'nvim-neorg/neorg', branch = 'unstable',
         config = function()
@@ -69,6 +90,7 @@ return require('packer').startup(function(use)
 					["core.defaults"] = {}, -- Load all the defaults
 					["core.norg.concealer"] = {}, -- Allows the use of icons
 					["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+					["core.gtd.base"] = { config = { workspace = "gtd" } },
 					["core.integrations.treesitter"] = {
                         config = {
                             highlights = {
