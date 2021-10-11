@@ -32,14 +32,14 @@ let g:terminal_color_14 = '#F18FB0'
 let g:terminal_color_15 = '#f1c4e0'
 
 " Transparent background
-au ColorScheme * hi Normal ctermbg=NONE guibg=NONE
-hi SignColumn guibg=NONE
-hi LineNr guifg=#a1a1dd guibg=NONE
-hi CursorLineNr guifg=#de286e guibg=NONE
-" au ColorScheme * hi Normal ctermbg=NONE guibg=#111119
-" hi SignColumn guibg=#111119
-" hi LineNr guifg=#a1a1dd guibg=#111119
-" hi CursorLineNr guifg=#de286e guibg=#111119
+" au ColorScheme * hi Normal ctermbg=NONE guibg=NONE
+" hi SignColumn guibg=NONE
+" hi LineNr guifg=#a1a1dd guibg=NONE
+" hi CursorLineNr guifg=#de286e guibg=NONE
+au ColorScheme * hi Normal ctermbg=NONE guibg=#111119
+hi SignColumn guibg=#111119
+hi LineNr guifg=#a1a1dd guibg=#111119
+hi CursorLineNr guifg=#de286e guibg=#111119
 
 if (has('termguicolors') && &termguicolors) || has('gui_running')
   let g:terminal_ansi_colors = ['#140a1d', '#B52A5B', '#FF4971', '#8897F4',
@@ -145,14 +145,13 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi SpellLocal guifg=NONE guibg=NONE gui=undercurl
   hi SpellRare guifg=NONE guibg=NONE gui=undercurl
 
-  " hi Pmenu guifg=#eed6ee guibg=NONE blend=0
-  hi Pmenu guifg=#8677d9 guibg=NONE blend=0
-  hi PmenuSbar guifg=#a883a8 guibg=NONE blend=0
-  hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline,standout blend=0
-  hi PmenuThumb guifg=#eed6ee guibg=NONE blend=0
+  hi Pmenu guifg=#8677d9 guibg=NONE
+  hi PmenuSbar guifg=#a883a8 guibg=NONE
+  hi PmenuSel guifg=#bd93f9 guibg=NONE gui=bold,underline
+  hi PmenuThumb guifg=NONE guibg=#1b1b29
 
   hi NormalFloat guibg=NONE
-  hi link FloatBorder Directory
+  hi FloatBorder guifg=#ff79c6
 
   " Treesitter
   hi link TSInclude Define
@@ -209,8 +208,16 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   " Telescope
   hi TelescopeBorder guifg=#bd93f9
 
+  " Nvim-Cmp
+  hi CmpItemAbbr guifg=#8677d9
+  hi CmpItemAbbrMatch guifg=#e086e0 gui=bold
+  hi CmpItemAbbrDeprecated guifg=#ac295
+  hi CmpItemAbbrMatchFuzzy guifg=#bd93f9
+  hi CmpItemKind guifg=#FF4971
+  hi CmpItemMenu guifg=#ff7ab2
+  
   " Beacon
-  hi Beacon guibg=#bd93f9
+  hi Beacon guibg=#1b1b29
 
   " Startify
   hi link StartifyBracket Delimiter

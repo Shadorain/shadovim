@@ -51,13 +51,6 @@ cmd('au FileType norg setlocal spell spelllang=en_us')
 vim.opt.foldenable = true
 vim.opt.foldmethod = 'marker'
 
--- Scroll margin
--- vim.opt.scrolloff = 4
-
--- Encoding
--- vim.opt.encoding = 'utf-8'
--- vim.opt.fileencoding = 'utf-8'
-
 -- Splits
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -70,11 +63,11 @@ vim.opt.undofile = true
 vim.opt.undodir = "/home/shadow/.local/cache/nvim/undo/"
 vim.opt.backupdir= "/home/shadow/.local/cache/nvim/backups/"
 
--- Completion
--- vim.opt.completeopt = "menuone,noinsert,noselect"
+-- Pumemu
 vim.opt.pumwidth = 15
 vim.opt.pumheight = 7
 vim.opt.pumblend = 20
+vim.opt.winblend = 20
 
 -- Update times
 vim.opt.updatetime = 150
@@ -88,18 +81,6 @@ cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions
 -- }}}
 -- [[ Plugin Settings ]] ---------------------------------------------------- ]]
 -- {{{
---- Ack {{{
-vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
-vim.g.ack_autoclose = 1
-vim.g.ack_use_cword_for_empty_search = 1
-
-cmd('cnoreabbrev Ack Ack!')
-
--- Navigate quickfix list
-vim.api.nvim_set_keymap('n', "<C-_>", "<esc>:Ack!<Space>", { noremap = true })
-vim.api.nvim_set_keymap('n', "[q", ":cprevious<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', "]q", ":cnext<CR>", { noremap = true, silent = true })
---- }}}
 --- Floaterm {{{
 vim.g.floaterm_autoinsert = 1
 vim.g.floaterm_width = 0.5
@@ -143,10 +124,12 @@ require('telescope').setup{
             },
         },
         vimgrep_arguments = {
-          'rg', '--color=always', '--no-heading',
+          'rg', '--color=never', '--no-heading',
           '--with-filename', '--line-number',
           '--column', '--smart-case'
         },
+        results_title = false,
+        preview_title = false,
         prompt_prefix = "❱ ",
         selection_caret = "❱ ",
         entry_prefix = "  ",
@@ -156,18 +139,14 @@ require('telescope').setup{
         layout_strategy = "horizontal",
         layout_config = {
             width = 0.8, height = 0.5,
-            preview_width = 0.6,
             prompt_position = "bottom",
         },
         file_sorter =  require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
         generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
         border = {},
-        -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
-        results_title = '',
-        preview_title = '',
-        winblend = 30,
+        winblend = 20,
         previewer = true,
         color_devicons = true,
         use_less = false,
@@ -184,37 +163,34 @@ vim.g.bookmark_highlight_lines = 1
 vim.g.bookmark_save_per_working_dir = 1
 vim.api.nvim_set_keymap('n', '<Leader>a', '<Plug>BookmarkShowAll', { noremap = true })
 --- }}}
---- Lightline {{{
--- Bar
-vim.g.lightline = {
-    colorscheme = "deus",
-    active = {
-        left = { { "mode" }, { "filename" } },
-        right = { { "lineinfo" }, { "percent" } },
+--- Lualine {{{
+require'lualine'.setup {
+    options = {
+        theme = 'shado',
+        icons_enabled = true,
+        disabled_filetypes = {},
+        section_separators   = { '', '' },
+        component_separators = { '', '' },
     },
-    component_function = {
-        gitbranch = "FugitiveHead"
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch'}, --, {'diff', color_added='#37d4a7', color_modified='#2f77a1',
+            -- color_removed='#de286e', symbols = {added = '', modified = '', removed = ''} }},
+        lualine_c = {'filename'},
+        lualine_x = {'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'},
     },
-}
-
--- Tabs
-vim.g.lightline.tabline = {
-    left = { { "tabs" } },
-    left = { { } }
-}
--- Mode mappings
-vim.g.lightline.mode_map = {
-    n = "ノーマル",
-    i = "インサート",
-    R = "代わる",
-    v = "ビジュアル",
-    V = "V-ライン",
-    ["<C-v>"] = "V-ブロック",
-    c = "コマンド",
-    s = "セレクト",
-    S = "S-ライン",
-    ["<C-s>"] = "S-ブロック",
-    t = "ターミナル",
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {'filename'},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {'location'},
+        lualine_z = {},
+    },
+    tabline = {},
+    extensions = {'quickfix'},
 }
 --- }}}
 --- Startify {{{
@@ -233,7 +209,7 @@ vim.g.startify_bookmarks = {
     { np = '~/.config/nvim/lua/plugins.lua'    },
     { nc = '~/.config/nvim/lua/config.lua'     },
     { nk = '~/.config/nvim/lua/binds.lua'      },
-    { nm = '~/.config/nvim/lua/mod.lua'      },
+    { nm = '~/.config/nvim/lua/mod.lua'        },
     { nl = '~/.config/nvim/lua/lsp_config.lua' },
     { ns = '~/.config/nvim/colors/shado.vim'   },
     { nx = '~/.config/nvim/colors/shado.vim'   },
@@ -263,11 +239,29 @@ cmd("let g:qs_highlight_on_keys = ['f', 'F', 't' , 'T']")
 cmd('packadd! termdebug')
 vim.g.termdebug_wide = 1
 --- }}}
---- Beacon {{{
-vim.g.beacon_minimal_jump = 2
-vim.g.beacon_size = 30
-vim.g.beacon_shrink = 1
-vim.g.beacon_timeout = 1000
+--- Specs {{{
+require('specs').setup{ 
+    show_jumps  = true,
+    min_jump = 30,
+    popup = {
+        delay_ms = 0, -- delay before popup displays
+        inc_ms = 15, -- time increments used for fade/resize effects 
+        blend = 40, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        width = 30,
+        winhl = "Beacon",
+        fader = require('specs').pulse_fader,
+        resizer = require('specs').shrink_resizer
+    },
+    ignore_filetypes = {},
+    ignore_buftypes = { nofile = true, },
+}
+--- }}}
+--- Transparent {{{
+require("transparent").setup({
+    enable = true,
+    extra_groups = {},
+    exclude = {},
+})
 --- }}}
 --- Rust-tools {{{
 local opts = {
@@ -303,84 +297,5 @@ local opts = {
 }
 require('rust-tools').setup(opts)
 --- }}}
--- --- Lir {{{
--- local actions = require'lir.actions'
--- local mark_actions = require 'lir.mark.actions'
--- local clipboard_actions = require'lir.clipboard.actions'
-
--- require'lir'.setup {
---     show_hidden_files = false,
---     devicons_enable = true,
---     mappings = {
---         ['l']     = actions.edit,
---         ['<C-s>'] = actions.split,
---         ['<C-v>'] = actions.vsplit,
---         ['<C-t>'] = actions.tabedit,
-
---         ['h']     = actions.up,
---         ['q']     = actions.quit,
-
---         ['K']     = actions.mkdir,
---         ['N']     = actions.newfile,
---         ['R']     = actions.rename,
---         ['@']     = actions.cd,
---         ['Y']     = actions.yank_path,
---         ['.']     = actions.toggle_show_hidden,
---         ['D']     = actions.delete,
-
---         ['J'] = function()
---             mark_actions.toggle_mark()
---             vim.cmd('normal! j')
---         end,
---         ['C'] = clipboard_actions.copy,
---         ['X'] = clipboard_actions.cut,
---         ['P'] = clipboard_actions.paste,
---     },
---     float = {
---         winblend = 0,
---         win_opts = function()
---           local width = math.floor(vim.o.columns * 0.8)
---           local height = math.floor(vim.o.lines * 0.8)
---           return {
---             border = require("lir.float.helper").make_border_opts({
---               "╭", "─", "╮", "│", "╯", "─", "╰", "│",
---             }, "TelescopeBorder"),
---             width = width,
---             height = height,
---             row = 1,
---             col = math.floor((vim.o.columns - width) / 2),
---           }
---         end,
---     },
---     hide_cursor = true,
--- }
-
--- require'nvim-web-devicons'.set_icon({
---     lir_folder_icon = {
---         icon = "",
---         color = "#7ebae4",
---         name = "LirFolderNode"
---     }
--- })
-
--- -- use visual mode
--- function _G.LirSettings()
---     vim.api.nvim_buf_set_keymap(0, 'x', 'J', ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>', {noremap = true, silent = true})
---     vim.api.nvim_echo({{vim.fn.expand('%:p'), 'Normal'}}, false, {})
--- end
-
--- vim.cmd [[augroup lir-settings]]
--- vim.cmd [[  autocmd!]]
--- vim.cmd [[  autocmd Filetype lir :lua LirSettings()]]
--- vim.cmd [[augroup END]]
--- --- }}}
--- --- Neorg {{{
--- require('neorg').setup {
---   load = {
---     ["core.defaults"] = {}, -- Enable all the default functionality
---     ["core.norg.concealer"] = {} -- Load the module responsible for converting text into icons
---   }
--- }
--- --- }}}
 -- }}}
 -- [[ ----------------------------------------------------------------------- ]]

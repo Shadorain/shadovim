@@ -25,10 +25,10 @@ nvim -c ":PackerSync"
 echo "#== | If that failed, rerun this script (Ctrl+c), else hit ENTER to continue... | ==#"
 read input
 
-# Overwrite with a link my colorscheme on top of existing default one for lightline.vim
-echo "*== | Installing lightline.vim theme | ==*"
-ln -sf ~/.config/nvim/shado_lightline.vim ~/.local/share/nvim/site/pack/packer/start/lightline.vim/autoload/lightline/colorscheme/deus.vim
+# Add lualine theme to local lualine folder
+echo "*== | Installing lualine.nvim theme | ==*"
+cp -f ~/.config/nvim/shado.lua ~/.local/share/nvim/site/pack/packer/start/lualine.nvim/lua/lualine/themes/shado.lua
 if [[ $? -ne 0 ]]; then
-    echo "<== | Error: failed to link colorscheme file | ==>"
+    echo "<== | Error: failed to copy colorscheme file | ==>"
     exit 1
 fi

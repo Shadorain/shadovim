@@ -42,7 +42,6 @@ vim.defer_fn(function()
 		set t_ut=
 		silent! bufdo e
 		PackerLoad impatient.nvim
-		PackerLoad lightline.vim
 		PackerLoad nvim-treesitter
 		lua require'colorizer'.setup()
 		colorscheme shado

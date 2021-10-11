@@ -18,12 +18,12 @@ local cmd = vim.cmd
 -- [[ General Bindings ]] --------------------------------------------------- ]]
 --- Utility {{{
 -- Keep screen centered
-map('n', 'n', 'nzzzv:Beacon<CR>', { noremap = true, silent = true })
-map('n', 'N', 'Nzzzv:Beacon<CR>', { noremap = true, silent = true })
+map('n', 'n', 'nzzzv:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
+map('n', 'N', 'Nzzzv:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
 -- map('n', 'J', 'mzJ\'z')
 
 -- Show cursor
-map('n', 'Q', ':Beacon<CR>', { noremap = true, silent = true })
+map('n', 'Q', ':lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
 
 -- Undo breakpoints
 -- map('i', ',', ',<c-q>u')
@@ -44,25 +44,6 @@ map('n', 'Y', 'y$')
 
 -- Reverse Join ('J')
 map('n', '<C-j>', 'ddkPJ')
-
----- Telescope {{{
-map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>')
-map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>')
-map('i', '<C-f>', '<esc><cmd>Telescope live_grep<cr>')
-map('n', '<leader>bv', '<esc><cmd>Telescope buffers<cr>')
-map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>')
-map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>')
-
-map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>')
-map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>')
-map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>')
-map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>')
-map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>')
-map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>')
-map('n', '<leader>thl', '<cmd>Telescope highlights<cr>')
-map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>')
-map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>')
----- }}}
 --- }}}
 --- Splits {{{
 -- Resizing
@@ -145,6 +126,10 @@ cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- Plugins {{{
 map('n', '<leader>G', ':Goyo<CR>')
 map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
+---- Tabline {{{
+map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
+map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })
+---- }}}
 ---- Floaterm {{{
 map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
 map('t', '<leader>bm', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true })
@@ -157,59 +142,24 @@ map('t', '<leader>bk', '<C-\\><C-n>:FloatermKill<CR>', { noremap = true, silent 
 ---- Commentary {{{
 map('n', '<leader>//', ':Commentary<CR>')
 ---- }}}
--- ---- C Lang {{{
--- -- CScope
--- map('n', '<leader>ss', '<esc>:cs find s <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>sc', '<esc>:cs find c <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>sg', '<esc>:cs find g <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>se', '<esc>:cs find e <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>sf', '<esc>:cs find f <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>si', '<esc>:cs find i ^<C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>sd', '<esc>:cs find d <C-R>=expand("<cword>")<CR><CR>')
+---- Telescope {{{
+map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>')
+map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>')
+map('i', '<C-f>', '<esc><cmd>Telescope live_grep<cr>')
+map('n', '<leader>bv', '<esc><cmd>Telescope buffers<cr>')
+map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>')
+map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>')
 
--- map('n', '<leader>sss', '<esc>:scs find s <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>ssc', '<esc>:scs find c <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>ssg', '<esc>:scs find g <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>sse', '<esc>:scs find e <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>ssf', '<esc>:scs find f <C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>ssi', '<esc>:scs find i ^<C-R>=expand("<cword>")<CR><CR>')
--- map('n', '<leader>ssd', '<esc>:scs find d <C-R>=expand("<cword>")<CR><CR>')
--- ---- }}}
--- ---- Git Commands {{{
--- map('n', '<leader>ga', ':Gwrite<CR>')
--- map('n', '<leader>gst', ':Gstatus<CR>')
--- map('n', '<leader>gd', ':Gdiff<CR>')
--- map('n', '<leader>gc', ':Telescope git_commits<CR>')
--- map('n', '<leader>gp', ':Git push<CR>')
--- map('n', '<leader>gb', ':Gblame<CR>')
--- map('n', '<leader>gB', ':Gbrowse<CR>')
--- map('n', '<leader>glo', ':Git log<CR>')
--- map('n', '<leader>gl', ':Git pull<CR>')
--- map('n', '<leader>gr', ':GRemove<CR>')
--- map('n', '<leader>gt', ':GitGutterSignsToggle<CR>')
--- map('n', '<leader>gs', '<Plug>(GitGutterStageHunk)<CR>')
--- map('n', '<leader>gu', '<Plug>(GitGutterUndoHunk)<CR>')
--- map('n', '<leader>gv', ':GV<CR>')
--- map('n', '<leader>gV', ':GV!<CR>')
--- ---- }}}
--- ---- Calendar {{{
--- map('n', '<leader>car', ':CalendarVR<CR>')
--- map('n', '<leader>cab', ':CalendarH<CR>')
--- map('n', '<leader>caf', ':CalendarT<CR>')
--- ---- }}}
--- ---- VimWiki {{{
--- map('n', '<leader>wb', ':VimWikiTabIndex<CR>')
--- map('n', 'leader>wd', ':VimwikiDeleteLink<CR>')
--- map('n', 'leader>wh', ':Vimwiki2HTML<CR>')
--- map('n', 'leader>whh', ':Vimwiki2HTMLBrowse<CR>')
--- map('n', 'leader>wi', ':VimwikiDiaryIndex<CR>')
--- map('n', 'leader>wr', ':VimwikiRenameLink<CR>')
--- map('n', 'leader>ws', ':VimwikiUISelect<CR>')
--- map('n', 'leader>wb', ':VimwikiTabIndex<CR>')
--- map('n', 'leader>ww', ':VimwikiIndex<CR>')
--- map('n', 'leader>wg', ':VimwikiDiaryGenerateLinks<CR>')
--- map('n', 'leader>wtt', ':n ~/.vimwiki/Life/TODO.md<CR>')
--- map('n', 'leader>wtc', ':VimwikiToggleListItem^ddmaGo\<Esc>pI\<right>\<right>~~\<Esc>A~~\<Esc>^db'a<CR>')
--- "}}}
+map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>')
+map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>')
+map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>')
+map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>')
+map('n', '<leader>tgd', '<cmd>lua require("mod").git_diff()<cr>')
+map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>')
+map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>')
+map('n', '<leader>thl', '<cmd>Telescope highlights<cr>')
+map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>')
+map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>')
+---- }}}
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]

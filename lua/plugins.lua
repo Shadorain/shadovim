@@ -37,7 +37,6 @@ return require('packer').startup(function(use)
 	}
 
     -- [[ Utility ]]
-    -- use { 'tamago324/lir.nvim' }           --- file explorer
     use { 'nvim-lua/plenary.nvim' }        --- general utilities
     use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
     use { 'tpope/vim-commentary' }         --- commenting
@@ -45,22 +44,49 @@ return require('packer').startup(function(use)
     use { 'vim-scripts/genutils' }         --- general utilities
     use { 'godlygeek/tabular' }            --- tabbing
     use { 'rafamadriz/friendly-snippets' } --- snippets
-    use { 'DanilaMihailov/beacon.nvim' }   --- cursor beacon
-    use { 'mfussenegger/nvim-dap' }        --- debugging
+    use { 'edluffy/specs.nvim' }           --- cursor beacon
+    -- use { 'mfussenegger/nvim-dap' }     --- debugging
     use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
-    -- use { 'cohama/lexima.vim' }         --- autoclosing (till autopairs gets any better)
+    use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    -- Tabline {{{
+    use { 'kdheepak/tabline.nvim',
+        config = function()
+            require'tabline'.setup {
+                enable = true,
+                options = {
+                    section_separators = {'', ''},
+                    component_separators = {'', ''},
+                    max_bufferline_percent = 66,
+                    show_tabs_always = true,
+                    show_devicons = true,
+                    show_bufnr = false,
+                    show_filename_only = true,
+                }
+            }
+            vim.cmd [[
+                set guioptions-=e
+                set sessionoptions+=tabpages,globals
+            ]]
+        end,
+        requires = { {'hoob3rt/lualine.nvim'}, {'kyazdani42/nvim-web-devicons', opt = true} }
+    }
+    -- }}}
+    -- Autopairs {{{
     use { 'jiangmiao/auto-pairs',          --- autoclosing (till autopairs gets any better)
         config = function()
             vim.cmd [[
-              let g:AutoPairsFlyMode = 1
+              let g:AutoPairsFlyMode = 0
               let g:AutoPairsShortcutBackInsert = '<M-C-v>'
               let g:AutoPairsShortcutFastWrap = '<M-S-n>'
               let g:AutoPairsMapCh = 0
               let g:AutoPairsMoveCharacter = "()[]{}\"'"
               au FileType rust let b:AutoPairs = AutoPairsDefine({'\w\zs<': '>', '\W\zs|': '|', '/*': '*/', "\W\zs\'": ''})
+              au FileType c,cpp let b:AutoPairs = AutoPairsDefine({'<': '>', '/*': '*/', "\W\zs\'": ''})
             ]]
         end
     }
+    -- }}}
+    -- IndentLine {{{
     use {'lukas-reineke/indent-blankline.nvim', event="Colorscheme",
        config = function()
             vim.cmd[[hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=10]]
@@ -82,6 +108,7 @@ return require('packer').startup(function(use)
            }
        end
     }
+    -- }}}
     -- Neorg {{{
     use { 'nvim-neorg/neorg', branch = 'unstable',
         config = function()
@@ -291,13 +318,14 @@ return require('packer').startup(function(use)
 
             local luasnip = require('luasnip')
             local cmp = require('cmp')
+            local lspkind = require('lspkind')
             cmp.setup {
                 preselect = cmp.PreselectMode.None,
-                completion = { completeopt = "menuone,noselect,noinsert" },
+                completion = { completeopt = "menu,menuone,noselect,noinsert" },
                 snippet = { expand = function(args) require('luasnip').lsp_expand(args.body) end },
                 mapping = {
-                    ["<C-j>"] = cmp.mapping.select_prev_item(),
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-j>"] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
+                    ["<C-n>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
                     ['<C-m>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-u>"] = cmp.mapping.scroll_docs(4),
@@ -305,14 +333,14 @@ return require('packer').startup(function(use)
                     ["<C-c>"] = cmp.mapping.close(),
                     ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
                     ['<Tab>'] = cmp.mapping(function(fallback)
-                        if vim.fn.pumvisible() == 1 then
+                        if cmp.visible() == 1 then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n', true)
                         elseif has_words_before() and luasnip.expand_or_jumpable() then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
                         else fallback() end
                     end, { 'i', 's' }),
                     ['<S-Tab>'] = cmp.mapping(function()
-                        if vim.fn.pumvisible() == 1 then
+                        if cmp.visible() == 1 then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n', true)
                         elseif luasnip.jumpable(-1) then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
@@ -344,19 +372,19 @@ return require('packer').startup(function(use)
                     { name = "neorg"    }, { name = "cmp_tabnine" },
                 },
                 formatting = {
-                    format = function(entry, vim_item)
-                      vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-                      vim_item.menu = ({
-                          buffer = "[B]",
-                          nvim_lsp = "[L]",
-                          luasnip = "[S]",
-                          calc = "[C]",
-                          path = "[P]",
-                          cmp_tabnine = "[T]",
-                      })[entry.source.name]
-                      return vim_item
-                    end,
+                    format = lspkind.cmp_format({with_text=true, menu = ({
+                        buffer = "[B]",
+                        nvim_lsp = "[L]",
+                        luasnip = "[S]",
+                        calc = "[C]",
+                        path = "[P]",
+                        neorg = "[N]",
+                        cmp_tabnine = "[T]",
+                    }),
+                    -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                    }),
                 },
+                experimental = { ghost_text = false, custom_menu = true }
             }
         end,
         requires = {
@@ -513,79 +541,25 @@ return require('packer').startup(function(use)
     }
     use { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' }
 	use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
-	use { 'JoosepAlviste/nvim-ts-context-commentstring',
-		requires = { { 'Olical/aniseed', after = 'nvim-treesitter' } },
-		after = 'nvim-treesitter',
-	}
 	use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
 	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-    -- use { 'windwp/nvim-autopairs',
-		-- config = function()
-			-- require('nvim-autopairs').setup { check_ts = true }
-			-- require('nvim-autopairs.completion.cmp').setup({
-  				-- map_cr = true, map_complete = true,
-			-- })
-			-- local npairs = require'nvim-autopairs'
-            -- local Rule   = require'nvim-autopairs.rule'
-            -- npairs.add_rules {
-              -- Rule(' ', ' ') :with_pair(function (opts)
-                  -- local pair = opts.line:sub(opts.col - 1, opts.col)
-                  -- return vim.tbl_contains({ '()', '[]', '{}' }, pair)
-                -- end),
-              -- Rule('( ', ' )') :with_pair(function() return false end)
-                  -- :with_move(function(opts)
-                      -- return opts.prev_char:match('.%)') ~= nil
-                  -- end) :use_key(')'),
-              -- Rule('{ ', ' }') :with_pair(function() return false end)
-                  -- :with_move(function(opts)
-                      -- return opts.prev_char:match('.%}') ~= nil
-                  -- end) :use_key('}'),
-              -- Rule('[ ', ' ]') :with_pair(function() return false end)
-                  -- :with_move(function(opts)
-                      -- return opts.prev_char:match('.%]') ~= nil
-                  -- end) :use_key(']')
-            -- }
-		-- end,
-        -- break_line_filetype = nil,
-        -- pairs_map = {
-        --     ["'"] = ">",
-        --     ['"'] = '"',
-        --     ['('] = ')',
-        --     ['['] = ']',
-        --     ['{'] = '}',
-        --     ['`'] = '`',
-        --     ['<'] = '>',
-        -- },
-        -- disable_filetype = { 'TelescopePrompt' },
-        -- -- ignore alphanumeric, operators, quote, curly brace, and square bracket
-        -- -- ignored_next_char = "[%w%.%+%-%=%/%,\"'{}%[%]]",
-		-- after = 'nvim-treesitter'
-	-- }
     --- }}}
     --- [[ Languages ]]
     use { 'sheerun/vim-polyglot' }     --- *
     use { 'rust-lang/rust.vim' }       --- rust!
     use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
     use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
-    use { 'plasticboy/vim-markdown' }  --- markdown
+    -- use { 'plasticboy/vim-markdown' }  --- markdown
 
     -- [[ Make it pretty ]]
     use { 'kyazdani42/nvim-web-devicons' }      --- icons
-    use { 'itchyny/lightline.vim' }             --- Statusbar
     use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
     use { 'junegunn/goyo.vim' }                 --- focus
-    use { 'xiyaowong/nvim-transparent',         --- transparency
-        require("transparent").setup({
-            enable = true,
-            extra_groups = {},
-            exclude = {},
-        })
-    }
+    use { 'xiyaowong/nvim-transparent' }        --- transparency
 
     -- [[ Finders ]]
     use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
     use { 'unblevable/quick-scope' }        --- horizonal movement
-    use { 'mileszs/ack.vim' }               --- searcher
 
     -- [[ Miscellaneous ]]
     use { 'mhinz/vim-startify' } --- Start Screen

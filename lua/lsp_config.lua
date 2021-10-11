@@ -8,11 +8,23 @@
 " =========================================================================== ]]
 -- Styling {{{
 local border = {
-    {"╭", "FloatBorder"}, {"─", "FloatBorder"},
-    {"╮", "FloatBorder"}, {"│", "FloatBorder"},
-    {"╯", "FloatBorder"}, {"─", "FloatBorder"},
-    {"╰", "FloatBorder"}, {"│", "FloatBorder"}
+    {"┌", "FloatBorder"},
+    {"─", "FloatBorder"},
+    {"┐", "FloatBorder"},
+    {"│", "FloatBorder"},
+    {"┘", "FloatBorder"},
+    {"─", "FloatBorder"},
+    {"└", "FloatBorder"},
+    {"│", "FloatBorder"},
 }
+-- {"╭", "FloatBorder"},
+-- {"─", "FloatBorder"},
+-- {"╮", "FloatBorder"},
+-- {"│", "FloatBorder"},
+-- {"╯", "FloatBorder"},
+-- {"─", "FloatBorder"},
+-- {"╰", "FloatBorder"},
+-- {"│", "FloatBorder"},
 -- }}}
 -- Icons {{{
 local M = {}
@@ -55,32 +67,6 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 -- }}}
--- Handlers {{{
-function goto_definition(split_cmd)
-  local util = vim.lsp.util
-  local log = require("vim.lsp.log")
-  local api = vim.api
-  local handler = function(_, method, result)
-      if result == nil or vim.tbl_isempty(result) then
-          local _ = log.info() and log.info(method, "No location found")
-          return nil
-      end
-      if split_cmd then vim.cmd(split_cmd) end
-
-      if vim.tbl_islist(result) then
-          util.jump_to_location(result[1])
-          if #result > 1 then
-              util.set_qflist(util.locations_to_items(result))
-              api.nvim_command("copen")
-              api.nvim_command("wincmd p")
-          end
-      else util.jump_to_location(result)
-      end
-  end
-  return handler
-end
-vim.lsp.handlers["textDocument/definition"] = goto_definition('split')
-
 -- Diagnostics {{{
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
@@ -89,8 +75,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
-vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="rounded", focusable=false})]]
--- }}}
+vim.cmd ('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})')
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
@@ -127,8 +112,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>ct', '<cmd>lua require("mod").code_actions()<CR>', opts)
+    buf_set_keymap('n', '<space>co', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua require("mod").code_actions()<CR>', opts)
     buf_set_keymap('v', '<space>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
     buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
@@ -150,7 +135,7 @@ local on_attach = function(client, bufnr)
         max_height = 12,
         max_width = 120,
         transparency = 80,
-        handler_opts = { border = "rounded" },
+        handler_opts = { border = "single" },
         trigger_on_newline = false,
         debug = false,
         padding = '',
@@ -211,11 +196,11 @@ end
 local nvim_lsp = require('lspconfig')
 local servers = { 'clangd', 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = { debounce_text_changes = 150, }
-  }
+    nvim_lsp[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = { debounce_text_changes = 150, }
+    }
 end
 
 nvim_lsp.rls.setup {

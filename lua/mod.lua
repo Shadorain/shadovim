@@ -53,14 +53,28 @@ function M.file_browser()
   builtin.file_browser(opts)
 end
 
+function M.git_diff()
+  local opts = {
+    layout_strategy = "horizontal",
+    border = true,
+    prompt_title = "~ Git Diff ~",
+    layout_config = {
+      width = 0.99,
+      height = 0.99,
+      prompt_position = "bottom",
+    },
+  }
+  require("telescope.builtin").git_status(opts)
+end
+
 function M.code_actions()
   local opts = {
-    winblend = 10,
+    winblend = 40,
     border = true,
     previewer = false,
     shorten_path = false,
   }
-  builtin.lsp_code_actions(themes.get_dropdown(opts))
+  builtin.lsp_code_actions(themes.get_cursor(opts))
 end
 
 function M.lsp_references()
