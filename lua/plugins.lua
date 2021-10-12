@@ -437,7 +437,7 @@ return require('packer').startup(function(use)
                 },
             }
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg" },
+				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg", "css", "vue", "html", "tsx", "typescript" },
 				rainbow = {
 				    enable = true,
 				    extended_mode = true,
