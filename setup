@@ -2,8 +2,9 @@
 # A setup script to install shadovim fast and easy!
 
 # Install packer the top lua plugin manager for new neovim
-echo "*== | Installing packer | ==*"
-if [[ ! -d "~/.local/share/nvim/site/pack/packer/start/packer.nvim" ]]; then
+function install_packer {
+    echo "*== | Installing packer | ==*"
+    rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     if [[ $? -ne 0 ]]; then
@@ -11,24 +12,53 @@ if [[ ! -d "~/.local/share/nvim/site/pack/packer/start/packer.nvim" ]]; then
         echo " -- Check your internet connection, and try again --"
         exit 1
     fi
-else
-    echo "*== | Packer already installed | ==*"
-fi
+}
 
 # Install all packer packages with PackerSync from inside nvim
-echo "*== | Installing packer plugins |==*"
-echo " -- Nvim will open to install some packer plugins in a second. --"
-echo " -- When it is complete, exit nvim (:q). Setup will resume after --"
-echo " --- Hit ENTER to continue... ---"
-read input
-nvim -c ":PackerSync"
-echo "#== | If that failed, rerun this script (Ctrl+c), else hit ENTER to continue... | ==#"
-read input
+function packer_sync {
+    echo "*== | Installing packer plugins |==*"
+    echo " -- Nvim will open to install some packer plugins in a second. --"
+    echo " -- When it is complete, exit nvim (:q). Setup will resume after --"
+    echo " --- Hit ENTER to continue... ---"
+    read input
+    nvim -c ":PackerSync"
+    echo "#== | If that failed, rerun this script (Ctrl+c), else hit ENTER to continue... | ==#"
+    read input
+}
 
 # Add lualine theme to local lualine folder
-echo "*== | Installing lualine.nvim theme | ==*"
-cp -f ~/.config/nvim/shado.lua ~/.local/share/nvim/site/pack/packer/start/lualine.nvim/lua/lualine/themes/shado.lua
-if [[ $? -ne 0 ]]; then
-    echo "<== | Error: failed to copy colorscheme file | ==>"
-    exit 1
+function install_lualine {
+    echo "*== | Installing lualine.nvim theme | ==*"
+    cp -f ~/.config/nvim/shado.lua ~/.local/share/nvim/site/pack/packer/start/lualine.nvim/lua/lualine/themes/shado.lua
+    if [[ $? -ne 0 ]]; then
+        echo "<== | Error: failed to copy colorscheme file | ==>"
+        exit 1
+    fi
+}
+
+function usage {
+    echo "Usage: setup [OPTION]"
+    echo "If no OPTION, install everything"
+    echo " -h       show this menu"
+    echo " -l       install lualine theme"
+    echo " -p       install Packer"
+    echo " -P       run :PackerSync"
+    exit 0
+}
+
+if [[ $# -ne 0 ]]; then
+    while getopts 'lpPh' OPTION; do
+        case "$OPTION" in
+            l) install_lualine;;
+            p) install_packer;;
+            P) packer_sync;;
+            *|h|help) usage;;
+        esac
+    done
+    exit 0
 fi
+
+# Default install
+install_packer
+packer_sync
+install_lualine
