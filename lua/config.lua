@@ -77,6 +77,10 @@ cmd('set cursorline')
 cmd('set cursorlineopt=number')
 
 cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
+
+-- Ctags
+vim.cmd [[ autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi ]]
+vim.cmd [[ autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw! ]]
 --- }}}
 -- }}}
 -- [[ Plugin Settings ]] ---------------------------------------------------- ]]
