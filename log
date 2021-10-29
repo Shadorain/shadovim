@@ -1,0 +1,1087 @@
+
+could not source "$VIM\sysinit.vim"
+sourcing "C:\Users\indra\AppData\Local\nvim\init.lua"
+not found in 'packpath': "pack/*/opt/packer.nvim"
+not found in 'packpath': "pack/*/start/termdebug"
+Reading ShaDa file "C:\Users\indra\AppData\Local\nvim-data\shada\main.shada" info marks oldfiles
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim"
+line 1: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim"
+line 148: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 148: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim"
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\elixir.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\elixir.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\fish.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\fish.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdresource.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdresource.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdscript.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdscript.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gomod.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gomod.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\graphql.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\graphql.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hcl.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hcl.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\heex.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\heex.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hjson.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hjson.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\json5.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\json5.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\julia.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\julia.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ledger.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ledger.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\nix.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\nix.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ql.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ql.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\query.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\query.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\surface.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\surface.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\teal.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\teal.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\tlaplus.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\tlaplus.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\yang.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\yang.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\zig.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\zig.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\ftdetect\rust.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\ftdetect\rust.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+line 2356: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\ftdetect\polyglot.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\ftdetect\polyglot.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+not found in runtime path: "ftdetect/*.lua"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\elixir.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\elixir.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\fish.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\fish.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdresource.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdresource.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdscript.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gdscript.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gomod.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\gomod.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\graphql.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\graphql.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hcl.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hcl.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\heex.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\heex.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hjson.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\hjson.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\json5.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\json5.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\julia.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\julia.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ledger.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ledger.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\nix.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\nix.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ql.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\ql.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\query.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\query.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\surface.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\surface.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\teal.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\teal.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\tlaplus.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\tlaplus.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\yang.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\yang.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\zig.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\ftdetect\zig.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\ftdetect\rust.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\ftdetect\rust.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+line 149: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\ftdetect\polyglot.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\ftdetect\polyglot.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\init.vim
+continuing in C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\filetype.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\filetype.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\ftplugin.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\ftplugin.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\indent.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\indent.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\syntax\syntax.vim"
+line 19: sourcing "C:\Users\indra\Neovim\share\nvim\runtime\syntax\synload.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\syntax\synload.vim
+continuing in C:\Users\indra\Neovim\share\nvim\runtime\syntax\syntax.vim
+Executing FileType Autocommands for "*"
+autocommand exe "set syntax=" . expand("<amatch>")
+
+Executing Syntax Autocommands for "*"
+autocommand call s:SynSet()
+
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\syntax\syntax.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim\colors\shado.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim\colors\shado.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\init.lua:0
+Executing ColorScheme Autocommands for "*"
+autocommand hi Normal ctermbg=NONE guibg=#111119
+
+finished sourcing C:\Users\indra\AppData\Local\nvim\init.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\plugin\polyglot.vim"
+--- Autocommands ---
+CursorHold
+    *         lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})
+	Last set from anonymous :source
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\plugin\polyglot.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\gzip.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\gzip.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\health.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\health.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\man.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\man.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\matchit.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\matchit.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\matchparen.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\matchparen.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\netrwPlugin.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\netrwPlugin.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\rplugin.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\rplugin.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\shada.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\shada.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\spellfile.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\spellfile.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\tarPlugin.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\tarPlugin.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\tohtml.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\tohtml.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\tutor.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\tutor.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\plugin\zipPlugin.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\plugin\zipPlugin.vim
+sourcing "C:\Users\indra\Neovim\share\nvim\runtime\pack\dist\opt\termdebug\plugin\termdebug.vim"
+finished sourcing C:\Users\indra\Neovim\share\nvim\runtime\pack\dist\opt\termdebug\plugin\termdebug.vim
+sourcing "C:\Users\indra\AppData\Local\nvim\plugin\packer_compiled.lua"
+not found in 'packpath': "pack/*/opt/packer.nvim"
+not found in 'packpath': "pack/*/start/cmp-calc"
+not found in 'packpath': "pack/*/start/cmp-buffer"
+not found in 'packpath': "pack/*/start/cmp_luasnip"
+not found in 'packpath': "pack/*/start/cmp-path"
+not found in 'packpath': "pack/*/start/cmp-nvim-lsp"
+not found in 'packpath': "pack/*/start/cmp-nvim-lua"
+not found in 'packpath': "pack/*/start/nvim-ts-rainbow"
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\nvim-ts-rainbow\plugin\rainbow.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\nvim-ts-rainbow\plugin\rainbow.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\plugin\packer_compiled.lua:0
+not found in 'packpath': "pack/*/start/neorg"
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\neorg\ftdetect\norg.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\neorg\ftdetect\norg.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\plugin\packer_compiled.lua:0
+not found in 'packpath': "pack/*/start/nvim-treesitter-textsubjects"
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\nvim-treesitter-textsubjects\plugin\nvim-treesitter-textsubjects.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\nvim-treesitter-textsubjects\plugin\nvim-treesitter-textsubjects.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\plugin\packer_compiled.lua:0
+not found in 'packpath': "pack/*/start/nvim-treesitter-textobjects"
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\nvim-treesitter-textobjects\plugin\nvim-treesitter-textobjects.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\nvim-treesitter-textobjects\plugin\nvim-treesitter-textobjects.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim\plugin\packer_compiled.lua:0
+finished sourcing C:\Users\indra\AppData\Local\nvim\plugin\packer_compiled.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\auto-pairs\plugin\auto-pairs.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\auto-pairs\plugin\auto-pairs.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\genutils\plugin\genutils.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\genutils\plugin\genutils.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\goyo.vim\plugin\goyo.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\goyo.vim\plugin\goyo.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\LuaSnip\plugin\luasnip.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\LuaSnip\plugin\luasnip.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-cmp\plugin\cmp.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-cmp\plugin\cmp.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-colorizer.lua\plugin\colorizer.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-colorizer.lua\plugin\colorizer.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-lspconfig\plugin\lspconfig.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-lspconfig\plugin\lspconfig.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-transparent\plugin\transparent.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-transparent\plugin\transparent.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\plugin\nvim-treesitter.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-treesitter\plugin\nvim-treesitter.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-web-devicons\plugin\nvim-web-devicons.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\nvim-web-devicons\plugin\nvim-web-devicons.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\plenary.nvim\plugin\plenary.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\plenary.nvim\plugin\plenary.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\quick-scope\plugin\quick_scope.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\quick-scope\plugin\quick_scope.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust-tools.nvim\plugin\rust-tools.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust-tools.nvim\plugin\rust-tools.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\plugin\cargo.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\plugin\cargo.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\plugin\rust.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\rust.vim\plugin\rust.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\specs.nvim\plugin\specs.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\specs.nvim\plugin\specs.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\tabular\plugin\Tabular.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\tabular\plugin\Tabular.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\telescope.nvim\plugin\telescope.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\telescope.nvim\plugin\telescope.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-bookmarks\plugin\bookmark.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-bookmarks\plugin\bookmark.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-bufkill\plugin\bufkill.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-bufkill\plugin\bufkill.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-commentary\plugin\commentary.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-commentary\plugin\commentary.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-floaterm\plugin\floaterm.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-floaterm\plugin\floaterm.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\plugin\polyglot.vim"
+--- Autocommands ---
+CursorHold
+    *         lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})
+	Last set from anonymous :source
+polyglot-sensible  CursorHold
+    *         silent! checktime
+	Last set from ~\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\plugin\polyglot.vim line 79
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\plugin\polyglot.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-startify\plugin\startify.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-startify\plugin\startify.vim
+not found in 'packpath': "start/*"
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\tabular\after\plugin\TabularMaps.vim"
+line 5: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\tabular\autoload\tabular.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\tabular\autoload\tabular.vim
+continuing in function AddTabularPattern[7]..<SNR>68_ParsePattern
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\tabular\after\plugin\TabularMaps.vim
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\cmp-tabnine\after\plugin\cmp-tabnine.lua"
+                                                                                                                 cmp-tabnine: Cannot find installed TabNine. Please run install.sh
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\cmp-tabnine\after\plugin\cmp-tabnine.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-nvim-lua\after\plugin\cmp_nvim_lua.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-nvim-lua\after\plugin\cmp_nvim_lua.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-nvim-lsp\after\plugin\cmp_nvim_lsp.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-nvim-lsp\after\plugin\cmp_nvim_lsp.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-path\after\plugin\cmp_path.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-path\after\plugin\cmp_path.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp_luasnip\after\plugin\cmp_luasnip.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp_luasnip\after\plugin\cmp_luasnip.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-buffer\after\plugin\cmp_buffer.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-buffer\after\plugin\cmp_buffer.lua
+sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-calc\after\plugin\cmp_calc.lua"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\cmp-calc\after\plugin\cmp_calc.lua
+Reading ShaDa file "C:\Users\indra\AppData\Local\nvim-data\shada\main.shada" info marks oldfiles
+Executing BufWinEnter Autocommands for "*"
+autocommand if &ft == "" && expand("<afile>:e") == "" | call s:Observe('shebang#Detect') | endif
+
+Executing BufEnter Autocommands for "*"
+autocommand call s:detect_indent()
+
+line 17: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\sleuth.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-polyglot\autoload\polyglot\sleuth.vim
+continuing in function <SNR>3_detect_indent
+Executing BufEnter Autocommands for "*"
+autocommand :call AutoPairsTryInit()
+
+Executing BufEnter Autocommands for "*"
+autocommand call <SID>UpdateList('BufEnter')
+
+Executing VimEnter Autocommands for "*"
+autocommand call PolyglotVerify()
+
+Executing VimEnter Autocommands for "*"
+autocommand lua require('transparent').clear_bg()
+
+Normal         xxx guifg=#dfb7e8 guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 39
+Comment        xxx ctermfg=14 guifg=#6272a4
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 87
+Constant       xxx ctermfg=13 guifg=#8897F4
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 111
+Special        xxx ctermfg=224 guifg=#5d5daf
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 90
+Identifier     xxx cterm=bold ctermfg=14 guifg=#b488bf
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 98
+Statement      xxx ctermfg=11 gui=bold guifg=#ff7ab2
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 102
+PreProc        xxx ctermfg=81 guifg=#849be0
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 121
+Type           xxx ctermfg=121 gui=bold guifg=#8677d9
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 128
+Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#458FAA
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 142
+Todo           xxx ctermfg=0 ctermbg=11 guifg=#302b30 guibg=#eba4e9 guisp=#eba4e9
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 134
+String         xxx guifg=#8677d9
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 116
+Function       xxx guifg=#e086e0
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 99
+Conditional    xxx guifg=#6876de
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 103
+Repeat         xxx guifg=#6876de
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 104
+Operator       xxx guifg=#6272a4 guibg=bold
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 106
+Structure      xxx guifg=#ff7ab2
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 131
+LineNr         xxx ctermfg=11 guifg=#a1a1dd guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 41
+NonText        xxx ctermfg=12 gui=bold guifg=#2f3037
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 139
+SignColumn     xxx ctermfg=14 ctermbg=242 guifg=Cyan guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 40
+CursorLineNr   xxx cterm=underline ctermfg=11 gui=bold guifg=#de286e guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 42
+EndOfBuffer    xxx guifg=#E9729D
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 57
+Executing VimEnter Autocommands for "*"
+autocommand call s:init(expand('<afile>:p'))
+
+Executing VimEnter Autocommands for "*"
+autocommand call s:on_vimenter()
+
+line 5: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-startify\autoload\startify.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-startify\autoload\startify.vim
+continuing in function <SNR>74_on_vimenter
+Executing BufDelete Autocommands for "*"
+autocommand lua current_nodes = require("luasnip").session.current_nodes if current_nodes then current_nodes[tonumber(vim.fn.expand("<abuf>"))] = nil end
+
+Error detected while processing function <SNR>74_on_vimenter[5]..startify#insane_in_the_membrane:
+line  119:
+E490: No fold found
+Executing FileType Autocommands for "*"
+autocommand setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+Executing FileType Autocommands for "*"
+autocommand call s:LoadFTPlugin()
+
+not found in runtime path: "ftplugin/startify.vim ftplugin/startify_*.vim ftplugin/startify/*.vim"
+not found in runtime path: "ftplugin/startify.lua ftplugin/startify_*.lua ftplugin/startify/*.lua"
+Executing FileType Autocommands for "*"
+autocommand call s:LoadIndent()
+
+not found in runtime path: "indent/startify.vim"
+not found in runtime path: "indent/startify.lua"
+Executing FileType Autocommands for "*"
+autocommand exe "set syntax=" . expand("<amatch>")
+
+Executing Syntax Autocommands for "*"
+autocommand call s:SynSet()
+
+line 25: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-startify\syntax\startify.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\start\vim-startify\syntax\startify.vim
+continuing in function <SNR>30_SynSet
+not found in runtime path: "syntax/startify.lua syntax/startify/*.lua"
+Executing FileType Autocommands for "*"
+autocommand lua require'nvim-treesitter.configs'.reattach_module('highlight')
+
+autocommand lua require'nvim-treesitter.configs'.reattach_module('indent')
+
+autocommand lua require'nvim-treesitter.configs'.reattach_module('incremental_selection')
+
+autocommand lua require'nvim-treesitter.configs'.reattach_module('rainbow')
+
+autocommand lua require'nvim-treesitter.configs'.reattach_module('textsubjects')
+
+autocommand lua require'nvim-treesitter.configs'.reattach_module('textobjects.move')
+
+autocommand lua require'nvim-treesitter.configs'.reattach_module('textobjects.select')
+
+Executing CursorMoved Autocommands for "*"
+autocommand :lua require('specs').on_cursor_moved()
+
+Executing CursorMoved Autocommands for "*"
+autocommand call s:Highlight_Matching_Pair()
+
+Executing CursorMoved Autocommands for "<buffer=1>"
+autocommand call s:set_cursor()
+
+Executing TextChanged Autocommands for "*"
+autocommand call s:Highlight_Matching_Pair()
+
+not found in runtime path: "lua/lualine/themes/shado.lua"
+not found in runtime path: "lua/lualine/themes/shado/init.lua"
+not found in runtime path: "lua/lualine/themes/shado.lua"
+not found in runtime path: "lua/lualine/themes/shado/init.lua"
+not found in runtime path: "lua/lualine/components/branch.lua"
+--- Autocommands ---
+
+--- Terminal info --- {{{
+&term: builtin_vtpcon
+Description: ANIS emulation for console virtual terminal sequence with libuv
+Aliases: vtpcon
+Boolean capabilities:
+  auto_left_margin          bw         = false
+  auto_right_margin         am         = true
+  no_esc_ctlc               xsb        = false
+  ceol_standout_glitch      xhp        = false
+  eat_newline_glitch        xenl       = false
+  erase_overstrike          eo         = false
+  generic_type              gn         = false
+  hard_copy                 hc         = false
+  has_meta_key              km         = true
+  has_status_line           hs         = false
+  insert_null_glitch        in         = false
+  memory_above              da         = false
+  memory_below              db         = false
+  move_insert_mode          mir        = true
+  move_standout_mode        msgr       = true
+  over_strike               os         = false
+  status_line_esc_ok        eslok      = false
+  dest_tabs_magic_smso      xt         = false
+  tilde_glitch              hz         = false
+  transparent_underline     ul         = false
+  xon_xoff                  xon        = false
+  needs_xon_xoff            nxon       = false
+  prtr_silent               mc5i       = false
+  hard_cursor               chts       = false
+  non_rev_rmcup             nrrmc      = false
+  no_pad_char               npc        = true
+  non_dest_scroll_region    ndscr      = false
+  can_change                ccc        = false
+  back_color_erase          bce        = true
+  hue_lightness_saturation  hls        = false
+  col_addr_glitch           xhpa       = false
+  cr_cancels_micro_mode     crxm       = false
+  has_print_wheel           daisy      = false
+  row_addr_glitch           xvpa       = false
+  semi_auto_right_margin    sam        = false
+  cpi_changes_res           cpix       = false
+  lpi_changes_res           lpix       = false
+  backspaces_with_bs        OTbs       = true
+  crt_no_scrolling          OTns       = false
+  no_correctly_working_cr   OTnc       = false
+  gnu_has_meta_key          OTMT       = false
+  linefeed_is_newline       OTNL       = false
+  has_hardware_tabs         OTpt       = false
+  return_does_clr_eol       OTxr       = false
+Numeric capabilities:
+  columns                   cols       = 80
+  init_tabs                 it         = 8
+  lines                     lines      = 24
+  lines_of_memory           lm         = -1
+  magic_cookie_glitch       xmc        = -1
+  padding_baud_rate         pb         = -1
+  virtual_terminal          vt         = -1
+  width_status_line         wsl        = -1
+  num_labels                nlab       = -1
+  label_height              lh         = -1
+  label_width               lw         = -1
+  max_attributes            ma         = -1
+  maximum_windows           wnum       = -1
+  max_colors                colors     = 256
+  max_pairs                 pairs      = 65536
+  no_color_video            ncv        = -1
+  buffer_capacity           bufsz      = -1
+  dot_vert_spacing          spinv      = -1
+  dot_horz_spacing          spinh      = -1
+  max_micro_address         maddr      = -1
+  max_micro_jump            mjump      = -1
+  micro_col_size            mcs        = -1
+  micro_line_size           mls        = -1
+  number_of_pins            npins      = -1
+  output_res_char           orc        = -1
+  output_res_line           orl        = -1
+  output_res_horz_inch      orhi       = -1
+  output_res_vert_inch      orvi       = -1
+  print_rate                cps        = -1
+  wide_char_size            widcs      = -1
+  buttons                   btns       = -1
+  bit_image_entwining       bitwin     = -1
+  bit_image_type            bitype     = -1
+  magic_cookie_glitch_ul    OTug       = -1
+  carriage_return_delay     OTdC       = -1
+  new_line_delay            OTdN       = -1
+  backspace_delay           OTdB       = -1
+  horizontal_tab_delay      OTdT       = -1
+  number_of_function_keys   OTkn       = -1
+String capabilities:
+  back_tab                  cbt        = <Esc>[Z
+  bell                      bel        = <C-G>
+  carriage_return           cr         = <CR>
+  change_scroll_region      csr        = <Esc>[%i%p1%d;%p2%dr
+  clear_screen              clear      = <Esc>[H<Esc>[2J
+  clr_eol                   el         = <Esc>[K
+  clr_eos                   ed         = <Esc>[J
+  column_address            hpa        = <Esc>[%i%p1%dG
+  cursor_address            cup        = <Esc>[%i%p1%d;%p2%dH
+  cursor_down               cud1       = <Esc>[B
+  cursor_home               home       = <Esc>[H
+  cursor_invisible          civis      = <Esc>[?25l
+  cursor_left               cub1       = <C-H>
+  cursor_normal             cnorm      = <Esc>[?25h
+  cursor_right              cuf1       = <Esc>[C
+  cursor_up                 cuu1       = <Esc>[A
+  delete_character          dch1       = <Esc>[P
+  delete_line               dl1        = <Esc>[M
+  enter_alt_charset_mode    smacs      = <Esc>(0
+  enter_bold_mode           bold       = <Esc>[1m
+  enter_ca_mode             smcup      = <Esc>[?1049h
+  enter_reverse_mode        rev        = <Esc>[7m
+  enter_standout_mode       smso       = <Esc>[7m
+  enter_underline_mode      smul       = <Esc>[4m
+  erase_chars               ech        = <Esc>[%p1%dX
+  exit_alt_charset_mode     rmacs      = <Esc>(B
+  exit_attribute_mode       sgr0       = <Esc>[0m
+  exit_ca_mode              rmcup      = <Esc>[?1049l
+  exit_standout_mode        rmso       = <Esc>[27m
+  exit_underline_mode       rmul       = <Esc>[24m
+  init_2string              is2        = <Esc>[!p<Esc>[?3l
+  insert_line               il1        = <Esc>[L
+  key_backspace             kbs        = <C-H>
+  key_dc                    kdch1      = <Esc>[3~
+  key_down                  kcud1      = <Esc>[B
+  key_f1                    kf1        = <Esc>[[A
+  key_f10                   kf10       = <Esc>[21~
+  key_f2                    kf2        = <Esc>[[B
+  key_f3                    kf3        = <Esc>[[C
+  key_f4                    kf4        = <Esc>[[D
+  key_f5                    kf5        = <Esc>[[E
+  key_f6                    kf6        = <Esc>[17~
+  key_f7                    kf7        = <Esc>[18~
+  key_f8                    kf8        = <Esc>[19~
+  key_f9                    kf9        = <Esc>[20~
+  key_home                  khome      = <Esc>[1~
+  key_ic                    kich1      = <Esc>[2~
+  key_left                  kcub1      = <Esc>[D
+  key_npage                 knp        = <Esc>[6~
+  key_ppage                 kpp        = <Esc>[5~
+  key_right                 kcuf1      = <Esc>[C
+  key_sf                    kind       = <Esc>[1;2B
+  key_sr                    kri        = <Esc>[1;2A
+  key_up                    kcuu1      = <Esc>[A
+  parm_dch                  dch        = <Esc>[%p1%dP
+  parm_delete_line          dl         = <Esc>[%p1%dM
+  parm_down_cursor          cud        = <Esc>[%p1%dB
+  parm_ich                  ich        = <Esc>[%p1%d@
+  parm_index                indn       = <Esc>[%p1%dS
+  parm_insert_line          il         = <Esc>[%p1%dL
+  parm_left_cursor          cub        = <Esc>[%p1%dD
+  parm_right_cursor         cuf        = <Esc>[%p1%dC
+  parm_rindex               rin        = <Esc>[%p1%dT
+  parm_up_cursor            cuu        = <Esc>[%p1%dA
+  repeat_char               rep        = %p1%c<Esc>[%p2%{1}%-%db
+  restore_cursor            rc         = <Esc>8
+  row_address               vpa        = <Esc>[%i%p1%dd
+  save_cursor               sc         = <Esc>7
+  scroll_forward            ind        = <NL>
+  scroll_reverse            ri         = <Esc>M
+  set_attributes            sgr        = <Esc>[0%?%p1%p3%|%t;7%;%?%p2%t;4%;%?%p6%t;1%;m
+  set_tab                   hts        = <Esc>H
+  tab                       ht         = <Tab>
+  key_b2                    kb2        = <Esc>[G
+  acs_chars                 acsc       = jjkkllmmnnqqttuuvvwwxx
+  key_btab                  kcbt       = <Esc>[Z
+  key_end                   kend       = <Esc>[4~
+  key_enter                 kent       = <Esc>OM
+  key_sdc                   kDC        = <Esc>[3;2~
+  key_send                  kEND       = <Esc>[4;2~
+  key_shome                 kHOM       = <Esc>[1;2~
+  key_sic                   kIC        = <Esc>[2;2~
+  key_sleft                 kLFT       = <Esc>[1;2D
+  key_snext                 kNXT       = <Esc>[6;2~
+  key_sprevious             kPRV       = <Esc>[5;2~
+  key_sright                kRIT       = <Esc>[1;2C
+  key_f11                   kf11       = <Esc>[23~
+  key_f12                   kf12       = <Esc>[24~
+  key_f13                   kf13       = <Esc>[25~
+  key_f14                   kf14       = <Esc>[26~
+  key_f15                   kf15       = <Esc>[28~
+  key_f16                   kf16       = <Esc>[29~
+  key_f17                   kf17       = <Esc>[31~
+  key_f18                   kf18       = <Esc>[32~
+  key_f19                   kf19       = <Esc>[33~
+  key_f20                   kf20       = <Esc>[34~
+  key_f21                   kf21       = <Esc>[23$
+  key_f22                   kf22       = <Esc>[24$
+  key_f23                   kf23       = <Esc>[11^
+  key_f24                   kf24       = <Esc>[12^
+  key_f25                   kf25       = <Esc>[13^
+  key_f26                   kf26       = <Esc>[14^
+  key_f27                   kf27       = <Esc>[15^
+  key_f28                   kf28       = <Esc>[17^
+  key_f29                   kf29       = <Esc>[18^
+  key_f30                   kf30       = <Esc>[19^
+  key_f31                   kf31       = <Esc>[20^
+  key_f32                   kf32       = <Esc>[21^
+  key_f33                   kf33       = <Esc>[23^
+  key_f34                   kf34       = <Esc>[24^
+  key_f35                   kf35       = <Esc>[25^
+  key_f36                   kf36       = <Esc>[26^
+  key_f37                   kf37       = <Esc>[28^
+  key_f38                   kf38       = <Esc>[29^
+  key_f39                   kf39       = <Esc>[31^
+  key_f40                   kf40       = <Esc>[1;6S
+  key_f41                   kf41       = <Esc>[32^
+  key_f42                   kf42       = <Esc>[33^
+  key_f43                   kf43       = <Esc>[34^
+  key_f44                   kf44       = <Esc>[23@
+  key_f45                   kf45       = <Esc>[24@
+  clr_bol                   el1        = <Esc>[1K
+  orig_pair                 op         = <Esc>[39;49m
+  initialize_color          initc      = <Esc>]4;%p1%d;rgb:%p2%{255}%*%{1000}%/%2.2X/%p3%{255}%*%{1000}%/%2.2X/%p4%{255}%*%{1000}%/%2.2X<Esc>
+  enter_italics_mode        sitm       = <Esc>[3m
+  exit_italics_mode         ritm       = <Esc>[23m
+  set_a_foreground          setaf      = <Esc>[%?%p1%{8}%<%t3%p1%d%e%p1%{16}%<%t9%p1%{8}%-%d%e38;5;%p1%d%;m
+  set_a_background          setab      = <Esc>[%?%p1%{8}%<%t4%p1%d%e%p1%{16}%<%t10%p1%{8}%-%d%e48;5;%p1%d%;m
+Extended boolean capabilities:
+  AX                        = true
+  G0                        = false
+  XT                        = true
+Extended numeric capabilities:
+  U8                        = -1
+Extended string capabilities:
+  Cr                        = 
+  Cs                        = 
+  E0                        = 
+  E3                        = <Esc>[3J
+  Ms                        = 
+  S0                        = 
+  Se                        = <Esc>[2 q
+  Smulx                     = 
+  Ss                        = <Esc>[%p1%d q
+  TS                        = 
+  XM                        = 
+  grbom                     = 
+  gsbom                     = 
+  kDC3                      = 
+  kDC4                      = 
+  kDC5                      = 
+  kDC6                      = 
+  kDC7                      = 
+  kDN                       = 
+  kDN3                      = 
+  kDN4                      = 
+  kDN5                      = 
+  kDN6                      = 
+  kDN7                      = 
+  kEND3                     = 
+  kEND4                     = 
+  kEND5                     = 
+  kEND6                     = 
+  kEND7                     = 
+  kEND8                     = 
+  kHOM3                     = 
+  kHOM4                     = 
+  kHOM5                     = 
+  kHOM6                     = 
+  kHOM7                     = 
+  kHOM8                     = 
+  kIC3                      = 
+  kIC4                      = 
+  kIC5                      = 
+  kIC6                      = 
+  kIC7                      = 
+  kLFT3                     = 
+  kLFT4                     = 
+  kLFT5                     = 
+  kLFT6                     = 
+  kLFT7                     = 
+  kNXT3                     = 
+  kNXT4                     = 
+  kNXT5                     = 
+  kNXT6                     = 
+  kNXT7                     = 
+  kPRV3                     = 
+  kPRV4                     = 
+  kPRV5                     = 
+  kPRV6                     = 
+  kPRV7                     = 
+  kRIT3                     = 
+  kRIT4                     = 
+  kRIT5                     = 
+  kRIT6                     = 
+  kRIT7                     = 
+  kUP                       = <Esc>[1;2A
+  kUP3                      = 
+  kUP4                      = 
+  kUP5                      = 
+  kUP6                      = 
+  kUP7                      = 
+  ka2                       = 
+  kb1                       = 
+  kb3                       = 
+  kc2                       = 
+  rmxx                      = 
+  smxx                      = 
+  xm                        = 
+  ext.get_bg                = <Esc>]11;?<C-G>
+  setrgbf                   = <Esc>[38;2;%p1%d;%p2%d;%p3%dm
+  setrgbb                   = <Esc>[48;2;%p1%d;%p2%d;%p3%dm
+  ext.save_title            = <Esc>[22;0t
+  ext.restore_title         = <Esc>[23;0t
+  ext.enable_lr_margin      = <Esc>[?69h
+  ext.disable_lr_margin     = <Esc>[?69l
+  ext.enable_bpaste         = <Esc>[?2004h
+  ext.disable_bpaste        = <Esc>[?2004l
+  ext.enable_focus          = <Esc>[?1004h
+  ext.disable_focus         = <Esc>[?1004l
+  ext.enable_mouse          = <Esc>[?1002h<Esc>[?1006h
+  ext.disable_mouse         = <Esc>[?1002l<Esc>[?1006l
+  ext.set_underline_color   = <Esc>[58:2::%p1%d:%p2%d:%p3%dm
+}}}
+
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim\colors\shado.vim"
+Executing OptionSet Autocommands for "background"
+autocommand lua require'lualine'.setup()
+
+finished sourcing C:\Users\indra\AppData\Local\nvim\colors\shado.vim
+continuing in nvim_exec()
+Executing ColorScheme Autocommands for "*"
+autocommand hi Normal ctermbg=NONE guibg=#111119
+
+autocommand lua require "rainbow.internal".defhl()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require("packer.load")({'indent-blankline.nvim'}, { event = "Colorscheme *" }, _G.packer_plugins)
+
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\indent-blankline.nvim\plugin\indent_blankline.vim"
+line 0: sourcing "C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\indent-blankline.nvim\autoload\indent_blankline.vim"
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\indent-blankline.nvim\autoload\indent_blankline.vim
+continuing in nvim_exec() called at C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\indent-blankline.nvim\plugin\indent_blankline.vim:31
+finished sourcing C:\Users\indra\AppData\Local\nvim-data\site\pack\packer\opt\indent-blankline.nvim\plugin\indent_blankline.vim
+continuing in ColorScheme Autocommands for "*"
+Executing ColorScheme Autocommands for "*"
+autocommand hi Normal ctermbg=NONE guibg=#111119
+
+autocommand lua require "rainbow.internal".defhl()
+
+Executing ColorScheme Autocommands for "*"
+Executing ColorScheme Autocommands for "*"
+autocommand call v:lua.cmp.plugin.colorscheme()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require('transparent').clear_bg()
+
+Normal         xxx guifg=#dfb7e8 guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 39
+Comment        xxx ctermfg=14 guifg=#6272a4
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 87
+Constant       xxx ctermfg=13 guifg=#8897F4
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 111
+Special        xxx ctermfg=224 guifg=#5d5daf
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 90
+Identifier     xxx cterm=bold ctermfg=14 guifg=#b488bf
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 98
+Statement      xxx ctermfg=11 gui=bold guifg=#ff7ab2
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 102
+PreProc        xxx ctermfg=81 guifg=#849be0
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 121
+Type           xxx ctermfg=121 gui=bold guifg=#8677d9
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 128
+Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#458FAA
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 142
+Todo           xxx ctermfg=0 ctermbg=11 guifg=#302b30 guibg=#eba4e9 guisp=#eba4e9
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 134
+String         xxx guifg=#8677d9
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 116
+Function       xxx guifg=#e086e0
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 99
+Conditional    xxx guifg=#6876de
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 103
+Repeat         xxx guifg=#6876de
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 104
+Operator       xxx guifg=#6272a4 guibg=bold
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 106
+Structure      xxx guifg=#ff7ab2
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 131
+LineNr         xxx ctermfg=11 guifg=#a1a1dd guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 41
+NonText        xxx ctermfg=12 gui=bold guifg=#2f3037
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 139
+SignColumn     xxx ctermfg=14 ctermbg=242 guifg=Cyan guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 40
+CursorLineNr   xxx cterm=underline ctermfg=11 gui=bold guifg=#de286e guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 42
+EndOfBuffer    xxx guifg=#E9729D
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 57
+Executing ColorScheme Autocommands for "*"
+autocommand call s:set_highlight_colors()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require('nvim-web-devicons').set_up_highlights()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require'lualine'.setup()
+
+Executing ColorScheme Autocommands for "*"
+autocommand hi Normal ctermbg=NONE guibg=#111119
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require("indent_blankline.utils").reset_highlights()
+
+Executing ColorScheme Autocommands for "*"
+autocommand call v:lua.cmp.plugin.colorscheme()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require('transparent').clear_bg()
+
+Normal         xxx guifg=#dfb7e8 guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 39
+Comment        xxx ctermfg=14 guifg=#6272a4
+	Last set from anonymous :source
+Constant       xxx ctermfg=13 guifg=#8897F4
+	Last set from anonymous :source
+Special        xxx ctermfg=224 guifg=#5d5daf
+	Last set from anonymous :source
+Identifier     xxx cterm=bold ctermfg=14 guifg=#b488bf
+	Last set from anonymous :source
+Statement      xxx ctermfg=11 gui=bold guifg=#ff7ab2
+	Last set from anonymous :source
+PreProc        xxx ctermfg=81 guifg=#849be0
+	Last set from anonymous :source
+Type           xxx ctermfg=121 gui=bold guifg=#8677d9
+	Last set from anonymous :source
+Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#458FAA
+	Last set from anonymous :source
+Todo           xxx ctermfg=0 guifg=#302b30 guisp=#eba4e9
+	Last set from anonymous :source
+String         xxx guifg=#8677d9
+	Last set from anonymous :source
+Function       xxx guifg=#e086e0
+	Last set from anonymous :source
+Conditional    xxx guifg=#6876de
+	Last set from anonymous :source
+Repeat         xxx guifg=#6876de
+	Last set from anonymous :source
+Operator       xxx guifg=#6272a4
+	Last set from anonymous :source
+Structure      xxx guifg=#ff7ab2
+	Last set from anonymous :source
+LineNr         xxx ctermfg=11 guifg=#a1a1dd
+	Last set from anonymous :source
+NonText        xxx ctermfg=12 gui=bold guifg=#2f3037
+	Last set from anonymous :source
+SignColumn     xxx ctermfg=14 guifg=Cyan
+	Last set from anonymous :source
+CursorLineNr   xxx cterm=underline ctermfg=11 gui=bold guifg=#de286e
+	Last set from anonymous :source
+EndOfBuffer    xxx guifg=#E9729D
+	Last set from anonymous :source
+Executing ColorScheme Autocommands for "*"
+autocommand call s:set_highlight_colors()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require('nvim-web-devicons').set_up_highlights()
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require'lualine'.setup()
+
+Executing ColorScheme Autocommands for "*"
+autocommand hi Normal ctermbg=NONE guibg=#111119
+
+Executing ColorScheme Autocommands for "*"
+autocommand lua require("indent_blankline.utils").reset_highlights()
+
+lualine: There are some issues with your config. Run :LualineNotices for details
+Executing WinScrolled Autocommands for "*"
+autocommand IndentBlanklineRefreshScroll
+
+not found in runtime path: "lua/lualine/themes/shado.lua"
+not found in runtime path: "lua/lualine/themes/shado/init.lua"
+not found in runtime path: "lua/lualine/themes/shado.lua"
+not found in runtime path: "lua/lualine/themes/shado/init.lua"
+--- Autocommands ---
+lualine: There are some issues with your config. Run :LualineNotices for details
+Normal         xxx guifg=#dfb7e8 guibg=#111119
+	Last set from ~\AppData\Local\nvim\colors\shado.vim line 39
+Comment        xxx ctermfg=14 guifg=#6272a4
+	Last set from anonymous :source
+Constant       xxx ctermfg=13 guifg=#8897F4
+	Last set from anonymous :source
+Special        xxx ctermfg=224 guifg=#5d5daf
+	Last set from anonymous :source
+Identifier     xxx cterm=bold ctermfg=14 guifg=#b488bf
+	Last set from anonymous :source
+Statement      xxx ctermfg=11 gui=bold guifg=#ff7ab2
+	Last set from anonymous :source
+PreProc        xxx ctermfg=81 guifg=#849be0
+	Last set from anonymous :source
+Type           xxx ctermfg=121 gui=bold guifg=#8677d9
+	Last set from anonymous :source
+Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#458FAA
+	Last set from anonymous :source
+Todo           xxx ctermfg=0 guifg=#302b30 guisp=#eba4e9
+	Last set from anonymous :source
+String         xxx guifg=#8677d9
+	Last set from anonymous :source
+Function       xxx guifg=#e086e0
+	Last set from anonymous :source
+Conditional    xxx guifg=#6876de
+	Last set from anonymous :source
+Repeat         xxx guifg=#6876de
+	Last set from anonymous :source
+Operator       xxx guifg=#6272a4
+	Last set from anonymous :source
+Structure      xxx guifg=#ff7ab2
+	Last set from anonymous :source
+LineNr         xxx ctermfg=11 guifg=#a1a1dd
+	Last set from anonymous :source
+NonText        xxx ctermfg=12 gui=bold guifg=#2f3037
+	Last set from anonymous :source
+SignColumn     xxx ctermfg=14 guifg=Cyan
+	Last set from anonymous :source
+CursorLineNr   xxx cterm=underline ctermfg=11 gui=bold guifg=#de286e
+	Last set from anonymous :source
+EndOfBuffer    xxx guifg=#E9729D
+	Last set from anonymous :source
+Executing CursorHold Autocommands for "*"
+autocommand lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})
+
+Executing CursorHold Autocommands for "*"
+autocommand silent! checktime
+
+Executing CursorHold Autocommands for "<buffer=1>"
+autocommand if (&ft == "" || &ft == "conf") | call b:PolyglotObserve() | endif
+
+Normal         xxx guifg=#dfb7e8
+	Last set from anonymous :source
+Comment        xxx ctermfg=14 guifg=#6272a4
+	Last set from anonymous :source
+Constant       xxx ctermfg=13 guifg=#8897F4
+	Last set from anonymous :source
+Special        xxx ctermfg=224 guifg=#5d5daf
+	Last set from anonymous :source
+Identifier     xxx cterm=bold ctermfg=14 guifg=#b488bf
+	Last set from anonymous :source
+Statement      xxx ctermfg=11 gui=bold guifg=#ff7ab2
+	Last set from anonymous :source
+PreProc        xxx ctermfg=81 guifg=#849be0
+	Last set from anonymous :source
+Type           xxx ctermfg=121 gui=bold guifg=#8677d9
+	Last set from anonymous :source
+Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#458FAA
+	Last set from anonymous :source
+Todo           xxx ctermfg=0 guifg=#302b30 guisp=#eba4e9
+	Last set from anonymous :source
+String         xxx guifg=#8677d9
+	Last set from anonymous :source
+Function       xxx guifg=#e086e0
+	Last set from anonymous :source
+Conditional    xxx guifg=#6876de
+	Last set from anonymous :source
+Repeat         xxx guifg=#6876de
+	Last set from anonymous :source
+Operator       xxx guifg=#6272a4
+	Last set from anonymous :source
+Structure      xxx guifg=#ff7ab2
+	Last set from anonymous :source
+LineNr         xxx ctermfg=11 guifg=#a1a1dd
+	Last set from anonymous :source
+NonText        xxx ctermfg=12 gui=bold guifg=#2f3037
+	Last set from anonymous :source
+SignColumn     xxx ctermfg=14 guifg=Cyan
+	Last set from anonymous :source
+CursorLineNr   xxx cterm=underline ctermfg=11 gui=bold guifg=#de286e
+	Last set from anonymous :source
+EndOfBuffer    xxx guifg=#E9729D
+	Last set from anonymous :source
+Normal         xxx guifg=#dfb7e8
+	Last set from anonymous :source
+Comment        xxx ctermfg=14 guifg=#6272a4
+	Last set from anonymous :source
+Constant       xxx ctermfg=13 guifg=#8897F4
+	Last set from anonymous :source
+Special        xxx ctermfg=224 guifg=#5d5daf
+	Last set from anonymous :source
+Identifier     xxx cterm=bold ctermfg=14 guifg=#b488bf
+	Last set from anonymous :source
+Statement      xxx ctermfg=11 gui=bold guifg=#ff7ab2
+	Last set from anonymous :source
+PreProc        xxx ctermfg=81 guifg=#849be0
+	Last set from anonymous :source
+Type           xxx ctermfg=121 gui=bold guifg=#8677d9
+	Last set from anonymous :source
+Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#458FAA
+	Last set from anonymous :source
+Todo           xxx ctermfg=0 guifg=#302b30 guisp=#eba4e9
+	Last set from anonymous :source
+String         xxx guifg=#8677d9
+	Last set from anonymous :source
+Function       xxx guifg=#e086e0
+	Last set from anonymous :source
+Conditional    xxx guifg=#6876de
+	Last set from anonymous :source
+Repeat         xxx guifg=#6876de
+	Last set from anonymous :source
+Operator       xxx guifg=#6272a4
+	Last set from anonymous :source
+Structure      xxx guifg=#ff7ab2
+	Last set from anonymous :source
+LineNr         xxx ctermfg=11 guifg=#a1a1dd
+	Last set from anonymous :source
+NonText        xxx ctermfg=12 gui=bold guifg=#2f3037
+	Last set from anonymous :source
+SignColumn     xxx ctermfg=14 guifg=Cyan
+	Last set from anonymous :source
+CursorLineNr   xxx cterm=underline ctermfg=11 gui=bold guifg=#de286e
+	Last set from anonymous :source
+EndOfBuffer    xxx guifg=#E9729D
+	Last set from anonymous :source
+Executing CursorHold Autocommands for "*"
+autocommand lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})
+
+Executing CursorHold Autocommands for "*"
+autocommand silent! checktime
+
+Executing CursorHold Autocommands for "<buffer=1>"
+autocommand if (&ft == "" || &ft == "conf") | call b:PolyglotObserve() | endif
+
+
+Executing VimLeavePre Autocommands for "*"
+autocommand lua vim.lsp._vim_exit_handler()
+
+Executing VimLeavePre Autocommands for "*"
+autocommand call s:on_vimleavepre()
+
+Writing ShaDa file "C:\Users\indra\AppData\Local\nvim-data\shada\main.shada"
+Executing VimLeave Autocommands for "*"
+autocommand lua _G.__luacache.save_cache()
