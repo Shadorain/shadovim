@@ -159,7 +159,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi TSField guifg=#E9729D guibg=NONE
   hi TSParameter guifg=#9ca7ff guibg=NONE
   hi link TSPunctSpecial Include
-  hi link TSWarning WarningMsg
+  hi link TSWarning WarnMsg
   hi link TSDanger Error
   hi link TSError Error
   " Treesitter Markdown
@@ -306,19 +306,19 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi! link VisualNOS Visual
   hi! link MsgArea Title
   hi! link diffAdded DiffAdd
-  hi! link diffBDiffer WarningMsg
+  hi! link diffBDiffer WarnMsg
   hi! link diffChanged DiffChange
-  hi! link diffCommon WarningMsg
-  hi! link diffDiffer WarningMsg
+  hi! link diffCommon WarnMsg
+  hi! link diffDiffer WarnMsg
   hi! link diffFile Directory
-  hi! link diffIdentical WarningMsg
+  hi! link diffIdentical WarnMsg
   hi! link diffIndexLine Number
-  hi! link diffIsA WarningMsg
-  hi! link diffNoEOL WarningMsg
-  hi! link diffOnly WarningMsg
+  hi! link diffIsA WarnMsg
+  hi! link diffNoEOL WarnMsg
+  hi! link diffOnly WarnMsg
   hi! link diffRemoved DiffDelete
   hi! link ALEVirtualTextError ErrorMsg
-  hi! link ALEVirtualTextWarning WarningMsg
+  hi! link ALEVirtualTextWarning WarnMsg
   hi! link Searchlight IncSearch
   " Signify {{{
   hi! link SignifySignAdd Signify
