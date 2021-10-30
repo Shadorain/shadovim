@@ -181,28 +181,28 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   " LSP
   hi link DiagnosticSignError Error
-  hi link DiagnosticSignWarning WarningMsg
-  hi link DiagnosticSignInformation ModeMsg
+  hi link DiagnosticSignWarn WarnMsg
+  hi link DiagnosticSignInfo ModeMsg
   hi link DiagnosticSignHint PreProc
   hi link DiagnosticDefaultError Error
-  hi link DiagnosticDefaultWarning WarningMsg
-  hi link DiagnosticDefaultInformation ModeMsg
+  hi link DiagnosticDefaultWarn WarnMsg
+  hi link DiagnosticDefaultInfo ModeMsg
   hi link DiagnosticDefaultHint PreProc
   hi link DiagnosticVirtualTextError Error
-  hi link DiagnosticVirtualTextWarning WarningMsg
-  hi link DiagnosticVirtualTextInformation ModeMsg
+  hi link DiagnosticVirtualTextWarn WarnMsg
+  hi link DiagnosticVirtualTextInfo ModeMsg
   hi link DiagnosticVirtualTextHint PreProc
   hi link DiagnosticFloatingError Error
-  hi link DiagnosticFloatingWarning WarningMsg
-  hi link DiagnosticFloatingInformation ModeMsg
+  hi link DiagnosticFloatingWarn WarnMsg
+  hi link DiagnosticFloatingInfo ModeMsg
   hi link DiagnosticFloatingHint PreProc
   hi link DiagnosticError Error
-  hi link DiagnosticWarning WarningMsg
-  hi link DiagnosticInformation ModeMsg
+  hi link DiagnosticWarn WarnMsg
+  hi link DiagnosticInfo ModeMsg
   hi link DiagnosticHint PreProc
   hi link DiagnosticUnderlineError Error
-  hi link DiagnosticUnderlineWarning WarningMsg
-  hi link DiagnosticUnderlineInformation ModeMsg
+  hi link DiagnosticUnderlineWarn WarnMsg
+  hi link DiagnosticUnderlineInfo ModeMsg
   hi link DiagnosticUnderlineHint PreProc
 
   " Telescope
