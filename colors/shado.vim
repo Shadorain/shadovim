@@ -180,30 +180,30 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link mkdCodeDelimiter htmlH5
 
   " LSP
-  hi link LspDiagnosticsSignError Error
-  hi link LspDiagnosticsSignWarning WarningMsg
-  hi link LspDiagnosticsSignInformation ModeMsg
-  hi link LspDiagnosticsSignHint PreProc
-  hi link LspDiagnosticsDefaultError Error
-  hi link LspDiagnosticsDefaultWarning WarningMsg
-  hi link LspDiagnosticsDefaultInformation ModeMsg
-  hi link LspDiagnosticsDefaultHint PreProc
-  hi link LspDiagnosticsVirtualTextError Error
-  hi link LspDiagnosticsVirtualTextWarning WarningMsg
-  hi link LspDiagnosticsVirtualTextInformation ModeMsg
-  hi link LspDiagnosticsVirtualTextHint PreProc
-  hi link LspDiagnosticsFloatingError Error
-  hi link LspDiagnosticsFloatingWarning WarningMsg
-  hi link LspDiagnosticsFloatingInformation ModeMsg
-  hi link LspDiagnosticsFloatingHint PreProc
-  hi link LspDiagnosticsError Error
-  hi link LspDiagnosticsWarning WarningMsg
-  hi link LspDiagnosticsInformation ModeMsg
-  hi link LspDiagnosticsHint PreProc
-  hi link LspDiagnosticsUnderlineError Error
-  hi link LspDiagnosticsUnderlineWarning WarningMsg
-  hi link LspDiagnosticsUnderlineInformation ModeMsg
-  hi link LspDiagnosticsUnderlineHint PreProc
+  hi link DiagnosticSignError Error
+  hi link DiagnosticSignWarning WarningMsg
+  hi link DiagnosticSignInformation ModeMsg
+  hi link DiagnosticSignHint PreProc
+  hi link DiagnosticDefaultError Error
+  hi link DiagnosticDefaultWarning WarningMsg
+  hi link DiagnosticDefaultInformation ModeMsg
+  hi link DiagnosticDefaultHint PreProc
+  hi link DiagnosticVirtualTextError Error
+  hi link DiagnosticVirtualTextWarning WarningMsg
+  hi link DiagnosticVirtualTextInformation ModeMsg
+  hi link DiagnosticVirtualTextHint PreProc
+  hi link DiagnosticFloatingError Error
+  hi link DiagnosticFloatingWarning WarningMsg
+  hi link DiagnosticFloatingInformation ModeMsg
+  hi link DiagnosticFloatingHint PreProc
+  hi link DiagnosticError Error
+  hi link DiagnosticWarning WarningMsg
+  hi link DiagnosticInformation ModeMsg
+  hi link DiagnosticHint PreProc
+  hi link DiagnosticUnderlineError Error
+  hi link DiagnosticUnderlineWarning WarningMsg
+  hi link DiagnosticUnderlineInformation ModeMsg
+  hi link DiagnosticUnderlineHint PreProc
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9
