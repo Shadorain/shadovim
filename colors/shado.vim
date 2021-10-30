@@ -70,7 +70,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi ModeMsg guifg=#fca1e7 guibg=NONE
   hi MoreMsg guifg=#ff7ab2 guibg=NONE
   hi Question guifg=#ff7ab2 guibg=NONE
-  hi WarningMsg guifg=#F18FB0 guibg=NONE
+  hi WarnMsg guifg=#F18FB0 guibg=NONE
 
   hi ColorColumn guifg=NONE guibg=#2f3037
   hi QuickFixLine guifg=#dfdfe0 guibg=#0f5bca
