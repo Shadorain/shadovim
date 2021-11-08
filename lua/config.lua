@@ -270,6 +270,7 @@ require("transparent").setup({
 --- Rust-tools {{{
 local opts = {
     tools = {
+        procMacro = false,
         autoSetHints = true,
         hover_with_actions = true,
         parent_module = true,

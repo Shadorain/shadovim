@@ -194,7 +194,7 @@ end
 -- }}}
 -- Lsp Init {{{
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'rust_analyzer' }
+local servers = { 'clangd' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,
@@ -202,13 +202,5 @@ for _, lsp in ipairs(servers) do
         flags = { debounce_text_changes = 150, }
     }
 end
-
-nvim_lsp.rls.setup {
-    settings = {
-        rust = { unstable_features = true, build_on_save = false, all_features = true }
-    },
-    on_attach = on_attach,
-    capabilities = capabilities
-}
 -- }}}
 -- [[ ----------------------------------------------------------------------- ]]
