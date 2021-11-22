@@ -47,7 +47,7 @@ return require('packer').startup(function(use)
     use { 'edluffy/specs.nvim' }           --- cursor beacon
     use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
     -- Tabline {{{
     use { 'kdheepak/tabline.nvim',
         config = function()

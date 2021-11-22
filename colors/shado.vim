@@ -70,7 +70,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi ModeMsg guifg=#fca1e7 guibg=NONE
   hi MoreMsg guifg=#ff7ab2 guibg=NONE
   hi Question guifg=#ff7ab2 guibg=NONE
-  hi WarningMsg guifg=#F18FB0 guibg=NONE
+  hi WarnMsg guifg=#F18FB0 guibg=NONE
 
   hi ColorColumn guifg=NONE guibg=#2f3037
   hi QuickFixLine guifg=#dfdfe0 guibg=#0f5bca
@@ -159,7 +159,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi TSField guifg=#E9729D guibg=NONE
   hi TSParameter guifg=#9ca7ff guibg=NONE
   hi link TSPunctSpecial Include
-  hi link TSWarning WarningMsg
+  hi link TSWarning WarnMsg
   hi link TSDanger Error
   hi link TSError Error
   " Treesitter Markdown
@@ -180,30 +180,30 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link mkdCodeDelimiter htmlH5
 
   " LSP
-  hi link LspDiagnosticsSignError Error
-  hi link LspDiagnosticsSignWarning WarningMsg
-  hi link LspDiagnosticsSignInformation ModeMsg
-  hi link LspDiagnosticsSignHint PreProc
-  hi link LspDiagnosticsDefaultError Error
-  hi link LspDiagnosticsDefaultWarning WarningMsg
-  hi link LspDiagnosticsDefaultInformation ModeMsg
-  hi link LspDiagnosticsDefaultHint PreProc
-  hi link LspDiagnosticsVirtualTextError Error
-  hi link LspDiagnosticsVirtualTextWarning WarningMsg
-  hi link LspDiagnosticsVirtualTextInformation ModeMsg
-  hi link LspDiagnosticsVirtualTextHint PreProc
-  hi link LspDiagnosticsFloatingError Error
-  hi link LspDiagnosticsFloatingWarning WarningMsg
-  hi link LspDiagnosticsFloatingInformation ModeMsg
-  hi link LspDiagnosticsFloatingHint PreProc
-  hi link LspDiagnosticsError Error
-  hi link LspDiagnosticsWarning WarningMsg
-  hi link LspDiagnosticsInformation ModeMsg
-  hi link LspDiagnosticsHint PreProc
-  hi link LspDiagnosticsUnderlineError Error
-  hi link LspDiagnosticsUnderlineWarning WarningMsg
-  hi link LspDiagnosticsUnderlineInformation ModeMsg
-  hi link LspDiagnosticsUnderlineHint PreProc
+  hi link DiagnosticSignError Error
+  hi link DiagnosticSignWarn WarnMsg
+  hi link DiagnosticSignInfo ModeMsg
+  hi link DiagnosticSignHint PreProc
+  hi link DiagnosticDefaultError Error
+  hi link DiagnosticDefaultWarn WarnMsg
+  hi link DiagnosticDefaultInfo ModeMsg
+  hi link DiagnosticDefaultHint PreProc
+  hi link DiagnosticVirtualTextError Error
+  hi link DiagnosticVirtualTextWarn WarnMsg
+  hi link DiagnosticVirtualTextInfo ModeMsg
+  hi link DiagnosticVirtualTextHint PreProc
+  hi link DiagnosticFloatingError Error
+  hi link DiagnosticFloatingWarn WarnMsg
+  hi link DiagnosticFloatingInfo ModeMsg
+  hi link DiagnosticFloatingHint PreProc
+  hi link DiagnosticError Error
+  hi link DiagnosticWarn WarnMsg
+  hi link DiagnosticInfo ModeMsg
+  hi link DiagnosticHint PreProc
+  hi link DiagnosticUnderlineError Error
+  hi link DiagnosticUnderlineWarn WarnMsg
+  hi link DiagnosticUnderlineInfo ModeMsg
+  hi link DiagnosticUnderlineHint PreProc
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9
@@ -306,19 +306,19 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi! link VisualNOS Visual
   hi! link MsgArea Title
   hi! link diffAdded DiffAdd
-  hi! link diffBDiffer WarningMsg
+  hi! link diffBDiffer WarnMsg
   hi! link diffChanged DiffChange
-  hi! link diffCommon WarningMsg
-  hi! link diffDiffer WarningMsg
+  hi! link diffCommon WarnMsg
+  hi! link diffDiffer WarnMsg
   hi! link diffFile Directory
-  hi! link diffIdentical WarningMsg
+  hi! link diffIdentical WarnMsg
   hi! link diffIndexLine Number
-  hi! link diffIsA WarningMsg
-  hi! link diffNoEOL WarningMsg
-  hi! link diffOnly WarningMsg
+  hi! link diffIsA WarnMsg
+  hi! link diffNoEOL WarnMsg
+  hi! link diffOnly WarnMsg
   hi! link diffRemoved DiffDelete
   hi! link ALEVirtualTextError ErrorMsg
-  hi! link ALEVirtualTextWarning WarningMsg
+  hi! link ALEVirtualTextWarning WarnMsg
   hi! link Searchlight IncSearch
   " Signify {{{
   hi! link SignifySignAdd Signify
