@@ -297,5 +297,73 @@ local opts = {
 }
 require('rust-tools').setup(opts)
 --- }}}
+--- DAP {{{
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode', -- adjust as needed
+  name = "lldb"
+}
+
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+    runInTerminal = false,
+  },
+}
+
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
+
+dap.defaults.fallback.force_external_terminal = true
+dap.defaults.fallback.external_terminal = {
+  command = '/usr/local/bin/st';
+  args = {''};
+}
+--- }}}
+--- DAP UI {{{
+require("dapui").setup({
+  icons = { expanded = "▾", collapsed = "▸" },
+  mappings = {
+    -- Use a table to apply multiple mappings
+    expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    edit = "e",
+    repl = "r",
+  },
+  sidebar = {
+    -- You can change the order of elements in the sidebar
+    elements = {
+      -- Provide as ID strings or tables with "id" and "size" keys
+      { id = "breakpoints", size = 0.15 },
+      { id = "scopes", size = 0.65, }, -- Can be float or integer > 1
+      { id = "stacks", size = 0.25 },
+      -- { id = "watches", size = 0.25 },
+    },
+    size = 40,
+    position = "left", -- Can be "left", "right", "top", "bottom"
+  },
+  tray = {
+    elements = { },
+    size = 10,
+    position = "bottom", -- Can be "left", "right", "top", "bottom"
+  },
+  floating = {
+    max_height = nil, -- These can be integers or a float between 0 and 1.
+    max_width = nil, -- Floats will be treated as percentage of your screen.
+    mappings = { close = { "q", "<Esc>" }, },
+  },
+  windows = { indent = 1 },
+})
+-- }}}
 -- }}}
 -- [[ ----------------------------------------------------------------------- ]]

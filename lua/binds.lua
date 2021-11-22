@@ -130,6 +130,18 @@ map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
 map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
 map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })
 ---- }}}
+---- Debugging {{{
+map('n', '<leader>db', ':lua require("dap").toggle_breakpoint()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dB', ':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', { noremap = true, silent = true })
+map('n', '<leader>dL', ':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', { noremap = true, silent = true })
+map('n', '<leader>dc', ':lua require("dap").continue()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dsi', ':lua require("dap").step_into()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dso', ':lua require("dap").step_over()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dsx', ':lua require("dap").step_out()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dr', ':lua require("dap").repl_open()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dl', ':lua require("dap").run_last()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dui', ':lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
+---- }}}
 ---- Floaterm {{{
 map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
 map('t', '<leader>bm', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true })
