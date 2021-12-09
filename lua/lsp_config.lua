@@ -75,7 +75,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
-vim.cmd ('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})')
+vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false})')
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
@@ -193,6 +193,44 @@ local on_attach = function(client, bufnr)
 end
 -- }}}
 -- Lsp Init {{{
+--- Rust-tools {{{
+local rs_opts = {
+    tools = {
+        autoSetHints = true,
+        hover_with_actions = true,
+        parent_module = true,
+        join_lines = true,
+        runnables = { use_telescope = true },
+        debuggables = { use_telescope = true },
+        inlay_hints = {
+            only_current_line = false,
+            only_current_line_autocmd = "CursorHold",
+            show_parameter_hints = true,
+            parameter_hints_prefix = "❰ ",
+            other_hints_prefix = "≣ ",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "Comment",
+        },
+        hover_actions = {
+            auto_focus = false,
+            border = {
+                {"╭", "FloatBorder"}, {"─", "FloatBorder"},
+                {"╮", "FloatBorder"}, {"│", "FloatBorder"},
+                {"╯", "FloatBorder"}, {"─", "FloatBorder"},
+                {"╰", "FloatBorder"}, {"│", "FloatBorder"}
+            }
+        },
+    },
+    server = {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    },
+}
+require('rust-tools').setup(rs_opts)
+--- }}}
 local nvim_lsp = require('lspconfig')
 local servers = { 'clangd' }
 for _, lsp in ipairs(servers) do

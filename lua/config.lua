@@ -267,40 +267,6 @@ require("transparent").setup({
     exclude = {},
 })
 --- }}}
---- Rust-tools {{{
-local opts = {
-    tools = {
-        autoSetHints = true,
-        hover_with_actions = true,
-        parent_module = true,
-        join_lines = true,
-        runnables = { use_telescope = true },
-        debuggables = { use_telescope = true },
-        inlay_hints = {
-            only_current_line = false,
-            only_current_line_autocmd = "CursorHold",
-            show_parameter_hints = true,
-            parameter_hints_prefix = "❰ ",
-            other_hints_prefix = "≣ ",
-            max_len_align = false,
-            max_len_align_padding = 1,
-            right_align = false,
-            right_align_padding = 7,
-            highlight = "Comment",
-        },
-        hover_actions = {
-            auto_focus = false,
-            border = {
-                {"╭", "FloatBorder"}, {"─", "FloatBorder"},
-                {"╮", "FloatBorder"}, {"│", "FloatBorder"},
-                {"╯", "FloatBorder"}, {"─", "FloatBorder"},
-                {"╰", "FloatBorder"}, {"│", "FloatBorder"}
-            }
-        },
-    },
-}
-require('rust-tools').setup(opts)
---- }}}
 --- DAP {{{
 local dap = require('dap')
 dap.adapters.lldb = {
