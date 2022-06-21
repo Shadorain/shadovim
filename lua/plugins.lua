@@ -46,8 +46,69 @@ return require('packer').startup(function(use)
     use { 'rafamadriz/friendly-snippets' } --- snippets
     use { 'edluffy/specs.nvim' }           --- cursor beacon
     use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
+    -- use { 'ibhagwan/fzf-lua', requires = { 'kyazdani42/nvim-web-devicons' } }
+    -- use { 'vijaymarupudi/nvim-fzf' }
+    -- Todo Comments {{{
+    use { "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup {
+          signs = true, -- show icons in the signs column
+          sign_priority = 8, -- sign priority
+          -- keywords recognized as todo comments
+          keywords = {
+            FIX = {
+              icon = " ", -- icon used for the sign, and in search results
+              color = "error", -- can be a hex color, or a named color (see below)
+              alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+              -- signs = false, -- configure signs for some keywords individually
+            },
+            TODO = { icon = " ", color = "info" },
+            HACK = { icon = " ", color = "warning" },
+            WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+            PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+            NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+          },
+          merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+          -- highlighting of the line containing the todo comment
+          -- * before: highlights before the keyword (typically comment characters)
+          -- * keyword: highlights of the keyword
+          -- * after: highlights after the keyword (todo text)
+          highlight = {
+            before = "", -- "fg" or "bg" or empty
+            keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+            after = "fg", -- "fg" or "bg" or empty
+            pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
+            comments_only = true, -- uses treesitter to match keywords in comments only
+            max_line_len = 400, -- ignore lines longer than this
+            exclude = {}, -- list of file types to exclude highlighting
+          },
+          -- list of named colors where we try to extract the guifg from the
+          -- list of hilight groups or use the hex color if hl not found as a fallback
+          colors = {
+            error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+            warning = { "DiagnosticWarning", "WarningMsg", "#FBBF24" },
+            info = { "DiagnosticInfo", "#2563EB" },
+            hint = { "DiagnosticHint", "#10B981" },
+            default = { "Identifier", "#7C3AED" },
+          },
+          search = {
+            command = "rg",
+            args = {
+              "--color=never",
+              "--no-heading",
+              "--with-filename",
+              "--line-number",
+              "--column",
+            },
+            pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+          },
+        }
+      end
+    } -- }}}
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    -- use { 'habamax/vim-godot' }
     -- Tabline {{{
     use { 'kdheepak/tabline.nvim',
         config = function()
@@ -110,7 +171,7 @@ return require('packer').startup(function(use)
     }
     -- }}}
     -- Neorg {{{
-    use { 'nvim-neorg/neorg', branch = 'unstable',
+    use { 'nvim-neorg/neorg',
         config = function()
 			require('neorg').setup {
 				load = {
@@ -282,7 +343,7 @@ return require('packer').startup(function(use)
                     ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
                     ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
                 },
-                watch_index = { interval = 1000, follow_files = true },
+                watch_gitdir = { interval = 1000, follow_files = true },
                 attach_to_untracked = true,
                 current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
                 current_line_blame_formatter_opts = { relative_time = false },
@@ -298,7 +359,7 @@ return require('packer').startup(function(use)
                     row = 0,
                     col = 1
                 },
-                use_internal_diff = true,  -- If vim.diff or luajit is present
+                -- diff_opts = { internal = true, }, -- use_internal_diff = true,  -- If vim.diff or luajit is present
                 yadm = { enable = false },
             }
         end
@@ -361,9 +422,11 @@ return require('packer').startup(function(use)
                         end
                     end, { 'i', 's' }),
                 },
-                documentation = {
-                    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-				    winhighlight = 'FloatBorder:TelescopeBorder',  
+                window = {
+                  documentation = {
+                      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				      winhighlight = 'FloatBorder:TelescopeBorder',  
+                  },
                 },
                 sources = {
                     { name = "luasnip"  }, { name = "nvim_lua" },
@@ -429,15 +492,29 @@ return require('packer').startup(function(use)
         run = ':TSUpdate',
         config = function()
             local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-			parser_configs.norg = {
+			      parser_configs.norg = {
                 install_info = {
                     url = "https://github.com/nvim-neorg/tree-sitter-norg",
                     files = { "src/parser.c", "src/scanner.cc" },
                     branch = "main"
                 },
             }
+            parser_configs.norg_meta = {
+                install_info = {
+                    url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+                    files = { "src/parser.c" },
+                    branch = "main"
+                },
+            }
+            parser_configs.norg_table = {
+                install_info = {
+                    url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+                    files = { "src/parser.c" },
+                    branch = "main"
+                },
+            }
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg" },
+				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg", "norg_meta", "norg_table" },
 				rainbow = {
 				    enable = true,
 				    extended_mode = true,

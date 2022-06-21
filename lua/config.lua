@@ -78,6 +78,8 @@ cmd('set cursorlineopt=number')
 
 cmd('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
 
+cmd('set autoread')
+
 -- Ctags
 vim.cmd [[ autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi ]]
 vim.cmd [[ autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw! ]]
@@ -310,22 +312,24 @@ require("dapui").setup({
     edit = "e",
     repl = "r",
   },
-  sidebar = {
+  layouts = {
+    {
     -- You can change the order of elements in the sidebar
-    elements = {
-      -- Provide as ID strings or tables with "id" and "size" keys
-      { id = "breakpoints", size = 0.15 },
-      { id = "scopes", size = 0.65, }, -- Can be float or integer > 1
-      { id = "stacks", size = 0.25 },
-      -- { id = "watches", size = 0.25 },
+      elements = {
+        -- Provide as ID strings or tables with "id" and "size" keys
+        { id = "breakpoints", size = 0.15 },
+        { id = "scopes", size = 0.65, }, -- Can be float or integer > 1
+        { id = "stacks", size = 0.25 },
+        -- { id = "watches", size = 0.25 },
+      },
+      size = 40,
+      position = "left", -- Can be "left", "right", "top", "bottom"
     },
-    size = 40,
-    position = "left", -- Can be "left", "right", "top", "bottom"
-  },
-  tray = {
-    elements = { },
-    size = 10,
-    position = "bottom", -- Can be "left", "right", "top", "bottom"
+    {
+      elements = { },
+      size = 10,
+      position = "bottom", -- Can be "left", "right", "top", "bottom"
+    },
   },
   floating = {
     max_height = nil, -- These can be integers or a float between 0 and 1.
@@ -335,5 +339,85 @@ require("dapui").setup({
   windows = { indent = 1 },
 })
 -- }}}
+-- SplitOrNew VimL Plugin {{{
+-- " List to contain file paths of existing buffers
+cmd('let g:SplitOrNew_names = []')
+
+-- " Populate g:SplitOrNew_names with the full paths of files in open buffers
+cmd([[
+  function! s:list_names()
+    for l:k in getbufinfo()
+        for l:j in keys(l:k)
+            if l:j == 'name'
+                call add( g:SplitOrNew_names, l:k[l:j])
+            endif
+        endfor
+    endfor
+  endfunction
+]])
+
+-- " Determine if a list has an item
+cmd(
+  [[function! s:list_contains(needle, haystack)
+    for l:hay in a:haystack
+        echom l:hay .. ' ' .. a:needle
+        if l:hay == a:needle
+            return 1
+        endif
+    endfor
+    return 0
+  endfunction
+]])
+
+-- " Open a split or edit existing split based on if the file has an existing buffer
+cmd([[
+  function! SplitOrNew(file)
+    " repopulate the name list
+    let g:SplitOrNew_names = []
+    call s:list_names()
+    " Get the entire path of a file. This is what Vims internal representation
+    " of a buffer, or at least the one that's most useful in this scenario
+    " buffer exists
+    let l:full_path = fnamemodify(a:file, ':p')
+    if  s:list_contains(l:full_path, g:SplitOrNew_names) == 1
+        " Bring file into current active buffer
+        execute ':e ' a:file
+    else
+        " Create Split with new file
+        execute ':vsp ' a:file
+    endif
+  endfunction
+]])
+
+-- " Define a command that takes one argument and accepts file paths as completions
+cmd([[ command! -nargs=1 -complete=file SplitOrNew call SplitOrNew('<args>') ]])
+-- }}}
+cmd([[
+  func! GodotSettings() abort
+      setlocal foldmethod=expr
+      setlocal tabstop=4
+      nnoremap <buffer> <F4> :GodotRunLast<CR>
+      nnoremap <buffer> <F5> :GodotRun<CR>
+      nnoremap <buffer> <F6> :GodotRunCurrent<CR>
+      nnoremap <buffer> <F7> :GodotRunFZF<CR>
+  endfunc
+  augroup godot | au!
+      au FileType gdscript call GodotSettings()
+  augroup end
+]])
+
+cmd([[
+  let g:tagbar_type_gdscript = {
+			  \'ctagstype' :'gdscript',
+			  \'kinds':[
+			  \'v:variables',
+			  \'f:functions',
+			  \]
+			  \}
+]])
+
+cmd([[
+let g:godot_executable = '/usr/bin/godot'
+]])
 -- }}}
 -- [[ ----------------------------------------------------------------------- ]]

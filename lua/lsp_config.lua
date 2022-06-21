@@ -146,38 +146,39 @@ local on_attach = function(client, bufnr)
     })
     -- Lspkind {{{
     require('lspkind').init({
-        with_text = false,
-        preset = 'default',
-        symbol_map = {
-          Text = "",
-          Method = "",
-          Function = "",
-          Constructor = "",
-          Field = "ﰠ",
-          Variable = "",
-          Class = "ﴯ",
-          Interface = "",
-          Module = "",
-          Property = "ﰠ",
-          Unit = "塞",
-          Value = "",
-          Enum = "",
-          Keyword = "",
-          Snippet = "",
-          Color = "",
-          File = "",
-          Reference = "",
-          Folder = "",
-          EnumMember = "",
-          Constant = "",
-          Struct = "פּ",
-          Event = "",
-          Operator = "",
-          TypeParameter = ""
-        },
+      -- with_text = false,
+      mode = "symbol_text",
+      preset = 'default',
+      symbol_map = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+      },
     })
     -- }}}
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_exec(
         [[
             hi LspReferenceRead  gui=bold guibg=#1b1b29 blend=10
@@ -240,5 +241,7 @@ for _, lsp in ipairs(servers) do
         flags = { debounce_text_changes = 150, }
     }
 end
+
+nvim_lsp.gdscript.setup { capabilities = capabilities, cmd = { "nc", "127.0.0.1", "6008" } }
 -- }}}
 -- [[ ----------------------------------------------------------------------- ]]
