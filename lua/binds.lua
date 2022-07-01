@@ -160,6 +160,7 @@ map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>')
 map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>')
 
 map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>')
+map('n', '<leader>tp',  '<cmd>Telescope projects<cr>')
 map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>')
 map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>')
 map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>')

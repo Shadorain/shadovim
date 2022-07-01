@@ -21,6 +21,9 @@ vim.opt.softtabstop = 4
 cmd('au FileType norg set shiftwidth=2')
 cmd('au FileType norg set tabstop=2')
 cmd('au FileType norg set softtabstop=2')
+cmd('au FileType lua set shiftwidth=2')
+cmd('au FileType lua set tabstop=2')
+cmd('au FileType lua set softtabstop=2')
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 vim.opt.autoindent = true
@@ -100,6 +103,9 @@ local null_ls = require('null-ls')
 require('crates').setup {
      null_ls = { enabled = true, name = "crates.nvim", },
 }
+--- }}}
+--- Comment {{{
+require('Comment').setup()
 --- }}}
 --- Illuminate {{{
 vim.g.Illuminate_ftblacklist = {'alpha', 'NvimTree', 'Startify'}
@@ -654,6 +660,8 @@ local new_maker = function(filepath, bufnr, opts)
   }):sync()
 end
 
+require('telescope').load_extension('projects')
+
 local actions = require('telescope.actions')
 require('telescope').setup{
     defaults = {
@@ -684,7 +692,7 @@ require('telescope').setup{
             prompt_position = "bottom",
         },
         file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-        file_ignore_patterns = {},
+        file_ignore_patterns = { "target", "build", "bin" },
         generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
         border = {},
         borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
@@ -700,23 +708,21 @@ require('telescope').setup{
 }
 --- }}}
 --- IndentBlankLine {{{
-vim.cmd[[hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=10]]
-vim.cmd[[hi IndentBlanklineIndent2 guifg=#1b1b29 guibg=NONE blend=10]]
-vim.cmd[[hi IndentBlanklineIndent3 guifg=#1b1b29 guibg=NONE blend=10]]
-vim.cmd[[hi IndentBlanklineIndent4 guifg=#1b1b29 guibg=NONE blend=10]]
-vim.cmd[[hi IndentBlanklineIndent5 guifg=#1b1b29 guibg=NONE blend=10]]
-vim.cmd[[hi IndentBlanklineIndent6 guifg=#1b1b29 guibg=NONE blend=10]]
 vim.g.indentLine_enabled = 1
-vim.g.indent_blankline_char = "▏" -- "▏"
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-vim.g.indent_blankline_show_first_indent_level = true
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_show_current_context = true
+vim.g.indent_blankline_char = "▏"
+vim.g.indent_blankline_show_blankline_indent = 0
+vim.g.indent_blankline_show_first_indent_level = 0
+vim.g.indent_blankline_use_treesitter = 1
+vim.g.indent_blankline_use_treesitter_scope = 1
+vim.g.indent_blankline_show_current_context = 1
+vim.g.indent_blankline_show_current_context_start = 0
 vim.g.indent_blankline_context_highlight_list = { 'Define' }
 
 vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer", "norg" }
 vim.g.indent_blankline_buftype_exclude =  { "terminal", "norg", "TelescopePrompt", "Startify" }
 require('indent_blankline').setup {
+  show_current_context = true,
+  show_current_context_start = false,
   char_highlight_list = {
     "IndentBlanklineIndent1", "IndentBlanklineIndent2",
     "IndentBlanklineIndent3", "IndentBlanklineIndent4",
@@ -743,7 +749,7 @@ null_ls.setup {
       extra_filetypes = { "toml" },
       extra_args = { "--no-semi", "--single-quote" },
     },
-    null_ls.builtins.code_actions.gitsigns,
+    -- null_ls.builtins.code_actions.gitsigns,
     null_ls.builtins.completion.luasnip,
     null_ls.builtins.completion.tags,
     null_ls.builtins.diagnostics.checkmake,
@@ -913,6 +919,7 @@ dap.defaults.fallback.external_terminal = {
 }
 --- }}}
 --- DAP UI {{{
+vim.fn.sign_define('DapBreakpoint', {text="", texthl='DiagnosticSignError', linehl='', numhl=''})
 require("dapui").setup({
   icons = { expanded = "▾", collapsed = "▸" },
   mappings = {

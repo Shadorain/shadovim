@@ -81,10 +81,11 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<space>co', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua require("mod").code_actions()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts) -- Until i can get a nicer picker ;(
+    -- buf_set_keymap('n', '<space>ca', '<cmd>lua require("mod").code_actions()<CR>', opts)
     buf_set_keymap('v', '<space>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
     buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '<space>e',  '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
@@ -146,19 +147,25 @@ local on_attach = function(client, bufnr)
       },
     })
     -- }}}
-    if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_exec(
-        [[
-            hi LspReferenceRead  gui=bold guibg=#1b1b29 blend=10
-            hi LspReferenceText  gui=bold guibg=#1b1b29 blend=10
-            hi LspReferenceWrite gui=bold guibg=#1b1b29 blend=10
-            augroup lsp_document_highlight
-            autocmd! * <buffer>
-            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            augroup END
-        ]], false)
-    end
+    local status_ok, illuminate = pcall(require, "illuminate")
+      if not status_ok then
+        return
+      end
+    illuminate.on_attach(client)
+    -- if client.server_capabilities.documentHighlightProvider then
+        
+        -- vim.api.nvim_exec(
+        -- [[
+        --     hi LspReferenceRead  gui=bold guibg=#1b1b29 blend=10
+        --     hi LspReferenceText  gui=bold guibg=#1b1b29 blend=10
+        --     hi LspReferenceWrite gui=bold guibg=#1b1b29 blend=10
+        --     augroup lsp_document_highlight
+        --     autocmd! * <buffer>
+        --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        --     augroup END
+        -- ]], false)
+    -- end
 end
 -- }}}
 -- Lsp Init {{{
