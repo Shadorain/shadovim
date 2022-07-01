@@ -26,38 +26,6 @@ local border = {
 -- {"╰", "FloatBorder"},
 -- {"│", "FloatBorder"},
 -- }}}
--- Icons {{{
-local M = {}
-M.icons = {
-  Class = " ",
-  Color = " ",
-  Constant = " ",
-  Constructor = " ",
-  Enum = "了 ",
-  EnumMember = " ",
-  Field = " ",
-  File = " ",
-  Folder = " ",
-  Function = " ",
-  Interface = "ﰮ ",
-  Keyword = " ",
-  Method = "ƒ ",
-  Module = " ",
-  Property = " ",
-  Snippet = "﬌ ",
-  Struct = " ",
-  Text = " ",
-  Unit = " ",
-  Value = " ",
-  Variable = " ",
-}
-function M.setup()
-  local kinds = vim.lsp.protocol.CompletionItemKind
-  for i, kind in ipairs(kinds) do
-    kinds[i] = M.icons[kind] or kind
-  end
-end
--- }}}
 -- Sign defining {{{
 -- local signs = { Error = "× ", Warning = " ", Hint = " ", Information = " " }
 -- local signs = { Error = "⮀ ", Warning = "", Hint = "", Information = "🞧 " }
@@ -233,7 +201,7 @@ local rs_opts = {
 require('rust-tools').setup(rs_opts)
 --- }}}
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd' }
+local servers = { 'clangd', 'taplo' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,

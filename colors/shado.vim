@@ -246,6 +246,15 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi BookmarkLine guibg=NONE guifg=NONE
   hi BookmarkAnnotationSign guibg=NONE guifg=#5d5daf
   hi BookmarkAnnotationLine guibg=NONE guifg=NONE
+
+  " IndentBlankLine
+  hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=10
+  hi IndentBlanklineIndent2 guifg=#1b1b29 guibg=NONE blend=10
+  hi IndentBlanklineIndent3 guifg=#1b1b29 guibg=NONE blend=10
+  hi IndentBlanklineIndent4 guifg=#1b1b29 guibg=NONE blend=10
+  hi IndentBlanklineIndent5 guifg=#1b1b29 guibg=NONE blend=10
+  hi IndentBlanklineIndent6 guifg=#1b1b29 guibg=NONE blend=10
+
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function

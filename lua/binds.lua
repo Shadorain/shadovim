@@ -151,9 +151,6 @@ map('t', '<leader>bn', '<C-\\><C-n>:FloatermPrev<CR>', { noremap = true, silent 
 map('t', '<leader>bb', '<C-\\><C-n>:FloatermNext<CR>', { noremap = true, silent = true })
 map('t', '<leader>bk', '<C-\\><C-n>:FloatermKill<CR>', { noremap = true, silent = true })
 ---- }}}
----- Commentary {{{
-map('n', '<leader>//', ':Commentary<CR>')
----- }}}
 ---- Telescope {{{
 map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>')
 map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>')
