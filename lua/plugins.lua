@@ -48,6 +48,37 @@ return require('packer').startup(function(use)
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     use { "ravenxrz/DAPInstall.nvim" }
     use { 'ahmedkhalf/project.nvim' }
+    use { 'nacro90/numb.nvim' }
+    use { 'rcarriga/nvim-notify' }
+    use { 'filipdutescu/renamer.nvim' }
+    use { 'tiagovla/scope.nvim' }
+    use { 'abecodes/tabout.nvim',
+        config = function()
+          require('tabout').setup {
+          tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+          backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+          act_as_tab = true, -- shift content if tab out is not possible
+          act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+          default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+          default_shift_tab = '<C-d>', -- reverse shift default action,
+          enable_backwards = true, -- well ...
+          completion = true, -- if the tabkey is used in a completion pum
+          tabouts = {
+            {open = "'", close = "'"},
+            {open = '"', close = '"'},
+            {open = '`', close = '`'},
+            {open = '(', close = ')'},
+            {open = '[', close = ']'},
+            {open = '{', close = '}'}
+          },
+          ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+          exclude = {} -- tabout will ignore these filetypes
+      }
+      end,
+	    wants = {'nvim-treesitter'}, -- or require if not used so far
+	    after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
+    }
+    use { 'folke/zen-mode.nvim' }
 
     -- [[ Git integration ]]
     use { 'nvim-lua/popup.nvim' }
@@ -93,12 +124,12 @@ return require('packer').startup(function(use)
     -- [[ Make it pretty ]]
     use { 'kyazdani42/nvim-web-devicons' }      --- icons
     use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
-    use { 'junegunn/goyo.vim' }                 --- focus
     use { 'xiyaowong/nvim-transparent' }        --- transparency
     use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
     use { 'kdheepak/tabline.nvim', requires = { {'hoob3rt/lualine.nvim'}, {'kyazdani42/nvim-web-devicons', opt = true} } }
     use { 'lukas-reineke/indent-blankline.nvim' }
     use { 'RRethy/vim-illuminate' }
+    use {'stevearc/dressing.nvim'}
 
     -- [[ Finders ]]
     use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc

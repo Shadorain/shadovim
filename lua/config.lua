@@ -98,10 +98,202 @@ vim.g.floaterm_wintitle = 0
 vim.g.floaterm_autoclose = 1
 vim.g.floaterm_title = 0
 --- }}}
+--- Renamer {{{
+vim.api.nvim_set_keymap(
+	"i",
+	"<F2>",
+	'<cmd>lua require("renamer").rename({empty = true})<cr>',
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<F2>",
+	'<cmd>lua require("renamer").rename({empty = true})<cr>',
+	{ noremap = true, silent = true }
+)
+local mappings_utils = require("renamer.mappings.utils")
+require('renamer').setup({
+	title = "Rename",
+	padding = { top = 0, left = 0, bottom = 0, right = 0 },
+	border = true,
+	border_chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+	-- Whether or not to highlight the current word references through LSP
+	show_refs = true,
+	-- The keymaps available while in the `renamer` buffer. The example below
+	-- overrides the default values, but you can add others as well.
+	mappings = {
+		["<c-i>"] = mappings_utils.set_cursor_to_start,
+		["<c-a>"] = mappings_utils.set_cursor_to_end,
+		["<c-e>"] = mappings_utils.set_cursor_to_word_end,
+		["<c-b>"] = mappings_utils.set_cursor_to_word_start,
+		["<c-c>"] = mappings_utils.clear_line,
+		["<c-u>"] = mappings_utils.undo,
+		["<c-r>"] = mappings_utils.redo,
+	},
+})
+--- }}}
+--- Scope {{{
+require("scope").setup()
+--- }}}
+--- Notify {{{
+require('notify').setup {
+  -- Animation style (see below for details)
+  stages = "fade_in_slide_out",
+
+  -- Function called when a new window is opened, use for changing win settings/config
+  on_open = nil,
+
+  -- Function called when a window is closed
+  on_close = nil,
+
+  -- Render function for notifications. See notify-render()
+  render = "default",
+
+  -- Default timeout for notifications
+  timeout = 175,
+
+  -- For stages that change opacity this is treated as the highlight behind the window
+  -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
+  background_colour = "Normal",
+
+  -- Minimum width for notification windows
+  minimum_width = 10,
+
+  -- Icons for the different levels
+  -- icons = {
+  --   ERROR = icons.diagnostics.Error,
+  --   WARN = icons.diagnostics.Warning,
+  --   INFO = icons.diagnostics.Information,
+  --   DEBUG = icons.ui.Bug,
+  --   TRACE = icons.ui.Pencil,
+  -- },
+}
+--- }}}
+--- Dressing {{{
+require('dressing').setup({
+  input = {
+    -- Set to false to disable the vim.ui.input implementation
+    enabled = true,
+    default_prompt = "❱ ", -- Default prompt string
+    prompt_align = "left", -- Can be 'left', 'right', or 'center'
+    insert_only = true, -- When true, <Esc> will close the modal
+    anchor = "SW", -- These are passed to nvim_open_win
+    border = "single",
+    relative = "cursor", -- 'editor' and 'win' will default to being centered
+
+    -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+    prefer_width = 40,
+    width = nil,
+    -- min_width and max_width can be a list of mixed types.
+    -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
+    max_width = { 140, 0.9 },
+    min_width = { 20, 0.2 },
+
+    winblend = 10, -- Window transparency (0-100)
+    winhighlight = "", -- Change default highlight groups (see :help winhl)
+
+    -- This is the config that will be passed to nvim_open_win.
+    -- Change values here to customize the layout
+    override = function(conf)
+      return conf
+    end,
+
+    get_config = nil, -- see :help dressing_get_config
+  },
+  select = {
+    -- Set to false to disable the vim.ui.select implementation
+    enabled = true,
+    -- Priority list of preferred vim.select implementations
+    backend = { "fzf_lua", "fzf", "builtin", "nui" },
+    trim_prompt = true, -- Trim trailing `:` from prompt
+
+    -- Options for telescope selector
+    -- These are passed into the telescope picker directly. Can be used like:
+    -- telescope = require('telescope.themes').get_ivy({...})
+    telescope = nil,
+
+    fzf = { window = { width = 0.5, height = 0.4, }, },
+    fzf_lua = { winopts = { width = 0.5, height = 0.4, }, },
+
+    -- Options for nui Menu
+    nui = {
+      position = "50%",
+      size = nil,
+      relative = "editor",
+      border = { style = "single", },
+      buf_options = { swapfile = false, filetype = "DressingSelect", },
+      win_options = { winblend = 10, },
+      max_width = 80,
+      max_height = 40,
+      min_width = 40,
+      min_height = 10,
+    },
+
+    -- Options for built-in selector
+    builtin = {
+      anchor = "NW", -- These are passed to nvim_open_win
+      border = "rounded",
+      relative = "editor", -- 'editor' and 'win' will default to being centered
+
+      winblend = 70, -- Window transparency (0-100)
+      winhighlight = "", -- Change default highlight groups (see :help winhl)
+
+      -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+      -- the min_ and max_ options can be a list of mixed types.
+      -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
+      width = nil,
+      max_width = { 140, 0.8 },
+      min_width = { 40, 0.2 },
+      height = nil,
+      max_height = 0.9,
+      min_height = { 10, 0.2 },
+
+      -- This is the config that will be passed to nvim_open_win.
+      -- Change values here to customize the layout
+      override = function(conf)
+        return conf
+      end,
+    },
+
+    -- Used to override format_item. See :help dressing-format
+    format_item_override = {},
+
+    -- see :help dressing_get_config
+    get_config = nil,
+  },
+})
+--- }}}
 --- Crates {{{
 local null_ls = require('null-ls')
 require('crates').setup {
      null_ls = { enabled = true, name = "crates.nvim", },
+}
+--- }}}
+--- Zen Mode {{{
+require('zen-mode').setup({
+  window = {
+	backdrop = 1,
+	height = 0.9, -- height of the Zen window
+	width = 0.85,
+	options = {
+	  signcolumn = "no", -- disable signcolumn
+	  number = false, -- disable number column
+	  relativenumber = false, -- disable relative numbers
+   },
+  },
+  plugins = {
+    gitsigns = { enabled = false }, -- disables git signs
+    tmux = { enabled = false },
+    twilight = { enabled = true },
+  },
+})
+--- }}}
+--- Numb {{{
+require('numb').setup{
+  show_numbers = true, -- Enable 'number' for the window while peeking
+  show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+  number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+  centered_peeking = true, -- Peeked line will be centered relative to window
 }
 --- }}}
 --- Comment {{{

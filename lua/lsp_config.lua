@@ -89,7 +89,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-    vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false })
+    vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false, width = 60 })
     vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false })
     require "lsp_signature".on_attach({
         bind = true,
@@ -216,7 +216,5 @@ for _, lsp in ipairs(servers) do
         flags = { debounce_text_changes = 150, }
     }
 end
-
-nvim_lsp.gdscript.setup { capabilities = capabilities, cmd = { "nc", "127.0.0.1", "6008" } }
 -- }}}
 -- [[ ----------------------------------------------------------------------- ]]

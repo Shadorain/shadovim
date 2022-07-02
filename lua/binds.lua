@@ -86,6 +86,11 @@ map('i', ';;', '<Esc>A;<Esc>')
 -- Moves cursor to next position or further
 cmd("inoremap <expr> <C-l> getline('.')[col('.')-1] =~? '[]>)}''\"`]' ? '<Right>' : '<Right>'")
 --- }}}
+--- Compilation/Debug/Program Management {{{
+map('n', '<Leader>cb', ':Cargo build<CR>')
+map('n', '<Leader>cr', ':Cargo run<CR>')
+map('n', '<Leader>cc', ':Cargo check<CR>')
+--- }}}
 -- [[ Leader / Plugin Bindings ]] ------------------------------------------- ]]
 --- Misc {{{
 -- Search and Replace
