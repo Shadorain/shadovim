@@ -28,115 +28,117 @@ require('packer').init({
 --- }}}
 -- [[ Plugins ]] ------------------------------------------------------------ ]]
 return require('packer').startup(function(use)
-    -- [[ Packer ]]
-    use { 'wbthomason/packer.nvim' }
+  -- [[ Packer ]]
+  use { 'wbthomason/packer.nvim' }
 
-    -- [[ Speed up ]]
-    use { 'lewis6991/impatient.nvim', opt = true, config = function() require('impatient') end }
+  -- [[ Speed up ]]
+  use { 'lewis6991/impatient.nvim', opt = true, config = function() require('impatient') end }
 
-    -- [[ Utility ]]
-    use { 'nvim-lua/plenary.nvim' }        --- general utilities
-    use { 'vim-scripts/genutils' }         --- general utilities
-    use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
-    use { 'voldikss/vim-floaterm' }        --- Terminal
-    use { 'edluffy/specs.nvim' }           --- cursor beacon
-    use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
-    use { 'godlygeek/tabular' }            --- tabbing
-    use { 'jiangmiao/auto-pairs' }
-    use { 'numToStr/Comment.nvim' }        --- commenting
-    use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    use { "ravenxrz/DAPInstall.nvim" }
-    use { 'ahmedkhalf/project.nvim' }
-    use { 'nacro90/numb.nvim' }
-    use { 'rcarriga/nvim-notify' }
-    use { 'filipdutescu/renamer.nvim' }
-    use { 'tiagovla/scope.nvim' }
-    use { 'abecodes/tabout.nvim',
-        config = function()
-          require('tabout').setup {
-          tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
-          backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-          act_as_tab = true, -- shift content if tab out is not possible
-          act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-          default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-          default_shift_tab = '<C-d>', -- reverse shift default action,
-          enable_backwards = true, -- well ...
-          completion = true, -- if the tabkey is used in a completion pum
-          tabouts = {
-            {open = "'", close = "'"},
-            {open = '"', close = '"'},
-            {open = '`', close = '`'},
-            {open = '(', close = ')'},
-            {open = '[', close = ']'},
-            {open = '{', close = '}'}
-          },
-          ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-          exclude = {} -- tabout will ignore these filetypes
-      }
-      end,
-	    wants = {'nvim-treesitter'}, -- or require if not used so far
-	    after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
-    }
-    use { 'folke/zen-mode.nvim' }
-
-    -- [[ Git integration ]]
-    use { 'nvim-lua/popup.nvim' }
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-
-    -- [[ Coding ]]
-    --- [[ LSP & Completion ]] {{{
-    use { 'neovim/nvim-lspconfig' } --- Native LSP
-    use { 'jose-elias-alvarez/null-ls.nvim' }
-    use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
-    use { 'hrsh7th/nvim-cmp', requires = { --- Autocompletion
-        { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-        { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-        { 'delphinus/cmp-ctags', after = 'nvim-cmp' },
-        { 'L3MON4D3/LuaSnip' },
+  -- [[ Utility ]]
+  use { 'nvim-lua/plenary.nvim' }        --- general utilities
+  use { 'vim-scripts/genutils' }         --- general utilities
+  use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
+  use { 'voldikss/vim-floaterm' }        --- Terminal
+  use { 'edluffy/specs.nvim' }           --- cursor beacon
+  use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
+  use { 'godlygeek/tabular' }            --- tabbing
+  use { 'jiangmiao/auto-pairs' }
+  use { 'numToStr/Comment.nvim' }        --- commenting
+  use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use { "ravenxrz/DAPInstall.nvim" }
+  use { 'ahmedkhalf/project.nvim' }
+  use { 'nacro90/numb.nvim' }
+  use { 'rcarriga/nvim-notify' }
+  use { 'filipdutescu/renamer.nvim' }
+  use { 'tiagovla/scope.nvim' }
+  use { 'abecodes/tabout.nvim',
+    config = function()
+      require('tabout').setup {
+      tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+      backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+      act_as_tab = true, -- shift content if tab out is not possible
+      act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+      default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+      default_shift_tab = '<C-d>', -- reverse shift default action,
+      enable_backwards = true, -- well ...
+      completion = true, -- if the tabkey is used in a completion pum
+      tabouts = {
+        {open = "'", close = "'"},
+        {open = '"', close = '"'},
+        {open = '`', close = '`'},
+        {open = '(', close = ')'},
+        {open = '[', close = ']'},
+        {open = '{', close = '}'}
       },
+      ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+      exclude = {} -- tabout will ignore these filetypes
     }
-    use { 'onsails/lspkind-nvim' }
+    end,
+	  wants = {'nvim-treesitter'}, -- or require if not used so far
+	  after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
+  }
+  use { 'folke/zen-mode.nvim' }
+
+  -- [[ Git integration ]]
+  use { 'nvim-lua/popup.nvim' }
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+  -- [[ Coding ]]
+  --- [[ LSP & Completion ]] {{{
+  use { 'neovim/nvim-lspconfig' } --- Native LSP
+  use { 'jose-elias-alvarez/null-ls.nvim' }
+  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
+  use { 'hrsh7th/nvim-cmp', requires = { --- Autocompletion
+      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+      { 'delphinus/cmp-ctags', after = 'nvim-cmp' },
+      { 'L3MON4D3/LuaSnip' },
+    },
+  }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  
+  use { 'onsails/lspkind-nvim' }
 	use { 'ray-x/lsp_signature.nvim', module = 'lsp_signature' }
-    use { 'rafamadriz/friendly-snippets' } --- extra snippets
+  use { 'rafamadriz/friendly-snippets' } --- extra snippets
 	use { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" } }
-    --- }}}
-    --- [[ Treesitter ]] {{{
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
-    use { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' }
+  --- }}}
+  --- [[ Treesitter ]] {{{
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
+  use { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' }
 	use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
 	use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
 	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
     --- }}}
-    --- [[ Languages ]]
-    use { 'sheerun/vim-polyglot' }     --- *
-    use { 'rust-lang/rust.vim' }       --- rust!
-    use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
-    use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
-    use { 'saecki/crates.nvim' }       --- cargo crates!
-    use { 'nvim-neorg/neorg' } --, after = "nvim-treesitter" }
+  --- [[ Languages ]]
+  use { 'sheerun/vim-polyglot' }     --- *
+  use { 'rust-lang/rust.vim' }       --- rust!
+  use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
+  use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
+  use { 'saecki/crates.nvim' }       --- cargo crates!
+  use { 'nvim-neorg/neorg' } --, after = "nvim-treesitter" }
 
-    -- [[ Make it pretty ]]
-    use { 'kyazdani42/nvim-web-devicons' }      --- icons
-    use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
-    use { 'xiyaowong/nvim-transparent' }        --- transparency
-    use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
-    use { 'kdheepak/tabline.nvim', requires = { {'hoob3rt/lualine.nvim'}, {'kyazdani42/nvim-web-devicons', opt = true} } }
-    use { 'lukas-reineke/indent-blankline.nvim' }
-    use { 'RRethy/vim-illuminate' }
-    use {'stevearc/dressing.nvim'}
+  -- [[ Make it pretty ]]
+  use { 'kyazdani42/nvim-web-devicons' }      --- icons
+  use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
+  use { 'xiyaowong/nvim-transparent' }        --- transparency
+  use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+  use { 'kdheepak/tabline.nvim', requires = { {'hoob3rt/lualine.nvim'}, {'kyazdani42/nvim-web-devicons', opt = true} } }
+  use { 'lukas-reineke/indent-blankline.nvim' }
+  use { 'RRethy/vim-illuminate' }
+  use {'stevearc/dressing.nvim'}
 
-    -- [[ Finders ]]
-    use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
-    use { 'unblevable/quick-scope' }        --- horizonal movement
+  -- [[ Finders ]]
+  use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
+  use { 'unblevable/quick-scope' }        --- horizonal movement
 
-    -- [[ Miscellaneous ]]
-    use { 'mhinz/vim-startify' } --- Start Screen
-    use { 'jghauser/mkdir.nvim', config = function() require('mkdir') end, event = "BufWritePre" }
+  -- [[ Miscellaneous ]]
+  use { 'mhinz/vim-startify' } --- Start Screen
+  use { 'jghauser/mkdir.nvim', config = function() require('mkdir') end, event = "BufWritePre" }
 end)
 -- [[ ----------------------------------------------------------------------- ]]

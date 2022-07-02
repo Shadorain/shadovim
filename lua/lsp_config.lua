@@ -43,9 +43,10 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
-vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false})')
+vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, width = 60})')
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -59,6 +60,9 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 -- }}}
 -- On attach {{{
+vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false, width = 60 })
+vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false, width = 60 })
+
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -74,6 +78,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '[d',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<space>cl', '<cmd>lua vim.lsp.codelens.run()<CR>', opts)
     buf_set_keymap('n', '<space>gr', '<cmd>lua require("mod").lsp_references()<CR>', opts)
     buf_set_keymap('n', '<space>gi', '<cmd>lua require("mod").lsp_implementations()<CR>', opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
@@ -89,9 +94,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-    vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false, width = 60 })
-    vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false })
-    require "lsp_signature".on_attach({
+    require("lsp_signature").on_attach({
         bind = true,
         floating_window = true,
         floating_window_above_cur_line = true,
@@ -113,6 +116,7 @@ local on_attach = function(client, bufnr)
         timer_interval = 200,
         toggle_key = '<M-f>',
     })
+    require("lsp_signature").setup()
     -- Lspkind {{{
     require('lspkind').init({
       -- with_text = false,
@@ -171,39 +175,53 @@ end
 -- Lsp Init {{{
 --- Rust-tools {{{
 local rs_opts = {
-    tools = {
-        autoSetHints = true,
-        hover_with_actions = true,
-        parent_module = true,
-        join_lines = true,
-        runnables = { use_telescope = true },
-        debuggables = { use_telescope = true },
-        inlay_hints = {
-            only_current_line = false,
-            only_current_line_autocmd = "CursorHold",
-            show_parameter_hints = true,
-            parameter_hints_prefix = "❰ ",
-            other_hints_prefix = "≣ ",
-            max_len_align = false,
-            max_len_align_padding = 1,
-            right_align = false,
-            right_align_padding = 7,
-            highlight = "Comment",
-        },
-        hover_actions = {
-            auto_focus = false,
-            border = {
-                {"╭", "FloatBorder"}, {"─", "FloatBorder"},
-                {"╮", "FloatBorder"}, {"│", "FloatBorder"},
-                {"╯", "FloatBorder"}, {"─", "FloatBorder"},
-                {"╰", "FloatBorder"}, {"│", "FloatBorder"}
-            }
-        },
+  tools = {
+    on_initialized = function()
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+        pattern = { "*.rs" },
+        callback = function()
+          vim.lsp.codelens.refresh()
+        end,
+      })
+    end,
+    autoSetHints = true,
+    hover_with_actions = true,
+    parent_module = true,
+    join_lines = true,
+    runnables = { use_telescope = true },
+    debuggables = { use_telescope = true },
+    inlay_hints = {
+      only_current_line = false,
+      only_current_line_autocmd = "CursorHold",
+      show_parameter_hints = true,
+      parameter_hints_prefix = "❰ ",
+      other_hints_prefix = "≣ ",
+      max_len_align = false,
+      max_len_align_padding = 1,
+      right_align = false,
+      right_align_padding = 7,
+      highlight = "Comment",
     },
-    server = {
-      on_attach = on_attach,
-      capabilities = capabilities,
+    hover_actions = {
+      auto_focus = false,
+      border = {
+        {"╭", "FloatBorder"}, {"─", "FloatBorder"},
+        {"╮", "FloatBorder"}, {"│", "FloatBorder"},
+        {"╯", "FloatBorder"}, {"─", "FloatBorder"},
+        {"╰", "FloatBorder"}, {"│", "FloatBorder"}
+      }
     },
+  },
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      ["rust-analyzer"] = {
+        lens = { enable = true },
+        checkOnSave = { command = "clippy" },
+      },
+    },
+  },
 }
 require('rust-tools').setup(rs_opts)
 --- }}}

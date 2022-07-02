@@ -139,7 +139,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi NonText guifg=#2f3037 guibg=NONE
   " hi NonText guifg=#E9729D guibg=NONE
 
-  hi Underlined guifg=#458FAA guibg=NONE gui=underline
+  hi Underlined guifg=#5d5daf guibg=NONE gui=underline
   hi SpellBad guifg=NONE guibg=NONE gui=undercurl
   hi SpellCap guifg=NONE guibg=NONE gui=undercurl
   hi SpellLocal guifg=NONE guibg=NONE gui=undercurl
@@ -254,6 +254,11 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi IndentBlanklineIndent4 guifg=#1b1b29 guibg=NONE blend=10
   hi IndentBlanklineIndent5 guifg=#1b1b29 guibg=NONE blend=10
   hi IndentBlanklineIndent6 guifg=#1b1b29 guibg=NONE blend=10
+
+  " CodeLens
+  hi LspCodeLens guifg=#5d5daf guibg=NONE blend=10
+  hi LspCodeLensSeparator guifg=#6272a4 guibg=NONE blend=10
+  hi LspSignatureActiveParameter guifg=#6272a4 guibg=NONE blend=10
 
   " Rust {{{
   hi! link rsForeignConst Constant

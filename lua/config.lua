@@ -336,6 +336,7 @@ local check_backspace = function()
 end
 
 local cmp = require('cmp')
+local compare = require('cmp.config.compare')
 local luasnip = require('luasnip')
 cmp.setup {
   preselect = cmp.PreselectMode.None,
@@ -397,28 +398,57 @@ cmp.setup {
   },
   window = {
     documentation = {
+      max_height = 40,
+      max_width = 70,
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 	  winhighlight = 'FloatBorder:TelescopeBorder',  
     },
   },
   sources = {
-    { name = "luasnip"  }, { name = "nvim_lua" },
-    { name = "nvim_lsp" }, { name = "calc" },
-    { name = "path"     }, { name = "buffer" },
-    { name = "neorg"    }, { name = "cmp_tabnine" },
-    { name = "cmdline"  }, { name = "ctags" },
-    { name = "crates" },
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "cmp_tabnine", group_index = 2 },
+    { name = "luasnip", group_index = 2 },
+    { name = "crates", group_index = 1 },
+    { name = "copilot", group_index = 2 },
+    { name = "ctags", group_index = 2 },
+    { name = "nvim_lua", group_index = 2 },
+    { name = "calc", group_index = 2 },
+    { name = "path", group_index = 2 },
+    { name = "buffer", group_index = 2 },
+    { name = "neorg", group_index = 2 },
+    { name = "cmdline", group_index = 2 },
+  },
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      compare.offset,
+      compare.exact,
+      -- compare.scopes,
+      compare.score,
+      compare.recently_used,
+      compare.locality,
+      -- compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
-        nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
-        buffer = "",
-        path = "",
+      	nvim_lsp = "[L]",
+      	crates = "[C]",
+      	copilot = "[P]",
+      	ctags = "[]]",
+      	cmp_tabnine = "[T]",
+      	buffer = "[B]",
+      	luasnip = "[S]",
+      	calc = "[+]",
+      	cmdline = "[>]",
+      	path = "[/]",
+      	neorg = "[N]",
       })[entry.source.name]
       return vim_item
     end,
@@ -927,6 +957,7 @@ require('project_nvim').setup({
   detection_methods = { "lsp", "pattern" },
   patterns = { ".git", "Cargo.toml", ".hg", ".bzr", ".svn", "Makefile" },
 })
+--- }}}
 --- Null-LS {{{
 local null_ls = require('null-ls')
 
@@ -952,7 +983,6 @@ null_ls.setup {
   },
   update_in_insert = false,
 }
---- }}}
 --- }}}
 --- Vim Bookmarks {{{
 vim.g.bookmark_sign = ''
