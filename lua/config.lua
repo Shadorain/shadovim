@@ -204,13 +204,14 @@ require('dressing').setup({
     -- Set to false to disable the vim.ui.select implementation
     enabled = true,
     -- Priority list of preferred vim.select implementations
-    backend = { "fzf_lua", "fzf", "builtin", "nui" },
+    backend = { "telescope", "fzf", "builtin", "nui" },
     trim_prompt = true, -- Trim trailing `:` from prompt
 
     -- Options for telescope selector
     -- These are passed into the telescope picker directly. Can be used like:
     -- telescope = require('telescope.themes').get_ivy({...})
-    telescope = nil,
+    -- telescope = nil,
+    telescope = require("telescope.themes").get_cursor(),
 
     fzf = { window = { width = 0.5, height = 0.4, }, },
     fzf_lua = { winopts = { width = 0.5, height = 0.4, }, },
@@ -235,7 +236,7 @@ require('dressing').setup({
       border = "rounded",
       relative = "editor", -- 'editor' and 'win' will default to being centered
 
-      winblend = 70, -- Window transparency (0-100)
+      winblend = 60, -- Window transparency (0-100)
       winhighlight = "", -- Change default highlight groups (see :help winhl)
 
       -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -398,10 +399,12 @@ cmp.setup {
   },
   window = {
     documentation = {
-      max_height = 40,
-      max_width = 70,
+      max_height = 30,
+      max_width = 100,
+      width = 80,
+      height = 20,
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	  winhighlight = 'FloatBorder:TelescopeBorder',  
+	    winhighlight = 'FloatBorder:TelescopeBorder',  
     },
   },
   sources = {
@@ -903,7 +906,7 @@ require('telescope').setup{
         results_title = false,
         preview_title = false,
         prompt_prefix = "❱ ",
-        selection_caret = "❱ ",
+        selection_caret = " ",
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
@@ -918,7 +921,7 @@ require('telescope').setup{
         generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
         border = {},
         borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
-        winblend = 20,
+        winblend = 25,
         previewer = true,
         color_devicons = true,
         use_less = false,

@@ -43,7 +43,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
-vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, width = 60})')
+vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -60,8 +60,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 -- }}}
 -- On attach {{{
-vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false, width = 60 })
-vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false, width = 60 })
+vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false, max_width = 80, max_height = 20 })
+vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false, max_width = 80, max_height = 20 })
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -209,7 +209,9 @@ local rs_opts = {
         {"╮", "FloatBorder"}, {"│", "FloatBorder"},
         {"╯", "FloatBorder"}, {"─", "FloatBorder"},
         {"╰", "FloatBorder"}, {"│", "FloatBorder"}
-      }
+      },
+      max_width = 80,
+      max_height = 20,
     },
   },
   server = {

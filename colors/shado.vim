@@ -53,7 +53,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   hi Search guifg=#8be9fd guibg=NONE gui=bold  "#302b30
   hi IncSearch guifg=#8be9fd guibg=NONE guisp=#8897F4 gui=bold
-  hi Visual guifg=NONE guibg=#414453
+  hi Visual guifg=NONE guibg=#262440 blend=10
   hi EndOfBuffer guifg=#E9729D guibg=NONE
   hi Folded guifg=#53606e guibg=NONE
   hi FoldColumn guifg=#53606e guibg=NONE
@@ -151,7 +151,8 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi PmenuThumb guifg=NONE guibg=#1b1b29
 
   hi NormalFloat guibg=NONE
-  hi FloatBorder guifg=#ff79c6
+  hi FloatBorder guifg=#ff79c6 guibg=NONE blend=0
+  hi FloatTitle guifg=#bd93f9 guibg=NONE blend=0
 
   " Treesitter
   hi link TSInclude Define
@@ -207,6 +208,10 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
 
   " Telescope
   hi TelescopeBorder guifg=#bd93f9
+  hi TelescopeSelection guibg=#262440 gui=bold
+  hi TelescopeSelectionCaret guifg=#8897F4 guibg=#262440
+  hi TelescopePromptPrefix guifg=#ff7ab2 
+  hi TelescopeTitle guifg=#ff7ab2 guibg=NONE
 
   " Nvim-Cmp
   hi CmpItemAbbr guifg=#8677d9
