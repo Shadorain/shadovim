@@ -90,6 +90,104 @@ vim.cmd [[ autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --sta
 -- }}}
 -- [[ Plugin Settings ]] ---------------------------------------------------- ]]
 -- {{{
+-- Icons {{{
+local kind_icons = {
+  Class = " ",
+  Color = " ",
+  Constant = " ",
+  Constructor = " ",
+  Enum = "了 ",
+  EnumMember = " ",
+  Field = " ",
+  File = " ",
+  Folder = " ",
+  Function = " ",
+  Interface = "ﰮ ",
+  Keyword = " ",
+  Method = "ƒ ",
+  Module = " ",
+  Property = " ",
+  Snippet = "﬌ ",
+  Struct = " ",
+  Text = " ",
+  Unit = " ",
+  Value = " ",
+  Variable = " ",
+}
+local type_icons = {
+  Array = " ",
+  Number = " ",
+  String = " ",
+  Boolean = "蘒",
+  Object = " ",
+}
+local documents_icons = {
+  File = " ",
+  Files = " ",
+  Folder = " ",
+  OpenFolder = " ",
+}
+local git_icons = {
+  Add = " ",
+  Mod = " ",
+  Remove = " ",
+  Ignore = " ",
+  Rename = " ",
+  Diff = " ",
+  Repo = " ",
+  Octoface = "",
+}
+local ui_icons = {
+  ArrowClosed = " ",
+  ArrowOpen = " ",
+  Lock = " ",
+  Circle = " ",
+  BigCircle = " ",
+  BigUnfilledCircle = " ",
+  Close = " ",
+  NewFile = " ",
+  Search = " ",
+  Lightbulb = " ",
+  Project = " ",
+  Dashboard = " ",
+  History = " ",
+  Comment = " ",
+  Bug = " ",
+  Code = "",
+  Telescope = " ",
+  Gear = " ",
+  Package = " ",
+  List = " ",
+  SignIn = " ",
+  SignOut = " ",
+  Check = " ",
+  Fire = " ",
+  Note = " ",
+  BookMark = " ",
+  Pencil = " ",
+  -- ChevronRight = " ",
+  ChevronRight = "> ",
+  Table = " ",
+  Calendar = " ",
+  CloudDownload = " ",
+}
+local diagnostics_icons = {
+  Error = " ",
+  Warning = " ",
+  Information = " ",
+  Question = " ",
+  Hint = " ",
+}
+local misc_icons = {
+  Robot = "ﮧ ",
+  Squirrel = " ",
+  Tag = " ",
+  Watch = " ",
+  Smiley = "ﲃ ",
+  Package = " ",
+  Rust = ' ',
+}
+-- }}}
 --- Floaterm {{{
 vim.g.floaterm_autoinsert = 1
 vim.g.floaterm_width = 0.5
@@ -135,6 +233,230 @@ require('renamer').setup({
 --- Scope {{{
 require("scope").setup()
 --- }}}
+--- Lir {{{
+local status_ok, lir = pcall(require, "lir")
+if not status_ok then
+  return
+end
+
+local actions = require "lir.actions"
+local mark_actions = require "lir.mark.actions"
+local clipboard_actions = require "lir.clipboard.actions"
+
+lir.setup {
+  show_hidden_files = false,
+  devicons_enable = true,
+  mappings = {
+    ["l"] = actions.edit,
+    ["<C-s>"] = actions.split,
+    ["v"] = actions.vsplit,
+    ["<C-t>"] = actions.tabedit,
+
+    ["h"] = actions.up,
+    ["q"] = actions.quit,
+
+    ["A"] = actions.mkdir,
+    ["a"] = actions.newfile,
+    ["r"] = actions.rename,
+    ["@"] = actions.cd,
+    ["Y"] = actions.yank_path,
+    ["i"] = actions.toggle_show_hidden,
+    ["d"] = actions.delete,
+
+    ["J"] = function()
+      mark_actions.toggle_mark()
+      vim.cmd "normal! j"
+    end,
+    ["c"] = clipboard_actions.copy,
+    ["x"] = clipboard_actions.cut,
+    ["p"] = clipboard_actions.paste,
+  },
+  float = {
+    winblend = 0,
+    curdir_window = {
+      enable = false,
+      highlight_dirname = true,
+    },
+    -- You can define a function that returns a table to be passed as the third
+    -- argument of nvim_open_win().
+    win_opts = function()
+      local width = math.floor(vim.o.columns * 0.2)
+      local height = math.floor(vim.o.lines * 0.2)
+      return {
+        border = "rounded",
+        width = width,
+        height = height,
+        -- row = 1,
+        -- col = math.floor((vim.o.columns - width) / 2),
+      }
+    end,
+  },
+  hide_cursor = false,
+  on_init = function()
+    -- use visual mode
+    vim.api.nvim_buf_set_keymap( 0, "x", "J", ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
+      { noremap = true, silent = true }
+    )
+
+    -- echo cwd
+    -- vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
+  end,
+}
+
+-- custom folder icon
+require("nvim-web-devicons").set_icon {
+  lir_folder_icon = {
+    icon = "",
+    -- color = "#7ebae4",
+    color = "#569CD6",
+    name = "LirFolderNode",
+  },
+}
+--- }}}
+--- Nvim Tree {{{
+local status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not status_ok then
+  return
+end
+
+local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+if not config_status_ok then
+  return
+end
+local tree_cb = nvim_tree_config.nvim_tree_callback
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+    nested = true,
+})
+nvim_tree.setup {
+  hijack_directories = {
+    enable = false,
+  },
+  -- update_to_buf_dir = {
+  --   enable = false,
+  -- },
+  -- disable_netrw = true,
+  -- hijack_netrw = true,
+  -- open_on_setup = false,
+  open_on_setup = false,
+  ignore_ft_on_setup = {
+    "startify",
+    "dashboard",
+    "alpha",
+  },
+  filters = {
+    custom = { ".git" },
+    exclude = { ".gitignore" },
+  },
+  -- open_on_tab = false,
+  -- hijack_cursor = false,
+  update_cwd = true,
+  -- update_to_buf_dir = {
+  --   enable = true,
+  --   auto_open = true,
+  -- },
+  -- --   error
+  -- --   info
+  -- --   question
+  -- --   warning
+  -- --   lightbulb
+  renderer = {
+    add_trailing = false,
+    group_empty = false,
+    highlight_git = false,
+    highlight_opened_files = "none",
+    root_folder_modifier = ":t",
+    indent_markers = {
+      enable = false,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+      padding = " ",
+      symlink_arrow = " ➛ ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        default = "",
+        symlink = "",
+        folder = {
+          arrow_open = ui_icons.ArrowOpen,
+          arrow_closed = ui_icons.ArrowClosed,
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+          symlink_open = "",
+        },
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "U",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
+    },
+  },
+  diagnostics = {
+    enable = true,
+    icons = {
+      hint = diagnostics_icons.Hint,
+      info = diagnostics_icons.Information,
+      warning = diagnostics_icons.Warning,
+      error = diagnostics_icons.Error,
+    },
+  },
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+    ignore_list = {},
+  },
+  -- system_open = {
+  --   cmd = nil,
+  --   args = {},
+  -- },
+  -- filters = {
+  --   dotfiles = false,
+  --   custom = {},
+  -- },
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 500,
+  },
+  view = {
+    width = 30,
+    height = 30,
+    hide_root_folder = false,
+    side = "left",
+    -- auto_resize = true,
+    mappings = {
+      custom_only = false,
+      list = {
+        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+        { key = "h", cb = tree_cb "close_node" },
+        { key = "v", cb = tree_cb "vsplit" },
+      },
+    },
+    number = false,
+    relativenumber = false,
+  },
+}
+--- }}}
 --- Notify {{{
 require('notify').setup {
   -- Animation style (see below for details)
@@ -150,11 +472,11 @@ require('notify').setup {
   render = "default",
 
   -- Default timeout for notifications
-  timeout = 175,
+  timeout = 5000,
 
   -- For stages that change opacity this is treated as the highlight behind the window
   -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
-  background_colour = "Normal",
+  background_colour = "#111119",
 
   -- Minimum width for notification windows
   minimum_width = 10,
@@ -306,35 +628,15 @@ vim.api.nvim_set_keymap('n', '<a-n>', '<cmd>lua require"illuminate".next_referen
 vim.api.nvim_set_keymap('n', '<a-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', {noremap=true})
 --- }}}
 --- Cmp {{{
--- Icons {{{
-local kind_icons = {
-  Class = " ",
-  Color = " ",
-  Constant = " ",
-  Constructor = " ",
-  Enum = "了 ",
-  EnumMember = " ",
-  Field = " ",
-  File = " ",
-  Folder = " ",
-  Function = " ",
-  Interface = "ﰮ ",
-  Keyword = " ",
-  Method = "ƒ ",
-  Module = " ",
-  Property = " ",
-  Snippet = "﬌ ",
-  Struct = " ",
-  Text = " ",
-  Unit = " ",
-  Value = " ",
-  Variable = " ",
-}
--- }}}
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#4484d1" })
+vim.api.nvim_set_hl(0, "CmpItemKindNvimLsp", { fg = "#6161b3" })
+vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
 
 local cmp = require('cmp')
 local compare = require('cmp.config.compare')
@@ -406,13 +708,17 @@ cmp.setup {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 	    winhighlight = 'FloatBorder:TelescopeBorder',  
     },
+    completion = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	    winhighlight = 'FloatBorder:VertSplit',  
+    },
   },
   sources = {
+    { name = "copilot", group_index = 2 },
     { name = "nvim_lsp", group_index = 2 },
     { name = "cmp_tabnine", group_index = 2 },
     { name = "luasnip", group_index = 2 },
     { name = "crates", group_index = 1 },
-    { name = "copilot", group_index = 2 },
     { name = "ctags", group_index = 2 },
     { name = "nvim_lua", group_index = 2 },
     { name = "calc", group_index = 2 },
@@ -424,6 +730,8 @@ cmp.setup {
   sorting = {
     priority_weight = 2,
     comparators = {
+      require("copilot_cmp.comparators").prioritize,
+      require("copilot_cmp.comparators").score,
       compare.offset,
       compare.exact,
       -- compare.scopes,
@@ -437,37 +745,39 @@ cmp.setup {
     },
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
+    -- fields = { "kind", "abbr", "menu" },
+    fields = { "kind", "abbr" },
     format = function(entry, vim_item)
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      vim_item.menu = ({
-      	nvim_lsp = "[L]",
-      	crates = "[C]",
-      	copilot = "[P]",
-      	ctags = "[]]",
-      	cmp_tabnine = "[T]",
-      	buffer = "[B]",
-      	luasnip = "[S]",
-      	calc = "[+]",
-      	cmdline = "[>]",
-      	path = "[/]",
-      	neorg = "[N]",
-      })[entry.source.name]
+      -- vim_item.menu = ({
+      -- 	copilot = git_icons.Octoface,
+      -- 	nvim_lsp = ui_icons.Code,
+      -- 	cmp_tabnine = misc_icons.Robot,
+      -- 	crates = misc_icons.Rust,
+      -- 	ctags = misc_icons.Tag,
+      -- 	luasnip = ui_icons.Pencil,
+      -- 	buffer = "[B]",
+      -- 	calc = "[+]",
+      -- 	path = "[/]",
+      -- 	neorg = "[N]",
+      -- 	cmdline = "[>]",
+      -- })[entry.source.name]
+      -- if entry.source.name == "copilot" then
+      --   vim_item.menu_hl_group = "CmpItemKindCopilot"
+      -- end
+      -- if entry.source.name == "nvim_lsp" or "luasnip" then
+      --   vim_item.menu_hl_group = "CmpItemKindNvimLsp"
+      -- end
+      -- if entry.source.name == "cmp_tabnine" then
+      --   vim_item.menu_hl_group = "CmpItemKindTabnine"
+      -- end
+      -- if entry.source.name == "crates" then
+      --   vim_item.menu_hl_group = "CmpItemKindCrate"
+      -- end
       return vim_item
     end,
-    -- format = lspkind.cmp_format({with_text=true, menu = ({
-    --   buffer = "[B]",
-    --   nvim_lsp = "[L]",
-    --   luasnip = "[S]",
-    --   calc = "[C]",
-    --   path = "[P]",
-    --   neorg = "[N]",
-    --   cmp_tabnine = "[T]",
-    --   }),
-    -- -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    -- }),
   },
-  experimental = { ghost_text = true, custom_menu = true }
+  experimental = { ghost_text = true } --,  custom_menu = true }
 }
 --- }}}
 --- Symbols Outline {{{

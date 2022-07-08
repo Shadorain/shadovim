@@ -105,9 +105,6 @@ map('n', '<leader>T', ':tabnew<CR>')   -- New tab
 
 -- Transparent Button
 map('n', '<leader>i', ':TransparentToggle<CR>', { noremap = true, silent = true }) 
-
--- File Browser
-map('n', '<leader>fr', ':lua require("mod").file_browser()<CR>', { noremap = true, silent = true }) 
 --- }}}
 --- Buffers {{{
 map('n', '<leader>bl', ':ls<CR>',  { noremap = true, silent = true })
@@ -131,6 +128,9 @@ cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- Plugins {{{
 map('n', '<leader>G', ':Goyo<CR>')
 map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
+-- File Browser
+map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>')
+map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>') 
 ---- Tabline {{{
 map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
 map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })

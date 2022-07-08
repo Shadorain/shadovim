@@ -44,14 +44,16 @@ return require('packer').startup(function(use)
   use { 'godlygeek/tabular' }            --- tabbing
   use { 'jiangmiao/auto-pairs' }
   use { 'numToStr/Comment.nvim' }        --- commenting
-  use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-  use { "ravenxrz/DAPInstall.nvim" }
+  use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+  use { 'ravenxrz/DAPInstall.nvim' }
   use { 'ahmedkhalf/project.nvim' }
   use { 'nacro90/numb.nvim' }
   use { 'rcarriga/nvim-notify' }
   use { 'filipdutescu/renamer.nvim' }
   use { 'tiagovla/scope.nvim' }
+  use { 'kyazdani42/nvim-tree.lua' }
+  use { 'tamago324/lir.nvim' }
   use { 'abecodes/tabout.nvim',
     config = function()
       require('tabout').setup {
@@ -102,11 +104,28 @@ return require('packer').startup(function(use)
     },
   }
   use { 'hrsh7th/cmp-nvim-lsp' }
+  -- use { 'github/copilot.vim' }
+  use { 'zbirenbaum/copilot.lua',
+    event = { "VimEnter" },
+    config = function()
+      require('copilot').setup {
+        cmp = {
+          enabled = true,
+          method = "getPanelCompletions",
+        },
+        panel = { -- no config options yet
+          enabled = true,
+        },
+        ft_disable = { "markdown" },
+      }
+    end,
+  }
+  use { 'zbirenbaum/copilot-cmp' } --, module = 'copilot_cmp', }
   
   use { 'onsails/lspkind-nvim' }
 	use { 'ray-x/lsp_signature.nvim', module = 'lsp_signature' }
   use { 'rafamadriz/friendly-snippets' } --- extra snippets
-	use { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" } }
+	use { 'simrat39/symbols-outline.nvim', cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" } }
   --- }}}
   --- [[ Treesitter ]] {{{
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
@@ -127,11 +146,11 @@ return require('packer').startup(function(use)
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
   use { 'xiyaowong/nvim-transparent' }        --- transparency
-  use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
-  use { 'kdheepak/tabline.nvim', requires = { {'hoob3rt/lualine.nvim'}, {'kyazdani42/nvim-web-devicons', opt = true} } }
+  use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+  use { 'kdheepak/tabline.nvim', requires = { { 'hoob3rt/lualine.nvim' }, { 'kyazdani42/nvim-web-devicons', opt = true } } }
   use { 'lukas-reineke/indent-blankline.nvim' }
   use { 'RRethy/vim-illuminate' }
-  use {'stevearc/dressing.nvim'}
+  use { 'stevearc/dressing.nvim' }
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc

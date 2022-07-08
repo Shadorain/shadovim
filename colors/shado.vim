@@ -76,7 +76,8 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi QuickFixLine guifg=#dfdfe0 guibg=#0f5bca
   hi StatusLine guifg=#1B1B29 guibg=#35355e guisp=#35355e gui=bold
   hi StatusLineNC guifg=#1B1B29 guibg=#35355e guisp=#35355e
-  hi VertSplit guifg=#1B1B29 guibg=#35355E guisp=#35355e
+  " hi VertSplit guifg=#1B1B29 guibg=#35355E guisp=#35355e
+  hi VertSplit guifg=#35355E guibg=NONE guisp=NONE
   hi WildMenu guifg=#eed6ee guibg=#5d5daf
 
   hi DiffAdd guifg=#37d4a7 guibg=NONE gui=NONE guisp=#2c9465
@@ -264,7 +265,6 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi LspCodeLens guifg=#5d5daf guibg=NONE blend=10
   hi LspCodeLensSeparator guifg=#6272a4 guibg=NONE blend=10
   hi LspSignatureActiveParameter guifg=#6272a4 guibg=NONE blend=10
-
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function
