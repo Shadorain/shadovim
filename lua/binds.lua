@@ -25,12 +25,6 @@ map('n', 'N', 'Nzzzv:lua require("specs").show_specs()<CR>', { noremap = true, s
 -- Show cursor
 map('n', 'Q', ':lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
 
--- Undo breakpoints
--- map('i', ',', ',<c-q>u')
--- map('i', '.', '.<c-q>u')
--- map('i', '!', '!<c-q>u')
--- map('i', '?', '?<c-q>u')
-
 -- Moving text
 map('v', 'J', ':m \'>+1<CR>gv=gv')
 map('v', 'K', ':m \'<-2<CR>gv=gv')
@@ -44,6 +38,9 @@ map('n', 'Y', 'y$')
 
 -- Reverse Join ('J')
 map('n', '<C-j>', 'ddkPJ')
+
+-- Source Config
+map('n', '<C-q>', ':source ~/.config/nvim/init.lua<CR>')
 --- }}}
 --- Splits {{{
 -- Resizing
@@ -54,17 +51,17 @@ map('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true }
 
 -- Split Management
 map('t', '<C-A-h>', '<C-\\><C-N><C-w>h')
-map('t', '<C-A-h>', '<C-\\><C-N><C-w>j')
-map('t', '<C-A-h>', '<C-\\><C-N><C-w>k')
-map('t', '<C-A-h>', '<C-\\><C-N><C-w>l')
+map('t', '<C-A-j>', '<C-\\><C-N><C-w>j')
+map('t', '<C-A-k>', '<C-\\><C-N><C-w>k')
+map('t', '<C-A-l>', '<C-\\><C-N><C-w>l')
 map('i', '<C-A-h>', '<esc><C-w>h')
-map('i', '<C-A-h>', '<esc><C-w>j')
-map('i', '<C-A-h>', '<esc><C-w>k')
-map('i', '<C-A-h>', '<esc><C-w>l')
+map('i', '<C-A-j>', '<esc><C-w>j')
+map('i', '<C-A-k>', '<esc><C-w>k')
+map('i', '<C-A-l>', '<esc><C-w>l')
 map('n', '<C-A-h>', '<C-w>h')
-map('n', '<C-A-h>', '<C-w>j')
-map('n', '<C-A-h>', '<C-w>k')
-map('n', '<C-A-h>', '<C-w>l')
+map('n', '<C-A-j>', '<C-w>j')
+map('n', '<C-A-k>', '<C-w>k')
+map('n', '<C-A-l>', '<C-w>l')
 map('n', '<leader>h', '<C-w>h')
 map('n', '<leader>l', '<C-w>l')
 
@@ -85,14 +82,7 @@ map('i', ';;', '<Esc>A;<Esc>')
 
 -- Moves cursor to next position or further
 cmd("inoremap <expr> <C-l> getline('.')[col('.')-1] =~? '[]>)}''\"`]' ? '<Right>' : '<Right>'")
---- }}}
---- Compilation/Debug/Program Management {{{
-map('n', '<Leader>cb', ':Cargo build<CR>')
-map('n', '<Leader>cr', ':Cargo run<CR>')
-map('n', '<Leader>cc', ':Cargo check<CR>')
---- }}}
--- [[ Leader / Plugin Bindings ]] ------------------------------------------- ]]
---- Misc {{{
+
 -- Search and Replace
 map('n', '<leader>R', '<esc><esc>:%s///gcI<left><left><left><left><left>')
 
@@ -106,6 +96,12 @@ map('n', '<leader>T', ':tabnew<CR>')   -- New tab
 -- Transparent Button
 map('n', '<leader>i', ':TransparentToggle<CR>', { noremap = true, silent = true }) 
 --- }}}
+--- Compilation/Debug/Program Management {{{
+map('n', '<Leader>cb', ':Cargo build<CR>')
+map('n', '<Leader>cr', ':Cargo run<CR>')
+map('n', '<Leader>cc', ':Cargo check<CR>')
+--- }}}
+-- [[ Leader / Plugin Bindings ]] ------------------------------------------- ]]
 --- Buffers {{{
 map('n', '<leader>bl', ':ls<CR>',  { noremap = true, silent = true })
 map('n', '<leader>bb', ':bn<CR>',  { noremap = true, silent = true })
@@ -126,11 +122,27 @@ map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- }}}
 --- Plugins {{{
-map('n', '<leader>G', ':Goyo<CR>')
 map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
 -- File Browser
 map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>')
 map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>') 
+
+---- Hop {{{
+map("n", "s", ":HopChar1<cr>", { silent = true })
+map("n", "S", ":HopPattern<cr>", { silent = true })
+
+-- map("n", "f", ":HopWordCurrentLineAC<cr>", opts)
+-- map("n", "F", ":HopWordCurrentLineBC<cr>", opts)
+map("o", "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
+map("o", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
+map("o", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
+map("o", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
+
+map("n", "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
+map("n", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
+map("n", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
+map("n", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
+---- }}}
 ---- Tabline {{{
 map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
 map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })

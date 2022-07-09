@@ -230,6 +230,13 @@ require('renamer').setup({
 	},
 })
 --- }}}
+--- Renamer {{{
+local status_ok, hop = pcall(require, "hop")
+if not status_ok then
+	return
+end
+hop.setup()
+--- }}}
 --- Scope {{{
 require("scope").setup()
 --- }}}
@@ -270,6 +277,7 @@ lir.setup {
     ["c"] = clipboard_actions.copy,
     ["x"] = clipboard_actions.cut,
     ["p"] = clipboard_actions.paste,
+    ["<ESC>"] = actions.close,
   },
   float = {
     winblend = 0,
@@ -332,6 +340,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
 nvim_tree.setup {
   hijack_directories = {
     enable = false,
+  },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    }
   },
   -- update_to_buf_dir = {
   --   enable = false,

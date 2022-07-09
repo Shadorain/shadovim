@@ -265,6 +265,14 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi LspCodeLens guifg=#5d5daf guibg=NONE blend=10
   hi LspCodeLensSeparator guifg=#6272a4 guibg=NONE blend=10
   hi LspSignatureActiveParameter guifg=#6272a4 guibg=NONE blend=10
+
+  " NvimTree
+  hi NvimTreeWindowPicker guifg=#de286e guibg=NONE gui=bold
+
+  " Hop
+  hi HopNextKey guifg=#de286e guibg=NONE gui=bold
+  hi link HopPreview Search
+  hi HopUnmatched guifg=#6272a4 guibg=bg
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function
