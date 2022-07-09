@@ -127,6 +127,7 @@ map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
 map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>')
 map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>') 
 
+map('n', '<leader>J', ':JABSOpen<CR>') 
 ---- Hop {{{
 map("n", "s", ":HopChar1<cr>", { silent = true })
 map("n", "S", ":HopPattern<cr>", { silent = true })

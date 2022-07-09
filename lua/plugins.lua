@@ -156,6 +156,7 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
   -- use { 'unblevable/quick-scope' }     --- horizonal movement
   use { 'phaazon/hop.nvim' }              --- easymotion movement
+  use { 'matbme/JABS.nvim' }              --- Buffer Switching
 
   -- [[ Miscellaneous ]]
   use { 'mhinz/vim-startify' } --- Start Screen

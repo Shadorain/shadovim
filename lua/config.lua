@@ -230,12 +230,36 @@ require('renamer').setup({
 	},
 })
 --- }}}
---- Renamer {{{
+--- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if not status_ok then
 	return
 end
 hop.setup()
+--- }}}
+--- JABS {{{
+local status_ok, jabs = pcall(require, "jabs")
+if not status_ok then
+	return
+end
+jabs.setup {
+  border = 'rounded',
+  offset = {
+    bottom = 6,
+  },
+  preview = {
+    border = 'rounded'
+  },
+  keymap = {
+    preview = "p",
+  },
+  highlight = {
+    current = "Title",
+    hidden = "FloatermNC",
+    split = "EndOfBuffer",
+    alternate = "Identifier"
+  },
+}
 --- }}}
 --- Scope {{{
 require("scope").setup()
@@ -277,7 +301,6 @@ lir.setup {
     ["c"] = clipboard_actions.copy,
     ["x"] = clipboard_actions.cut,
     ["p"] = clipboard_actions.paste,
-    ["<ESC>"] = actions.close,
   },
   float = {
     winblend = 0,

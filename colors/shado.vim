@@ -63,7 +63,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi Ignore guifg=#53606e guibg=NONE
 
   hi FloatermNC guifg=#6161b3
-  hi FloatermBorder guifg=#ff79c6
+  hi FloatermBorder guifg=#ff79c6 guibg=NONE blend=0
 
   hi Error guifg=#ac2958 guibg=NONE
   hi ErrorMsg guifg=#ff8170 guibg=NONE
