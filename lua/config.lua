@@ -45,6 +45,7 @@ vim.opt.mouse = 'a'
 vim.opt.mousefocus = true
 vim.opt.ruler = true
 vim.opt.inccommand = "split"
+vim.opt.showtabline = 0
 
 -- Vim Spell
 cmd('au FileType markdown setlocal spell spelllang=en_us')
@@ -230,12 +231,216 @@ require('renamer').setup({
 	},
 })
 --- }}}
+--- Cybu {{{
+local ok, cybu = pcall(require, "cybu")
+if not ok then
+  return
+end
+cybu.setup {
+  position = {
+    relative_to = "win", -- win, editor, cursor
+    anchor = "topright", -- topleft, topcenter, topright,
+    -- centerleft, center, centerright,
+    -- bottomleft, bottomcenter, bottomright
+    -- vertical_offset = 10, -- vertical offset from anchor in lines
+    -- horizontal_offset = 0, -- vertical offset from anchor in columns
+    -- max_win_height = 5, -- height of cybu window in lines
+    -- max_win_width = 0.5, -- integer for absolute in columns
+    -- float for relative to win/editor width
+  },
+  display_time = 1750, -- time the cybu window is displayed
+  behavior = {                    -- set behavior for different modes
+    mode = {
+      default = {
+        switch = "immediate",     -- immediate, on_close
+        view = "rolling",         -- paging, rolling
+      },
+      last_used = {
+        switch = "on_close",      -- immediate, on_close
+        view = "paging",          -- paging, rolling
+      },
+    },
+  },
+  style = {
+    path = "relative", -- absolute, relative, tail (filename only)
+    border = "rounded", -- single, double, rounded, none
+    separator = " ", -- string used as separator
+    prefix = "…", -- string used as prefix for truncated paths
+    padding = 1, -- left & right padding in number of spaces
+    hide_buffer_id = true,
+    devicons = { enabled = true, colored = true, },
+  },
+  highlights = {                        -- see highlights via :highlight
+    current_buffer = "CybuFocus",       -- current / selected buffer
+    adjacent_buffers = "CybuAdjacent",  -- buffers not in focus
+    background = "CybuBackground",      -- window background
+    border = "CybuBorder",              -- border of the window
+  },
+  exclude = {
+    "neo-tree",
+    "fugitive",
+    "qf",
+  },
+}
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if not status_ok then
 	return
 end
 hop.setup()
+--- }}}
+--- Winbar {{{
+winbar_filetype_exclude = {
+  "help",
+  "startify",
+  "dashboard",
+  "packer",
+  "neogitstatus",
+  "NvimTree",
+  "Trouble",
+  "alpha",
+  "lir",
+  "Outline",
+  "spectre_panel",
+  "toggleterm",
+  "DressingSelect",
+  "Jaq",
+  "harpoon",
+  "",
+}
+
+function isempty(s)
+  return s == nil or s == ""
+end
+
+winbar_hl_group = "Keyword"
+icon_hl_group = "WinbarFileIcon"
+sep_hl_group = "WinbarSeparator"
+tab_hl_group = "WinbarTabnbr"
+
+get_filename = function()
+  local filename = vim.fn.expand "%:t"
+  local extension = vim.fn.expand "%:e"
+
+  if not isempty(filename) then
+    local file_icon, file_icon_color = require("nvim-web-devicons").get_icon_color(
+      filename,
+      extension,
+      { default = true }
+    )
+
+    -- icon_hl_group = icon_hl_group .. extension
+    -- vim.api.nvim_set_hl(0, icon_hl_group, { link = "WinbarFileIcon" })
+    if isempty(file_icon) then
+      file_icon = ""
+      file_icon_color = ""
+    end
+
+    return " " .. "%#" .. icon_hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#"..winbar_hl_group .."#" .. filename .. "%*"
+  end
+end
+
+local get_navic = function()
+  local status_navic_ok, navic = pcall(require, "nvim-navic")
+  if not status_navic_ok then return "" end
+
+  local status_ok, navic_location = pcall(navic.get_location, {})
+  if not status_ok then return "" end
+
+  if not navic.is_available() or navic_location == "error" then
+    return ""
+  end
+
+  if not isempty(navic_location) then
+    return "%#"..sep_hl_group.."#" .. ui_icons.ChevronRight .. " " .. navic_location
+  else return ""
+  end
+end
+
+local excludes = function()
+  if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+    vim.opt_local.winbar = nil
+    return true
+  end
+  return false
+end
+
+get_winbar = function()
+  if excludes() then return end
+  local value = get_filename()
+
+  local navic_added = false
+  if not isempty(value) then
+    local navic_value = get_navic()
+    value = value .. " " .. navic_value
+    if not isempty(navic_value) then
+      navic_added = true
+    end
+  end
+
+  if not isempty(value) and get_buf_option "mod" then
+    local mod = "%#NvimTreeWindowPicker#" .. ui_icons.Circle .. "%*"
+    if navic_added then
+      value = value .. " " .. mod
+    else value = value .. mod
+    end
+  end
+
+  local num_tabs = #vim.api.nvim_list_tabpages()
+
+  if num_tabs > 1 and not isempty(value) then
+    local tabpage_number = tostring(vim.api.nvim_tabpage_get_number(0))
+    value = value .. "%=" .. "%#"..tab_hl_group.."#" .. tabpage_number .. "%#"..sep_hl_group.."#" .. "/" .. "%#"..tab_hl_group.."#" .. tostring(num_tabs)
+  end
+
+  local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
+  if not status_ok then return end
+end
+
+function get_buf_option(opt)
+  local status_ok, buf_option = pcall(vim.api.nvim_buf_get_option, 0, opt)
+  if not status_ok then
+    return nil
+  else return buf_option
+  end
+end
+
+if vim.fn.has "nvim-0.8" == 1 then
+  vim.api.nvim_create_autocmd(
+    { "CursorMoved", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed" },
+    { callback = function() get_winbar() end, }
+  )
+end
+
+--- Navic {{{
+local status_ok, navic = pcall(require, "nvim-navic")
+if not status_ok then
+  return
+end
+
+navic.setup {
+  highlight = true,
+  separator = " " .. ui_icons.ChevronRight .. " ",
+  depth_limit = 0,
+  depth_limit_indicator = "..",
+}
+--- }}}
+--- }}}
+--- Harpoon {{{
+local status_ok, telescope = pcall(require, "telescope")
+if not status_ok then
+  return
+end
+telescope.load_extension 'harpoon'
+
+require('harpoon').setup {
+  menu = {
+    width = 50,
+    height = 8,
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' }
+  }
+}
 --- }}}
 --- JABS {{{
 local status_ok, jabs = pcall(require, "jabs")
@@ -750,8 +955,8 @@ cmp.setup {
     },
   },
   sources = {
-    { name = "copilot", group_index = 2 },
     { name = "nvim_lsp", group_index = 2 },
+    { name = "copilot", group_index = 2 },
     { name = "cmp_tabnine", group_index = 2 },
     { name = "luasnip", group_index = 2 },
     { name = "crates", group_index = 1 },
@@ -1337,7 +1542,6 @@ null_ls.setup {
 vim.g.bookmark_sign = ''
 vim.g.bookmark_highlight_lines = 1
 vim.g.bookmark_save_per_working_dir = 1
-vim.api.nvim_set_keymap('n', '<Leader>a', '<Plug>BookmarkShowAll', { noremap = true })
 --- }}}
 --- Lualine {{{
 require'lualine'.setup {
@@ -1370,22 +1574,22 @@ require'lualine'.setup {
 }
 --- }}}
 --- Tabline {{{
-require'tabline'.setup {
-  enable = true,
-  options = {
-    section_separators = {'', ''},
-    component_separators = {'', ''},
-    max_bufferline_percent = 66,
-    show_tabs_always = true,
-    show_devicons = true,
-    show_bufnr = false,
-    show_filename_only = true,
-  }
-}
-vim.cmd [[
-  set guioptions-=e
-  set sessionoptions+=tabpages,globals
-]]
+-- require'tabline'.setup {
+--   enable = true,
+--   options = {
+--     section_separators = {'', ''},
+--     component_separators = {'', ''},
+--     max_bufferline_percent = 66,
+--     show_tabs_always = true,
+--     show_devicons = true,
+--     show_bufnr = false,
+--     show_filename_only = true,
+--   }
+-- }
+-- vim.cmd [[
+--   set guioptions-=e
+--   set sessionoptions+=tabpages,globals
+-- ]]
 --- }}}
 --- Startify {{{
 vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
@@ -1459,29 +1663,29 @@ require("transparent").setup({
 --- }}}
 --- DAP {{{
 local dap = require('dap')
-dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode', -- adjust as needed
-  name = "lldb"
-}
-
-dap.configurations.cpp = {
-  {
-    name = "Launch",
-    type = "lldb",
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    args = {},
-    runInTerminal = false,
-  },
-}
-
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+-- dap.adapters.lldb = {
+--   type = 'executable',
+--   command = '/usr/bin/lldb-vscode', -- adjust as needed
+--   name = "lldb"
+-- }
+--
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch",
+--     type = "gdb",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     cwd = '${workspaceFolder}',
+--     stopOnEntry = false,
+--     args = {},
+--     runInTerminal = false,
+--   },
+-- }
+--
+-- dap.configurations.c = dap.configurations.cpp
+-- dap.configurations.rust = dap.configurations.cpp
 
 dap.defaults.fallback.force_external_terminal = true
 dap.defaults.fallback.external_terminal = {

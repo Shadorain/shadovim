@@ -86,6 +86,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi DiffText guifg=#e3d3eb guibg=#4d254d gui=NONE guisp=#4d254d
 
   hi Comment guifg=#6272a4 guibg=NONE
+  hi DocComment guifg=#5d5daf guibg=NONE
   hi Conceal guifg=#6272a4 guibg=NONE
 
   hi Special guifg=#5d5daf guibg=NONE
@@ -270,9 +271,56 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi NvimTreeWindowPicker guifg=#de286e guibg=NONE gui=bold
 
   " Hop
-  hi HopNextKey guifg=#de286e guibg=NONE gui=bold
+  hi link HopNextKey NvimTreeWindowPicker
   hi link HopPreview Search
   hi HopUnmatched guifg=#6272a4 guibg=bg
+
+  " Cybu
+  hi link CybuFocus EndOfBuffer
+  hi link CybuAdjacent FloatermNC
+  hi CybuBackground guifg=NONE guibg=#000000 blend=10
+  hi link CybuBorder FloatermBorder
+
+  " Winbar
+  hi link WinbarFileIcon TelescopeBorder
+  hi link WinbarSeparator BookmarkAnnotationSign
+  hi link WinbarTabnbr Comment
+
+  " Navic
+  hi link NavicText String
+  hi link NavicSeparator WinbarSeparator
+  hi link NavicIcon Title "NvimTreeWindowPicker
+  hi link NavicIconsFile NavicIcon
+  hi link NavicIconsModule NavicIcon
+  hi link NavicIconsNamespace NavicIcon
+  hi link NavicIconsPackage NavicIcon
+  hi link NavicIconsClass NavicIcon
+  hi link NavicIconsMethod NavicIcon
+  hi link NavicIconsProperty NavicIcon
+  hi link NavicIconsField NavicIcon
+  hi link NavicIconsConstructor NavicIcon
+  hi link NavicIconsEnum NavicIcon
+  hi link NavicIconsInterface NavicIcon
+  hi link NavicIconsFunction NavicIcon
+  hi link NavicIconsVariable NavicIcon
+  hi link NavicIconsConstant NavicIcon
+  hi link NavicIconsString NavicIcon
+  hi link NavicIconsNumber NavicIcon
+  hi link NavicIconsBoolean NavicIcon
+  hi link NavicIconsArray NavicIcon
+  hi link NavicIconsObject NavicIcon
+  hi link NavicIconsKey NavicIcon
+  hi link NavicIconsNull NavicIcon
+  hi link NavicIconsEnumMember NavicIcon
+  hi link NavicIconsStruct NavicIcon
+  hi link NavicIconsEvent NavicIcon
+  hi link NavicIconsOperator NavicIcon
+  hi link NavicIconsTypeParameter NavicIcon
+
+  " Harpoon
+  hi link HarpoonWindow CybuBackground
+  hi link HarpoonBorder FloatermBorder
+
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function
@@ -292,6 +340,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi! link rsUserType Type
   hi! link rsAttribute Macro
   hi! link rsLet Exception
+  hi! link rsDocComment DocComment
   " }}}
   " Vim {{{
   hi! link vimAutoCmdSfxList LibraryType

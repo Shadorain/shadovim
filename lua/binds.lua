@@ -37,10 +37,13 @@ map('n', '<leader>k', ':m .-2<CR>==')
 map('n', 'Y', 'y$')
 
 -- Reverse Join ('J')
-map('n', '<C-j>', 'ddkPJ')
+-- map('n', '<C-j>', 'ddkPJ')
 
 -- Source Config
 map('n', '<C-q>', ':source ~/.config/nvim/init.lua<CR>')
+
+-- Save
+map('n', '<C-s>', ':w<CR>')
 --- }}}
 --- Splits {{{
 -- Resizing
@@ -91,7 +94,12 @@ map('n', '<leader>r', ':nohl<CR>:redraw!<CR>')
 
 -- Open
 map('n', '<leader>S', ':Startify<CR>') -- Startify
-map('n', '<leader>T', ':tabnew<CR>')   -- New tab
+
+-- Tabs
+map('n', '<leader>T',  ':tabnew %<CR>', { noremap = true, silent = true }) -- New tab
+map('n', '<leader>tt', ':tabnew %<CR>', { noremap = true, silent = true }) -- New tab
+map('n', '<leader>tc', ':tabclose<CR>', { noremap = true, silent = true }) -- Close tab
+map('n', '<leader>to', ':tabonly<CR>',  { noremap = true, silent = true }) -- Close all but open tab
 
 -- Transparent Button
 map('n', '<leader>i', ':TransparentToggle<CR>', { noremap = true, silent = true }) 
@@ -122,12 +130,26 @@ map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- }}}
 --- Plugins {{{
-map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>')
+map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>', { noremap = true, silent = true })
 -- File Browser
-map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>')
-map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>') 
+map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
+map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>', { noremap = true, silent = true }) 
 
-map('n', '<leader>J', ':JABSOpen<CR>') 
+map('n', '<leader>J', ':JABSOpen<CR>', { noremap = true, silent = true })
+---- Harpoon {{{
+map('n', 'mm', ':lua require("harpoon.mark").add_file()<CR>',        { noremap = true, silent = true })
+map('n', 'm.', ':lua require("harpoon.ui").nav_next()<CR>',          { noremap = true, silent = true })
+map('n', 'm,', ':lua require("harpoon.ui").nav_prev()<CR>',          { noremap = true, silent = true })
+map('n', 'm;', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { noremap = true, silent = true })
+---- }}}
+---- Bookmarks {{{
+map('n', 'mb', '<cmd>BookmarkToggle<CR>',   { noremap = true, silent = true })
+map('n', 'mA', '<cmd>BookmarkAnnotate<CR>', { noremap = true, silent = true })
+map('n', 'mj', '<cmd>BookmarkNext<CR>',     { noremap = true, silent = true })
+map('n', 'mk', '<cmd>BookmarkPrev<CR>',     { noremap = true, silent = true })
+map('n', 'mx', '<cmd>BookmarkClearAll<CR>', opts)
+map('n', 'mS', '<cmd>BookmarkShowAll<CR>',  { noremap = true, silent = true })
+---- }}}
 ---- Hop {{{
 map("n", "s", ":HopChar1<cr>", { silent = true })
 map("n", "S", ":HopPattern<cr>", { silent = true })
@@ -144,9 +166,15 @@ map("n", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.Hint
 map("n", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
 map("n", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
 ---- }}}
+---- Cybu {{{
+map('n', '<C-j>', '<Plug>(CybuNext)', { noremap = true, silent = true })
+map('n', '<C-k>', '<Plug>(CybuPrev)', { noremap = true, silent = true })
+map('n', '<C-S-j>', '<Plug>(CybuLastusedNext)', { noremap = true, silent = true })
+map('n', '<C-S-k>', '<Plug>(CybuLastusedPrev)', { noremap = true, silent = true })
+---- }}}
 ---- Tabline {{{
-map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
-map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })
+-- map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
+-- map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })
 ---- }}}
 ---- Debugging {{{
 map('n', '<leader>db', ':lua require("dap").toggle_breakpoint()<CR>', { noremap = true, silent = true })
@@ -156,9 +184,18 @@ map('n', '<leader>dc', ':lua require("dap").continue()<CR>', { noremap = true, s
 map('n', '<leader>dsi', ':lua require("dap").step_into()<CR>', { noremap = true, silent = true })
 map('n', '<leader>dso', ':lua require("dap").step_over()<CR>', { noremap = true, silent = true })
 map('n', '<leader>dsx', ':lua require("dap").step_out()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dj', ':lua require("dap").down()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dk', ':lua require("dap").up()<CR>', { noremap = true, silent = true })
 map('n', '<leader>dr', ':lua require("dap").repl_open()<CR>', { noremap = true, silent = true })
 map('n', '<leader>dl', ':lua require("dap").run_last()<CR>', { noremap = true, silent = true })
 map('n', '<leader>dui', ':lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
+map('n', '<leader>dK', ':lua require("dap.ui.variables").hover()<CR>', { noremap = true, silent = true })
+map('n', '<leader>d{', ':lua require("dap.ui.variables").scopes()<CR>', { noremap = true, silent = true })
+map('n', '<leader>di', ':lua require("dap.ui.widgets").hover()', { noremap = true, silent = true })
+map('n', '<leader>d_', ':lua require("dap").disconnect();require("dap").stop();require("dap").run_last()<CR>', { noremap = true, silent = true })
+map('n', '<leader>d?', ':lua local widgets=require("dap.ui.widgets");widgets.centered_float(widgets.scopes)<CR>', { noremap = true, silent = true })
+
+map('v', '<leader>dK', ':lua require("dap.ui.variables").visual_hover()<CR>', { noremap = true, silent = true })
 ---- }}}
 ---- Floaterm {{{
 map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
@@ -170,24 +207,24 @@ map('t', '<leader>bb', '<C-\\><C-n>:FloatermNext<CR>', { noremap = true, silent 
 map('t', '<leader>bk', '<C-\\><C-n>:FloatermKill<CR>', { noremap = true, silent = true })
 ---- }}}
 ---- Telescope {{{
-map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>')
-map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>')
-map('i', '<C-f>', '<esc><cmd>Telescope live_grep<cr>')
-map('n', '<leader>bv', '<esc><cmd>Telescope buffers<cr>')
-map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>')
-map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>')
+map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>', { noremap = true, silent = true })
+map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+map('i', '<C-f>', '<esc><cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
+map('n', '<leader>bv', '<esc><cmd>Telescope buffers<cr>', { noremap = true, silent = true })
+map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>', { noremap = true, silent = true })
+map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>', { noremap = true, silent = true })
 
-map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>')
-map('n', '<leader>tp',  '<cmd>Telescope projects<cr>')
-map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>')
-map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>')
-map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>')
-map('n', '<leader>tgd', '<cmd>lua require("mod").git_diff()<cr>')
-map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>')
-map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>')
-map('n', '<leader>thl', '<cmd>Telescope highlights<cr>')
-map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>')
-map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>')
+map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>', { noremap = true, silent = true })
+map('n', '<leader>tp',  '<cmd>Telescope projects<cr>', { noremap = true, silent = true })
+map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
+map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>', { noremap = true, silent = true })
+map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>', { noremap = true, silent = true })
+map('n', '<leader>tgd', '<cmd>lua require("mod").git_diff()<cr>', { noremap = true, silent = true })
+map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>', { noremap = true, silent = true })
+map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>', { noremap = true, silent = true })
+map('n', '<leader>thl', '<cmd>Telescope highlights<cr>', { noremap = true, silent = true })
+map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>', { noremap = true, silent = true })
+map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>', { noremap = true, silent = true })
 ---- }}}
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]

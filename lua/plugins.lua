@@ -147,16 +147,20 @@ return require('packer').startup(function(use)
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
   use { 'xiyaowong/nvim-transparent' }        --- transparency
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-  use { 'kdheepak/tabline.nvim', requires = { { 'hoob3rt/lualine.nvim' }, { 'kyazdani42/nvim-web-devicons', opt = true } } }
+  -- use { 'kdheepak/tabline.nvim', requires = { { 'hoob3rt/lualine.nvim' }, { 'kyazdani42/nvim-web-devicons', opt = true } } }
   use { 'lukas-reineke/indent-blankline.nvim' }
   use { 'RRethy/vim-illuminate' }
   use { 'stevearc/dressing.nvim' }
+  use { 'ghillb/cybu.nvim' }
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
   -- use { 'unblevable/quick-scope' }     --- horizonal movement
   use { 'phaazon/hop.nvim' }              --- easymotion movement
   use { 'matbme/JABS.nvim' }              --- Buffer Switching
+  use { 'theprimeagen/harpoon' }          --- Buffer Harpooning
+  use { 'SmiteshP/nvim-navic' }           --- Navigation
+  -- use { 'fgheng/winbar.nvim' }
 
   -- [[ Miscellaneous ]]
   use { 'mhinz/vim-startify' } --- Start Screen
