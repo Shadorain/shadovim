@@ -292,6 +292,42 @@ hop.setup {
   case_insensitive = false,
 }
 --- }}}
+--- Lazygit {{{
+vim.g.lazygit_floating_window_winblend = 20 -- transparency of floating window
+vim.g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
+vim.g.lazygit_floating_window_corner_chars = {'╭', '╮', '╰', '╯'} -- customize lazygit popup window corner characters
+vim.g.lazygit_floating_window_use_plenary = 0 -- use plenary.nvim to manage floating window if available
+vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
+--- }}}
+--- Venn {{{
+local status_ok, venn = pcall(require, "venn")
+if not status_ok then
+	return
+end
+function _G.Toggle_venn()
+    local venn_enabled = vim.inspect(vim.b.venn_enabled)
+    if venn_enabled == "nil" then
+        vim.b.venn_enabled = true
+        vim.cmd[[setlocal ve=all]]
+        -- draw a line on HJKL keystokes
+        vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
+        -- draw a box by pressing "f" with visual selection
+        vim.api.nvim_buf_set_keymap(0, "v", "b", ":VFill<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "v", "o", ":VBoxO<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "v", "H", ":VBoxH<CR>", {noremap = true})
+    else
+        vim.cmd[[setlocal ve=]]
+        vim.cmd[[mapclear <buffer>]]
+        vim.b.venn_enabled = nil
+    end
+end
+-- toggle keymappings for venn using <leader>v
+vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
+--- }}}
 --- Winbar {{{
 winbar_filetype_exclude = {
   "help",
@@ -458,6 +494,7 @@ jabs.setup {
     border = 'rounded'
   },
   keymap = {
+    close = "d",
     preview = "p",
   },
   highlight = {
@@ -1616,6 +1653,7 @@ vim.g.startify_bookmarks = {
     { x  = '~/.xmonad/xmonad.hs'               },
     { p  = '~/.config/shadobar/config-xmonad'  },
     { c  = '~/.config/picom.conf'              },
+    { st = '~/dev/st/config.h'                 },
     { za = '~/.zsh_aliases'                    },
     { zc = '~/.zshrc'                          },
     { ze = '~/.zshenv'                         },

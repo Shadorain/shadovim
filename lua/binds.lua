@@ -136,6 +136,10 @@ map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = tru
 map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>', { noremap = true, silent = true }) 
 
 map('n', '<leader>J', ':JABSOpen<CR>', { noremap = true, silent = true })
+---- Lazygit {{{
+map('n', '<leader>gg', ':LazyGit<CR>', { noremap = true, silent = true })
+map('n', '<leader>GG', ':LazyGitConfig<CR>', { noremap = true, silent = true })
+---- }}}
 ---- Harpoon {{{
 map('n', 'mm', ':lua require("harpoon.mark").add_file()<CR>',        { noremap = true, silent = true })
 map('n', 'm.', ':lua require("harpoon.ui").nav_next()<CR>',          { noremap = true, silent = true })

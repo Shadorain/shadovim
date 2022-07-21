@@ -85,6 +85,7 @@ return require('packer').startup(function(use)
   -- [[ Git integration ]]
   use { 'nvim-lua/popup.nvim' }
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use { 'kdheepak/lazygit.nvim' }
 
   -- [[ Coding ]]
   --- [[ LSP & Completion ]] {{{
@@ -165,5 +166,6 @@ return require('packer').startup(function(use)
   -- [[ Miscellaneous ]]
   use { 'mhinz/vim-startify' } --- Start Screen
   use { 'jghauser/mkdir.nvim', config = function() require('mkdir') end, event = "BufWritePre" }
+  use { 'jbyuki/venn.nvim' }
 end)
 -- [[ ----------------------------------------------------------------------- ]]
