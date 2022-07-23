@@ -49,7 +49,7 @@ vim.opt.showtabline = 0
 
 -- Vim Spell
 cmd('au FileType markdown setlocal spell spelllang=en_us')
-cmd('au FileType norg setlocal spell spelllang=en_us')
+-- cmd('au FileType norg setlocal spell spelllang=en_us')
 
 -- Folds
 vim.opt.foldenable = true
@@ -233,71 +233,68 @@ require('renamer').setup({
 --- }}}
 --- Cybu {{{
 local ok, cybu = pcall(require, "cybu")
-if not ok then
-  return
-end
-cybu.setup {
-  position = {
-    relative_to = "win", -- win, editor, cursor
-    anchor = "topright", -- topleft, topcenter, topright,
-    -- centerleft, center, centerright,
-    -- bottomleft, bottomcenter, bottomright
-    -- vertical_offset = 10, -- vertical offset from anchor in lines
-    -- horizontal_offset = 0, -- vertical offset from anchor in columns
-    -- max_win_height = 5, -- height of cybu window in lines
-    -- max_win_width = 0.5, -- integer for absolute in columns
-    -- float for relative to win/editor width
-  },
-  display_time = 1750, -- time the cybu window is displayed
-  behavior = {                    -- set behavior for different modes
-    mode = {
-      default = {
-        switch = "immediate",     -- immediate, on_close
-        view = "rolling",         -- paging, rolling
-      },
-      last_used = {
-        switch = "on_close",      -- immediate, on_close
-        view = "paging",          -- paging, rolling
+if ok then
+  cybu.setup {
+    position = {
+      relative_to = "win", -- win, editor, cursor
+      anchor = "topright", -- topleft, topcenter, topright,
+      -- centerleft, center, centerright,
+      -- bottomleft, bottomcenter, bottomright
+      -- vertical_offset = 10, -- vertical offset from anchor in lines
+      -- horizontal_offset = 0, -- vertical offset from anchor in columns
+      -- max_win_height = 5, -- height of cybu window in lines
+      -- max_win_width = 0.5, -- integer for absolute in columns
+      -- float for relative to win/editor width
+    },
+    display_time = 1750, -- time the cybu window is displayed
+    behavior = {                    -- set behavior for different modes
+      mode = {
+        default = {
+          switch = "immediate",     -- immediate, on_close
+          view = "rolling",         -- paging, rolling
+        },
+        last_used = {
+          switch = "on_close",      -- immediate, on_close
+          view = "paging",          -- paging, rolling
+        },
       },
     },
-  },
-  style = {
-    path = "relative", -- absolute, relative, tail (filename only)
-    border = "rounded", -- single, double, rounded, none
-    separator = " ", -- string used as separator
-    prefix = "…", -- string used as prefix for truncated paths
-    padding = 1, -- left & right padding in number of spaces
-    hide_buffer_id = true,
-    devicons = { enabled = true, colored = true, },
-  },
-  highlights = {                        -- see highlights via :highlight
-    current_buffer = "CybuFocus",       -- current / selected buffer
-    adjacent_buffers = "CybuAdjacent",  -- buffers not in focus
-    background = "CybuBackground",      -- window background
-    border = "CybuBorder",              -- border of the window
-  },
-  exclude = {
-    "neo-tree",
-    "fugitive",
-    "qf",
-  },
-}
+    style = {
+      path = "relative", -- absolute, relative, tail (filename only)
+      border = "rounded", -- single, double, rounded, none
+      separator = " ", -- string used as separator
+      prefix = "…", -- string used as prefix for truncated paths
+      padding = 1, -- left & right padding in number of spaces
+      hide_buffer_id = true,
+      devicons = { enabled = true, colored = true, },
+    },
+    highlights = {                        -- see highlights via :highlight
+      current_buffer = "cybufocus",       -- current / selected buffer
+      adjacent_buffers = "cybuadjacent",  -- buffers not in focus
+      background = "cybubackground",      -- window background
+      border = "cybuborder",              -- border of the window
+    },
+    exclude = {
+      "neo-tree",
+      "fugitive",
+      "qf",
+    }
+  }
+end
 --- }}}
 --- Highlight Colors {{{
 local status_ok, hl_colors = pcall(require, "nvim-highlight-colors")
-if not status_ok then
-	return
+if status_ok then
+  hl_colors.setup {}
 end
-hl_colors.setup {}
 --- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
-if not status_ok then
-	return
+if status_ok then
+  hop.setup {
+    case_insensitive = false,
+  }
 end
-hop.setup {
-  case_insensitive = false,
-}
 --- }}}
 --- Lazygit {{{
 vim.g.lazygit_floating_window_winblend = 20 -- transparency of floating window
@@ -308,29 +305,28 @@ vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not ins
 --- }}}
 --- Venn {{{
 local status_ok, venn = pcall(require, "venn")
-if not status_ok then
-	return
-end
-function _G.Toggle_venn()
-    local venn_enabled = vim.inspect(vim.b.venn_enabled)
-    if venn_enabled == "nil" then
-        vim.b.venn_enabled = true
-        vim.cmd[[setlocal ve=all]]
-        -- draw a line on HJKL keystokes
-        vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
-        -- draw a box by pressing "f" with visual selection
-        vim.api.nvim_buf_set_keymap(0, "v", "b", ":VFill<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "v", "o", ":VBoxO<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "v", "H", ":VBoxH<CR>", {noremap = true})
-    else
-        vim.cmd[[setlocal ve=]]
-        vim.cmd[[mapclear <buffer>]]
-        vim.b.venn_enabled = nil
-    end
+if status_ok then
+  function _G.Toggle_venn()
+      local venn_enabled = vim.inspect(vim.b.venn_enabled)
+      if venn_enabled == "nil" then
+          vim.b.venn_enabled = true
+          vim.cmd[[setlocal ve=all]]
+          -- draw a line on HJKL keystokes
+          vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
+          -- draw a box by pressing "f" with visual selection
+          vim.api.nvim_buf_set_keymap(0, "v", "b", ":VFill<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(0, "v", "o", ":VBoxO<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(0, "v", "H", ":VBoxH<CR>", {noremap = true})
+      else
+          vim.cmd[[setlocal ve=]]
+          vim.cmd[[mapclear <buffer>]]
+          vim.b.venn_enabled = nil
+      end
+  end
 end
 -- toggle keymappings for venn using <leader>v
 vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
@@ -460,291 +456,282 @@ end
 
 --- Navic {{{
 local status_ok, navic = pcall(require, "nvim-navic")
-if not status_ok then
-  return
+if status_ok then
+  navic.setup {
+    highlight = true,
+    separator = " " .. ui_icons.ChevronRight .. " ",
+    depth_limit = 0,
+    depth_limit_indicator = "..",
+  }
 end
-
-navic.setup {
-  highlight = true,
-  separator = " " .. ui_icons.ChevronRight .. " ",
-  depth_limit = 0,
-  depth_limit_indicator = "..",
-}
 --- }}}
 --- }}}
 --- Harpoon {{{
 local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-  return
-end
-telescope.load_extension 'harpoon'
+if status_ok then
+  telescope.load_extension 'harpoon'
 
-require('harpoon').setup {
-  menu = {
-    width = 50,
-    height = 8,
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' }
+  require('harpoon').setup {
+    menu = {
+      width = 50,
+      height = 8,
+      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' }
+    }
   }
-}
+end
 --- }}}
 --- JABS {{{
 local status_ok, jabs = pcall(require, "jabs")
-if not status_ok then
-	return
+if status_ok then
+  jabs.setup {
+    border = 'rounded',
+    offset = {
+      bottom = 6,
+    },
+    preview = {
+      border = 'rounded'
+    },
+    keymap = {
+      close = "d",
+      preview = "p",
+    },
+    highlight = {
+      current = "Title",
+      hidden = "FloatermNC",
+      split = "EndOfBuffer",
+      alternate = "Identifier"
+    },
+  }
 end
-jabs.setup {
-  border = 'rounded',
-  offset = {
-    bottom = 6,
-  },
-  preview = {
-    border = 'rounded'
-  },
-  keymap = {
-    close = "d",
-    preview = "p",
-  },
-  highlight = {
-    current = "Title",
-    hidden = "FloatermNC",
-    split = "EndOfBuffer",
-    alternate = "Identifier"
-  },
-}
 --- }}}
 --- Scope {{{
 require("scope").setup()
 --- }}}
 --- Lir {{{
 local status_ok, lir = pcall(require, "lir")
-if not status_ok then
-  return
-end
+if status_ok then
+  local actions = require "lir.actions"
+  local mark_actions = require "lir.mark.actions"
+  local clipboard_actions = require "lir.clipboard.actions"
 
-local actions = require "lir.actions"
-local mark_actions = require "lir.mark.actions"
-local clipboard_actions = require "lir.clipboard.actions"
+  lir.setup {
+    show_hidden_files = false,
+    devicons_enable = true,
+    mappings = {
+      ["l"] = actions.edit,
+      ["<C-s>"] = actions.split,
+      ["v"] = actions.vsplit,
+      ["<C-t>"] = actions.tabedit,
 
-lir.setup {
-  show_hidden_files = false,
-  devicons_enable = true,
-  mappings = {
-    ["l"] = actions.edit,
-    ["<C-s>"] = actions.split,
-    ["v"] = actions.vsplit,
-    ["<C-t>"] = actions.tabedit,
+      ["h"] = actions.up,
+      ["q"] = actions.quit,
 
-    ["h"] = actions.up,
-    ["q"] = actions.quit,
+      ["A"] = actions.mkdir,
+      ["a"] = actions.newfile,
+      ["r"] = actions.rename,
+      ["@"] = actions.cd,
+      ["Y"] = actions.yank_path,
+      ["i"] = actions.toggle_show_hidden,
+      ["d"] = actions.delete,
 
-    ["A"] = actions.mkdir,
-    ["a"] = actions.newfile,
-    ["r"] = actions.rename,
-    ["@"] = actions.cd,
-    ["Y"] = actions.yank_path,
-    ["i"] = actions.toggle_show_hidden,
-    ["d"] = actions.delete,
-
-    ["J"] = function()
-      mark_actions.toggle_mark()
-      vim.cmd "normal! j"
-    end,
-    ["c"] = clipboard_actions.copy,
-    ["x"] = clipboard_actions.cut,
-    ["p"] = clipboard_actions.paste,
-  },
-  float = {
-    winblend = 0,
-    curdir_window = {
-      enable = false,
-      highlight_dirname = true,
+      ["J"] = function()
+        mark_actions.toggle_mark()
+        vim.cmd "normal! j"
+      end,
+      ["c"] = clipboard_actions.copy,
+      ["x"] = clipboard_actions.cut,
+      ["p"] = clipboard_actions.paste,
     },
-    -- You can define a function that returns a table to be passed as the third
-    -- argument of nvim_open_win().
-    win_opts = function()
-      local width = math.floor(vim.o.columns * 0.2)
-      local height = math.floor(vim.o.lines * 0.2)
-      return {
-        border = "rounded",
-        width = width,
-        height = height,
-        -- row = 1,
-        -- col = math.floor((vim.o.columns - width) / 2),
-      }
+    float = {
+      winblend = 0,
+      curdir_window = {
+        enable = false,
+        highlight_dirname = true,
+      },
+      -- You can define a function that returns a table to be passed as the third
+      -- argument of nvim_open_win().
+      win_opts = function()
+        local width = math.floor(vim.o.columns * 0.2)
+        local height = math.floor(vim.o.lines * 0.2)
+        return {
+          border = "rounded",
+          width = width,
+          height = height,
+          -- row = 1,
+          -- col = math.floor((vim.o.columns - width) / 2),
+        }
+      end,
+    },
+    hide_cursor = false,
+    on_init = function()
+      -- use visual mode
+      vim.api.nvim_buf_set_keymap( 0, "x", "J", ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
+        { noremap = true, silent = true }
+      )
+
+      -- echo cwd
+      -- vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
     end,
-  },
-  hide_cursor = false,
-  on_init = function()
-    -- use visual mode
-    vim.api.nvim_buf_set_keymap( 0, "x", "J", ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
-      { noremap = true, silent = true }
-    )
+  }
 
-    -- echo cwd
-    -- vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
-  end,
-}
-
--- custom folder icon
-require("nvim-web-devicons").set_icon {
-  lir_folder_icon = {
-    icon = "",
-    -- color = "#7ebae4",
-    color = "#569CD6",
-    name = "LirFolderNode",
-  },
-}
+  -- custom folder icon
+  require("nvim-web-devicons").set_icon {
+    lir_folder_icon = {
+      icon = "",
+      -- color = "#7ebae4",
+      color = "#569CD6",
+      name = "LirFolderNode",
+    },
+  }
+end
 --- }}}
 --- Nvim Tree {{{
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
-  return
-end
+if status_ok then
+  local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  if config_status_ok then
+      local tree_cb = nvim_tree_config.nvim_tree_callback
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
-local tree_cb = nvim_tree_config.nvim_tree_callback
-
-vim.api.nvim_create_autocmd('BufEnter', {
-    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
-    nested = true,
-})
-nvim_tree.setup {
-  hijack_directories = {
-    enable = false,
-  },
-  actions = {
-    open_file = {
-      quit_on_open = true,
-    }
-  },
-  -- update_to_buf_dir = {
-  --   enable = false,
-  -- },
-  -- disable_netrw = true,
-  -- hijack_netrw = true,
-  -- open_on_setup = false,
-  open_on_setup = false,
-  ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
-    "alpha",
-  },
-  filters = {
-    custom = { ".git" },
-    exclude = { ".gitignore" },
-  },
-  -- open_on_tab = false,
-  -- hijack_cursor = false,
-  update_cwd = true,
-  -- update_to_buf_dir = {
-  --   enable = true,
-  --   auto_open = true,
-  -- },
-  -- --   error
-  -- --   info
-  -- --   question
-  -- --   warning
-  -- --   lightbulb
-  renderer = {
-    add_trailing = false,
-    group_empty = false,
-    highlight_git = false,
-    highlight_opened_files = "none",
-    root_folder_modifier = ":t",
-    indent_markers = {
-      enable = false,
-      icons = {
-        corner = "└ ",
-        edge = "│ ",
-        none = "  ",
-      },
-    },
-    icons = {
-      webdev_colors = true,
-      git_placement = "before",
-      padding = " ",
-      symlink_arrow = " ➛ ",
-      show = {
-        file = true,
-        folder = true,
-        folder_arrow = true,
-        git = true,
-      },
-      glyphs = {
-        default = "",
-        symlink = "",
-        folder = {
-          arrow_open = ui_icons.ArrowOpen,
-          arrow_closed = ui_icons.ArrowClosed,
-          default = "",
-          open = "",
-          empty = "",
-          empty_open = "",
-          symlink = "",
-          symlink_open = "",
+      vim.api.nvim_create_autocmd('BufEnter', {
+          command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+          nested = true,
+      })
+      nvim_tree.setup {
+        hijack_directories = {
+          enable = false,
         },
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          }
+        },
+        -- update_to_buf_dir = {
+        --   enable = false,
+        -- },
+        -- disable_netrw = true,
+        -- hijack_netrw = true,
+        -- open_on_setup = false,
+        open_on_setup = false,
+        ignore_ft_on_setup = {
+          "startify",
+          "dashboard",
+          "alpha",
+        },
+        filters = {
+          custom = { ".git" },
+          exclude = { ".gitignore" },
+        },
+        -- open_on_tab = false,
+        -- hijack_cursor = false,
+        update_cwd = true,
+        -- update_to_buf_dir = {
+        --   enable = true,
+        --   auto_open = true,
+        -- },
+        -- --   error
+        -- --   info
+        -- --   question
+        -- --   warning
+        -- --   lightbulb
+        renderer = {
+          add_trailing = false,
+          group_empty = false,
+          highlight_git = false,
+          highlight_opened_files = "none",
+          root_folder_modifier = ":t",
+          indent_markers = {
+            enable = false,
+            icons = {
+              corner = "└ ",
+              edge = "│ ",
+              none = "  ",
+            },
+          },
+          icons = {
+            webdev_colors = true,
+            git_placement = "before",
+            padding = " ",
+            symlink_arrow = " ➛ ",
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = true,
+              git = true,
+            },
+            glyphs = {
+              default = "",
+              symlink = "",
+              folder = {
+                arrow_open = ui_icons.ArrowOpen,
+                arrow_closed = ui_icons.ArrowClosed,
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+              },
+              git = {
+                unstaged = "",
+                staged = "S",
+                unmerged = "",
+                renamed = "➜",
+                untracked = "U",
+                deleted = "",
+                ignored = "◌",
+              },
+            },
+          },
+        },
+        diagnostics = {
+          enable = true,
+          icons = {
+            hint = diagnostics_icons.Hint,
+            info = diagnostics_icons.Information,
+            warning = diagnostics_icons.Warning,
+            error = diagnostics_icons.Error,
+          },
+        },
+        update_focused_file = {
+          enable = true,
+          update_cwd = true,
+          ignore_list = {},
+        },
+        -- system_open = {
+        --   cmd = nil,
+        --   args = {},
+        -- },
+        -- filters = {
+        --   dotfiles = false,
+        --   custom = {},
+        -- },
         git = {
-          unstaged = "",
-          staged = "S",
-          unmerged = "",
-          renamed = "➜",
-          untracked = "U",
-          deleted = "",
-          ignored = "◌",
+          enable = true,
+          ignore = true,
+          timeout = 500,
         },
-      },
-    },
-  },
-  diagnostics = {
-    enable = true,
-    icons = {
-      hint = diagnostics_icons.Hint,
-      info = diagnostics_icons.Information,
-      warning = diagnostics_icons.Warning,
-      error = diagnostics_icons.Error,
-    },
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-    ignore_list = {},
-  },
-  -- system_open = {
-  --   cmd = nil,
-  --   args = {},
-  -- },
-  -- filters = {
-  --   dotfiles = false,
-  --   custom = {},
-  -- },
-  git = {
-    enable = true,
-    ignore = true,
-    timeout = 500,
-  },
-  view = {
-    width = 30,
-    height = 30,
-    hide_root_folder = false,
-    side = "left",
-    -- auto_resize = true,
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        { key = "h", cb = tree_cb "close_node" },
-        { key = "v", cb = tree_cb "vsplit" },
-        { key = "s", cb = tree_cb "split" },
-        { key = "<C-x>", action = "system_open" },
-      },
-    },
-    number = false,
-    relativenumber = false,
-  },
-}
+        view = {
+          width = 30,
+          height = 30,
+          hide_root_folder = false,
+          side = "left",
+          -- auto_resize = true,
+          mappings = {
+            custom_only = false,
+            list = {
+              { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+              { key = "h", cb = tree_cb "close_node" },
+              { key = "v", cb = tree_cb "vsplit" },
+              { key = "s", cb = tree_cb "split" },
+              { key = "<C-x>", action = "system_open" },
+            },
+          },
+          number = false,
+          relativenumber = false,
+        },
+      }
+  end
+end
 --- }}}
 --- Notify {{{
 require('notify').setup {
@@ -1330,6 +1317,7 @@ require('neorg').setup {
 	    autodetect = false
 	  }
     },
+    ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
     -- ["core.integrations.telescope"] = {},
     ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
   },

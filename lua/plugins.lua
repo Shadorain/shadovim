@@ -146,7 +146,7 @@ return require('packer').startup(function(use)
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
-  use { 'brenoprata10/nvim-highlight-colors' } --- Colorizer
+  -- use { 'brenoprata10/nvim-highlight-colors' } --- Colorizer
   use { 'xiyaowong/nvim-transparent' }        --- transparency
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
   -- use { 'kdheepak/tabline.nvim', requires = { { 'hoob3rt/lualine.nvim' }, { 'kyazdani42/nvim-web-devicons', opt = true } } }
