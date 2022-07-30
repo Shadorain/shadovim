@@ -322,6 +322,10 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link HarpoonWindow CybuBackground
   hi link HarpoonBorder FloatermBorder
 
+  " Nvim-UFO
+  hi default link UfoPreviewSbar PmenuSbar
+  hi default link UfoPreviewThumb PmenuThumb
+  hi default link UfoFoldedEllipsis Conditional
   " Rust {{{
   hi! link rsForeignConst Constant
   hi! link rsForeignFunc Function

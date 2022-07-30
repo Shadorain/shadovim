@@ -54,6 +54,9 @@ cmd('au FileType markdown setlocal spell spelllang=en_us')
 -- Folds
 vim.opt.foldenable = true
 vim.opt.foldmethod = 'marker'
+-- vim.opt.foldcolumn = '1'
+-- vim.opt.foldlevel = 99
+-- vim.opt.foldlevelstart = 99
 
 -- Splits
 vim.opt.splitright = true
@@ -294,6 +297,31 @@ if status_ok then
   hop.setup {
     case_insensitive = false,
   }
+end
+--- }}}
+--- UFO {{{
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+local status_ok, ufo = pcall(require, "ufo")
+if status_ok then
+  ufo.setup {
+    preview = {
+      win_config = {
+          border = {'', '─', '', '', '', '─', '', ''},
+          winhighlight = 'Normal:Folded',
+          winblend = 10
+      },
+      mappings = {
+          scrollU = '<C-u>',
+          scrollD = '<C-d>'
+      }
+    },
+  }
+end
+--- }}}
+--- Neogen {{{
+local status_ok, neogen = pcall(require, "neogen")
+if status_ok then
+  neogen.setup {}
 end
 --- }}}
 --- Lazygit {{{
@@ -864,28 +892,39 @@ require('dressing').setup({
 --- }}}
 --- Crates {{{
 local null_ls = require('null-ls')
-require('crates').setup {
-     null_ls = { enabled = true, name = "crates.nvim", },
-}
+local status_ok, crates = pcall(require, "crates")
+if status_ok then
+  crates.setup {
+       null_ls = { enabled = true, name = "crates.nvim", },
+  }
+end
 --- }}}
 --- Zen Mode {{{
-require('zen-mode').setup({
-  window = {
-	backdrop = 1,
-	height = 0.9, -- height of the Zen window
-	width = 0.85,
-	options = {
-	  signcolumn = "no", -- disable signcolumn
-	  number = false, -- disable number column
-	  relativenumber = false, -- disable relative numbers
-   },
-  },
-  plugins = {
-    gitsigns = { enabled = false }, -- disables git signs
-    tmux = { enabled = false },
-    twilight = { enabled = true },
-  },
-})
+local status_ok, zen = pcall(require, "zen-mode")
+if status_ok then
+  zen.setup({
+    window = {
+	  backdrop = 0.9,
+	  height = 1, -- height of the Zen window
+	  width = 1,
+	  options = {
+	    signcolumn = "yes", -- disable signcolumn
+	    number = true, -- disable number column
+	    relativenumber = true, -- disable relative numbers
+     },
+    },
+    plugins = {
+      options = {
+        enabled = true,
+        ruler = false, -- disables the ruler text in the cmd line area
+        showcmd = false, -- disables the command in the last line of the screen
+      },
+      gitsigns = { enabled = false }, -- disables git signs
+      tmux = { enabled = false },
+      twilight = { enabled = true },
+    },
+  })
+end
 --- }}}
 --- Numb {{{
 require('numb').setup{
@@ -947,6 +986,8 @@ cmp.setup {
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
+      elseif neogen.jumpable() then
+        neogen.jump_next()
       elseif check_backspace() then
         fallback()
       else fallback()
@@ -957,6 +998,8 @@ cmp.setup {
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
+      elseif neogen.jumpable(true) then
+        neogen.jump_prev()
       else fallback()
       end
     end, { "i", "s", }),

@@ -54,6 +54,8 @@ return require('packer').startup(function(use)
   use { 'tiagovla/scope.nvim' }
   use { 'kyazdani42/nvim-tree.lua' }
   use { 'tamago324/lir.nvim' }
+  use { 'danymat/neogen' }
+  -- use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'abecodes/tabout.nvim',
     config = function()
       require('tabout').setup {

@@ -95,7 +95,8 @@ map('n', '<leader>R', '<esc><esc>:%s///gcI<left><left><left><left><left>')
 map('n', '<leader>r', ':nohl<CR>:redraw!<CR>')
 
 -- Open
-map('n', '<leader>S', ':Startify<CR>') -- Startify
+map('n', '<leader>S',  ':Startify<CR>',   { noremap = true, silent = true }) -- Startify
+map('n', '<leader>ss', ':SSave!<CR><CR>', opts) -- Save Session
 
 -- Tabs
 map('n', '<leader>T',  ':tabnew %<CR>', { noremap = true, silent = true }) -- New tab
@@ -132,15 +133,38 @@ map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- }}}
 --- Plugins {{{
+---- Treesitter Playground {{{
 map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>', { noremap = true, silent = true })
--- File Browser
+---- }}}
+---- Nvim-Tree {{{
 map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
+---- }}}
+---- Lir {{{
 map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>', { noremap = true, silent = true }) 
-
+---- }}}
+---- JABS {{{
 map('n', '<leader>J', ':JABSOpen<CR>', { noremap = true, silent = true })
+---- }}}
+---- Zen-Mode {{{
+local status_ok, zen = pcall(require, "zen-mode")
+if status_ok then
+  map('n', '<leader>Z', ':lua require("zen-mode").toggle()<CR>', { noremap = true, silent = true })
+end
+---- }}}
+---- Nvim-UFO {{{
+-- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+-- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+---- }}}
 ---- Lazygit {{{
 map('n', '<leader>gg', ':LazyGit<CR>', { noremap = true, silent = true })
 map('n', '<leader>GG', ':LazyGitConfig<CR>', { noremap = true, silent = true })
+---- }}}
+---- Neogen {{{
+map("n", "<Leader>nf", ":Neogen func<CR>",  { noremap = true, silent = true })
+map("n", "<Leader>nt", ":Neogen type<CR>",  { noremap = true, silent = true })
+map("n", "<Leader>nc", ":Neogen class<CR>", { noremap = true, silent = true })
+map("n", "<Leader>nl", ":Neogen file<CR>",  { noremap = true, silent = true })
+map("n", "<Leader>nn", ":Neogen<CR>",       { noremap = true, silent = true })
 ---- }}}
 ---- Harpoon {{{
 map('n', 'mm', ':lua require("harpoon.mark").add_file()<CR>',        { noremap = true, silent = true })
