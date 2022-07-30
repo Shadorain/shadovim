@@ -28,10 +28,10 @@ map('n', 'Q', ':lua require("specs").show_specs()<CR>', { noremap = true, silent
 -- Moving text
 map('v', 'J', ':m \'>+1<CR>gv=gv')
 map('v', 'K', ':m \'<-2<CR>gv=gv')
-map('i', '<C-j>', '<esc>:m .+1<CR>==')
-map('i', '<C-k>', '<esc>:m .-2<CR>==')
-map('n', '<leader>j', ':m .+1<CR>==')
-map('n', '<leader>k', ':m .-2<CR>==')
+-- map('i', '<C-j>', '<esc>:m .+1<CR>==')
+-- map('i', '<C-k>', '<esc>:m .-2<CR>==')
+-- map('n', '<leader>j', ':m .+1<CR>==')
+-- map('n', '<leader>k', ':m .-2<CR>==')
 
 -- Copy to end of line
 map('n', 'Y', 'y$')
@@ -67,6 +67,8 @@ map('n', '<C-A-k>', '<C-w>k')
 map('n', '<C-A-l>', '<C-w>l')
 map('n', '<leader>h', '<C-w>h')
 map('n', '<leader>l', '<C-w>l')
+map('n', '<leader>j', '<C-w>j')
+map('n', '<leader>k', '<C-w>k')
 
 -- Close + Balance
 map('n', 'Ww', '<C-w>c')
@@ -228,6 +230,8 @@ map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>', { noremap = true, sil
 map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>', { noremap = true, silent = true })
 map('n', '<leader>thl', '<cmd>Telescope highlights<cr>', { noremap = true, silent = true })
 map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>', { noremap = true, silent = true })
+map('n', '<leader>tj',  '<cmd>Telescope jumplist<cr>', { noremap = true, silent = true })
+map('n', '<leader>tr',  '<cmd>Telescope resume<cr>', { noremap = true, silent = true })
 map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>', { noremap = true, silent = true })
 ---- }}}
 --- }}}
