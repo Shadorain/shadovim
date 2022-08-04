@@ -142,6 +142,9 @@ map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = tru
 ---- Lir {{{
 map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>', { noremap = true, silent = true }) 
 ---- }}}
+---- Peek {{{
+map('n', '<leader>p', ':lua require("peek").Peek("definition")<CR>', { noremap = true, silent = true }) 
+---- }}}
 ---- JABS {{{
 map('n', '<leader>J', ':JABSOpen<CR>', { noremap = true, silent = true })
 ---- }}}
