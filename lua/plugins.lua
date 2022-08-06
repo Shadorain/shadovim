@@ -42,7 +42,7 @@ return require('packer').startup(function(use)
   use { 'edluffy/specs.nvim' }           --- cursor beacon
   use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
   use { 'godlygeek/tabular' }            --- tabbing
-  use { 'jiangmiao/auto-pairs' }
+  use { 'windwp/nvim-autopairs' }
   use { 'numToStr/Comment.nvim' }        --- commenting
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }

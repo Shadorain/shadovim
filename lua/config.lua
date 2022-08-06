@@ -978,7 +978,7 @@ cmp.setup {
     ["<C-u>"]     = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-c>"]     = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-    ['<CR>']      = cmp.mapping.confirm { select = true, },
+    ['<CR>']      = cmp.mapping.confirm { select = false, },
     ['<Tab>']     = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -1034,7 +1034,13 @@ cmp.setup {
   },
   sources = {
     { name = "nvim_lsp", group_index = 2 },
-    { name = "copilot", group_index = 2 },
+    { name = "copilot",
+      max_item_count = 3,
+      trigger_characters = {
+        { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" },
+      },
+      group_index = 2
+    },
     { name = "cmp_tabnine", group_index = 2 },
     { name = "luasnip", group_index = 2 },
     { name = "crates", group_index = 1 },
@@ -1226,15 +1232,44 @@ require('gitsigns').setup {
 }
 --- }}}
 --- AutoPairs {{{
-vim.cmd [[
-  let g:AutoPairsFlyMode = 0
-  let g:AutoPairsShortcutBackInsert = '<M-C-v>'
-  let g:AutoPairsShortcutFastWrap = '<M-S-n>'
-  let g:AutoPairsMapCh = 0
-  let g:AutoPairsMoveCharacter = "()[]{}\"'"
-  au FileType rust let b:AutoPairs = AutoPairsDefine({'\w\zs<': '>', '\W\zs|': '|', '/*': '*/', "\W\zs\'": ''})
-  au FileType c,cpp let b:AutoPairs = AutoPairsDefine({'<': '>', '/*': '*/', "\W\zs\'": ''})
-]]
+local status_ok, npairs = pcall(require, "nvim-autopairs")
+if status_ok then
+  npairs.setup {
+    check_ts = true,
+    ts_config = { },
+    disable_filetype = { "TelescopePrompt", "spectre_panel" },
+    fast_wrap = {
+      map = "<M-f>",
+      chars = { "{", "[", "(", '"', "'", "<" },
+      pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+      offset = 0, -- Offset from pattern match
+      end_key = "$",
+      keys = "qwertyuiopzxcvbnmasdfghjkl",
+      check_comma = true,
+      highlight = "PmenuSel",
+      highlight_grey = "LineNr",
+    },
+  }
+
+  local Rule = require('nvim-autopairs.rule')
+  npairs.add_rule(Rule("<", ">", "rust"))
+end
+
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local cmp_status_ok, cmp = pcall(require, "cmp")
+if cmp_status_ok then
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+end
+-- use { 'jiangmiao/auto-pairs' }
+-- vim.cmd [[
+--   let g:AutoPairsFlyMode = 0
+--   let g:AutoPairsShortcutBackInsert = '<M-C-v>'
+--   let g:AutoPairsShortcutFastWrap = '<M-S-n>'
+--   let g:AutoPairsMapCh = 0
+--   let g:AutoPairsMoveCharacter = "()[]{}\"'"
+--   au FileType rust let b:AutoPairs = AutoPairsDefine({'\w\zs<': '>', '\W\zs|': '|', '/*': '*/', "\W\zs\'": ''})
+--   au FileType c,cpp let b:AutoPairs = AutoPairsDefine({'<': '>', '/*': '*/', "\W\zs\'": ''})
+-- ]]
 --- }}}
 --- Neorg {{{
 require('neorg').setup {

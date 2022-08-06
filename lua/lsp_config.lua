@@ -109,7 +109,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '<space>e',  '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 
     -- Updated to support Nvim-UFO
     -- vim.keymap.set('n', 'K', function()
@@ -139,7 +139,7 @@ local on_attach = function(client, bufnr)
         shadow_blend = 36,
         shadow_guibg = 'Black',
         timer_interval = 200,
-        toggle_key = '<M-f>',
+        -- toggle_key = '<M-f>',
     })
     require("lsp_signature").setup()
     -- Lspkind {{{

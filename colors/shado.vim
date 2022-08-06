@@ -166,6 +166,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link TSWarning WarnMsg
   hi link TSDanger Error
   hi link TSError Error
+
   " Treesitter Markdown
   hi htmlH1 guifg=#bd93f9
   hi htmlH2 guifg=#8897F4
