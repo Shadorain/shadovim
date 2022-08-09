@@ -291,6 +291,12 @@ if status_ok then
   hl_colors.setup {}
 end
 --- }}}
+--- Stay-In-Place {{{
+local status_ok, stay = pcall(require, "stay-in-place")
+if status_ok then
+  stay.setup {}
+end
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if status_ok then
@@ -968,7 +974,7 @@ cmp.setup {
 
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
+    select = true,
   },
 
   mapping = {
@@ -978,7 +984,7 @@ cmp.setup {
     ["<C-u>"]     = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-c>"]     = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-    ['<CR>']      = cmp.mapping.confirm { select = false, },
+    ['<CR>']      = cmp.mapping.confirm { select = true, },
     ['<Tab>']     = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()

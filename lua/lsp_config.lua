@@ -91,8 +91,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'gi',        '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', 'gr',        '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '[d',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '[d',        '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d',        '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<space>cl', '<cmd>lua vim.lsp.codelens.run()<CR>', opts)
@@ -210,7 +210,7 @@ local rs_opts = {
       })
     end,
     autoSetHints = true,
-    hover_with_actions = true,
+    -- hover_with_actions = true,
     parent_module = true,
     join_lines = true,
     runnables = { use_telescope = true },
@@ -240,6 +240,10 @@ local rs_opts = {
     },
   },
   server = {
+    -- on_attach = function(_, bufnr)
+    --   vim.keymap.set("n", "<leader>ca", require('rust-tools').hover_actions.hover_actions, { buffer = bufnr })
+    --   vim.keymap.set("n", "<Leader>cg", require('rust-tools').code_action_group.code_action_group, { buffer = bufnr })
+    -- end,
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {

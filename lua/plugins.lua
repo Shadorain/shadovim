@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
   use { 'kyazdani42/nvim-tree.lua' }
   use { 'tamago324/lir.nvim' }
   use { 'LunarVim/peek.lua' }
+  use { 'gbprod/stay-in-place.nvim' }
   use { 'danymat/neogen' }
   -- use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'abecodes/tabout.nvim',
