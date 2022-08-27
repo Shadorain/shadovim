@@ -184,6 +184,12 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi link mkdCode Comment
   hi link mkdCodeDelimiter htmlH5
 
+  " Lualine
+  hi LualineDiagnosticError guifg=#ac2958 guibg=#1b1b29 blend=10
+  hi LualineDiagnosticWarn guifg=#F18FB0 guibg=#1b1b29 blend=10
+  hi LualineDiagnosticInfo guifg=#fca1e7 guibg=#1b1b29 blend=10
+  hi LualineDiagnosticHint guifg=#849be0 guibg=#1b1b29 blend=10
+
   " LSP
   hi link DiagnosticSignError Error
   hi link DiagnosticSignWarn WarnMsg

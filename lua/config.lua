@@ -1677,7 +1677,19 @@ require'lualine'.setup {
         lualine_b = {'branch'}, --, {'diff', color_added='#37d4a7', color_modified='#2f77a1',
             -- color_removed='#de286e', symbols = {added = '', modified = '', removed = ''} }},
         lualine_c = {'filename'},
-        lualine_x = {'filetype'},
+        lualine_x = { {
+          'diagnostics', sources = { 'nvim_lsp' },
+          sections = { 'error', 'warn' }, -- 'info', 'hint'
+          diagnostics_color = {
+            error = 'LualineDiagnosticError',
+            warn  = 'LualineDiagnosticWarn', 
+            info  = 'LualineDiagnosticInfo',
+            hint  = 'LualineDiagnosticHint', 
+          },
+          colored = true,
+          update_in_insert = false,
+          always_visible = false,
+        }, 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location'},
     },
