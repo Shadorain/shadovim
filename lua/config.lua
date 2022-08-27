@@ -297,6 +297,21 @@ if status_ok then
   stay.setup {}
 end
 --- }}}
+--- Image {{{
+local status_ok, image = pcall(require, "image")
+if status_ok then
+  image.setup {
+    render = {
+      min_padding = 5,
+      show_label = true,
+      use_dither = true,
+    },
+    events = {
+      update_on_nvim_resize = true,
+    },
+  }
+end
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if status_ok then

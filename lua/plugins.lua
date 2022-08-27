@@ -158,6 +158,7 @@ return require('packer').startup(function(use)
   use { 'RRethy/vim-illuminate' }
   use { 'stevearc/dressing.nvim' }
   use { 'ghillb/cybu.nvim' }
+  use { 'samodostal/image.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
