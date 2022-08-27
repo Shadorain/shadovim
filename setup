@@ -26,21 +26,10 @@ function packer_sync {
     read input
 }
 
-# Add lualine theme to local lualine folder
-function install_lualine {
-    echo "*== | Installing lualine.nvim theme | ==*"
-    cp -f ~/.config/nvim/shado.lua ~/.local/share/nvim/site/pack/packer/start/lualine.nvim/lua/lualine/themes/shado.lua
-    if [[ $? -ne 0 ]]; then
-        echo "<== | Error: failed to copy colorscheme file | ==>"
-        exit 1
-    fi
-}
-
 function usage {
     echo "Usage: setup [OPTION]"
     echo "If no OPTION, install everything"
     echo " -h       show this menu"
-    echo " -l       install lualine theme"
     echo " -p       install Packer"
     echo " -P       run :PackerSync"
     exit 0
@@ -49,7 +38,6 @@ function usage {
 if [[ $# -ne 0 ]]; then
     while getopts 'lpPh' OPTION; do
         case "$OPTION" in
-            l) install_lualine;;
             p) install_packer;;
             P) packer_sync;;
             *|h|help) usage;;
@@ -61,4 +49,3 @@ fi
 # Default install
 install_packer
 packer_sync
-install_lualine
