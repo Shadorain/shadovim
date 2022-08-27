@@ -155,8 +155,8 @@ if status_ok then
 end
 ---- }}}
 ---- Nvim-UFO {{{
--- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
--- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 ---- }}}
 ---- Lazygit {{{
 map('n', '<leader>gg', ':LazyGit<CR>', { noremap = true, silent = true })

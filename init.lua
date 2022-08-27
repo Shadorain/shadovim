@@ -18,6 +18,8 @@ vim.g.loaded_zipPlugin = false
 vim.g.loaded_man = false
 vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 --- }}}
 --- Sourcing {{{
 require('plugins')

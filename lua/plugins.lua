@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
   use { 'LunarVim/peek.lua' }
   use { 'gbprod/stay-in-place.nvim' }
   use { 'danymat/neogen' }
-  -- use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'abecodes/tabout.nvim',
     config = function()
       require('tabout').setup {

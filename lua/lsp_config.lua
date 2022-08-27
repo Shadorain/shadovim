@@ -93,7 +93,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gr',        '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', '[d',        '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d',        '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    -- buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<space>cl', '<cmd>lua vim.lsp.codelens.run()<CR>', opts)
     buf_set_keymap('n', '<space>gr', '<cmd>lua require("mod").lsp_references()<CR>', opts)
@@ -108,16 +108,19 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('v', '<space>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
     buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '<space>e',  '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<space>q',  '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
     buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 
+    -- local bufnr = vim.api.nvim_get_current_buf()
+    -- require('ufo').setFoldVirtTextHandler(bufnr, require('mod').fold_handler)
+
     -- Updated to support Nvim-UFO
-    -- vim.keymap.set('n', 'K', function()
-    --     local winid = require('ufo').peekFoldedLinesUnderCursor()
-    --     if not winid then
-    --         vim.lsp.buf.hover()
-    --     end
-    -- end)
+    vim.keymap.set('n', 'K', function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+            vim.lsp.buf.hover()
+        end
+    end)
 
     require("lsp_signature").on_attach({
         bind = true,

@@ -54,9 +54,9 @@ cmd('au FileType markdown setlocal spell spelllang=en_us')
 -- Folds
 vim.opt.foldenable = true
 vim.opt.foldmethod = 'marker'
--- vim.opt.foldcolumn = '1'
--- vim.opt.foldlevel = 99
--- vim.opt.foldlevelstart = 99
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 
 -- Splits
 vim.opt.splitright = true
@@ -321,10 +321,11 @@ if status_ok then
 end
 --- }}}
 --- UFO {{{
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 local status_ok, ufo = pcall(require, "ufo")
 if status_ok then
   ufo.setup {
+    fold_virt_text_handler = require('mod').fold_handler,
     preview = {
       win_config = {
           border = {'', '─', '', '', '', '─', '', ''},

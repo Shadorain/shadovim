@@ -55,8 +55,8 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   hi IncSearch guifg=#8be9fd guibg=NONE guisp=#8897F4 gui=bold
   hi Visual guifg=NONE guibg=#262440 blend=10
   hi EndOfBuffer guifg=#E9729D guibg=NONE
-  hi Folded guifg=#53606e guibg=NONE
-  hi FoldColumn guifg=#53606e guibg=NONE
+  hi Folded guifg=#53606e guibg=#171526
+  hi FoldColumn guifg=#6161b3 guibg=NONE
   hi MatchWord guifg=#0f5bca guibg=NONE
   hi MatchParen guifg=#8be9fd guibg=NONE
   hi Signify guifg=#4484d1 guibg=NONE
