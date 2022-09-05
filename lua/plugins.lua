@@ -160,6 +160,7 @@ return require('packer').startup(function(use)
   use { 'ghillb/cybu.nvim' }
   use { 'samodostal/image.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'Shadorain/shadotheme' }
+  use { 'levouh/tint.nvim' }
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc

@@ -312,6 +312,34 @@ if status_ok then
   }
 end
 --- }}}
+--- Tint {{{
+local status_ok, tint = pcall(require, "tint")
+if status_ok then
+  -- tint.setup {
+  --   bg = true,  -- Dim background highlights
+  --   amt = -40,  -- Dim by value, brighten would just be 40
+  --   ignore = { "SignColumn", "LineNr", "CursorLineNr", "WinSeparator", "Status.*" },  -- Highlight group patterns to ignore
+  --   ignorefunc = function(winid)
+  --     local buf = vim.api.nvim_win_get_buf(winid)
+  --     local buftype vim.api.nvim_buf_get_option(buf, "buftype")
+  --
+  --     if buftype == "terminal" then
+  --       -- Ignore `terminal`-type buffers
+  --       return true
+  --     end
+  --
+  --     -- Dim everything else
+  --     return true
+  --   end
+  -- }
+end
+--- }}}
+--- Headlines {{{
+local status_ok, headlines = pcall(require, "headlines")
+if status_ok then
+  headlines.setup()
+end
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if status_ok then
