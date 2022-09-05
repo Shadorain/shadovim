@@ -1344,135 +1344,33 @@ end
 -- ]]
 --- }}}
 --- Neorg {{{
-require('neorg').setup {
-  load = {
-	["core.defaults"] = {}, -- Load all the defaults
-	["core.norg.concealer"] = {}, -- Allows the use of icons
-	["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-	["core.gtd.base"] = { config = { workspace = "gtd" } },
-	["core.integrations.treesitter"] = {
-      config = {
-        highlights = {
-          Unordered = {
-            List = {
-              ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
-              ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
-              ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
-            },
-            Link = {
-              ["1"] = "+htmlh1", ["2"] = "+htmlh2",
-              ["3"] = "+htmlh3", ["4"] = "+htmlh4",
-              ["5"] = "+htmlh5", ["6"] = "+htmlh6",
-            },
-          },
-          Ordered = {
-            List = {
-              ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
-              ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
-              ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
-            },
-            Link = {
-              ["1"] = "+htmlh1", ["2"] = "+htmlh2",
-              ["3"] = "+htmlh3", ["4"] = "+htmlh4",
-              ["5"] = "+htmlh5", ["6"] = "+htmlh6",
-            },
-          },
-          Quote = {
-            ["1"] = { [""] = "+htmlH1", Content = "+htmlH1" },
-            ["2"] = { [""] = "+htmlH2", Content = "+htmlH2" },
-            ["3"] = { [""] = "+htmlH3", Content = "+htmlH3" },
-            ["4"] = { [""] = "+htmlH4", Content = "+htmlH4" },
-            ["5"] = { [""] = "+htmlH5", Content = "+htmlH5" },
-            ["6"] = { [""] = "+htmlH6", Content = "+htmlH6" },
-          },
-          Definition = {
-              [""] = "+Exception",
-              End = "+Exception",
-              Title = "+TSStrong",
-              -- TODO: figure out odd highlighting of ranged tag when using TSNone
-              Content = "+TSEmphasis",
-          },
-          TodoItem = {
-            ["1"] = {
-              [""] = "+NeorgUnorderedList1",
-              Undone = "+StringDelimiter",
-              Pending = "+TSPunctDelimiter",
-              Done = "+TSString",
-            },
-            ["2"] = {
-              [""] = "+NeorgUnorderedList2",
-              Undone = "+StringDelimiter",
-              Pending = "+TSPunctDelimiter",
-              Done = "+TSString",
-            },
-            ["3"] = {
-              [""] = "+NeorgUnorderedList3",
-              Undone = "+StringDelimiter",
-              Pending = "+TSPunctDelimiter",
-              Done = "+TSString",
-            },
-            ["4"] = {
-              [""] = "+NeorgUnorderedList4",
-              Undone = "+StringDelimiter",
-              Pending = "+TSPunctDelimiter",
-              Done = "+TSString",
-            },
-            ["5"] = {
-              [""] = "+NeorgUnorderedList5",
-              Undone = "+StringDelimiter",
-              Pending = "+TSPunctDelimiter",
-              Done = "+TSString",
-            },
-            ["6"] = {
-              [""] = "+NeorgUnorderedList6",
-              Undone = "+StringDelimiter",
-              Pending = "+TSPunctDelimiter",
-              Done = "+TSString",
-            },
-          },
-          EscapeSequence = "+TSType",
-          StrongParagraphDelimiter = "+Comment",
-          WeakParagraphDelimiter = "+Comment",
-          HorizontalLine = "+htmlH4",
-          Marker = { [""] = "+Structure", Title = "+TSStrong" },
-          Tag = {
-            Begin = "+TSKeyword",
-            ["End"] = "+TSKeyword",
-            Name = { [""] = "+Normal", Word = "+TSKeyword" },
-            Parameter = "+TSType",
-            Content = "+Normal",
-          },
-          Insertion = {
-            [""] = "cterm=bold gui=bold",
-            Prefix = "+TSPunctDelimiter",
-            Variable = {
-              [""] = "+TSString",
-              Value = "+TSPunctDelimiter",
-            },
-            Item = "+TSNamespace",
-            Parameters = "+TSComment",
-          },
-          EscapeSequence = "+TSType",
-        }
-      }
-    },
+local status_ok, neorg = pcall(require, "neorg")
+if status_ok then
+  neorg.setup {
+    load = {
+	  ["core.defaults"] = {}, -- Load all the defaults
+	  ["core.norg.concealer"] = {}, -- Allows the use of icons
+	  ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+	  ["core.gtd.base"] = { config = { workspace = "gtd" } },
+	  ["core.integrations.treesitter"] = { config = { } },
     ["core.norg.dirman"] = { -- Manage Neorg directories
-	  config = {
-	    workspaces = {
-		  main   = "~/dev/neorg",
-		  work   = "~/dev/neorg/work",
-		  school = "~/dev/neorg/school",
-	    },
-	    autochdir = false,
-	    autodetect = false
-	  }
+	    config = {
+	      workspaces = {
+		    main   = "~/dev/neorg",
+		    work   = "~/dev/neorg/work",
+		    school = "~/dev/neorg/school",
+	      },
+	      autochdir = false,
+	      autodetect = false
+	    }
+      },
+      ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
+      -- ["core.integrations.telescope"] = {},
+      ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
     },
-    ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
-    -- ["core.integrations.telescope"] = {},
-    ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
-  },
-  logger = { level = "warn" },
-}
+    logger = { level = "warn" },
+  }
+end
 --- }}}
 --- Treesitter {{{
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
