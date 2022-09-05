@@ -31,6 +31,9 @@ return require('packer').startup(function(use)
   -- [[ Packer ]]
   use { 'wbthomason/packer.nvim' }
 
+  -- [[ Custom ]]
+  use { 'Shadorain/shadotheme', after = "nvim-treesitter" }
+
   -- [[ Speed up ]]
   use { 'lewis6991/impatient.nvim', opt = true, config = function() require('impatient') end }
 
@@ -150,26 +153,22 @@ return require('packer').startup(function(use)
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
-  -- use { 'brenoprata10/nvim-highlight-colors' } --- Colorizer
   use { 'xiyaowong/nvim-transparent' }        --- transparency
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-  -- use { 'kdheepak/tabline.nvim', requires = { { 'hoob3rt/lualine.nvim' }, { 'kyazdani42/nvim-web-devicons', opt = true } } }
   use { 'lukas-reineke/indent-blankline.nvim' }
   use { 'RRethy/vim-illuminate' }
   use { 'stevearc/dressing.nvim' }
   use { 'ghillb/cybu.nvim' }
   use { 'samodostal/image.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use { 'Shadorain/shadotheme' }
   use { 'levouh/tint.nvim' }
+  use { 'lukas-reineke/headlines.nvim' }
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
-  -- use { 'unblevable/quick-scope' }     --- horizonal movement
   use { 'phaazon/hop.nvim' }              --- easymotion movement
   use { 'matbme/JABS.nvim' }              --- Buffer Switching
   use { 'theprimeagen/harpoon' }          --- Buffer Harpooning
   use { 'SmiteshP/nvim-navic' }           --- Navigation
-  -- use { 'fgheng/winbar.nvim' }
 
   -- [[ Miscellaneous ]]
   use { 'mhinz/vim-startify' } --- Start Screen

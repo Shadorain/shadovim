@@ -1638,8 +1638,7 @@ require'lualine'.setup {
     },
     sections = {
         lualine_a = {'mode'},
-        lualine_b = {'branch'}, --, {'diff', color_added='#37d4a7', color_modified='#2f77a1',
-            -- color_removed='#de286e', symbols = {added = '', modified = '', removed = ''} }},
+        lualine_b = {'branch'},
         lualine_c = {'filename'},
         lualine_x = { {
           'diagnostics', sources = { 'nvim_lsp' },
@@ -1658,12 +1657,37 @@ require'lualine'.setup {
         lualine_z = {'location'},
     },
     inactive_sections = {
-        lualine_a = {},
-        lualine_b = {'filename'},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {'location'},
-        lualine_z = {},
+        lualine_a = {'mode'},
+        lualine_b = {'branch'},
+        lualine_c = {'filename'},
+        lualine_x = {
+        -- {
+        --   'diff',
+        --   colored = true, -- Displays a colored diff status if set to true
+        --   diff_color = {
+        --     -- Same color values as the general color option can be used here.
+        --     added    = 'DiffAdd',    -- Changes the diff's added color
+        --     modified = 'DiffChange', -- Changes the diff's modified color
+        --     removed  = 'DiffDelete', -- Changes the diff's removed color you
+        --   },
+        --   symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the symbols used by the diff.
+        --   source = nil,
+        -- },
+        {
+          'diagnostics', sources = { 'nvim_lsp' },
+          sections = { 'error', 'warn' }, -- 'info', 'hint'
+          diagnostics_color = {
+            error = 'LualineDiagnosticError',
+            warn  = 'LualineDiagnosticWarn', 
+            info  = 'LualineDiagnosticInfo',
+            hint  = 'LualineDiagnosticHint', 
+          },
+          colored = true,
+          update_in_insert = false,
+          always_visible = false,
+        }, 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'},
     },
     tabline = {},
     extensions = {'quickfix'},
@@ -1705,8 +1729,9 @@ vim.g.startify_bookmarks = {
     { nk = '~/.config/nvim/lua/binds.lua'      },
     { nm = '~/.config/nvim/lua/mod.lua'        },
     { nl = '~/.config/nvim/lua/lsp_config.lua' },
-    { ns = '~/.config/nvim/colors/shado.vim'   },
-    { nx = '~/.config/nvim/colors/shado.vim'   },
+    { ns = '~/dev/shadotheme/colors/shado.vim' },
+    { nX = '~/dev/shadotheme/colors/shado.vim' },
+    { nx = '~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim' },
     { x  = '~/.xmonad/xmonad.hs'               },
     { p  = '~/.config/shadobar/config-xmonad'  },
     { c  = '~/.config/picom.conf'              },
