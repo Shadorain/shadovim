@@ -158,6 +158,9 @@ end
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 ---- }}}
+---- GitSigns {{{
+map('n', '<leader>gs', ':Gitsigns<CR>', { noremap = true, silent = true })
+---- }}}
 ---- Lazygit {{{
 map('n', '<leader>gg', ':LazyGit<CR>', { noremap = true, silent = true })
 map('n', '<leader>GG', ':LazyGitConfig<CR>', { noremap = true, silent = true })
