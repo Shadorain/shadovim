@@ -133,7 +133,8 @@ return require('packer').startup(function(use)
   use { 'onsails/lspkind-nvim' }
 	use { 'ray-x/lsp_signature.nvim', module = 'lsp_signature' }
   use { 'rafamadriz/friendly-snippets' } --- extra snippets
-	use { 'simrat39/symbols-outline.nvim', cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" } }
+	-- use { 'simrat39/symbols-outline.nvim', cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" } }
+	use { 'stevearc/aerial.nvim' }
   --- }}}
   --- [[ Treesitter ]] {{{
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }

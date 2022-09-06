@@ -340,6 +340,17 @@ if status_ok then
   headlines.setup()
 end
 --- }}}
+--- Aerial {{{
+local status_ok, aerial = pcall(require, "aerial")
+if status_ok then
+  aerial.setup {
+    manage_folds = true,
+    link_tree_to_folds = true,
+    link_folds_to_tree = true,
+    show_guides = true,
+  }
+end
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if status_ok then
