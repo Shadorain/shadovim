@@ -154,6 +154,7 @@ return require('packer').startup(function(use)
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
+  use { 'nvim-colortils/colortils.nvim' }     --- Colorpicker!
   use { 'xiyaowong/nvim-transparent' }        --- transparency
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
   use { 'lukas-reineke/indent-blankline.nvim' }

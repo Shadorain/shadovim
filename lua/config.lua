@@ -359,6 +359,12 @@ if status_ok then
   }
 end
 --- }}}
+--- Colortils {{{
+local status_ok, colortils = pcall(require, "colortils")
+if status_ok then
+  colortils.setup()
+end
+--- }}}
 --- UFO {{{
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 local status_ok, ufo = pcall(require, "ufo")
