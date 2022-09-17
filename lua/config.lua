@@ -365,6 +365,20 @@ if status_ok then
   colortils.setup()
 end
 --- }}}
+--- Copilot {{{
+local status_ok, copilot_cmp = pcall(require, "copilot-cmp")
+if status_ok then
+  require("copilot-cmp").setup {
+    method = "getCompletionsCycling",
+    force_autofmt = false,
+    formatters = {
+      label = require("copilot_cmp.format").format_label_text,
+      insert_text = require("copilot_cmp.format").format_label_text,
+      preview = require("copilot_cmp.format").deindent,
+    },
+  }
+end
+--- }}}
 --- UFO {{{
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 local status_ok, ufo = pcall(require, "ufo")
@@ -1023,6 +1037,7 @@ vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
 local cmp = require('cmp')
 local compare = require('cmp.config.compare')
 local luasnip = require('luasnip')
+vim.defer_fn(function()
 cmp.setup {
   preselect = cmp.PreselectMode.None,
   completion = { completeopt = "menu,menuone,noselect,noinsert" },
@@ -1171,6 +1186,7 @@ cmp.setup {
   },
   experimental = { ghost_text = true } --,  custom_menu = true }
 }
+end, 100)
 --- }}}
 --- Symbols Outline {{{
 vim.g.symbols_outline = {

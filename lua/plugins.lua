@@ -114,21 +114,20 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-nvim-lsp' }
   -- use { 'github/copilot.vim' }
   use { 'zbirenbaum/copilot.lua',
-    event = { "VimEnter" },
+    after = 'lualine.nvim',
     config = function()
-      require('copilot').setup {
-        cmp = {
-          enabled = true,
-          method = "getPanelCompletions",
-        },
-        panel = { -- no config options yet
-          enabled = true,
-        },
-        ft_disable = { "markdown" },
-      }
+      vim.defer_fn(function()
+        require('copilot').setup {
+          panel = { enabled = true, },
+          ft_disable = { "markdown" },
+          copilot_node_command = 'node', -- Node version must be < 18
+          plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
+          server_opts_overrides = {},
+        }
+      end, 100)
     end,
   }
-  use { 'zbirenbaum/copilot-cmp' } --, module = 'copilot_cmp', }
+  use { 'zbirenbaum/copilot-cmp', after = 'copilot.lua' }
   
   use { 'onsails/lspkind-nvim' }
 	use { 'ray-x/lsp_signature.nvim', module = 'lsp_signature' }
