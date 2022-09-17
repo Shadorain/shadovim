@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
   use { 'windwp/nvim-autopairs' }
   use { 'numToStr/Comment.nvim' }        --- commenting
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { 'LudoPinelli/comment-box.nvim' }
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
   use { 'ravenxrz/DAPInstall.nvim' }
   use { 'ahmedkhalf/project.nvim' }

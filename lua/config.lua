@@ -1624,10 +1624,13 @@ require('indent_blankline').setup {
 }
 --- }}}
 --- Project {{{
-require('project_nvim').setup({
-  detection_methods = { "lsp", "pattern" },
-  patterns = { ".git", "Cargo.toml", ".hg", ".bzr", ".svn", "Makefile" },
-})
+local status_ok, project = pcall(require, "project_nvim")
+if status_ok then
+  project.setup({
+    detection_methods = { "lsp", "pattern" },
+    patterns = { ".git", "Cargo.toml", ".hg", ".bzr", ".svn", "Makefile" },
+  })
+end
 --- }}}
 --- Null-LS {{{
 local null_ls = require('null-ls')

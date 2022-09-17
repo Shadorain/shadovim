@@ -75,8 +75,8 @@ local function attach_navic(client, bufnr)
   navic.attach(client, bufnr)
 end
 
-vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false, max_width = 80, max_height = 20 })
-vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false, max_width = 80, max_height = 20 })
+vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = true, max_width = 80, max_height = 20 })
+vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = true, max_width = 80, max_height = 20 })
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -131,6 +131,13 @@ local on_attach = function(client, bufnr)
             vim.lsp.buf.hover()
         end
     end)
+
+    
+    local status_ok, rust_tools = pcall(require, "rust-tools")
+    if status_ok then
+      buf_set_keymap('n', 'gE', '<cmd>lua require("rust-tools").expand_macro.expand_macro()<CR>', opts)
+      buf_set_keymap('n', 'gP', '<cmd>lua require("rust-tools").parent_module.parent_module()<CR>', opts)
+    end
 
     require("lsp_signature").on_attach({
         bind = true,
@@ -229,11 +236,14 @@ local rs_opts = {
     runnables = { use_telescope = true },
     debuggables = { use_telescope = true },
     inlay_hints = {
+      auto = true,
       only_current_line = false,
       only_current_line_autocmd = "CursorHold",
       show_parameter_hints = true,
       parameter_hints_prefix = "❰ ",
       other_hints_prefix = "≣ ",
+      -- parameter_hints_prefix = " ",
+      -- other_hints_prefix = " ",
       max_len_align = false,
       max_len_align_padding = 1,
       right_align = false,
@@ -254,8 +264,10 @@ local rs_opts = {
   },
   server = {
     -- on_attach = function(_, bufnr)
-    --   vim.keymap.set("n", "<leader>ca", require('rust-tools').hover_actions.hover_actions, { buffer = bufnr })
-    --   vim.keymap.set("n", "<Leader>cg", require('rust-tools').code_action_group.code_action_group, { buffer = bufnr })
+      -- vim.keymap.set("n", "gE", require'rust-tools'.expand_macro.expand_macro, { buffer = bufnr })
+      -- vim.keymap.set("n", "gP", require'rust-tools'.parent_module.parent_module, { buffer = bufnr })
+      -- vim.keymap.set("n", "<leader>ca", require('rust-tools').hover_actions.hover_actions, { buffer = bufnr })
+      -- vim.keymap.set("n", "<Leader>cg", require('rust-tools').code_action_group.code_action_group, { buffer = bufnr })
     -- end,
     on_attach = on_attach,
     capabilities = capabilities,
