@@ -28,10 +28,6 @@ map('n', 'Q', ':lua require("specs").show_specs()<CR>', { noremap = true, silent
 -- Moving text
 map('v', 'J', ':m \'>+1<CR>gv=gv')
 map('v', 'K', ':m \'<-2<CR>gv=gv')
--- map('i', '<C-j>', '<esc>:m .+1<CR>==')
--- map('i', '<C-k>', '<esc>:m .-2<CR>==')
--- map('n', '<leader>j', ':m .+1<CR>==')
--- map('n', '<leader>k', ':m .-2<CR>==')
 
 -- Copy to end of line
 map('n', 'Y', 'y$')
@@ -46,6 +42,11 @@ map('n', '<C-q>', ':source ~/.config/nvim/init.lua<CR>')
 map('n', '<C-s>', ':w<CR>')
 --- }}}
 --- Splits {{{
+map('n', '<leader>h', '<C-w>h', { noremap = true, silent = true })
+map('n', '<leader>l', '<C-w>l', { noremap = true, silent = true })
+map('n', '<leader>j', '<C-w>j', { noremap = true, silent = true })
+map('n', '<leader>k', '<C-w>k', { noremap = true, silent = true })
+
 -- Resizing
 map('n', '<Up>',    ':resize +2<CR>', { noremap = true, silent = true })
 map('n', '<Down>',  ':resize -2<CR>', { noremap = true, silent = true })
@@ -65,10 +66,6 @@ map('n', '<C-A-h>', '<C-w>h')
 map('n', '<C-A-j>', '<C-w>j')
 map('n', '<C-A-k>', '<C-w>k')
 map('n', '<C-A-l>', '<C-w>l')
-map('n', '<leader>h', '<C-w>h')
-map('n', '<leader>l', '<C-w>l')
-map('n', '<leader>j', '<C-w>j')
-map('n', '<leader>k', '<C-w>k')
 
 -- Close + Balance
 map('n', 'Ww', '<C-w>c')
@@ -87,131 +84,23 @@ map('i', ';;', '<Esc>A;<Esc>')
 
 -- Moves cursor to next position or further
 cmd("inoremap <expr> <C-l> getline('.')[col('.')-1] =~? '[]>)}''\"`]' ? '<Right>' : '<Right>'")
-
--- Search and Replace
-map('n', '<leader>R', '<esc><esc>:%s///gcI<left><left><left><left><left>')
-
+--- }}}
+-- [[ Leader / Plugin Bindings ]] ------------------------------------------- ]]
+--- No Label {{{
 -- Redraw highlights
 map('n', '<leader>r', ':nohl<CR>:redraw!<CR>')
 
--- Open
-map('n', '<leader>S',  ':Startify<CR>',   { noremap = true, silent = true }) -- Startify
-map('n', '<leader>sS', ':SSave!<CR><CR>', opts) -- Save Session
-
--- Tabs
-map('n', '<leader>T',  ':tabnew %<CR>', { noremap = true, silent = true }) -- New tab
-map('n', '<leader>tt', ':tabnew %<CR>', { noremap = true, silent = true }) -- New tab
-map('n', '<leader>tc', ':tabclose<CR>', { noremap = true, silent = true }) -- Close tab
-map('n', '<leader>to', ':tabonly<CR>',  { noremap = true, silent = true }) -- Close all but open tab
-
--- Transparent Button
-map('n', '<leader>i', ':TransparentToggle<CR>', { noremap = true, silent = true }) 
---- }}}
---- Compilation/Debug/Program Management {{{
-map('n', '<Leader>cb', ':Cargo build<CR>')
-map('n', '<Leader>cr', ':Cargo run<CR>')
-map('n', '<Leader>cc', ':Cargo check<CR>')
---- }}}
--- [[ Leader / Plugin Bindings ]] ------------------------------------------- ]]
---- Buffers {{{
-map('n', '<leader>bl', ':ls<CR>',  { noremap = true, silent = true })
-map('n', '<leader>bb', ':bn<CR>',  { noremap = true, silent = true })
-map('n', '<leader>bn', ':bp<CR>',  { noremap = true, silent = true })
-map('n', '<leader>bk', ':BD<CR>',  { noremap = true, silent = true }) -- delete from list
-map('n', '<leader>bu', ':BUN<CR>', { noremap = true, silent = true }) -- unload mem
-map('n', '<leader>b1', ':b 1<CR>', { noremap = true, silent = true })
-map('n', '<leader>b2', ':b 2<CR>', { noremap = true, silent = true })
-map('n', '<leader>b3', ':b 3<CR>', { noremap = true, silent = true })
-map('n', '<leader>b4', ':b 4<CR>', { noremap = true, silent = true })
-map('n', '<leader>b5', ':b 5<CR>', { noremap = true, silent = true })
-map('n', '<leader>b6', ':b 6<CR>', { noremap = true, silent = true })
-map('n', '<leader>b7', ':b 7<CR>', { noremap = true, silent = true })
-map('n', '<leader>b8', ':b 8<CR>', { noremap = true, silent = true })
-map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
-
--- Buffer menu
-cmd('set wildchar=<Tab> wildmenu wildmode=full')
---- }}}
---- Plugins {{{
----- Treesitter Playground {{{
+--- Treesitter Playground
 map('n', '<leader>tht', ':TSHighlightCapturesUnderCursor<CR>', { noremap = true, silent = true })
----- }}}
----- Nvim-Tree {{{
-map('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
----- }}}
----- Lir {{{
-map('n', '<leader>fr', ':lua require("lir.float").toggle()<CR>', { noremap = true, silent = true }) 
----- }}}
----- Peek {{{
-map('n', '<leader>p', ':lua require("peek").Peek("definition")<CR>', { noremap = true, silent = true }) 
----- }}}
----- JABS {{{
-map('n', '<leader>J', ':JABSOpen<CR>', { noremap = true, silent = true })
----- }}}
----- Session Manager {{{
-map('n', '<leader>sl', ':SessionManager load_session<CR>', { noremap = true, silent = true })
-map('n', '<leader>sL', ':SessionManager load_last_session<CR>', { noremap = true, silent = true })
-map('n', '<leader>ss', ':SessionManager save_current_session<CR>', { noremap = true, silent = true })
-map('n', '<leader>sd', ':SessionManager delete_session<CR>', { noremap = true, silent = true })
----- }}}
----- Zen-Mode {{{
-local status_ok, zen = pcall(require, "zen-mode")
-if status_ok then
-  map('n', '<leader>Z', ':lua require("zen-mode").toggle()<CR>', { noremap = true, silent = true })
-end
----- }}}
--- Colortils
-map('n', '<leader>cp', ':Colortils picker<CR>', { noremap = true, silent = true })
-map('n', '<leader>cg', ':Colortils gradient<CR>', { noremap = true, silent = true })
-map('n', '<leader>cd', ':Colortils darken<CR>', { noremap = true, silent = true })
-map('n', '<leader>cl', ':Colortils lighten<CR>', { noremap = true, silent = true })
---- }}}
--- Browse
-map('n', '<leader>Bi', ':BrowseInput<CR>',           { noremap = true })
-map('n', '<leader>BB', ':Browse<CR>',                { noremap = true })
-map('n', '<leader>Bb', ':BrowseBookmarks<CR>',       { noremap = true })
-map('n', '<leader>Bd', ':BrowseDevdocs<CR>',         { noremap = true })
-map('n', '<leader>Bf', ':BrowseDevdocsFiletype<CR>', { noremap = true })
-map('n', '<leader>Bm', ':BrowseMdn<CR>',             { noremap = true })
---- }}}
----- Nvim-UFO {{{
+
+--- Nvim-UFO {{{
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
----- }}}
----- GitSigns {{{
-map('n', '<leader>gs', ':Gitsigns<CR>', { noremap = true, silent = true })
----- }}}
----- Lazygit {{{
-map('n', '<leader>gg', ':LazyGit<CR>', { noremap = true, silent = true })
-map('n', '<leader>GG', ':LazyGitConfig<CR>', { noremap = true, silent = true })
----- }}}
----- Neogen {{{
-map("n", "<Leader>nf", ":Neogen func<CR>",  { noremap = true, silent = true })
-map("n", "<Leader>nt", ":Neogen type<CR>",  { noremap = true, silent = true })
-map("n", "<Leader>nc", ":Neogen class<CR>", { noremap = true, silent = true })
-map("n", "<Leader>nl", ":Neogen file<CR>",  { noremap = true, silent = true })
-map("n", "<Leader>nn", ":Neogen<CR>",       { noremap = true, silent = true })
----- }}}
----- Harpoon {{{
-map('n', 'mm', ':lua require("harpoon.mark").add_file()<CR>',        { noremap = true, silent = true })
-map('n', 'm.', ':lua require("harpoon.ui").nav_next()<CR>',          { noremap = true, silent = true })
-map('n', 'm,', ':lua require("harpoon.ui").nav_prev()<CR>',          { noremap = true, silent = true })
-map('n', 'm;', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { noremap = true, silent = true })
----- }}}
----- Bookmarks {{{
-map('n', 'mb', '<cmd>BookmarkToggle<CR>',   { noremap = true, silent = true })
-map('n', 'mA', '<cmd>BookmarkAnnotate<CR>', { noremap = true, silent = true })
-map('n', 'mj', '<cmd>BookmarkNext<CR>',     { noremap = true, silent = true })
-map('n', 'mk', '<cmd>BookmarkPrev<CR>',     { noremap = true, silent = true })
-map('n', 'mx', '<cmd>BookmarkClearAll<CR>', opts)
-map('n', 'mS', '<cmd>BookmarkShowAll<CR>',  { noremap = true, silent = true })
----- }}}
----- Hop {{{
+--- }}}
+--- Hop {{{
 map("n", "s", ":HopChar1<cr>", { silent = true })
 map("n", "S", ":HopPattern<cr>", { silent = true })
 
--- map("n", "f", ":HopWordCurrentLineAC<cr>", opts)
--- map("n", "F", ":HopWordCurrentLineBC<cr>", opts)
 map("o", "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
 map("o", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
 map("o", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
@@ -221,68 +110,254 @@ map("n", "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.Hint
 map("n", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
 map("n", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
 map("n", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
----- }}}
----- Cybu {{{
+--- }}}
+--- Cybu {{{
 map('n', '<C-j>', '<Plug>(CybuNext)', { noremap = true, silent = true })
 map('n', '<C-k>', '<Plug>(CybuPrev)', { noremap = true, silent = true })
 map('n', '<C-S-j>', '<Plug>(CybuLastusedNext)', { noremap = true, silent = true })
 map('n', '<C-S-k>', '<Plug>(CybuLastusedPrev)', { noremap = true, silent = true })
----- }}}
----- Tabline {{{
--- map('n', '<leader>tt', ':TablineTabNew<CR>', { noremap = true, silent = true })
--- map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })
----- }}}
+--- }}}
+--- Telescope {{{
+map('n', '<C-f>',       '<esc><cmd>Telescope find_files<cr>', { noremap = true, silent = true })
+map('n', '<C-A-f>',     '<esc><esc><C-w>v<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+map('i', '<C-f>',       '<esc><cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
+--- }}}
+--- }}}
+--- Which Key {{{
+--- Opts {{{
+-- Normal Mode Opts
+local opts_n = {
+  mode = "n",       -- NORMAL mode
+  buffer = nil,     -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,    -- use `silent` when creating keymaps
+  noremap = true,   -- use `noremap` when creating keymaps
+  nowait = true,    -- use `nowait` when creating keymaps
+}
+-- Visual Mode Opts
+local opts_v = {
+  mode = "v",       -- VISUAL mode
+  buffer = nil,     -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,    -- use `silent` when creating keymaps
+  noremap = true,   -- use `noremap` when creating keymaps
+  nowait = true,    -- use `nowait` when creating keymaps
+}
+-- Terminal Mode Opts
+local opts_t = {
+  mode = "t",       -- TERMINAL mode
+  buffer = nil,     -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,    -- use `silent` when creating keymaps
+  noremap = true,   -- use `noremap` when creating keymaps
+  nowait = true,    -- use `nowait` when creating keymaps
+}
+--- }}}
+--- Mark Mappings {{{
+local m_mappings = {
+  ["m"] = {
+--- Bookmarks {{{
+    name = "+bookmarks",
+    A = { "<cmd>silent BookmarkAnnotate<cr>",     "Annotate" },
+    B = { "<cmd>silent BookmarkToggle<cr>",       "Toggle" },
+    C = { "<cmd>silent BookmarkClear<cr>",        "Clear" },
+    X = { "<cmd>silent BookmarkClearAll<cr>",     "Clear All" },
+    j = { "<cmd>silent BookmarkNext<cr>",         "Next" },
+    k = { "<cmd>silent BookmarkPrev<cr>",         "Prev" },
+    S = { "<cmd>silent BookmarkShowAll<cr>",      "Show" },
+--- }}}
+--- Harpoon {{{
+    m     = { '<cmd>lua require("harpoon.mark").add_file()<cr>',        "Harpoon" },
+    ["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>',          "Harpoon Next" },
+    [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>',          "Harpoon Prev" },
+    [";"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
+--- }}}
+  }
+}
+--- }}}
+--- Normal Mappings {{{
+local n_mappings = {
+  ["<leader>"] = {
+--- Misc {{{
+    R = { '<esc><esc>:%s///gcI<left><left><left><left><left>',  "Search/Replace" },
+    S = { '<cmd>Startify<CR>',                                  "Startify" },
+    i = { '<cmd>TransparentToggle<CR>',                         "Transparency" },
+    p = { '<cmd>lua require("peek").Peek("definition")<CR>',    "LSP Peek" },
+    J = { '<cmd>JABSOpen<CR>',                                  "JABS Buffers" },
+    Z = { '<cmd>lua require("zen-mode").toggle()<CR>',          "Zen Mode" },
+--- }}}
+--- <T> Telescope {{{
+    T = {
+      name = "+telescope",
+      m     = { "<cmd>Telescope harpoon marks<cr>",         "Search Harpoons" },
+      f     = { '<cmd>Telescope find_files',                "Find Files" },
+      g     = { '<cmd>Telescope live_grep',                 "Grep" },
+      o     = { '<cmd>Telescope oldfiles',                  "Recently Opened" },
+      h     = { '<cmd>Telescope help_tags',                 "Nvim help" },
+      k     = { '<cmd>Telescope keymaps',                   "Keymaps" },
+      C     = { '<cmd>Telescope git_commits',               "Git Commits" },
+      r     = { '<cmd>Telescope resume',                    "Resume" },
+      p     = { '<cmd>Telescope projects',                  "Projects" },
+      H     = { '<cmd>Telescope highlights',                "Highlights" },
+      j     = { '<cmd>Telescope jumplist',                  "jumplist" },
+      c     = { '<cmd>Telescope commands',                  "Execute" },
+      u     = { 'silent! %foldopen! | UndotreeToggle',      "Undotree" },
+      ["/"] = { '<cmd>Telescope current_buffer_fuzzy_find', "Search in File" },
+      ["?"] = { '<cmd>Telescope search_history',            "History" },
+      [";"] = { '<cmd>Telescope command_history',           "Command History" },
+    },
+--- }}}
+--- <s> Session {{{
+    s = {
+      name = "+session",
+      S = { '<cmd>SSave!<CR>',                              "SSave"  },
+      s = { '<cmd>SessionManager save_current_session<CR>', "Save"   },
+      l = { '<cmd>SessionManager load_session<CR>',         "Load"   },
+      L = { '<cmd>SessionManager load_last_session<CR>',    "Recent" },
+      d = { '<cmd>SessionManager delete_session<CR>',       "Delete" },
+    },
+--- }}}
+--- <t> Tabs {{{
+    t = {
+      name = "+tabs",
+      t = { '<cmd>tabnew %<CR>',  "New"   },
+      c = { '<cmd>tabclose<CR>',  "Close" },
+      o = { '<cmd>tabonly<CR>',   "Only"  },
+      -- t = { '<cmd>TablineTabNew<CR>', "New" },
+      -- r = { '<cmd>TablineTabRename<CR>', "Rename" },
+    },
+--- }}}
+--- <f> File {{{
+    f = {
+      name = "+file",
+      e = { '<cmd>NvimTreeToggle<CR>',                     "Nvim Tree" },
+      r = { '<cmd>lua require("lir.float").toggle()<CR>',  "Lir Tree"  },
+      o = { '<cmd>tabonly<CR>',                            "Only Tab"  },
+    },
+--- }}}
+--- <c> Cargo | Colortils {{{
+    c = {
+      name = "+cargo|color",
+      c = { '<cmd>Cargo build<CR>',        "Build"      },
+      c = { '<cmd>Cargo run<CR>',          "Run"        },
+      c = { '<cmd>Cargo check<CR>',        "Check"      },
+      p = { '<cmd>Colortils picker<CR>',   "Picker"     },
+      g = { '<cmd>Colortils gradient<CR>', "Gradient"   },
+      d = { '<cmd>Colortils darken<CR>',   "Darken"     },
+      l = { '<cmd>Colortils lighten<CR>',  "Lighten"    },
+    },
+--- }}}
+--- <b> Buffer {{{
+    b = {
+      name = "+buffer",
+      l     = { '<cmd>ls<CR>',  "List" },
+      b     = { '<cmd>bn<CR>',  "Next" },
+      n     = { '<cmd>bp<CR>',  "Prev" },
+      k     = { '<cmd>BD<<CR>', "Delete" },
+      u     = { '<cmd>BUN<CR>', "Unload" },
+      ["1"] = { '<cmd>b 1<CR>', "Buf #1" },
+      ["2"] = { '<cmd>b 2<CR>', "Buf #2" },
+      ["3"] = { '<cmd>b 3<CR>', "Buf #3" },
+      ["4"] = { '<cmd>b 4<CR>', "Buf #4" },
+      ["5"] = { '<cmd>b 5<CR>', "Buf #5" },
+      ["6"] = { '<cmd>b 6<CR>', "Buf #6" },
+      ["7"] = { '<cmd>b 7<CR>', "Buf #7" },
+      ["8"] = { '<cmd>b 8<CR>', "Buf #8" },
+      ["9"] = { '<cmd>b 9<CR>', "Buf #9" },
+
+      m     = { '<cmd>FloatermToggle<CR>',                          "Float Terminal"  },
+      [","] = { '<cmd>FloatermNew --wintype=normal --height=8<CR>', "Bottom Terminal" },
+    },
+--- }}}
+--- <B> Browse {{{
+    B = {
+      name = "+browse",
+      B = { '<cmd>Browse<CR>',                "Search"            },
+      i = { '<cmd>BrowseInput<CR>',           "Input"             },
+      b = { '<cmd>BrowseBookmarks<CR>',       "Bookmarks"         },
+      d = { '<cmd>BrowseDevdocs<CR>',         "Devdocs"           },
+      f = { '<cmd>BrowseDevdocsFiletype<CR>', "Devdocs Filetype"  },
+      m = { '<cmd>BrowseMdn<CR>',             "Mdn"               },
+    },
+--- }}}
+--- <g> Git {{{
+    g = {
+      name = "+git",
+      g = { '<cmd>LazyGit<CR>',                        "Lazygit"        },
+      G = { '<cmd>LazyGitConfig<CR>',                  "Lazygit Cfg"    },
+      -- s = { '<cmd>Gitsigns<CR>',                    "Gitsigns"       },
+      J = { '<cmd>Gitsigns next_hunk<CR>',             "Next Hunk"      },
+      K = { '<cmd>Gitsigns prev_hunk<CR>',             "Prev Hunk"      },
+      s = { '<cmd>Gitsigns stage_hunk<CR>',            "Stage Hunk"     },
+      p = { '<cmd>Gitsigns preview_hunk<CR>',          "Preview Hunk"   },
+      u = { '<cmd>Gitsigns undo_stage_hunk<CR>',       "Undo Stage"     },
+      S = { '<cmd>Gitsigns stage_buffer<CR>',          "Stage Buffer"   },
+      d = { '<cmd>Gitsigns toggle_deleted<CR>',        "Toggle Deleted" },
+      b = { '<cmd>Gitsigns blame_line<CR>',            "Blame Line"     },
+      B = { '<cmd>Gitsigns blame_line{full=true}<CR>', "Blame"          },
+    },
+--- }}}
+--- <n> Neogen {{{
+    n = {
+      name = "+neogen",
+      n = { '<cmd>Neogen<CR>',       "Any"      },
+      f = { '<cmd>Neogen func<CR>',  "Function" },
+      t = { '<cmd>Neogen type<CR>',  "Type"     },
+      c = { '<cmd>Neogen class<CR>', "Class"    },
+      l = { '<cmd>Neogen file<CR>',  "File"     },
+    },
+--- }}}
+--- <d> Debugging {{{
+    d = {
+      name = "+debug",
+      b     = { '<cmd>lua require("dap").toggle_breakpoint()<CR>',   "Breakpoint"  },
+      c     = { '<cmd>lua require("dap").continue()<CR>',            "Continue"    },
+      j     = { '<cmd>lua require("dap").down()<CR>',                "Down STrace" },
+      k     = { '<cmd>lua require("dap").up()<CR>',                  "Up STrace"   },
+      l     = { '<cmd>lua require("dap").run_last()<CR>',            "Run Last"    },
+      q     = { '<cmd>lua require("dap").terminate()<CR>',           "Terminate"   },
+      u     = { '<cmd>lua require("dapui").toggle()<CR>',            "UI"          },
+      K     = { '<cmd>lua require("dap.ui.variables").hover()<CR>',  "Var Hover"   },
+      ["{"] = { '<cmd>lua require("dap.ui.variables").scopes()<CR>', "Var Scopes"  },
+      s = {
+        name = "+step",
+        i = { '<cmd>lua require("dap").step_into()<CR>',             "Into" },
+        o = { '<cmd>lua require("dap").step_over()<CR>',             "Over" },
+        x = { '<cmd>lua require("dap").step_out()<CR>',              "Out"  },
+      },
+    },
+--- }}}
+  }
+}
+--- }}}
+--- Visual Mappings {{{
+local v_mappings = {
+  ["<leader>"] = {
 ---- Debugging {{{
-map('n', '<leader>db', ':lua require("dap").toggle_breakpoint()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dB', ':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', { noremap = true, silent = true })
-map('n', '<leader>dL', ':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', { noremap = true, silent = true })
-map('n', '<leader>dc', ':lua require("dap").continue()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dsi', ':lua require("dap").step_into()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dso', ':lua require("dap").step_over()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dsx', ':lua require("dap").step_out()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dj', ':lua require("dap").down()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dk', ':lua require("dap").up()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dr', ':lua require("dap").repl_open()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dl', ':lua require("dap").run_last()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dui', ':lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
-map('n', '<leader>dK', ':lua require("dap.ui.variables").hover()<CR>', { noremap = true, silent = true })
-map('n', '<leader>d{', ':lua require("dap.ui.variables").scopes()<CR>', { noremap = true, silent = true })
-map('n', '<leader>di', ':lua require("dap.ui.widgets").hover()', { noremap = true, silent = true })
-map('n', '<leader>d_', ':lua require("dap").disconnect();require("dap").stop();require("dap").run_last()<CR>', { noremap = true, silent = true })
-map('n', '<leader>d?', ':lua local widgets=require("dap.ui.widgets");widgets.centered_float(widgets.scopes)<CR>', { noremap = true, silent = true })
-
-map('v', '<leader>dK', ':lua require("dap.ui.variables").visual_hover()<CR>', { noremap = true, silent = true })
+    d = {
+      name = "+debug",
+      K = { '<cmd>lua require("dap.ui.variables").visual_hover()<cr>', "Range Hover" },
+    },
 ---- }}}
+  }
+}
+--- }}}
+--- Terminal Mappings {{{
+local t_mappings = {
+  ["<leader>"] = {
 ---- Floaterm {{{
-map('n', '<leader>bm', ':FloatermToggle<CR>', { noremap = true, silent = true })
-map('t', '<leader>bm', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true })
-map('n', '<leader>b,', ':FloatermNew --wintype=normal --height=8<CR>', { noremap = true, silent = true })
-map('t', '<leader>b,', '<C-\\><C-n>:FloatermNew --wintype=normal --height=8<CR>', { noremap = true, silent = true })
-map('t', '<leader>bn', '<C-\\><C-n>:FloatermPrev<CR>', { noremap = true, silent = true })
-map('t', '<leader>bb', '<C-\\><C-n>:FloatermNext<CR>', { noremap = true, silent = true })
-map('t', '<leader>bk', '<C-\\><C-n>:FloatermKill<CR>', { noremap = true, silent = true })
+    b = {
+      name = "+floaterm",
+      b = { '<C-\\><C-n><cmd>FloatermNext<cr>',   "Next"   },
+      n = { '<C-\\><C-n><cmd>FloatermPrev<cr>',   "Prev"   },
+      k = { '<C-\\><C-n><cmd>FloatermKill<cr>',   "Close"  },
+      m = { '<C-\\><C-n><cmd>FloatermToggle<cr>', "Toggle" },
+    },
 ---- }}}
----- Telescope {{{
-map('n', '<C-f>', '<esc><cmd>Telescope find_files<cr>', { noremap = true, silent = true })
-map('n', '<C-A-f>', '<esc><esc><C-w>v<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
-map('i', '<C-f>', '<esc><cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
-map('n', '<leader>bv', '<esc><cmd>Telescope buffers<cr>', { noremap = true, silent = true })
-map('n', '<C-b>', '<esc><cmd>Telescope buffers<cr>', { noremap = true, silent = true })
-map('n', '<leader>bc', '<esc><cmd>Telescope git_commits<cr>', { noremap = true, silent = true })
-
-map('n', '<leader>tf',  '<cmd>Telescope find_files<cr>', { noremap = true, silent = true })
-map('n', '<leader>tp',  '<cmd>Telescope projects<cr>', { noremap = true, silent = true })
-map('n', '<leader>tgr', '<cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
-map('n', '<leader>tb',  '<cmd>Telescope buffers<cr>', { noremap = true, silent = true })
-map('n', '<leader>tgc', '<cmd>Telescope git_commits<cr>', { noremap = true, silent = true })
-map('n', '<leader>tgd', '<cmd>lua require("mod").git_diff()<cr>', { noremap = true, silent = true })
-map('n', '<leader>tgb', '<cmd>Telescope git_bcommits<cr>', { noremap = true, silent = true })
-map('n', '<leader>tbt', '<cmd>Telescope current_buffer_tags<cr>', { noremap = true, silent = true })
-map('n', '<leader>thl', '<cmd>Telescope highlights<cr>', { noremap = true, silent = true })
-map('n', '<leader>tk',  '<cmd>Telescope keymaps<cr>', { noremap = true, silent = true })
-map('n', '<leader>tj',  '<cmd>Telescope jumplist<cr>', { noremap = true, silent = true })
-map('n', '<leader>tr',  '<cmd>Telescope resume<cr>', { noremap = true, silent = true })
-map('n', '<leader>tm',  '<cmd>Telescope man_pages<cr>', { noremap = true, silent = true })
----- }}}
+  }
+}
+--- }}}
+local wk = require("which-key")
+wk.register(m_mappings, opts_n)
+wk.register(n_mappings, opts_n)
+wk.register(v_mappings, opts_v)
+wk.register(t_mappings, opts_t)
 --- }}}
 -- [[ ----------------------------------------------------------------------- ]]

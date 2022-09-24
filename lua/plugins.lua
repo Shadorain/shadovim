@@ -61,7 +61,8 @@ return require('packer').startup(function(use)
   use { 'LunarVim/peek.lua' }
   use { 'gbprod/stay-in-place.nvim' }
   use { 'danymat/neogen' }
-  use { 'tversteeg/registers.nvim' }
+  use { 'folke/which-key.nvim' }
+  use { 'mbbill/undotree' }
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'abecodes/tabout.nvim',
     config = function()
