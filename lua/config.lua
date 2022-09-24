@@ -351,6 +351,41 @@ if status_ok then
   }
 end
 --- }}}
+--- Browse {{{
+local status_ok, browse = pcall(require, "browse")
+if status_ok then
+  browse.setup()
+
+  function command(name, rhs, opts)
+    opts = opts or {}
+    vim.api.nvim_create_user_command(name, rhs, opts)
+  end
+
+  command("BrowseInput", function()
+    browse.input_search()
+  end, {})
+
+  command("Browse", function()
+    browse.browse({ bookmarks = bookmarks })
+  end, {})
+
+  command("BrowseBookmarks", function()
+    browse.open_bookmarks({ bookmarks = bookmarks })
+  end, {})
+
+  command("BrowseDevdocs", function()
+    browse.devdocs.search()
+  end, {})
+
+  command("BrowseDevdocsFiletype", function()
+    browse.devdocs.search_with_filetype()
+  end, {})
+
+  command("BrowseMdn", function()
+    browse.mdn.search()
+  end, {})
+end
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if status_ok then

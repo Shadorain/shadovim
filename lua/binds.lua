@@ -160,6 +160,14 @@ if status_ok then
   map('n', '<leader>Z', ':lua require("zen-mode").toggle()<CR>', { noremap = true, silent = true })
 end
 ---- }}}
+-- Browse
+map('n', '<leader>Bi', ':BrowseInput<CR>',           { noremap = true })
+map('n', '<leader>BB', ':Browse<CR>',                { noremap = true })
+map('n', '<leader>Bb', ':BrowseBookmarks<CR>',       { noremap = true })
+map('n', '<leader>Bd', ':BrowseDevdocs<CR>',         { noremap = true })
+map('n', '<leader>Bf', ':BrowseDevdocsFiletype<CR>', { noremap = true })
+map('n', '<leader>Bm', ':BrowseMdn<CR>',             { noremap = true })
+--- }}}
 ---- Nvim-UFO {{{
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)

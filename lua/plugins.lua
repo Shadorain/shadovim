@@ -167,6 +167,7 @@ return require('packer').startup(function(use)
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
+  use { 'lalitmee/browse.nvim', requires = { 'nvim-telescope/telescope.nvim' } }
   use { 'phaazon/hop.nvim' }              --- easymotion movement
   use { 'matbme/JABS.nvim' }              --- Buffer Switching
   use { 'theprimeagen/harpoon' }          --- Buffer Harpooning
