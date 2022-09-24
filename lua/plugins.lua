@@ -61,6 +61,7 @@ return require('packer').startup(function(use)
   use { 'LunarVim/peek.lua' }
   use { 'gbprod/stay-in-place.nvim' }
   use { 'danymat/neogen' }
+  use { 'tversteeg/registers.nvim' }
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'abecodes/tabout.nvim',
     config = function()
@@ -94,10 +95,12 @@ return require('packer').startup(function(use)
   use { 'nvim-lua/popup.nvim' }
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'kdheepak/lazygit.nvim' }
+  use { 'pwntester/octo.nvim' }
 
   -- [[ Coding ]]
   --- [[ LSP & Completion ]] {{{
   use { 'neovim/nvim-lspconfig' } --- Native LSP
+  use { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' }
   use { 'jose-elias-alvarez/null-ls.nvim' }
   use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/nvim-cmp', requires = { --- Autocompletion
@@ -149,7 +152,7 @@ return require('packer').startup(function(use)
   use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
   use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
   use { 'saecki/crates.nvim' }       --- cargo crates!
-  use { 'nvim-neorg/neorg' } --, after = "nvim-treesitter" }
+  use { 'nvim-neorg/neorg', run = ":Neorg sync-parsers", ft = "norg", after = "nvim-treesitter" }
 
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
@@ -163,7 +166,7 @@ return require('packer').startup(function(use)
   use { 'ghillb/cybu.nvim' }
   use { 'samodostal/image.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'levouh/tint.nvim' }
-  use { 'lukas-reineke/headlines.nvim' }
+  -- use { 'lukas-reineke/headlines.nvim' }
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc

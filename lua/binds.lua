@@ -129,12 +129,6 @@ map('n', '<leader>b7', ':b 7<CR>', { noremap = true, silent = true })
 map('n', '<leader>b8', ':b 8<CR>', { noremap = true, silent = true })
 map('n', '<leader>b9', ':b 9<CR>', { noremap = true, silent = true })
 
--- Colortils
-map('n', '<leader>cp', ':Colortils picker<CR>', { noremap = true, silent = true })
-map('n', '<leader>cg', ':Colortils gradient<CR>', { noremap = true, silent = true })
-map('n', '<leader>cd', ':Colortils darken<CR>', { noremap = true, silent = true })
-map('n', '<leader>cl', ':Colortils lighten<CR>', { noremap = true, silent = true })
---- }}}
 -- Buffer menu
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
 --- }}}
@@ -166,6 +160,12 @@ if status_ok then
   map('n', '<leader>Z', ':lua require("zen-mode").toggle()<CR>', { noremap = true, silent = true })
 end
 ---- }}}
+-- Colortils
+map('n', '<leader>cp', ':Colortils picker<CR>', { noremap = true, silent = true })
+map('n', '<leader>cg', ':Colortils gradient<CR>', { noremap = true, silent = true })
+map('n', '<leader>cd', ':Colortils darken<CR>', { noremap = true, silent = true })
+map('n', '<leader>cl', ':Colortils lighten<CR>', { noremap = true, silent = true })
+--- }}}
 -- Browse
 map('n', '<leader>Bi', ':BrowseInput<CR>',           { noremap = true })
 map('n', '<leader>BB', ':Browse<CR>',                { noremap = true })

@@ -869,7 +869,7 @@ if status_ok then
         },
         view = {
           width = 30,
-          height = 30,
+          -- height = 30,
           hide_root_folder = false,
           side = "left",
           -- auto_resize = true,
@@ -1429,27 +1429,27 @@ local status_ok, neorg = pcall(require, "neorg")
 if status_ok then
   neorg.setup {
     load = {
-	  ["core.defaults"] = {}, -- Load all the defaults
-	  ["core.norg.concealer"] = {}, -- Allows the use of icons
-	  ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-	  ["core.gtd.base"] = { config = { workspace = "gtd" } },
-	  ["core.integrations.treesitter"] = { config = { } },
-    ["core.norg.dirman"] = { -- Manage Neorg directories
-	    config = {
-	      workspaces = {
-		    main   = "~/dev/neorg",
-		    work   = "~/dev/neorg/work",
-		    school = "~/dev/neorg/school",
-	      },
-	      autochdir = false,
-	      autodetect = false
-	    }
-      },
+	    ["core.defaults"] = {}, -- Load all the defaults
+	    ["core.norg.concealer"] = {}, -- Allows the use of icons
+	    ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+	    ["core.gtd.base"] = { config = { workspace = "gtd" } },
+	    ["core.integrations.treesitter"] = { config = { } },
+      ["core.norg.dirman"] = { -- Manage Neorg directories
+	      config = {
+	        workspaces = {
+		        main   = "~/dev/neorg",
+		        work   = "~/dev/neorg/work",
+		        school = "~/dev/neorg/school",
+	        },
+	        autochdir = false,
+	        autodetect = false
+	      }
+        },
       ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
       -- ["core.integrations.telescope"] = {},
       ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
     },
-    logger = { level = "warn" },
+    -- logger = { level = "warn" },
   }
 end
 --- }}}
