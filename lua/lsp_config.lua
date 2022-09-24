@@ -8,32 +8,22 @@
 " =========================================================================== ]]
 -- Styling {{{
 local border = {
-    {"┌", "FloatBorder"},
-    {"─", "FloatBorder"},
-    {"┐", "FloatBorder"},
-    {"│", "FloatBorder"},
-    {"┘", "FloatBorder"},
-    {"─", "FloatBorder"},
-    {"└", "FloatBorder"},
-    {"│", "FloatBorder"},
+  {"╭", "FloatBorder"},  -- {"┌", "FloatBorder"},
+  {"─", "FloatBorder"},  -- {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},  -- {"┐", "FloatBorder"},
+  {"│", "FloatBorder"},  -- {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},  -- {"┘", "FloatBorder"},
+  {"─", "FloatBorder"},  -- {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},  -- {"└", "FloatBorder"},
+  {"│", "FloatBorder"},  -- {"│", "FloatBorder"},
 }
--- {"╭", "FloatBorder"},
--- {"─", "FloatBorder"},
--- {"╮", "FloatBorder"},
--- {"│", "FloatBorder"},
--- {"╯", "FloatBorder"},
--- {"─", "FloatBorder"},
--- {"╰", "FloatBorder"},
--- {"│", "FloatBorder"},
--- }}}
 -- Sign defining {{{
--- local signs = { Error = "× ", Warning = " ", Hint = " ", Information = " " }
--- local signs = { Error = "⮀ ", Warning = "", Hint = "", Information = "🞧 " }
 local signs = { Error = " ", Warn = "", Hint = "", Info = "🞧 " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+-- }}}
 -- }}}
 -- Diagnostics {{{
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -58,7 +48,6 @@ capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = { 'documentation', 'detail', 'additionalTextEdits', },
 }
-
 --- Nvim-UFO
 -- capabilities.textDocument.foldingRange = {
 --     dynamicRegistration = false,
@@ -84,61 +73,79 @@ local on_attach = function(client, bufnr)
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     attach_navic(client, bufnr)
-  
-    -- LSP Mappings
-    local opts = { noremap = true, silent = true }
-    buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gi',        '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', 'gr',        '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '[d',        '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d',        '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    -- buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>cl', '<cmd>lua vim.lsp.codelens.run()<CR>', opts)
-    buf_set_keymap('n', '<space>gr', '<cmd>lua require("mod").lsp_references()<CR>', opts)
-    buf_set_keymap('n', '<space>gi', '<cmd>lua require("mod").lsp_implementations()<CR>', opts)
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<space>co', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts) -- Until i can get a nicer picker ;(
-    -- buf_set_keymap('n', '<space>ca', '<cmd>lua require("mod").code_actions()<CR>', opts)
-    buf_set_keymap('v', '<space>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>e',  '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    buf_set_keymap('n', '<space>q',  '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-    buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
-
-    -- Aerial
-    --- Toggle the aerial window with <leader>a
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>o', '<cmd>AerialToggle<CR>', {})
-    --- Jump forwards/backwards with '{' and '}'
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '{', '<cmd>AerialPrev<CR>', {})
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '}', '<cmd>AerialNext<CR>', {})
-    --- Jump up the tree with '[[' or ']]'
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[[', '<cmd>AerialPrevUp<CR>', {})
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']]', '<cmd>AerialNextUp<CR>', {})
-
-    -- local bufnr = vim.api.nvim_get_current_buf()
-    -- require('ufo').setFoldVirtTextHandler(bufnr, require('mod').fold_handler)
-
-    -- Updated to support Nvim-UFO
-    vim.keymap.set('n', 'K', function()
+    
+    local l_mappings = {
+      ["{"]  = { '<cmd>AerialPrev<cr>', "Prev Func" },
+      ["}"]  = { '<cmd>AerialNext<cr>', "Next Func" },
+      ["[["] = { '<cmd>AerialPrevUp<cr>', "Prev Up" },
+      ["]]"] = { '<cmd>AerialNextUp<cr>', "Next Up" },
+      ["[d"] = { '<cmd>lua vim.diagnostic.goto_prev()<cr>',  "Diag Prev" },
+      ["]d"] = { '<cmd>lua vim.diagnostic.goto_next()<cr>',  "Diag Next" },
+      K = { function()
         local winid = require('ufo').peekFoldedLinesUnderCursor()
         if not winid then
             vim.lsp.buf.hover()
-        end
-    end)
+        end end, "Hover" },
+      g = {
+        d = { '<cmd>lua vim.lsp.buf.definition()<CR>',     "Definition" },
+        D = { '<cmd>lua vim.lsp.buf.declaration()<CR>',    "Declaration" },
+        i = { '<cmd>lua vim.lsp.buf.implementation()<CR>', "Implementation" },
+        r = { '<cmd>lua vim.lsp.buf.references()<CR>',     "References" },
+        E = { '<cmd>lua require("rust-tools").expand_macro.expand_macro()<CR>',   "Expand Macro" },
+        P = { '<cmd>lua require("rust-tools").parent_module.parent_module()<CR>', "Parent Module" },
+      },
+      ["<leader>"] = {
+        o = { '<cmd>AerialToggle<cr>',                             "Aerial" },
+        e = { '<cmd>lua vim.diagnostic.open_float()<cr>',          "Float" },
+        q = { '<cmd>lua vim.diagnostic.setloclist()<cr>',          "Loc List" },
+        f = { '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', "Format" },
+        D = { '<cmd>lua vim.lsp.buf.type_definition()<cr>',        "Type Def" },
+        c = {
+          a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code Actions" },
+          l = { '<cmd>lua vim.lsp.codelens.run()<CR>',    "Code Lens" },
+        },
+        g = {
+          r = { '<cmd>lua require("mod").lsp_references()<CR>',      "References" },
+          i = { '<cmd>lua require("mod").lsp_implementations()<CR>', "Implementation" },
+        },
+        w = {
+          a = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',                       "Add Workspace" },
+          r = { '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',                    "Remove Workspace" },
+          l = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', "List Workspaces" },
+        },
+        ["rn"] = { '<cmd>lua vim.lsp.buf.rename()<CR>', "Rename" },
+      },
+    }
+    local v_mappings = {
+      ["<leader>"] = {
+        c = {
+          a = { '<cmd>lua vim.lsp.buf.range_code_action()<CR>', "Range Action" },
+        },
+      },
+    }
 
-    
-    local status_ok, rust_tools = pcall(require, "rust-tools")
-    if status_ok then
-      buf_set_keymap('n', 'gE', '<cmd>lua require("rust-tools").expand_macro.expand_macro()<CR>', opts)
-      buf_set_keymap('n', 'gP', '<cmd>lua require("rust-tools").parent_module.parent_module()<CR>', opts)
-    end
+    -- local bufnr = vim.api.nvim_get_current_buf()
+    -- require('ufo').setFoldVirtTextHandler(bufnr, require('mod').fold_handler)
+    -- LSP Mode Opts
+    local opts_l = {
+      mode = "n",       -- NORMAL mode
+      buffer = bufnr,     -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true,    -- use `silent` when creating keymaps
+      noremap = true,   -- use `noremap` when creating keymaps
+      nowait = true,    -- use `nowait` when creating keymaps
+    }
+    local opts_v = {
+      mode = "v",       -- VISUAL mode
+      buffer = bufnr,   -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true,    -- use `silent` when creating keymaps
+      noremap = true,   -- use `noremap` when creating keymaps
+      nowait = true,    -- use `nowait` when creating keymaps
+    }
+    local wk = require("which-key")
+    wk.register(l_mappings, opts_l)
+    wk.register(v_mappings, opts_v)
 
+    -- Lsp Signature {{{
     require("lsp_signature").on_attach({
         bind = true,
         floating_window = true,
@@ -162,6 +169,7 @@ local on_attach = function(client, bufnr)
         -- toggle_key = '<M-f>',
     })
     require("lsp_signature").setup()
+    -- }}}
     -- Lspkind {{{
     require('lspkind').init({
       -- with_text = false,
@@ -201,20 +209,6 @@ local on_attach = function(client, bufnr)
         return
       end
     illuminate.on_attach(client)
-    -- if client.server_capabilities.documentHighlightProvider then
-        
-        -- vim.api.nvim_exec(
-        -- [[
-        --     hi LspReferenceRead  gui=bold guibg=#1b1b29 blend=10
-        --     hi LspReferenceText  gui=bold guibg=#1b1b29 blend=10
-        --     hi LspReferenceWrite gui=bold guibg=#1b1b29 blend=10
-        --     augroup lsp_document_highlight
-        --     autocmd! * <buffer>
-        --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        --     augroup END
-        -- ]], false)
-    -- end
 end
 -- }}}
 -- Lsp Init {{{

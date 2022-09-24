@@ -516,7 +516,7 @@ if status_ok then
           ["p"] = "@parameter.inner",
         },
       },
-	  move = {
+	    move = {
         enable = true,
         set_jumps = true, -- Whether to set jumps in the jumplist
         goto_next_start = {
@@ -1898,10 +1898,10 @@ if status_ok then
     }
   }
 end
--- vim.cmd [[
---   set guioptions-=e
---   set sessionoptions+=tabpages,globals
--- ]]
+vim.cmd [[
+  set guioptions-=e
+  set sessionoptions+=tabpages,globals
+]]
 --- }}}
 --- }}}
 --- * Effects * {{{
