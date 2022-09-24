@@ -167,6 +167,7 @@ return require('packer').startup(function(use)
 
   -- [[ Finders ]]
   use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
+  use { 'nvim-telescope/telescope-ui-select.nvim' }
   use { 'lalitmee/browse.nvim', requires = { 'nvim-telescope/telescope.nvim' } }
   use { 'phaazon/hop.nvim' }              --- easymotion movement
   use { 'matbme/JABS.nvim' }              --- Buffer Switching
@@ -175,6 +176,7 @@ return require('packer').startup(function(use)
 
   -- [[ Miscellaneous ]]
   use { 'mhinz/vim-startify' } --- Start Screen
+  use { 'Shatur/neovim-session-manager' }
   use { 'jghauser/mkdir.nvim', config = function() require('mkdir') end, event = "BufWritePre" }
   use { 'jbyuki/venn.nvim' }
 end)

@@ -386,6 +386,19 @@ if status_ok then
   end, {})
 end
 --- }}}
+--- Session Manager {{{
+local status_ok, session_manager = pcall(require, "session_manager")
+if status_ok then
+  session_manager.setup({
+  autoload_mode = require('session_manager.config').AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+  autosave_last_session = false, -- Automatically save last session on exit.
+  autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
+})
+end
+
+-- local tele_status_ok, telescope = pcall(require, "telescope")
+-- local tele_session_status_ok, telescope = pcall(telescope.load_extension, "sessions")
+--- }}}
 --- Hop {{{
 local status_ok, hop = pcall(require, "hop")
 if status_ok then
@@ -1588,52 +1601,58 @@ local new_maker = function(filepath, bufnr, opts)
   }):sync()
 end
 
-require('telescope').load_extension('projects')
-
 local actions = require('telescope.actions')
 require('telescope').setup{
-    defaults = {
-        buffer_previewer_maker = new_maker,
-        mappings = {
-            i = {
-                ["<esc>"] = actions.close,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["<C-j>"] = actions.move_selection_next,
-            },
-        },
-        vimgrep_arguments = {
-          'rg', '--color=never', '--no-heading',
-          '--with-filename', '--line-number',
-          '--column', '--smart-case'
-        },
-        results_title = false,
-        preview_title = false,
-        prompt_prefix = "❱ ",
-        selection_caret = " ",
-        entry_prefix = "  ",
-        initial_mode = "insert",
-        selection_strategy = "reset",
-        sorting_strategy = "descending",
-        layout_strategy = "horizontal",
-        layout_config = {
-            width = 0.8, height = 0.5,
-            prompt_position = "bottom",
-        },
-        file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-        file_ignore_patterns = { "target", "build", "bin" },
-        generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-        border = {},
-        borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
-        winblend = 25,
-        previewer = true,
-        color_devicons = true,
-        use_less = false,
-        set_env = { ['COLORTERM'] = 'truecolor' },
-        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+  extensions = {
+    ["ui-select"] = {
+      -- require("telescope.themes").get_dropdown { }
     }
+  },
+  defaults = {
+    buffer_previewer_maker = new_maker,
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.move_selection_next,
+      },
+    },
+    vimgrep_arguments = {
+      'rg', '--color=never', '--no-heading',
+      '--with-filename', '--line-number',
+      '--column', '--smart-case'
+    },
+    results_title = false,
+    preview_title = false,
+    prompt_prefix = "❱ ",
+    selection_caret = " ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.8, height = 0.5,
+      prompt_position = "bottom",
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = { "target", "build", "bin" },
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
+    winblend = 25,
+    previewer = true,
+    color_devicons = true,
+    use_less = false,
+    set_env = { ['COLORTERM'] = 'truecolor' },
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+  }
 }
+
+require('telescope').load_extension('projects')
+require('telescope').load_extension('ui-select')
 --- }}}
 --- IndentBlankLine {{{
 vim.g.indentLine_enabled = 1

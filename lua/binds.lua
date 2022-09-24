@@ -96,7 +96,7 @@ map('n', '<leader>r', ':nohl<CR>:redraw!<CR>')
 
 -- Open
 map('n', '<leader>S',  ':Startify<CR>',   { noremap = true, silent = true }) -- Startify
-map('n', '<leader>ss', ':SSave!<CR><CR>', opts) -- Save Session
+map('n', '<leader>sS', ':SSave!<CR><CR>', opts) -- Save Session
 
 -- Tabs
 map('n', '<leader>T',  ':tabnew %<CR>', { noremap = true, silent = true }) -- New tab
@@ -153,6 +153,12 @@ map('n', '<leader>p', ':lua require("peek").Peek("definition")<CR>', { noremap =
 ---- }}}
 ---- JABS {{{
 map('n', '<leader>J', ':JABSOpen<CR>', { noremap = true, silent = true })
+---- }}}
+---- Session Manager {{{
+map('n', '<leader>sl', ':SessionManager load_session<CR>', { noremap = true, silent = true })
+map('n', '<leader>sL', ':SessionManager load_last_session<CR>', { noremap = true, silent = true })
+map('n', '<leader>ss', ':SessionManager save_current_session<CR>', { noremap = true, silent = true })
+map('n', '<leader>sd', ':SessionManager delete_session<CR>', { noremap = true, silent = true })
 ---- }}}
 ---- Zen-Mode {{{
 local status_ok, zen = pcall(require, "zen-mode")
