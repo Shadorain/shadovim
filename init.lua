@@ -10,6 +10,7 @@
 --- Speed up {{{
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
 -- vim.opt.shadafile = "NONE"
+vim.opt.termguicolors = true
 vim.g.loaded_gzip = false
 vim.g.loaded_matchit = false
 vim.g.loaded_netrwPlugin = false

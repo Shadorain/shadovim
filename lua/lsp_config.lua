@@ -33,7 +33,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
-vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
+-- vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
+vim.diagnostic.config({virtual_lines = { only_current_line = true }})
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -75,6 +76,7 @@ local on_attach = function(client, bufnr)
     attach_navic(client, bufnr)
     
     local l_mappings = {
+      L      = { '<cmd>lua require("lsp_lines").toggle()<CR>', "LSP Lines" },
       ["{"]  = { '<cmd>AerialPrev<cr>', "Prev Func" },
       ["}"]  = { '<cmd>AerialNext<cr>', "Next Func" },
       ["[["] = { '<cmd>AerialPrevUp<cr>', "Prev Up" },
