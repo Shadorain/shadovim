@@ -1110,41 +1110,203 @@ vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
 vim.g.startify_enable_special = 0
 
 vim.g.startify_lists = {
-    { type = 'sessions',  header = {'    Sessions'}                              },
-    { type = 'bookmarks', header = {'    Bookmarks'}                             },
-    { type = 'files',     header = {'    Files'}                                 },
-    { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()} },
+    { type = 'sessions',  header = {'    Sessions'}                               },
+    { type = 'bookmarks', header = {'    Bookmarks'}                              },
+    { type = 'files',     header = {'    Files'}                                  },
+    { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()}  },
 }
 
 vim.g.startify_bookmarks = {
-    { nv = '~/.config/nvim/init.lua'           },
-    { np = '~/.config/nvim/lua/plugins.lua'    },
-    { nc = '~/.config/nvim/lua/config.lua'     },
-    { nk = '~/.config/nvim/lua/binds.lua'      },
-    { nm = '~/.config/nvim/lua/mod.lua'        },
-    { nl = '~/.config/nvim/lua/lsp_config.lua' },
-    { ns = '~/dev/shadotheme/colors/shado.vim' },
-    { nX = '~/dev/shadotheme/colors/shado.vim' },
+    { nv = '~/.config/nvim/init.lua'                                              },
+    { np = '~/.config/nvim/lua/plugins.lua'                                       },
+    { nc = '~/.config/nvim/lua/config.lua'                                        },
+    { nk = '~/.config/nvim/lua/binds.lua'                                         },
+    { nm = '~/.config/nvim/lua/mod.lua'                                           },
+    { nl = '~/.config/nvim/lua/lsp_config.lua'                                    },
+    { ns = '~/dev/shadotheme/colors/shado.vim'                                    },
+    { nX = '~/dev/shadotheme/colors/shado.vim'                                    },
     { nx = '~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim' },
-    { x  = '~/.xmonad/xmonad.hs'               },
-    { p  = '~/.config/shadobar/config-xmonad'  },
-    { c  = '~/.config/picom.conf'              },
-    { st = '~/dev/st/config.h'                 },
-    { za = '~/.zsh_aliases'                    },
-    { zc = '~/.zshrc'                          },
-    { ze = '~/.zshenv'                         },
+    { x  = '~/.xmonad/xmonad.hs'                                                  },
+    { p  = '~/.config/shadobar/config-xmonad'                                     },
+    { c  = '~/.config/picom.conf'                                                 },
+    { st = '~/dev/st/config.h'                                                    },
+    { za = '~/.zsh_aliases'                                                       },
+    { zc = '~/.zshrc'                                                             },
+    { ze = '~/.zshenv'                                                            },
 }
 
-vim.g.startify_custom_header = vim.split([[ 
-#||>================---------------------------------------------================<||#
- \"      _________  __                  ___                        __             "/       
-  "     /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____      " 
-  "     \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \     " 
-  "     /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \    " 
-  "    /_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /    " 
- /"            \/       \/      \/      \/                    \/          \/      "\
-#||>================---------------------------------------------================<||#
-    ]], "\n", true)
+-- vim.g.startify_custom_header = vim.split([[ 
+-- ]], "\n", true)
+--- }}}
+--- Alpha {[{
+local status_ok, alpha = pcall(require, "alpha")
+if status_ok then
+    local startify = require('alpha.themes.startify')
+    local logo = {
+      type = 'text',
+      val = {
+        [[  _________  __                  ___                        __         ]],
+        [[ /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____  ]],
+        [[ \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \ ]],
+        [[ /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \]],
+        [[/_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /]],
+        [[        \/       \/      \/      \/                    \/          \/  ]],
+      },
+      opts = {
+        position = 'left',
+        hl = 'Title',
+      },
+    }
+
+    -- Info Text
+    local function info_value()
+      local datetime = os.date(' %d-%m-%Y')
+      local version = vim.version()
+      local nvim_version_info = '   v' .. version.major .. '.' .. version.minor .. '.' .. version.patch
+
+      return '' .. datetime .. nvim_version_info
+    end
+
+    local info = {
+      type = 'text',
+      val = info_value(),
+      opts = {
+        hl = 'StringDelimiter',
+        position = 'left',
+      },
+    }
+    -- Header Group
+    local header = {
+      type = 'group',
+      val = {
+        { type = 'padding', val = 1 },
+        logo,
+        { type = 'padding', val = 1 },
+        info,
+        { type = 'padding', val = 1 },
+      },
+    }
+
+    local bookmarks = {
+      type = 'group',
+      val = {
+        {
+          type = 'text',
+          val = 'Bookmarks',
+          opts = {
+            hl = 'String',
+            shrink_margin = false,
+            position = 'left',
+          },
+        },
+        { type = 'padding', val = 1 },
+        startify.button('nv', '  Init', '<cmd>e ~/.config/nvim/lua/init.lua<cr>'),
+        startify.button('np', '  Plugins', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>'),
+        startify.button('nc', '  Config', '<cmd>e ~/.config/nvim/lua/config.lua<cr>'),
+        startify.button('nk', '  Binds', '<cmd>e ~/.config/nvim/lua/binds.lua<cr>'),
+        startify.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
+        startify.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim'),
+        startify.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.vim'),
+        startify.button('x ', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs'),
+        startify.button('p ', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad'),
+        startify.button('c ', '  Picom', '<cmd>e ~/.config/picom.conf'),
+        startify.button('st', '  ST Config', '<cmd>e ~/dev/C/st/config.h'),
+        startify.button('zc', '  Zshrc', '<cmd>e ~/.zshrc'),
+        startify.button('za', '  Zsh Aliases', '<cmd>e ~/.zsh_aliases'),
+        startify.button('ze', '  Zsh Environment', '<cmd>e ~/.zshenv'),
+      },
+      opts = { position = 'left' },
+    }
+
+    local mru = {
+      type = 'group',
+      val = {
+        {
+          type = 'text',
+          val = 'Recent files',
+          opts = {
+            hl = 'String',
+            shrink_margin = false,
+            position = 'left',
+          },
+        },
+        { type = 'padding', val = 1 },
+        {
+          type = 'group',
+          val = function()
+            return { startify.mru(1, vim.fn.getcwd(), 5) }
+          end,
+          opts = { position = 'left' },
+        },
+      },
+     opts = { position = 'left', },
+    }
+
+    local buttons = {
+      type = 'group',
+      val = {
+        {
+          type = 'text',
+          val = 'Actions',
+          opts = {
+            hl = 'String',
+            shrink_margin = false,
+            position = 'left',
+          },
+        },
+        { type = 'padding', val = 1, opts = { position = 'center' } },
+        startify.button('i', '  New file',     '<cmd>ene <BAR> startinsert<CR>'),
+        startify.button('r', '  Recent files', '<cmd>Telescope oldfiles<CR>'),
+        startify.button('g', '  Live grep',    '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
+        startify.button('s', '  Open Sesion',  '<cmd>SessionManager load_session<CR>'),
+        startify.button('S', '  Last Sesion',  '<cmd>SessionManager load_last_session<CR>'),
+        startify.button('q', '  Quit',         ':qa<CR>'),
+      },
+      opts = {
+        position = 'left',
+      },
+    }
+
+    local config = {
+      layout = {
+        header,
+        { type = 'padding', val = 1, opts = { position = 'left' } },
+        buttons,
+        { type = 'padding', val = 1, opts = { position = 'left' } },
+        bookmarks,
+        { type = 'padding', val = 1, opts = { position = 'left' } },
+        mru,
+      },
+      opts = {
+        position = 'left',
+        setup = function()
+          vim.api.nvim_create_autocmd('User', {
+            pattern = 'AlphaReady',
+            desc = 'Disable status, and cmdline for alpha',
+            callback = function()
+              vim.go.laststatus = 0
+              vim.opt.cmdheight = 0
+            end,
+          })
+          vim.api.nvim_create_autocmd('BufUnload', {
+            buffer = 0,
+            desc = 'Enable status and cmdline after alpha',
+            callback = function()
+              vim.go.laststatus = 3
+              vim.opt.cmdheight = 1
+            end,
+          })
+        end,
+        margin = 5,
+      },
+    }
+
+    vim.cmd([[
+      autocmd FileType alpha setlocal nofoldenable
+    ]])
+
+    alpha.setup(config)
+end
 --- }}}
 --- }}}
 --- * Utility * {{{
@@ -1996,8 +2158,8 @@ if status_ok then
   vim.g.indent_blankline_show_current_context_start = 0
   vim.g.indent_blankline_context_highlight_list = { 'Define' }
 
-  vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer", "norg" }
-  vim.g.indent_blankline_buftype_exclude =  { "terminal", "norg", "TelescopePrompt", "Startify" }
+  vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer", "norg", "alpha" }
+  vim.g.indent_blankline_buftype_exclude =  { "terminal", "norg", "TelescopePrompt", "Startify", "alpha" }
   indent_blankline.setup {
     show_current_context = true,
     show_current_context_start = false,

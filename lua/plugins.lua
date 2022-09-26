@@ -179,7 +179,8 @@ return require('packer').startup(function(use)
   use { 'SmiteshP/nvim-navic' }           --- Navigation
 
   -- [[ Miscellaneous ]]
-  use { 'mhinz/vim-startify' } --- Start Screen
+  -- use { 'mhinz/vim-startify' } --- Start Screen
+  use { 'goolord/alpha-nvim' }
   use { 'Shatur/neovim-session-manager' }
   use { 'jghauser/mkdir.nvim', config = function() require('mkdir') end, event = "BufWritePre" }
   use { 'jbyuki/venn.nvim' }

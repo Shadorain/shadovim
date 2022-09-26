@@ -122,7 +122,7 @@ local on_attach = function(client, bufnr)
     local v_mappings = {
       ["<leader>"] = {
         c = {
-          a = { '<cmd>lua vim.lsp.buf.range_code_action()<CR>', "Range Action" },
+          a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Range Action" },
         },
       },
     }
