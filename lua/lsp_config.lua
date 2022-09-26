@@ -34,7 +34,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 })
 -- }}}
 -- vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
-vim.diagnostic.config({virtual_lines = { only_current_line = true }})
+-- vim.diagnostic.config({virtual_lines = { only_current_line = true }})
+vim.diagnostic.config({virtual_text = false })
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -76,7 +77,6 @@ local on_attach = function(client, bufnr)
     attach_navic(client, bufnr)
     
     local l_mappings = {
-      L      = { '<cmd>lua require("lsp_lines").toggle()<CR>', "LSP Lines" },
       ["{"]  = { '<cmd>AerialPrev<cr>', "Prev Func" },
       ["}"]  = { '<cmd>AerialNext<cr>', "Next Func" },
       ["[["] = { '<cmd>AerialPrevUp<cr>', "Prev Up" },
@@ -97,10 +97,11 @@ local on_attach = function(client, bufnr)
         P = { '<cmd>lua require("rust-tools").parent_module.parent_module()<CR>', "Parent Module" },
       },
       ["<leader>"] = {
+        L = { '<cmd>lua require("lsp_lines").toggle()<CR>',        "LSP Lines" },
         o = { '<cmd>AerialToggle<cr>',                             "Aerial" },
         e = { '<cmd>lua vim.diagnostic.open_float()<cr>',          "Float" },
         q = { '<cmd>lua vim.diagnostic.setloclist()<cr>',          "Loc List" },
-        f = { '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', "Format" },
+        F = { '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', "Format" },
         D = { '<cmd>lua vim.lsp.buf.type_definition()<cr>',        "Type Def" },
         c = {
           a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code Actions" },

@@ -229,7 +229,6 @@ local n_mappings = {
       name = "+file",
       e = { '<cmd>NvimTreeToggle<CR>',                     "Nvim Tree" },
       r = { '<cmd>lua require("lir.float").toggle()<CR>',  "Lir Tree"  },
-      o = { '<cmd>tabonly<CR>',                            "Only Tab"  },
     },
 --- }}}
 --- <c> Cargo | Colortils {{{

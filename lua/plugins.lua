@@ -153,7 +153,7 @@ return require('packer').startup(function(use)
   use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
   use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
   use { 'saecki/crates.nvim' }       --- cargo crates!
-  use { 'nvim-neorg/neorg', run = ":Neorg sync-parsers", ft = "norg", after = "nvim-treesitter" }
+  use { 'nvim-neorg/neorg' } -- , run = ":Neorg sync-parsers", ft = "norg", after = "nvim-treesitter" }
 
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons

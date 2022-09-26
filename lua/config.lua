@@ -52,7 +52,7 @@ vim.opt.timeoutlen = 500
 cmd('set wildchar=<Tab> wildmenu wildmode=full')
 
 -- Sessin management
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.o.sessionoptions="tabpages,globals,blank,buffers,curdir,folds,help,winsize,winpos,terminal"
 
 -- Vim Spell
 cmd('au FileType markdown setlocal spell spelllang=en_us')
@@ -279,6 +279,28 @@ vim.g.bookmark_save_per_working_dir = 1
 --- Cmp {{{
 local status_ok, cmp = pcall(require, "cmp")
 if status_ok then
+  -- vim.api.nvim_create_autocmd(
+  --     {"TextChangedI", "TextChangedP"},
+  --     {
+  --       callback = function()
+  --         local line = vim.api.nvim_get_current_line()
+  --         local cursor = vim.api.nvim_win_get_cursor(0)[2]
+  --
+  --         local current = string.sub(line, cursor, cursor + 1)
+  --         if current == "." or current == "," or current == " " then
+  --           require('cmp').close()
+  --         end
+  --
+  --         local before_line = string.sub(line, 1, cursor + 1)
+  --         local after_line = string.sub(line, cursor + 1, -1)
+  --         if not string.match(before_line, '^%s+$') then
+  --           if after_line == "" or string.match(before_line, " $") or string.match(before_line, "%.$") then
+  --             require('cmp').complete()
+  --           end
+  --         end
+  --     end,
+  --     pattern = "*"
+  --   })
   local check_backspace = function()
     local col = vim.fn.col "." - 1
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
@@ -369,24 +391,25 @@ if status_ok then
       },
     },
     sources = {
-      { name = "nvim_lsp", group_index = 2 },
+      { name = "nvim_lsp", group_index = 2, keyword_length = 0 },
       { name = "copilot",
         max_item_count = 3,
         trigger_characters = {
           { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" },
         },
-        group_index = 2
+        group_index = 2,
+        keyword_length = 0,
       },
-      { name = "cmp_tabnine", group_index = 2 },
-      { name = "luasnip", group_index = 2 },
-      { name = "crates", group_index = 1 },
-      { name = "ctags", group_index = 2 },
-      { name = "nvim_lua", group_index = 2 },
-      { name = "calc", group_index = 2 },
-      { name = "path", group_index = 2 },
-      { name = "buffer", group_index = 2 },
-      { name = "neorg", group_index = 2 },
-      { name = "cmdline", group_index = 2 },
+      { name = "cmp_tabnine", group_index = 2, keyword_length = 0 },
+      { name = "luasnip",     group_index = 2, keyword_length = 0 },
+      { name = "crates",      group_index = 1, keyword_length = 0 },
+      { name = "ctags",       group_index = 2, keyword_length = 0 },
+      { name = "nvim_lua",    group_index = 2, keyword_length = 0 },
+      { name = "calc",        group_index = 2, keyword_length = 0 },
+      { name = "path",        group_index = 2, keyword_length = 0 },
+      { name = "buffer",      group_index = 2, keyword_length = 0 },
+      { name = "neorg",       group_index = 2, keyword_length = 0 },
+      { name = "cmdline",     group_index = 2, keyword_length = 0 },
     },
     sorting = {
       priority_weight = 2,
@@ -842,7 +865,7 @@ if status_ok then
 end
 --- }}}
 --- }}}
---- * Buffer * {{{
+--- * Buffer * {{{ 
 --- Harpoon {{{
 local status_ok, harpoon = pcall(require, "harpoon")
 if status_ok then
@@ -1359,30 +1382,30 @@ vim.g.floaterm_title = 0
 --- Neorg {{{
 local status_ok, neorg = pcall(require, "neorg")
 if status_ok then
-  neorg.setup {
-    load = {
-	    ["core.defaults"] = {}, -- Load all the defaults
-	    ["core.norg.concealer"] = {}, -- Allows the use of icons
-	    ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-	    ["core.gtd.base"] = { config = { workspace = "gtd" } },
-	    ["core.integrations.treesitter"] = { config = { } },
-      ["core.norg.dirman"] = { -- Manage Neorg directories
-	      config = {
-	        workspaces = {
-		        main   = "~/dev/neorg",
-		        work   = "~/dev/neorg/work",
-		        school = "~/dev/neorg/school",
-	        },
-	        autochdir = false,
-	        autodetect = false
-	      }
-        },
-      ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
-      -- ["core.integrations.telescope"] = {},
-      ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
-    },
-    -- logger = { level = "warn" },
-  }
+    neorg.setup {
+      load = {
+	      ["core.defaults"] = {}, -- Load all the defaults
+	      ["core.norg.concealer"] = {}, -- Allows the use of icons
+	      ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+	      ["core.gtd.base"] = { config = { workspace = "gtd" } },
+	      ["core.integrations.treesitter"] = { config = { } },
+          ["core.norg.dirman"] = { -- Manage Neorg directories
+	        config = {
+	          workspaces = {
+		          main   = "~/dev/neorg",
+		          work   = "~/dev/neorg/work",
+		          school = "~/dev/neorg/school",
+	          },
+	          autochdir = false,
+	          autodetect = false
+	        }
+          },
+        ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
+        -- ["core.integrations.telescope"] = {},
+        ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
+      },
+      -- logger = { level = "warn" },
+    }
 end
 --- }}}
 --- }}}
@@ -1922,10 +1945,6 @@ if status_ok then
     }
   }
 end
-vim.cmd [[
-  set guioptions-=e
-  set sessionoptions+=tabpages,globals
-]]
 --- }}}
 --- }}}
 --- * Effects * {{{
