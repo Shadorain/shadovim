@@ -1105,207 +1105,329 @@ if status_ok then
   })
 end
 --- }}}
---- Startify {{{
-vim.g.startify_session_dir = '/home/shadow/.local/cache/nvim/session/'
-vim.g.startify_enable_special = 0
-
-vim.g.startify_lists = {
-    { type = 'sessions',  header = {'    Sessions'}                               },
-    { type = 'bookmarks', header = {'    Bookmarks'}                              },
-    { type = 'files',     header = {'    Files'}                                  },
-    { type = 'dir',       header = {'    Current Directory ' .. vim.fn.getcwd()}  },
-}
-
-vim.g.startify_bookmarks = {
-    { nv = '~/.config/nvim/init.lua'                                              },
-    { np = '~/.config/nvim/lua/plugins.lua'                                       },
-    { nc = '~/.config/nvim/lua/config.lua'                                        },
-    { nk = '~/.config/nvim/lua/binds.lua'                                         },
-    { nm = '~/.config/nvim/lua/mod.lua'                                           },
-    { nl = '~/.config/nvim/lua/lsp_config.lua'                                    },
-    { ns = '~/dev/shadotheme/colors/shado.vim'                                    },
-    { nX = '~/dev/shadotheme/colors/shado.vim'                                    },
-    { nx = '~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim' },
-    { x  = '~/.xmonad/xmonad.hs'                                                  },
-    { p  = '~/.config/shadobar/config-xmonad'                                     },
-    { c  = '~/.config/picom.conf'                                                 },
-    { st = '~/dev/st/config.h'                                                    },
-    { za = '~/.zsh_aliases'                                                       },
-    { zc = '~/.zshrc'                                                             },
-    { ze = '~/.zshenv'                                                            },
-}
-
--- vim.g.startify_custom_header = vim.split([[ 
--- ]], "\n", true)
---- }}}
 --- Alpha {[{
 local status_ok, alpha = pcall(require, "alpha")
 if status_ok then
-    local startify = require('alpha.themes.startify')
-    local logo = {
-      type = 'text',
-      val = {
-        [[  _________  __                  ___                        __         ]],
-        [[ /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____  ]],
-        [[ \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \ ]],
-        [[ /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \]],
-        [[/_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /]],
-        [[        \/       \/      \/      \/                    \/          \/  ]],
-      },
-      opts = {
-        position = 'left',
-        hl = 'Title',
-      },
-    }
+  local path_ok, path = pcall(require, "plenary.path")
 
-    -- Info Text
-    local function info_value()
-      local datetime = os.date(' %d-%m-%Y')
-      local version = vim.version()
-      local nvim_version_info = '   v' .. version.major .. '.' .. version.minor .. '.' .. version.patch
+  local dashboard = require("alpha.themes.dashboard")
+  local nvim_web_devicons = require "nvim-web-devicons"
+  local cdir = vim.fn.getcwd()
 
-      return '' .. datetime .. nvim_version_info
-    end
+  --- Header {{{
+  local logo = {
+    type = 'text',
+    val = {
+      -- [[  _________  __                  ___                        __         ]],
+      -- [[ /   _____/ |  |__  _____     __| _/ _____ _______ _____   |__|  ____  ]],
+      -- [[ \_____  \  |  |  \ \__  \   / __ | /  _  \\_  __ \\__  \  |  | /    \ ]],
+      -- [[ /        \ |   Y  \ / __ \_/ /_/ |(  <_>  )|  | \/ / __ \_|  ||   |  \]],
+      -- [[/_______  / |___|  /(____  /\____ | \_____/ |__|   (____  /|__||___|  /]],
+      -- [[        \/       \/      \/      \/                    \/          \/  ]],
+      [[                                        ████                          ]],
+      [[                                        ████████                      ]],
+      [[                    ██                  ██████████                    ]],
+      [[                  ████                  ████  ████                    ]],
+      [[                ██████                  ██    ████▓▓                  ]],
+      [[                ██  ██▓▓              ▓▓██      ████                  ]],
+      [[                ██  ████▓▓            ████      ████▓▓                ]],
+      [[              ▓▓██    ████▓▓      ▓▓▓▓██        ██████                ]],
+      [[              ██      ██████▓▓▓▓▓▓██████          ████▓▓              ]],
+      [[              ██    ▓▓██████████████████▓▓        ██████              ]],
+      [[              ██  ▒▒██████████████████████▓▓██    ██████              ]],
+      [[              ██▓▓████████████████████████████  ▓▓██████▓▓            ]],
+      [[              ████████████████████████████████▓▓██████████▓▓▓▓        ]],
+      [[            ▓▓████  ██████    ██████████████████████████████████      ]],
+      [[            ████    ████      ██████████████████████████████████      ]],
+      [[          ▓▓██      ██            ██████████████████████████████▓▓    ]],
+      [[          ██████  ▓▓██      ▓▓████    ████████████████████████████    ]],
+      [[          ██████  ████  ██████████████      ██████████████████████    ]],
+      [[          ░░██    ██░░▓▓██████████░░          ░░██████████████████▓▓  ]],
+      [[        ████░░  ▓▓██  ██████░░░░░░              ░░██████████████████  ]],
+      [[    ▓▓▓▓░░      ░░░░  ░░██░░                      ░░████████████████░░]],
+      [[████████████                                        ██████████████████]],
+      [[██████████████                                        ████████████████]],
+      [[██████████████                                        ████████████████]],
+      [[████████████░░                                        ████████████████]],
+      [[░░████████░░                                          ████████████████]],
+      [[  ██████                                            ██████████████████]],
+      [[  ████████                  ████                    ██████████████████]],
+      [[  ████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░                    ██████████████████]],
+      [[  ░░████████████████████░░░░                      ▒▒██████████████████]],
+      [[    ████████░░░░░░░░░░░░  ██▒▒                    ████████████████████]],
+      [[    ░░░░████▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░                    ████████████████████]],
+      [[            ██████████                          ██████████████████████]],
+      [[            ████████                            ██████████████████████]],
+      [[            ████████                          ████████████████████████]],
+      [[            ██████████                      ████████████████████████  ]],
+      [[          ██████████████                    ████████████████████████  ]],
+      [[          ██████████████                  ████████████████  ████████  ]],
+      [[        ████████    ██████              ████████████████    ██████    ]],
+      [[        ██████      ██████            ████████████████░░      ████    ]],
+      [[      ████████        ████          ████████████████          ████    ]],
+      [[    ██████████        ████        ████████████████              ██    ]],
+      [[      ██████████    ████        ██████████████                        ]],
+      [[          ████████          ██████████████                            ]],
+      [[              ████████████████████████                                ]],
+    },
+    opts = {
+      position = 'center',
+      hl = 'AlphaLogo',
+    },
+  }
+  -- Info Text
+  local function info_value()
+    -- local plugins = string.format(" %d", vim.tbl_count(packer_plugins))
+    local datetime = os.date(' %d-%m-%Y')
+    local version = vim.version()
+    local nvim_version_info = '   v' .. version.major .. '.' .. version.minor .. '.' .. version.patch
 
-    local info = {
-      type = 'text',
-      val = info_value(),
-      opts = {
-        hl = 'StringDelimiter',
-        position = 'left',
-      },
-    }
-    -- Header Group
-    local header = {
-      type = 'group',
-      val = {
-        { type = 'padding', val = 1 },
-        logo,
-        { type = 'padding', val = 1 },
-        info,
-        { type = 'padding', val = 1 },
-      },
-    }
+    return '' .. datetime .. nvim_version_info
+  end
 
-    local bookmarks = {
-      type = 'group',
-      val = {
-        {
-          type = 'text',
-          val = 'Bookmarks',
-          opts = {
-            hl = 'String',
-            shrink_margin = false,
-            position = 'left',
-          },
+  local info = {
+    type = 'text',
+    val = info_value(),
+    opts = {
+      hl = 'StringDelimiter',
+      position = 'center',
+    },
+  }
+  -- Header Group
+  local header = {
+    type = 'group',
+    val = {
+      { type = 'padding', val = 2 },
+      logo,
+      { type = 'padding', val = 1 },
+      info,
+      { type = 'padding', val = 2 },
+    },
+  }
+  --- }}}
+  --- File Button Fn {{{
+  local function get_extension(fn)
+      local match = fn:match("^.+(%..+)$")
+      local ext = ""
+      if match ~= nil then
+          ext = match:sub(2)
+      end
+      return ext
+  end
+
+  local function icon(fn)
+      local nwd = require("nvim-web-devicons")
+      local ext = get_extension(fn)
+      return nwd.get_icon(fn, ext, { default = true })
+  end
+
+  local function file_button(fn, sc, short_fn)
+      short_fn = short_fn or fn
+      local ico_txt
+      local fb_hl = {}
+
+      local ico, hl = icon(fn)
+      local hl_option_type = type(nvim_web_devicons.highlight)
+      if hl_option_type == "boolean" then
+          if hl and nvim_web_devicons.highlight then
+              table.insert(fb_hl, { hl, 0, 1 })
+          end
+      end
+      if hl_option_type == "string" then
+          table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 1 })
+      end
+      ico_txt = ico .. "  "
+
+      local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
+      local fn_start = short_fn:match(".*/")
+      if fn_start ~= nil then
+          table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt - 2 })
+      end
+      file_button_el.opts.hl = fb_hl
+      return file_button_el
+  end
+  --- }}}
+  --- Buttons {{{
+  local buttons = {
+    type = "group",
+    val = {
+      -- { type = "text", val = "Quick links", opts = { hl = "String", position = "center" } },
+      -- { type = "padding", val = 1 },
+      dashboard.button('i', '  New file',       '<cmd>ene <BAR> startinsert<CR>'),
+      dashboard.button('r', '  Recent files',   '<cmd>Telescope oldfiles<CR>'),
+      dashboard.button('g', '  Live grep',      '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
+      dashboard.button('s', '  Open sesion',    '<cmd>SessionManager load_session<CR>'),
+      dashboard.button('S', '  Last sesion',    '<cmd>SessionManager load_last_session<CR>'),
+      dashboard.button("c", "  Update plugins", '<cmd>PackerSync<CR>'),
+      dashboard.button('q', '  Quit',           ':qa<CR>'),
+    },
+    position = "center",
+  }
+  --- }}}
+  --- MRU {{{
+  local default_mru_ignore = { "gitcommit" }
+
+  local mru_opts = {
+      ignore = function(path, ext)
+          return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
+      end,
+  }
+  --- @param start number
+  --- @param cwd string optional
+  --- @param items_number number optional number of items to generate, default = 10
+  local function mru(start, cwd, items_number, opts)
+      opts = opts or mru_opts
+      items_number = items_number or 9
+
+      local oldfiles = {}
+      for _, v in pairs(vim.v.oldfiles) do
+          if #oldfiles == items_number then
+              break
+          end
+          local cwd_cond
+          if not cwd then
+              cwd_cond = true
+          else
+              cwd_cond = vim.startswith(v, cwd)
+          end
+          local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
+          if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
+              oldfiles[#oldfiles + 1] = v
+          end
+      end
+
+      local special_shortcuts = {'a', 's', 'd'}
+      local target_width = 35
+
+      local tbl = {}
+      for i, fn in ipairs(oldfiles) do
+          local short_fn
+          if cwd then
+              short_fn = vim.fn.fnamemodify(fn, ":.")
+          else
+              short_fn = vim.fn.fnamemodify(fn, ":~")
+          end
+
+          if(#short_fn > target_width) then
+            short_fn = path.new(short_fn):shorten(1, {-2, -1})
+            if(#short_fn > target_width) then
+              short_fn = path.new(short_fn):shorten(1, {-1})
+            end
+          end
+
+          local shortcut = ""
+          if i <= #special_shortcuts then
+            shortcut = special_shortcuts[i]
+          else
+            shortcut = tostring(i + start - 1 - #special_shortcuts)
+          end
+
+          local file_button_el = file_button(fn, shortcut, short_fn)
+          tbl[i] = file_button_el
+      end
+      return {
+          type = "group",
+          val = tbl,
+          opts = {},
+      }
+  end
+
+  local section_mru = {
+    type = "group",
+    val = {
+      {
+        type = "text",
+        val = "Recent files",
+        opts = {
+          hl = "String",
+          shrink_margin = false,
+          position = "center",
         },
-        { type = 'padding', val = 1 },
-        startify.button('nv', '  Init', '<cmd>e ~/.config/nvim/lua/init.lua<cr>'),
-        startify.button('np', '  Plugins', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>'),
-        startify.button('nc', '  Config', '<cmd>e ~/.config/nvim/lua/config.lua<cr>'),
-        startify.button('nk', '  Binds', '<cmd>e ~/.config/nvim/lua/binds.lua<cr>'),
-        startify.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
-        startify.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim'),
-        startify.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.vim'),
-        startify.button('x ', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs'),
-        startify.button('p ', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad'),
-        startify.button('c ', '  Picom', '<cmd>e ~/.config/picom.conf'),
-        startify.button('st', '  ST Config', '<cmd>e ~/dev/C/st/config.h'),
-        startify.button('zc', '  Zshrc', '<cmd>e ~/.zshrc'),
-        startify.button('za', '  Zsh Aliases', '<cmd>e ~/.zsh_aliases'),
-        startify.button('ze', '  Zsh Environment', '<cmd>e ~/.zshenv'),
       },
-      opts = { position = 'left' },
-    }
-
-    local mru = {
-      type = 'group',
-      val = {
-        {
-          type = 'text',
-          val = 'Recent files',
-          opts = {
-            hl = 'String',
-            shrink_margin = false,
-            position = 'left',
-          },
-        },
-        { type = 'padding', val = 1 },
-        {
-          type = 'group',
-          val = function()
-            return { startify.mru(1, vim.fn.getcwd(), 5) }
-          end,
-          opts = { position = 'left' },
-        },
-      },
-     opts = { position = 'left', },
-    }
-
-    local buttons = {
-      type = 'group',
-      val = {
-        {
-          type = 'text',
-          val = 'Actions',
-          opts = {
-            hl = 'String',
-            shrink_margin = false,
-            position = 'left',
-          },
-        },
-        { type = 'padding', val = 1, opts = { position = 'center' } },
-        startify.button('i', '  New file',     '<cmd>ene <BAR> startinsert<CR>'),
-        startify.button('r', '  Recent files', '<cmd>Telescope oldfiles<CR>'),
-        startify.button('g', '  Live grep',    '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
-        startify.button('s', '  Open Sesion',  '<cmd>SessionManager load_session<CR>'),
-        startify.button('S', '  Last Sesion',  '<cmd>SessionManager load_last_session<CR>'),
-        startify.button('q', '  Quit',         ':qa<CR>'),
-      },
-      opts = {
-        position = 'left',
-      },
-    }
-
-    local config = {
-      layout = {
-        header,
-        { type = 'padding', val = 1, opts = { position = 'left' } },
-        buttons,
-        { type = 'padding', val = 1, opts = { position = 'left' } },
-        bookmarks,
-        { type = 'padding', val = 1, opts = { position = 'left' } },
-        mru,
-      },
-      opts = {
-        position = 'left',
-        setup = function()
-          vim.api.nvim_create_autocmd('User', {
-            pattern = 'AlphaReady',
-            desc = 'Disable status, and cmdline for alpha',
-            callback = function()
-              vim.go.laststatus = 0
-              vim.opt.cmdheight = 0
-            end,
-          })
-          vim.api.nvim_create_autocmd('BufUnload', {
-            buffer = 0,
-            desc = 'Enable status and cmdline after alpha',
-            callback = function()
-              vim.go.laststatus = 3
-              vim.opt.cmdheight = 1
-            end,
-          })
+      { type = "padding", val = 1 },
+      {
+        type = "group",
+        val = function()
+          return { mru(1, cdir, 9) }
         end,
-        margin = 5,
+        opts = { shrink_margin = false },
       },
     }
+  }
+  --- }}}
+  --- Bookmarks {{{
+  local bookmarks = {
+    type = 'group',
+    val = {
+      {
+        type = 'text',
+        val = 'Bookmarks',
+        opts = {
+          hl = 'String',
+          shrink_margin = false,
+          position = 'center',
+        },
+      },
+      { type = 'padding', val = 1 },
+      dashboard.button('nv', '  Init', '<cmd>e ~/.config/nvim/lua/init.lua<cr>'),
+      dashboard.button('np', '  Plugins', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>'),
+      dashboard.button('nc', '  Config', '<cmd>e ~/.config/nvim/lua/config.lua<cr>'),
+      dashboard.button('nk', '  Binds', '<cmd>e ~/.config/nvim/lua/binds.lua<cr>'),
+      dashboard.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
+      dashboard.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim<cr>'),
+      dashboard.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.vim<cr>'),
+      dashboard.button('x ', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs<cr>'),
+      dashboard.button('p ', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad<cr>'),
+      dashboard.button('c ', '  Picom', '<cmd>e ~/.config/picom.conf<cr>'),
+      dashboard.button('st', '  ST Config', '<cmd>e ~/dev/C/st/config.h<cr>'),
+      dashboard.button('zc', '  Zshrc', '<cmd>e ~/.zshrc<cr>'),
+      dashboard.button('za', '  Zsh Aliases', '<cmd>e ~/.zsh_aliases<cr>'),
+      dashboard.button('ze', '  Zsh Environment', '<cmd>e ~/.zshenv<cr>'),
+    },
+    opts = { position = 'center' },
+  }
+  --- }}}
+  --- Opts {{{
+  local opts = {
+    layout = {
+      { type = "padding", val = 1 },
+      header,
+      { type = "padding", val = 2 },
+      buttons,
+      { type = "padding", val = 2 },
+      bookmarks,
+      { type = "padding", val = 2 },
+      section_mru,
+    },
+    setup = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'AlphaReady',
+        desc = 'Disable status, and cmdline for alpha',
+        callback = function()
+          vim.go.laststatus = 0
+          vim.opt.cmdheight = 0
+        end,
+      })
+      vim.api.nvim_create_autocmd('BufUnload', {
+        buffer = 0,
+        desc = 'Enable status and cmdline after alpha',
+        callback = function()
+          vim.go.laststatus = 3
+          vim.opt.cmdheight = 1
+        end,
+      })
+    end,
+    opts = {
+      margin = 5,
+    },
+  }
 
-    vim.cmd([[
-      autocmd FileType alpha setlocal nofoldenable
-    ]])
+  vim.cmd([[
+    autocmd FileType alpha setlocal nofoldenable
+  ]])
 
-    alpha.setup(config)
+  alpha.setup(opts)
+  --- }}}
 end
 --- }}}
 --- }}}
