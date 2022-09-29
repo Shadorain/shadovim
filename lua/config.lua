@@ -62,7 +62,7 @@ cmd('au FileType markdown setlocal spell spelllang=en_us')
 vim.opt.foldenable = true
 vim.opt.foldmethod = 'marker'
 vim.opt.foldcolumn = '1'
-vim.opt.foldlevel = 99
+vim.opt.foldlevel = 1
 vim.opt.foldlevelstart = 99
 
 -- Splits

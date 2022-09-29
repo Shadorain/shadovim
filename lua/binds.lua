@@ -177,7 +177,7 @@ local n_mappings = {
   ["<leader>"] = {
 --- Misc {{{
     R = { '<esc><esc>:%s///gcI<left><left><left><left><left>',  "Search/Replace" },
-    S = { '<cmd>Startify<CR>',                                  "Startify" },
+    A = { '<cmd>Alpha<CR>',                                     "Alpha" },
     i = { '<cmd>TransparentToggle<CR>',                         "Transparency" },
     p = { '<cmd>lua require("peek").Peek("definition")<CR>',    "LSP Peek" },
     J = { '<cmd>JABSOpen<CR>',                                  "JABS Buffers" },
@@ -207,7 +207,6 @@ local n_mappings = {
 --- <s> Session {{{
     s = {
       name = "+session",
-      S = { '<cmd>SSave!<CR>',                              "SSave"  },
       s = { '<cmd>SessionManager save_current_session<CR>', "Save"   },
       l = { '<cmd>SessionManager load_session<CR>',         "Load"   },
       L = { '<cmd>SessionManager load_last_session<CR>',    "Recent" },

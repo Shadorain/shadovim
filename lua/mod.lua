@@ -67,16 +67,6 @@ function M.git_diff()
   require("telescope.builtin").git_status(opts)
 end
 
-function M.code_actions()
-  local opts = {
-    winblend = 40,
-    border = true,
-    previewer = false,
-    shorten_path = false,
-  }
-  builtin.lsp_code_actions(themes.get_cursor(opts))
-end
-
 function M.lsp_references()
   local opts = {
     layout_strategy = "vertical",

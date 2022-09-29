@@ -33,7 +33,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
     update_in_insert = false,
 })
 -- }}}
--- vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
+vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
 -- vim.diagnostic.config({virtual_lines = { only_current_line = true }})
 vim.diagnostic.config({virtual_text = false })
 -- Capabilities {{{
@@ -51,11 +51,11 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = { 'documentation', 'detail', 'additionalTextEdits', },
 }
 --- Nvim-UFO
--- capabilities.textDocument.foldingRange = {
---     dynamicRegistration = false,
---     lineFoldingOnly = true
--- }
--- }}}
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+--- }}}
 -- On attach {{{
 local function attach_navic(client, bufnr)
   vim.g.navic_silence = true
@@ -66,8 +66,8 @@ local function attach_navic(client, bufnr)
   navic.attach(client, bufnr)
 end
 
-vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = true, max_width = 80, max_height = 20 })
-vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = true, max_width = 80, max_height = 20 })
+vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", focusable = true, max_width = 80, max_height = 20 })
+vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", focusable = true, max_width = 80, max_height = 20 })
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -89,27 +89,25 @@ local on_attach = function(client, bufnr)
             vim.lsp.buf.hover()
         end end, "Hover" },
       g = {
-        d = { '<cmd>lua vim.lsp.buf.definition()<CR>',     "Definition" },
-        D = { '<cmd>lua vim.lsp.buf.declaration()<CR>',    "Declaration" },
-        i = { '<cmd>lua vim.lsp.buf.implementation()<CR>', "Implementation" },
-        r = { '<cmd>lua vim.lsp.buf.references()<CR>',     "References" },
+        d = { '<cmd>Telescope lsp_definitions<CR>',                               "Definition" },
+        D = { '<cmd>Telescope lsp_declarations<CR>',                              "Declaration" },
+        I = { '<cmd>Telescope lsp_incoming_calls<CR>',                            "Incoming Calls" },
+        O = { '<cmd>Telescope lsp_outgoing_calls<CR>',                            "Outgoing Calls" },
+        r = { '<cmd>lua require("mod").lsp_references()<CR>',                     "References" },
+        i = { '<cmd>lua require("mod").lsp_implementations()<CR>',                "Implementation" },
         E = { '<cmd>lua require("rust-tools").expand_macro.expand_macro()<CR>',   "Expand Macro" },
         P = { '<cmd>lua require("rust-tools").parent_module.parent_module()<CR>', "Parent Module" },
       },
       ["<leader>"] = {
         L = { '<cmd>lua require("lsp_lines").toggle()<CR>',        "LSP Lines" },
         o = { '<cmd>AerialToggle<cr>',                             "Aerial" },
-        e = { '<cmd>lua vim.diagnostic.open_float()<cr>',          "Float" },
-        q = { '<cmd>lua vim.diagnostic.setloclist()<cr>',          "Loc List" },
         F = { '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', "Format" },
         D = { '<cmd>lua vim.lsp.buf.type_definition()<cr>',        "Type Def" },
+        -- e = { '<cmd>lua vim.diagnostic.open_float()<cr>',          "Float" },
+        -- q = { '<cmd>lua vim.diagnostic.setloclist()<cr>',          "Loc List" },
         c = {
           a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code Actions" },
           l = { '<cmd>lua vim.lsp.codelens.run()<CR>',    "Code Lens" },
-        },
-        g = {
-          r = { '<cmd>lua require("mod").lsp_references()<CR>',      "References" },
-          i = { '<cmd>lua require("mod").lsp_implementations()<CR>', "Implementation" },
         },
         w = {
           a = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',                       "Add Workspace" },
@@ -128,7 +126,7 @@ local on_attach = function(client, bufnr)
     }
 
     -- local bufnr = vim.api.nvim_get_current_buf()
-    -- require('ufo').setFoldVirtTextHandler(bufnr, require('mod').fold_handler)
+    require('ufo').setFoldVirtTextHandler(bufnr, require('mod').fold_handler)
     -- LSP Mode Opts
     local opts_l = {
       mode = "n",       -- NORMAL mode
@@ -215,16 +213,36 @@ local on_attach = function(client, bufnr)
 end
 -- }}}
 -- Lsp Init {{{
+function setup_codelens_refresh(client, bufnr)
+  local status_ok, codelens_supported = pcall(function()
+    return client.supports_method "textDocument/codeLens"
+  end)
+  if not status_ok or not codelens_supported then
+    return
+  end
+  local group = "lsp_code_lens_refresh"
+  local cl_events = { "BufEnter", "InsertLeave" }
+  local ok, cl_autocmds = pcall(vim.api.nvim_get_autocmds, {
+    group = group,
+    buffer = bufnr,
+    event = cl_events,
+  })
+
+  if ok and #cl_autocmds > 0 then
+    return
+  end
+  vim.api.nvim_create_augroup(group, { clear = false })
+  vim.api.nvim_create_autocmd(cl_events, {
+    group = group,
+    buffer = bufnr,
+    callback = vim.lsp.codelens.refresh,
+  })
+end
 --- Rust-tools {{{
 local rs_opts = {
   tools = {
     on_initialized = function()
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-        pattern = { "*.rs" },
-        callback = function()
-          vim.lsp.codelens.refresh()
-        end,
-      })
+      setup_codelens_refresh()
     end,
     autoSetHints = true,
     -- hover_with_actions = true,
