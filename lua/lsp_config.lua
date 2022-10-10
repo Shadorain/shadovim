@@ -103,7 +103,7 @@ local on_attach = function(client, bufnr)
         o = { '<cmd>AerialToggle<cr>',                             "Aerial" },
         F = { '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', "Format" },
         D = { '<cmd>lua vim.lsp.buf.type_definition()<cr>',        "Type Def" },
-        -- e = { '<cmd>lua vim.diagnostic.open_float()<cr>',          "Float" },
+        e = { '<cmd>lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})<cr>', "Float" },
         -- q = { '<cmd>lua vim.diagnostic.setloclist()<cr>',          "Loc List" },
         c = {
           a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code Actions" },

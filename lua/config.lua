@@ -6,6 +6,7 @@
 "   \______  /\____/|___|  /__|  |__\___  / /\ |____/____/(____  /
 "          \/            \/        /_____/  \/                 \/
 " =========================================================================== ]]
+local M = {}
 local cmd = vim.cmd
 -- [[ General Settings ]] --------------------------------------------------- ]]
 -- {{{
@@ -302,8 +303,10 @@ if status_ok then
   --     pattern = "*"
   --   })
   local check_backspace = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+    -- local col = vim.fn.col "." - 1
+    -- return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
   end
 
   vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
@@ -315,8 +318,11 @@ if status_ok then
   local luasnip = require('luasnip')
   vim.defer_fn(function()
   cmp.setup {
-    preselect = cmp.PreselectMode.None,
-    completion = { completeopt = "menu,menuone,noselect,noinsert" },
+    -- preselect = cmp.PreselectMode.None,
+    completion = {
+      completeopt = "menu,menuone,noselect,noinsert",
+      keyword_length = 1,
+    },
 
     snippet = {
       expand = function(args)
@@ -329,26 +335,37 @@ if status_ok then
       select = true,
     },
 
-    mapping = {
+    mapping = cmp.mapping.preset.insert {
       ["<C-j>"]     = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
       ["<C-n>"]     = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
-      ["<C-d>"]     = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-      ["<C-u>"]     = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-d>"]     = cmp.mapping.scroll_docs(-4),
+      ["<C-u>"]     = cmp.mapping.scroll_docs(4),
+      ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-c>"]     = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
       ['<CR>']      = cmp.mapping.confirm { select = true, },
+      ["<C-y>"]     = cmp.mapping {
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          else
+            fallback()
+          end
+        end,
+      },
       ['<Tab>']     = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expandable() then
-          luasnip.expand()
-        elseif luasnip.expand_or_jumpable() then
+        elseif luasnip.expand_or_locally_jumpable() then
           luasnip.expand_or_jump()
+        elseif luasnip.jumpable(1) then
+          luasnip.jump(1)
         elseif neogen.jumpable() then
           neogen.jump_next()
         elseif check_backspace() then
           fallback()
-        else fallback()
+        else
+          fallback()
         end
       end, { "i", "s", }),
       ['<S-Tab>'] = cmp.mapping(function()
@@ -358,23 +375,24 @@ if status_ok then
           luasnip.jump(-1)
         elseif neogen.jumpable(true) then
           neogen.jump_prev()
-        else fallback()
+        else
+          fallback()
         end
       end, { "i", "s", }),
-      ['<C-l>'] = cmp.mapping(function()
-        if has_words_before() and luasnip.expand_or_jumpable() then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
-        else
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, true, true), '', true)
-        end
-      end, { 'i', 's' }),
-      ['<C-h>'] = cmp.mapping(function()
-        if luasnip.jumpable(-1) then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
-        else
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Left>', true, true, true), '', true)
-        end
-      end, { 'i', 's' }),
+      -- ['<C-l>'] = cmp.mapping(function()
+      --   if has_words_before() and luasnip.expand_or_jumpable() then
+      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
+      --   else
+      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, true, true), '', true)
+      --   end
+      -- end, { 'i', 's' }),
+      -- ['<C-h>'] = cmp.mapping(function()
+      --   if luasnip.jumpable(-1) then
+      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
+      --   else
+      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Left>', true, true, true), '', true)
+      --   end
+      -- end, { 'i', 's' }),
     },
     window = {
       documentation = {
@@ -391,25 +409,23 @@ if status_ok then
       },
     },
     sources = {
-      { name = "nvim_lsp", group_index = 2, keyword_length = 0 },
+      { name = "nvim_lsp", },
       { name = "copilot",
         max_item_count = 3,
         trigger_characters = {
           { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" },
         },
-        group_index = 2,
-        keyword_length = 0,
       },
-      { name = "cmp_tabnine", group_index = 2, keyword_length = 0 },
-      { name = "luasnip",     group_index = 2, keyword_length = 0 },
-      { name = "crates",      group_index = 1, keyword_length = 0 },
-      { name = "ctags",       group_index = 2, keyword_length = 0 },
-      { name = "nvim_lua",    group_index = 2, keyword_length = 0 },
-      { name = "calc",        group_index = 2, keyword_length = 0 },
-      { name = "path",        group_index = 2, keyword_length = 0 },
-      { name = "buffer",      group_index = 2, keyword_length = 0 },
-      { name = "neorg",       group_index = 2, keyword_length = 0 },
-      { name = "cmdline",     group_index = 2, keyword_length = 0 },
+      { name = "cmp_tabnine", },
+      { name = "luasnip",     },
+      { name = "crates",      },
+      { name = "ctags",       },
+      { name = "nvim_lua",    },
+      { name = "calc",        },
+      { name = "path",        },
+      { name = "buffer",      },
+      { name = "neorg",       },
+      { name = "cmdline",     },
     },
     sorting = {
       priority_weight = 2,
@@ -913,6 +929,18 @@ if status_ok then
   scope.setup()
 end
 --- }}}
+--- Bufala + Tabbot {{{
+local status_ok, bufala = pcall(require, "bufala")
+if status_ok then
+  require('bufala').setup({
+    layout = 'stack' -- optional, valid values are 'stack' and 'row'
+  })
+end
+local status_ok, tabbot = pcall(require, "tabbot")
+if status_ok then
+  tabbot.setup()
+end
+--- }}}
 --- Cybu {{{
 local ok, cybu = pcall(require, "cybu")
 if ok then
@@ -1041,6 +1069,8 @@ if status_ok then
           ["<esc>"] = actions.close,
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-j>"] = actions.move_selection_next,
+          ["<C-s>"] = actions.select_horizontal,
+          ["<C-v>"] = actions.select_vertical,
         },
       },
       vimgrep_arguments = {
@@ -1369,7 +1399,7 @@ if status_ok then
         },
       },
       { type = 'padding', val = 1 },
-      dashboard.button('nv', '  Init', '<cmd>e ~/.config/nvim/lua/init.lua<cr>'),
+      dashboard.button('nv', '  Init', '<cmd>e ~/.config/nvim/init.lua<cr>'),
       dashboard.button('np', '  Plugins', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>'),
       dashboard.button('nc', '  Config', '<cmd>e ~/.config/nvim/lua/config.lua<cr>'),
       dashboard.button('nk', '  Binds', '<cmd>e ~/.config/nvim/lua/binds.lua<cr>'),
@@ -1449,7 +1479,7 @@ if status_ok then
     render = "default",
 
     -- Default timeout for notifications
-    timeout = 500,
+    timeout = 1000,
 
     -- For stages that change opacity this is treated as the highlight behind the window
     -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
@@ -1664,33 +1694,37 @@ vim.g.floaterm_title = 0
 --- }}}
 --- * Note Taking * {{{
 --- Neorg {{{
-local status_ok, neorg = pcall(require, "neorg")
-if status_ok then
-    neorg.setup {
-      load = {
-	      ["core.defaults"] = {}, -- Load all the defaults
-	      ["core.norg.concealer"] = {}, -- Allows the use of icons
-	      ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-	      ["core.gtd.base"] = { config = { workspace = "gtd" } },
-	      ["core.integrations.treesitter"] = { config = { } },
-          ["core.norg.dirman"] = { -- Manage Neorg directories
-	        config = {
-	          workspaces = {
-		          main   = "~/dev/neorg",
-		          work   = "~/dev/neorg/work",
-		          school = "~/dev/neorg/school",
-	          },
-	          autochdir = false,
-	          autodetect = false
-	        }
-          },
-        ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
-        -- ["core.integrations.telescope"] = {},
-        ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
-      },
-      -- logger = { level = "warn" },
-    }
+function M.neorg()
+  local status_ok, neorg = pcall(require, "neorg")
+  if not status_ok then
+    return
+  end
+  neorg.setup {
+    load = {
+	    ["core.defaults"] = {}, -- Load all the defaults
+	    ["core.norg.concealer"] = {}, -- Allows the use of icons
+	    ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+	    ["core.gtd.base"] = { config = { workspace = "gtd" } },
+	    ["core.integrations.treesitter"] = { config = { } },
+        ["core.norg.dirman"] = { -- Manage Neorg directories
+	      config = {
+	        workspaces = {
+		        main   = "~/dev/neorg",
+		        work   = "~/dev/neorg/work",
+		        school = "~/dev/neorg/school",
+	        },
+	        autochdir = false,
+	        autodetect = false
+	      }
+        },
+      ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
+      -- ["core.integrations.telescope"] = {},
+      ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
+    },
+    -- logger = { level = "warn" },
+  }
 end
+M.neorg()
 --- }}}
 --- }}}
 --- * Git * {{{
@@ -2342,6 +2376,41 @@ if status_ok then
   }
 end
 --- }}}
+-- Noice {{{
+local status_ok, noice = pcall(require, "noice")
+if status_ok then
+  local noice_opts = {
+    views = {
+      split = {
+        win_options = {
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+        },
+      },
+      popup = {
+        win_options = {
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+        },
+      },
+      cmdline = {
+        win_options = {
+          winhighlight = "Normal:TelescopeBorder",
+        },
+      },
+      fancy_cmdline = {
+        filter_options = {
+          win_options = {
+            winhighlight = "Normal:Normal,FloatBorder:LspDiagnosticWarn",
+          },
+        },
+      },
+      -- routes = {
+      --   view = "virtual"
+      -- },
+    },
+  }
+  noice.setup(noice_opts)
+end
+-- }}}
 --- }}}
 --- * Debugging * {{{
 --- DAP {{{
@@ -2402,4 +2471,5 @@ vim.g.termdebug_wide = 1
 --- }}}
 --- }}}
 -- }}}
+return M
 -- [[ ----------------------------------------------------------------------- ]]

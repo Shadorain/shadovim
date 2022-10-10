@@ -122,6 +122,33 @@ map('n', '<C-f>',       '<esc><cmd>Telescope find_files<cr>', { noremap = true, 
 map('n', '<C-A-f>',     '<esc><esc><C-w>v<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
 map('i', '<C-f>',       '<esc><cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
 --- }}}
+--- Tabbot / Bufala {{{
+-- Buffers
+map('n', '<leader><cr>',  '<cmd>Bufala split<cr>', { noremap = true, silent = true })
+map('n', '<leader>M',     '<cmd>Bufala focus<cr>', { noremap = true, silent = true })
+
+-- Move-to Tab
+map('n', '<leader>!', '<cmd>Tabbot send 1<cr>', { noremap = true, silent = true })
+map('n', '<leader>@', '<cmd>Tabbot send 2<cr>', { noremap = true, silent = true })
+map('n', '<leader>#', '<cmd>Tabbot send 3<cr>', { noremap = true, silent = true })
+map('n', '<leader>$', '<cmd>Tabbot send 4<cr>', { noremap = true, silent = true })
+map('n', '<leader>%', '<cmd>Tabbot send 5<cr>', { noremap = true, silent = true })
+map('n', '<leader>^', '<cmd>Tabbot send 6<cr>', { noremap = true, silent = true })
+map('n', '<leader>&', '<cmd>Tabbot send 7<cr>', { noremap = true, silent = true })
+map('n', '<leader>*', '<cmd>Tabbot send 8<cr>', { noremap = true, silent = true })
+map('n', '<leader>(', '<cmd>Tabbot send 9<cr>', { noremap = true, silent = true })
+
+-- Switch Tab
+map('n', '<leader>1', '<cmd>Tabbot go 1<cr>', { noremap = true, silent = true })
+map('n', '<leader>2', '<cmd>Tabbot go 2<cr>', { noremap = true, silent = true })
+map('n', '<leader>3', '<cmd>Tabbot go 3<cr>', { noremap = true, silent = true })
+map('n', '<leader>4', '<cmd>Tabbot go 4<cr>', { noremap = true, silent = true })
+map('n', '<leader>5', '<cmd>Tabbot go 5<cr>', { noremap = true, silent = true })
+map('n', '<leader>6', '<cmd>Tabbot go 6<cr>', { noremap = true, silent = true })
+map('n', '<leader>7', '<cmd>Tabbot go 7<cr>', { noremap = true, silent = true })
+map('n', '<leader>8', '<cmd>Tabbot go 8<cr>', { noremap = true, silent = true })
+map('n', '<leader>9', '<cmd>Tabbot go 9<cr>', { noremap = true, silent = true })
+--- }}}
 --- }}}
 --- Which Key {{{
 --- Opts {{{

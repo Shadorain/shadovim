@@ -6,6 +6,7 @@
 "   |____|   |____/____/\___  /|__|___|  /____  > /\ |____/____/(____  /
 "                      /_____/         \/     \/  \/                 \/
 " =========================================================================== ]]
+local M = {}
 -- [[ Setup ]] -------------------------------------------------------------- ]]
 --- Install {{{
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -64,6 +65,8 @@ return require('packer').startup(function(use)
   use { 'folke/which-key.nvim' }
   use { 'mbbill/undotree' }
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+  use { 'MunifTanjim/nui.nvim' }
+  -- use { "folke/noice.nvim" }
   use { 'abecodes/tabout.nvim',
     config = function()
       require('tabout').setup {
@@ -153,7 +156,14 @@ return require('packer').startup(function(use)
   use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
   use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
   use { 'saecki/crates.nvim' }       --- cargo crates!
-  use { 'nvim-neorg/neorg' } -- , run = ":Neorg sync-parsers", ft = "norg", after = "nvim-treesitter" }
+  use { 'nvim-neorg/neorg' ,
+    -- config = function()
+    --   require("neorg").setup(require("config").norg)
+    -- end,
+    -- run = ":Neorg sync-parsers",
+    -- ft = "norg",
+    -- after = "nvim-treesitter",
+  }
 
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
@@ -179,10 +189,11 @@ return require('packer').startup(function(use)
   use { 'SmiteshP/nvim-navic' }           --- Navigation
 
   -- [[ Miscellaneous ]]
-  -- use { 'mhinz/vim-startify' } --- Start Screen
   use { 'goolord/alpha-nvim' }
   use { 'Shatur/neovim-session-manager' }
   use { 'jghauser/mkdir.nvim', config = function() require('mkdir') end, event = "BufWritePre" }
   use { 'jbyuki/venn.nvim' }
+  use { 'nat-418/bufala.nvim' }
+  use { 'nat-418/tabbot.nvim' }
 end)
 -- [[ ----------------------------------------------------------------------- ]]
