@@ -38,7 +38,7 @@ vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", f
 vim.diagnostic.config({virtual_text = false })
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true

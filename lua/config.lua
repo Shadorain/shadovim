@@ -1277,23 +1277,6 @@ if status_ok then
       return file_button_el
   end
   --- }}}
-  --- Buttons {{{
-  local buttons = {
-    type = "group",
-    val = {
-      -- { type = "text", val = "Quick links", opts = { hl = "String", position = "center" } },
-      -- { type = "padding", val = 1 },
-      dashboard.button('i', '  New file',       '<cmd>ene <BAR> startinsert<CR>'),
-      dashboard.button('r', '  Recent files',   '<cmd>Telescope oldfiles<CR>'),
-      dashboard.button('g', '  Live grep',      '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
-      dashboard.button('s', '  Open sesion',    '<cmd>SessionManager load_session<CR>'),
-      dashboard.button('S', '  Last sesion',    '<cmd>SessionManager load_last_session<CR>'),
-      dashboard.button("c", "  Update plugins", '<cmd>PackerSync<CR>'),
-      dashboard.button('q', '  Quit',           ':qa<CR>'),
-    },
-    position = "center",
-  }
-  --- }}}
   --- MRU {{{
   local default_mru_ignore = { "gitcommit" }
 
@@ -1385,6 +1368,25 @@ if status_ok then
     }
   }
   --- }}}
+  --- Buttons {{{
+  local buttons = {
+    type = "group",
+    val = {
+      -- { type = "text", val = "Quick links", opts = { hl = "String", position = "center" } },
+      -- { type = "padding", val = 1 },
+      dashboard.button('i', '  New file',       '<cmd>ene <BAR> startinsert<CR>'),
+      dashboard.button('r', '  Recent files',   '<cmd>Telescope oldfiles<CR>'),
+      dashboard.button('g', '  Live grep',      '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
+      dashboard.button('S', '  Open sesion',    '<cmd>SessionManager load_session<CR>'),
+      dashboard.button('L', '  Last sesion',    '<cmd>SessionManager load_last_session<CR>'),
+      dashboard.button('T', '  Todos',          '<cmd>Neorg workspace gtd<CR>'),
+      dashboard.button('J', '  Journal',        '<cmd>Neorg journal today<CR>'),
+      dashboard.button("P", "  Update plugins", '<cmd>PackerSync<CR>'),
+      dashboard.button('q', '  Quit',           ':qa<CR>'),
+    },
+    position = "center",
+  }
+  --- }}}
   --- Bookmarks {{{
   local bookmarks = {
     type = 'group',
@@ -1406,10 +1408,10 @@ if status_ok then
       dashboard.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
       dashboard.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim<cr>'),
       dashboard.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.vim<cr>'),
-      dashboard.button('x ', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs<cr>'),
-      dashboard.button('p ', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad<cr>'),
-      dashboard.button('c ', '  Picom', '<cmd>e ~/.config/picom.conf<cr>'),
-      dashboard.button('st', '  ST Config', '<cmd>e ~/dev/C/st/config.h<cr>'),
+      dashboard.button('cx', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs<cr>'),
+      dashboard.button('cp', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad<cr>'),
+      dashboard.button('cP', '  Picom', '<cmd>e ~/.config/picom.conf<cr>'),
+      dashboard.button('cs', '  ST Config', '<cmd>e ~/dev/C/st/config.h<cr>'),
       dashboard.button('zc', '  Zshrc', '<cmd>e ~/.zshrc<cr>'),
       dashboard.button('za', '  Zsh Aliases', '<cmd>e ~/.zsh_aliases<cr>'),
       dashboard.button('ze', '  Zsh Environment', '<cmd>e ~/.zshenv<cr>'),
@@ -1703,22 +1705,30 @@ function M.neorg()
     load = {
 	    ["core.defaults"] = {}, -- Load all the defaults
 	    ["core.norg.concealer"] = {}, -- Allows the use of icons
+	    ["core.norg.manoeuvre"] = {},
 	    ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
 	    ["core.gtd.base"] = { config = { workspace = "gtd" } },
 	    ["core.integrations.treesitter"] = { config = { } },
-        ["core.norg.dirman"] = { -- Manage Neorg directories
+      ["core.norg.journal"] = {
+        config = {
+          journal_folder = "dev/neorg/journal",
+          use_template = true,
+        }
+      },
+      ["core.norg.dirman"] = { -- Manage Neorg directories
 	      config = {
 	        workspaces = {
-		        main   = "~/dev/neorg",
-		        work   = "~/dev/neorg/work",
-		        school = "~/dev/neorg/school",
+		        main     = "~/dev/neorg",
+		        -- work     = "~/dev/neorg/work",
+		        -- personal = "~/dev/neorg/personal",
+		        gtd      = "~/dev/neorg/gtd",
 	        },
-	        autochdir = false,
-	        autodetect = false
+	        default_workspace = main,
+	        autochdir = true,
+	        index = "index.norg",
 	      }
-        },
+      },
       ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
-      -- ["core.integrations.telescope"] = {},
       ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
     },
     -- logger = { level = "warn" },
