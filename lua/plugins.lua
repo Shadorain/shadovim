@@ -1,7 +1,7 @@
 --[[ ========================================================================
-"  __________.__               .__                   .__                
-"  \______   \  |  __ __  ____ |__| ____   ______    |  |  __ _______   
-"   |     ___/  | |  |  \/ ___\|  |/    \ /  ___/    |  | |  |  \__  \  
+"  __________.__               .__                   .__
+"  \______   \  |  __ __  ____ |__| ____   ______    |  |  __ _______
+"   |     ___/  | |  |  \/ ___\|  |/    \ /  ___/    |  | |  |  \__  \
 "   |    |   |  |_|  |  / /_/  >  |   |  \\___ \     |  |_|  |  // __ \_
 "   |____|   |____/____/\___  /|__|___|  /____  > /\ |____/____/(____  /
 "                      /_____/         \/     \/  \/                 \/
@@ -44,7 +44,6 @@ return require('packer').startup(function(use)
   use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
   use { 'voldikss/vim-floaterm' }        --- Terminal
   use { 'edluffy/specs.nvim' }           --- cursor beacon
-  use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
   use { 'godlygeek/tabular' }            --- tabbing
   use { 'windwp/nvim-autopairs' }
   use { 'numToStr/Comment.nvim' }        --- commenting
@@ -66,6 +65,9 @@ return require('packer').startup(function(use)
   use { 'mbbill/undotree' }
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'MunifTanjim/nui.nvim' }
+  use { 'echasnovski/mini.nvim' }
+  use { 'edluffy/hologram.nvim' }
+  use { 'ekickx/clipboard-image.nvim' }
   -- use { "folke/noice.nvim" }
   use { 'abecodes/tabout.nvim',
     config = function()
@@ -136,7 +138,7 @@ return require('packer').startup(function(use)
     end,
   }
   use { 'zbirenbaum/copilot-cmp', after = 'copilot.lua' }
-  
+
   use { 'onsails/lspkind-nvim' }
 	use { 'ray-x/lsp_signature.nvim', module = 'lsp_signature' }
   use { 'rafamadriz/friendly-snippets' } --- extra snippets
@@ -156,13 +158,14 @@ return require('packer').startup(function(use)
   use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
   use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
   use { 'saecki/crates.nvim' }       --- cargo crates!
-  use { 'nvim-neorg/neorg' ,
+  use { 'nvim-neorg/neorg',
     -- config = function()
     --   require("neorg").setup(require("config").norg)
     -- end,
     -- run = ":Neorg sync-parsers",
     -- ft = "norg",
     -- after = "nvim-treesitter",
+    requires = {"nvim-neorg/neorg-telescope", "max397574/neorg-kanban", "max397574/neorg-contexts"},
   }
 
   -- [[ Make it pretty ]]
@@ -171,7 +174,7 @@ return require('packer').startup(function(use)
   use { 'nvim-colortils/colortils.nvim' }     --- Colorpicker!
   use { 'xiyaowong/nvim-transparent' }        --- transparency
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-  use { 'lukas-reineke/indent-blankline.nvim' }
+  -- use { 'lukas-reineke/indent-blankline.nvim' }
   use { 'RRethy/vim-illuminate' }
   use { 'stevearc/dressing.nvim' }
   use { 'ghillb/cybu.nvim' }

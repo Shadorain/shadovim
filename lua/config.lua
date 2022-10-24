@@ -1,7 +1,7 @@
 --[[ ========================================================================
-"   _________                _____.__           .__                
-"   _   ___ \  ____   _____/ ____\__| ____     |  |  __ _______   
-"  /    \  \/ /  _ \ /    \   __\|  |/ ___\    |  | |  |  \__  \  
+"   _________                _____.__           .__
+"   _   ___ \  ____   _____/ ____\__| ____     |  |  __ _______
+"  /    \  \/ /  _ \ /    \   __\|  |/ ___\    |  | |  |  \__  \
 "  \     \___(  <_> )   |  \  |  |  / /_/  >   |  |_|  |  // __ \_
 "   \______  /\____/|___|  /__|  |__\___  / /\ |____/____/(____  /
 "          \/            \/        /_____/  \/                 \/
@@ -401,11 +401,11 @@ if status_ok then
         width = 80,
         height = 20,
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	      winhighlight = 'FloatBorder:TelescopeBorder',  
+	      winhighlight = 'FloatBorder:TelescopeBorder',
       },
       completion = {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	      winhighlight = 'FloatBorder:VertSplit',  
+	      winhighlight = 'FloatBorder:VertSplit',
       },
     },
     sources = {
@@ -513,7 +513,7 @@ if status_ok then
 	    enable = true,
 	    extended_mode = true,
 	    max_file_lines = 1000,
-	    colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },  
+	    colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },
     },
     highlight = { enable = true },
     incremental_selection = {
@@ -881,7 +881,7 @@ if status_ok then
 end
 --- }}}
 --- }}}
---- * Buffer * {{{ 
+--- * Buffer * {{{
 --- Harpoon {{{
 local status_ok, harpoon = pcall(require, "harpoon")
 if status_ok then
@@ -1095,7 +1095,7 @@ if status_ok then
       file_ignore_patterns = { "target", "build", "bin" },
       generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
       border = {},
-      borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }, 
+      borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
       winblend = 25,
       previewer = true,
       color_devicons = true,
@@ -1701,14 +1701,20 @@ function M.neorg()
   if not status_ok then
     return
   end
+  local kanban = pcall(require, "neorg-kanban")
+  -- kanban.setup()
   neorg.setup {
     load = {
-	    ["core.defaults"] = {}, -- Load all the defaults
-	    ["core.norg.concealer"] = {}, -- Allows the use of icons
-	    ["core.norg.manoeuvre"] = {},
-	    ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-	    ["core.gtd.base"] = { config = { workspace = "gtd" } },
-	    ["core.integrations.treesitter"] = { config = { } },
+	  ["core.defaults"] = {}, -- Load all the defaults
+	  ["core.norg.concealer"] = {}, -- Allows the use of icons
+	  ["core.norg.manoeuvre"] = {},
+	  ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+	  ["core.gtd.base"] = { config = { workspace = "gtd" } },
+	  ["core.integrations.treesitter"] = {
+	    config = {
+	      exclude = "archive.norg",
+	    }
+	  },
       ["core.norg.journal"] = {
         config = {
           journal_folder = "dev/neorg/journal",
@@ -1719,8 +1725,6 @@ function M.neorg()
 	      config = {
 	        workspaces = {
 		        main     = "~/dev/neorg",
-		        -- work     = "~/dev/neorg/work",
-		        -- personal = "~/dev/neorg/personal",
 		        gtd      = "~/dev/neorg/gtd",
 	        },
 	        default_workspace = main,
@@ -1730,8 +1734,23 @@ function M.neorg()
       },
       ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
       ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
+      ["core.integrations.telescope"] = {},
+      ["external.kanban"] = {
+        config = {
+          task_states = {
+            "undone",
+            "urgent",
+            "pending",
+            "on_hold",
+            "uncertain",
+            "recurring",
+            "done",
+            -- "cancelled",
+          },
+        },
+      },
+      ["external.context"] = { }
     },
-    -- logger = { level = "warn" },
   }
 end
 M.neorg()
@@ -2208,9 +2227,9 @@ if status_ok then
         sections = { 'error', 'warn' }, -- 'info', 'hint'
         diagnostics_color = {
           error = 'LualineDiagnosticError',
-          warn  = 'LualineDiagnosticWarn', 
+          warn  = 'LualineDiagnosticWarn',
           info  = 'LualineDiagnosticInfo',
-          hint  = 'LualineDiagnosticHint', 
+          hint  = 'LualineDiagnosticHint',
         },
         colored = true,
         update_in_insert = false,
@@ -2241,9 +2260,9 @@ if status_ok then
         sections = { 'error', 'warn' }, -- 'info', 'hint'
         diagnostics_color = {
           error = 'LualineDiagnosticError',
-          warn  = 'LualineDiagnosticWarn', 
+          warn  = 'LualineDiagnosticWarn',
           info  = 'LualineDiagnosticInfo',
-          hint  = 'LualineDiagnosticHint', 
+          hint  = 'LualineDiagnosticHint',
         },
         colored = true,
         update_in_insert = false,
@@ -2279,12 +2298,12 @@ end
 --- Specs {{{
 local status_ok, specs = pcall(require, "specs")
 if status_ok then
-  specs.setup{ 
+  specs.setup{
     show_jumps  = true,
     min_jump = 30,
     popup = {
       delay_ms = 0, -- delay before popup displays
-      inc_ms = 15, -- time increments used for fade/resize effects 
+      inc_ms = 15, -- time increments used for fade/resize effects
       blend = 40, -- starting blend, between 0-100 (fully transparent), see :h winblend
       width = 30,
       winhl = "Beacon",
@@ -2386,6 +2405,102 @@ if status_ok then
   }
 end
 --- }}}
+-- Clipboard Image {{{
+local status_ok, clipboard_image = pcall(require, "clipboard-image")
+if status_ok then
+  clipboard_image.setup {
+    -- Default configuration for all filetype
+    default = {
+      img_dir = "images",
+      img_name = function() return os.date('%Y-%m-%d-%H-%M-%S') end, -- Example result: "2021-04-13-10-04-02"
+      affix = "<\n  %s\n>" -- Multi lines affix
+    },
+    -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
+    -- If you're uncertain what to name your field to, you can run `lua print(vim.bo.filetype)`
+    -- Missing options from `markdown` field will be replaced by options from `default` field
+    markdown = {
+      img_dir = {"src", "assets", "img"}, -- Use table for nested dir (New feature form PR #20)
+      img_dir_txt = "/assets/img",
+      img_handler = function(img) -- New feature from PR #22
+        local script = string.format('./image_compressor.sh "%s"', img.path)
+        os.execute(script)
+      end,
+    },
+    norg = {
+      img_dir = {"src", "assets", "img"}, -- Use table for nested dir (New feature form PR #20)
+      img_dir_txt = "/assets/img",
+      img_handler = function(img) -- New feature from PR #22
+        local script = string.format('./image_compressor.sh "%s"', img.path)
+        os.execute(script)
+      end,
+    }
+  }
+end
+-- }}}
+-- Mini {{{
+-- Auto commands
+vim.cmd [[ au TermOpen * lua vim.b.minicursorword_disable = true ]]
+vim.cmd [[ au User AlphaReady lua vim.b.miniindentscope_disable = true ]]
+
+local status_ok, mini_bufremove = pcall(require, "mini.bufremove")
+if status_ok then
+  mini_bufremove.setup()
+end
+
+local status_ok, mini_trailspace = pcall(require, "mini.trailspace")
+if status_ok then
+  mini_trailspace.setup()
+end
+
+-- Visualize and operate on indent scope
+local status_ok, mini_indent = pcall(require, "mini.indentscope")
+if status_ok then
+  vim.cmd[[ hi MiniIndentscopeSymbol guifg=#6a5acd ]]
+  mini_indent.setup({
+	  symbol = "│",
+  })
+end
+
+local status_ok, mini_align = pcall(require, "mini.align")
+if status_ok then
+  mini_align.setup()
+end
+
+local status_ok, mini_cursorword = pcall(require, "mini.cursorword")
+if status_ok then
+  vim.cmd[[ hi MiniCursorword gui=bold ]]
+  mini_cursorword.setup({
+	  delay = 100,
+  })
+end
+
+-- Minimap
+local status_ok, mini_map = pcall(require, "mini.map")
+if status_ok then
+  local diagnostic_integration = mini_map.gen_integration.diagnostic({
+    error = 'DiagnosticFloatingError',
+    warn  = 'DiagnosticFloatingWarn',
+    info  = 'DiagnosticFloatingInfo',
+    hint  = 'DiagnosticFloatingHint',
+  })
+  mini_map.setup({
+    symbols = {
+      encode = mini_map.gen_encode_symbols.dot('4x2'),
+    },
+	  integrations = {
+		  mini_map.gen_integration.builtin_search(),
+		  -- mini_map.gen_integration.gitsigns(),
+		  diagnostic_integration,
+	  },
+  })
+end
+-- }}}
+-- Hologram {{{
+local status_ok, hologram = pcall(require, "hologram")
+if status_ok then
+  hologram.setup { auto_display = true }
+end
+-- }}}
 -- Noice {{{
 local status_ok, noice = pcall(require, "noice")
 if status_ok then

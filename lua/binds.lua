@@ -1,10 +1,10 @@
 --[[ ========================================================================
-"    _________.__                .___    ___.   .__            .___      
+"    _________.__                .___    ___.   .__            .___
 "   /   _____/|  |__ _____     __| _/____\_ |__ |__| ____    __| _/______
 "   \_____  \ |  |  \\__  \   / __ |/  _ \| __ \|  |/    \  / __ |/  ___/
-"   /        \|   Y  \/ __ \_/ /_/ (  <_> ) \_\ \  |   |  \/ /_/ |\___ \ 
+"   /        \|   Y  \/ __ \_/ /_/ (  <_> ) \_\ \  |   |  \/ /_/ |\___ \
 "  /_______  /|___|  (____  /\____ |\____/|___  /__|___|  /\____ /____  >
-"          \/      \/     \/      \/          \/        \/      \/    \/ 
+"          \/      \/     \/      \/          \/        \/      \/    \/
 " =========================================================================== ]]
 --- Setup {{{
 function keymap(mode, lhs, rhs, opts)
@@ -205,7 +205,8 @@ local n_mappings = {
 --- Misc {{{
     R = { '<esc><esc>:%s///gcI<left><left><left><left><left>',  "Search/Replace" },
     A = { '<cmd>Alpha<CR>',                                     "Alpha" },
-    i = { '<cmd>TransparentToggle<CR>',                         "Transparency" },
+    i = { 'gg=G\'\'',                                           "Indent File" },
+    I = { '<cmd>TransparentToggle<CR>',                         "Transparency" },
     p = { '<cmd>lua require("peek").Peek("definition")<CR>',    "LSP Peek" },
     J = { '<cmd>JABSOpen<CR>',                                  "JABS Buffers" },
     Z = { '<cmd>lua require("zen-mode").toggle()<CR>',          "Zen Mode" },
@@ -275,8 +276,8 @@ local n_mappings = {
       l     = { '<cmd>ls<CR>',  "List"   },
       b     = { '<cmd>bn<CR>',  "Next"   },
       n     = { '<cmd>bp<CR>',  "Prev"   },
-      k     = { '<cmd>BD<CR>',  "Delete" },
-      u     = { '<cmd>BUN<CR>', "Unload" },
+      k     = { '<cmd>lua MiniBufremove.delete()<CR>', "Delete" },
+      u     = { '<cmd>lua MiniBufremove.unshow<CR>',   "Unload" },
       ["1"] = { '<cmd>b 1<CR>', "Buf #1" },
       ["2"] = { '<cmd>b 2<CR>', "Buf #2" },
       ["3"] = { '<cmd>b 3<CR>', "Buf #3" },
@@ -307,7 +308,7 @@ local n_mappings = {
       name = "+git",
       g = { '<cmd>LazyGit<CR>',                        "Lazygit"        },
       G = { '<cmd>LazyGitConfig<CR>',                  "Lazygit Cfg"    },
-      s = { 
+      s = {
         name = "+gitsigns",
         J = { '<cmd>Gitsigns next_hunk<CR>',             "Next Hunk"      },
         K = { '<cmd>Gitsigns prev_hunk<CR>',             "Prev Hunk"      },
@@ -349,6 +350,39 @@ local n_mappings = {
         o = { '<cmd>lua require("dap").step_over()<CR>',             "Over" },
         x = { '<cmd>lua require("dap").step_out()<CR>',              "Out"  },
       },
+    },
+--- <m> Miscellaneous {{{
+    m = {
+      name = "+misc",
+      t     = { '<cmd>lua MiniTrailspace.trim()<CR>', "Trim Trailspace" },
+      m     = { '<cmd>lua MiniMap.toggle()<CR>',      "Minimap" },
+      r     = { '<cmd>lua MiniMap.refresh()<CR>',     "Refresh Minimap" },
+    },
+--- }}}
+--- <o> Neorg {{{
+    o = {
+      name = "+neorg",
+      t = {
+        name = "+todos",
+        c = { '<cmd>Neorg gtd capture<CR>', "Capture" },
+        e = { '<cmd>Neorg gtd edit<CR>', "Edit" },
+        v = { '<cmd>Neorg gtd view<CR>', "View" },
+        p = { '<cmd>Telescope neorg find_project_tasks<CR>', "Find Projects" },
+        x = { '<cmd>Telescope neorg find_context_tasks<CR>', "Find Contexts" },
+        a = { '<cmd>Telescope neorg find_aof_tasks<CR>', "Find AOFs" },
+      },
+      f = {
+        name = "+find",
+        h = { '<cmd>Telescope neorg search_headings<CR>', "Headings" },
+        l = { '<cmd>Telescope neorg find_linkable<CR>', "Linkable" },
+        f = { '<cmd>Telescope neorg insert_file_link<CR>', "File Link" },
+      },
+      T  = { '<cmd>Neorg toc split<CR>', "TOC" },
+      i  = { '<cmd>Neorg inject-metadata<CR>', "Metadata" },
+      j  = { '<cmd>Neorg journal today<CR>', "Journal" },
+      nn = { '<cmd>Neorg keybind norg core.norg.dirman.new.note<CR>', "New Note" },
+      mh = { '<cmd>Neorg mode traverse-heading<CR>', "Traverse Heading" },
+      mn = { '<cmd>Neorg mode norg<CR>', "Norg Mode" },
     },
 --- }}}
   }
