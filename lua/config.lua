@@ -1705,16 +1705,17 @@ function M.neorg()
   -- kanban.setup()
   neorg.setup {
     load = {
-	  ["core.defaults"] = {}, -- Load all the defaults
-	  ["core.norg.concealer"] = {}, -- Allows the use of icons
-	  ["core.norg.manoeuvre"] = {},
-	  ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-	  ["core.gtd.base"] = { config = { workspace = "gtd" } },
-	  ["core.integrations.treesitter"] = {
-	    config = {
-	      exclude = "archive.norg",
-	    }
-	  },
+      ["core.defaults"] = {}, -- Load all the defaults
+      ["core.norg.concealer"] = {}, -- Allows the use of icons
+      ["core.norg.manoeuvre"] = {},
+      ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+      ["core.gtd.base"] = {
+	      config = {
+	        workspace = "gtd",
+	        exclude = { "archive.norg", },
+	      }
+      },
+      ["core.integrations.treesitter"] = {},
       ["core.norg.journal"] = {
         config = {
           journal_folder = "dev/neorg/journal",
