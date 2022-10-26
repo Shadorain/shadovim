@@ -1408,6 +1408,7 @@ if status_ok then
       dashboard.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
       dashboard.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim<cr>'),
       dashboard.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.vim<cr>'),
+      dashboard.button('ch', '  Hyprland', '<cmd>e ~/.config/hypr/hyprland.conf<cr>'),
       dashboard.button('cx', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs<cr>'),
       dashboard.button('cp', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad<cr>'),
       dashboard.button('cP', '  Picom', '<cmd>e ~/.config/picom.conf<cr>'),
@@ -2409,31 +2410,40 @@ end
 local status_ok, clipboard_image = pcall(require, "clipboard-image")
 if status_ok then
   clipboard_image.setup {
-    -- Default configuration for all filetype
     default = {
-      img_dir = "images",
-      img_name = function() return os.date('%Y-%m-%d-%H-%M-%S') end, -- Example result: "2021-04-13-10-04-02"
-      affix = "<\n  %s\n>" -- Multi lines affix
+      img_dir = "/home/shadow/images/",
+      img_name = function()
+                vim.fn.inputsave()
+                local name = vim.fn.input("Name: ")
+                vim.fn.inputrestore()
+
+                if name == nil or name == "" then
+                    return os.date("%y-%m-%d-%H-%M-%S")
+                end
+                return name
+            end,-- function() return os.date('%Y-%m-%d-%H-%M-%S') end, -- Example result: "2021-04-13-10-04-02"
+      affix = "![Img](%s)",
+      img_dir_txt = "/home/shadow/images",
     },
-    -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
-    -- If you're uncertain what to name your field to, you can run `lua print(vim.bo.filetype)`
-    -- Missing options from `markdown` field will be replaced by options from `default` field
-    markdown = {
-      img_dir = {"src", "assets", "img"}, -- Use table for nested dir (New feature form PR #20)
-      img_dir_txt = "/assets/img",
-      img_handler = function(img) -- New feature from PR #22
-        local script = string.format('./image_compressor.sh "%s"', img.path)
-        os.execute(script)
-      end,
-    },
-    norg = {
-      img_dir = {"src", "assets", "img"}, -- Use table for nested dir (New feature form PR #20)
-      img_dir_txt = "/assets/img",
-      img_handler = function(img) -- New feature from PR #22
-        local script = string.format('./image_compressor.sh "%s"', img.path)
-        os.execute(script)
-      end,
-    }
+    -- -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
+    -- -- If you're uncertain what to name your field to, you can run `lua print(vim.bo.filetype)`
+    -- -- Missing options from `markdown` field will be replaced by options from `default` field
+    -- markdown = {
+    --   img_dir = {"src", "assets", "img"}, -- Use table for nested dir (New feature form PR #20)
+    --   img_dir_txt = "/assets/img",
+    --   img_handler = function(img) -- New feature from PR #22
+    --     local script = string.format('./image_compressor.sh "%s"', img.path)
+    --     os.execute(script)
+    --   end,
+    -- },
+    -- norg = {
+    --   img_dir = {"src", "assets", "img"}, -- Use table for nested dir (New feature form PR #20)
+    --   img_dir_txt = "/assets/img",
+    --   img_handler = function(img) -- New feature from PR #22
+    --     local script = string.format('./image_compressor.sh "%s"', img.path)
+    --     os.execute(script)
+    --   end,
+    -- }
   }
 end
 -- }}}

@@ -180,7 +180,7 @@ local opts_t = {
 --- Mark Mappings {{{
 local m_mappings = {
   ["m"] = {
---- Bookmarks {{{
+    --- Bookmarks {{{
     name = "+bookmarks",
     A = { "<cmd>silent BookmarkAnnotate<cr>",     "Annotate" },
     B = { "<cmd>silent BookmarkToggle<cr>",       "Toggle" },
@@ -189,20 +189,20 @@ local m_mappings = {
     j = { "<cmd>silent BookmarkNext<cr>",         "Next" },
     k = { "<cmd>silent BookmarkPrev<cr>",         "Prev" },
     S = { "<cmd>silent BookmarkShowAll<cr>",      "Show" },
---- }}}
---- Harpoon {{{
+    --- }}}
+    --- Harpoon {{{
     m     = { '<cmd>lua require("harpoon.mark").add_file()<cr>',        "Harpoon" },
     ["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>',          "Harpoon Next" },
     [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>',          "Harpoon Prev" },
     [";"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
---- }}}
+    --- }}}
   }
 }
 --- }}}
 --- Normal Mappings {{{
 local n_mappings = {
   ["<leader>"] = {
---- Misc {{{
+    --- Misc {{{
     R = { '<esc><esc>:%s///gcI<left><left><left><left><left>',  "Search/Replace" },
     A = { '<cmd>Alpha<CR>',                                     "Alpha" },
     i = { 'gg=G\'\'',                                           "Indent File" },
@@ -210,8 +210,8 @@ local n_mappings = {
     p = { '<cmd>lua require("peek").Peek("definition")<CR>',    "LSP Peek" },
     J = { '<cmd>JABSOpen<CR>',                                  "JABS Buffers" },
     Z = { '<cmd>lua require("zen-mode").toggle()<CR>',          "Zen Mode" },
---- }}}
---- <T> Telescope {{{
+    --- }}}
+    --- <T> Telescope {{{
     T = {
       name = "+telescope",
       m     = { "<cmd>Telescope harpoon marks<cr>",             "Search Harpoons" },
@@ -231,8 +231,8 @@ local n_mappings = {
       ["?"] = { '<cmd>Telescope search_history<cr>',            "History" },
       [";"] = { '<cmd>Telescope command_history<cr>',           "Command History" },
     },
---- }}}
---- <s> Session {{{
+    --- }}}
+    --- <s> Session {{{
     s = {
       name = "+session",
       s = { '<cmd>SessionManager save_current_session<CR>', "Save"   },
@@ -240,8 +240,8 @@ local n_mappings = {
       L = { '<cmd>SessionManager load_last_session<CR>',    "Recent" },
       d = { '<cmd>SessionManager delete_session<CR>',       "Delete" },
     },
---- }}}
---- <t> Tabs {{{
+    --- }}}
+    --- <t> Tabs {{{
     t = {
       name = "+tabs",
       t = { '<cmd>tabnew %<CR>',  "New"   },
@@ -250,15 +250,15 @@ local n_mappings = {
       -- t = { '<cmd>TablineTabNew<CR>', "New" },
       -- r = { '<cmd>TablineTabRename<CR>', "Rename" },
     },
---- }}}
---- <f> File {{{
+    --- }}}
+    --- <f> File {{{
     f = {
       name = "+file",
       e = { '<cmd>NvimTreeToggle<CR>',                     "Nvim Tree" },
       r = { '<cmd>lua require("lir.float").toggle()<CR>',  "Lir Tree"  },
     },
---- }}}
---- <c> Cargo | Colortils {{{
+    --- }}}
+    --- <c> Cargo | Colortils {{{
     c = {
       name = "+cargo|color",
       c = { '<cmd>Cargo build<CR>',        "Build"      },
@@ -269,8 +269,8 @@ local n_mappings = {
       d = { '<cmd>Colortils darken<CR>',   "Darken"     },
       l = { '<cmd>Colortils lighten<CR>',  "Lighten"    },
     },
---- }}}
---- <b> Buffer {{{
+    --- }}}
+    --- <b> Buffer {{{
     b = {
       name = "+buffer",
       l     = { '<cmd>ls<CR>',  "List"   },
@@ -291,8 +291,8 @@ local n_mappings = {
       m     = { '<cmd>FloatermToggle<CR>',                          "Float Terminal"  },
       [","] = { '<cmd>FloatermNew --wintype=normal --height=8<CR>', "Bottom Terminal" },
     },
---- }}}
---- <B> Browse {{{
+    --- }}}
+    --- <B> Browse {{{
     B = {
       name = "+browse",
       B = { '<cmd>Browse<CR>',                "Search"            },
@@ -302,8 +302,8 @@ local n_mappings = {
       f = { '<cmd>BrowseDevdocsFiletype<CR>', "Devdocs Filetype"  },
       m = { '<cmd>BrowseMdn<CR>',             "Mdn"               },
     },
---- }}}
---- <g> Git {{{
+    --- }}}
+    --- <g> Git {{{
     g = {
       name = "+git",
       g = { '<cmd>LazyGit<CR>',                        "Lazygit"        },
@@ -321,8 +321,8 @@ local n_mappings = {
         B = { '<cmd>Gitsigns blame_line{full=true}<CR>', "Blame"          },
       },
     },
---- }}}
---- <n> Neogen {{{
+    --- }}}
+    --- <n> Neogen {{{
     n = {
       name = "+neogen",
       n = { '<cmd>Neogen<CR>',       "Any"      },
@@ -331,8 +331,8 @@ local n_mappings = {
       c = { '<cmd>Neogen class<CR>', "Class"    },
       l = { '<cmd>Neogen file<CR>',  "File"     },
     },
---- }}}
---- <d> Debugging {{{
+    --- }}}
+    --- <d> Debugging {{{
     d = {
       name = "+debug",
       b     = { '<cmd>lua require("dap").toggle_breakpoint()<CR>',   "Breakpoint"  },
@@ -351,15 +351,15 @@ local n_mappings = {
         x = { '<cmd>lua require("dap").step_out()<CR>',              "Out"  },
       },
     },
---- <m> Miscellaneous {{{
+    --- <m> Miscellaneous {{{
     m = {
       name = "+misc",
       t     = { '<cmd>lua MiniTrailspace.trim()<CR>', "Trim Trailspace" },
       m     = { '<cmd>lua MiniMap.toggle()<CR>',      "Minimap" },
       r     = { '<cmd>lua MiniMap.refresh()<CR>',     "Refresh Minimap" },
     },
---- }}}
---- <o> Neorg {{{
+    --- }}}
+    --- <o> Neorg {{{
     o = {
       name = "+neorg",
       t = {
@@ -377,6 +377,7 @@ local n_mappings = {
         l = { '<cmd>Telescope neorg find_linkable<CR>', "Linkable" },
         f = { '<cmd>Telescope neorg insert_file_link<CR>', "File Link" },
       },
+      k  = { '<cmd>Neorg kanban toggle<CR>', "Kanban" },
       T  = { '<cmd>Neorg toc split<CR>', "TOC" },
       i  = { '<cmd>Neorg inject-metadata<CR>', "Metadata" },
       j  = { '<cmd>Neorg journal today<CR>', "Journal" },
@@ -384,26 +385,26 @@ local n_mappings = {
       mh = { '<cmd>Neorg mode traverse-heading<CR>', "Traverse Heading" },
       mn = { '<cmd>Neorg mode norg<CR>', "Norg Mode" },
     },
---- }}}
+    --- }}}
   }
 }
 --- }}}
 --- Visual Mappings {{{
 local v_mappings = {
   ["<leader>"] = {
----- Debugging {{{
+    ---- Debugging {{{
     d = {
       name = "+debug",
       K = { '<cmd>lua require("dap.ui.variables").visual_hover()<cr>', "Range Hover" },
     },
----- }}}
+    ---- }}}
   }
 }
 --- }}}
 --- Terminal Mappings {{{
 local t_mappings = {
   ["<leader>"] = {
----- Floaterm {{{
+    ---- Floaterm {{{
     b = {
       name = "+floaterm",
       b = { '<C-\\><C-n><cmd>FloatermNext<cr>',   "Next"   },
@@ -411,7 +412,7 @@ local t_mappings = {
       k = { '<C-\\><C-n><cmd>FloatermKill<cr>',   "Close"  },
       m = { '<C-\\><C-n><cmd>FloatermToggle<cr>', "Toggle" },
     },
----- }}}
+    ---- }}}
   }
 }
 --- }}}
