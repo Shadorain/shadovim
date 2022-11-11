@@ -1,15 +1,14 @@
 --[[ ========================================================================
-"  .__       .__  __     .__                
-"  |__| ____ |__|/  |_   |  |  __ _______   
-"  |  |/    \|  \   __\  |  | |  |  \__  \  
+"  .__       .__  __     .__
+"  |__| ____ |__|/  |_   |  |  __ _______
+"  |  |/    \|  \   __\  |  | |  |  \__  \
 "  |  |   |  \  ||  |    |  |_|  |  // __ \_
 "  |__|___|  /__||__| /\ |____/____/(____  /
-"          \/         \/                 \/ 
+"          \/         \/                 \/
 " =========================================================================== ]]
 -- [[ Startup ]] ------------------------------------------------------------ ]]
 --- Speed up {{{
 --> [[[ Credits to Vhyrro for these tips here ]]] <--
--- vim.opt.shadafile = "NONE"
 vim.opt.termguicolors = true
 vim.g.loaded_gzip = false
 vim.g.loaded_matchit = false
@@ -19,8 +18,8 @@ vim.g.loaded_zipPlugin = false
 vim.g.loaded_man = false
 vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = false
+vim.g.loaded_ruby_provider = false
 --- }}}
 --- Sourcing {{{
 require('plugins')
@@ -30,14 +29,13 @@ require('lsp_config')
 
 vim.opt.shadafile = ""
 vim.opt.termguicolors = true
-vim.g.colors_name = "shado"
+
 vim.cmd [[
 	rshada!
 	doautocmd BufRead
 	filetype on
 	filetype plugin indent on
 	syntax enable
-	colorscheme shado
 ]]
 
 vim.defer_fn(function()

@@ -997,8 +997,6 @@ end
 --- Browse {{{
 local status_ok, browse = pcall(require, "browse")
 if status_ok then
-  browse.setup()
-
   function command(name, rhs, opts)
     opts = opts or {}
     vim.api.nvim_create_user_command(name, rhs, opts)
@@ -1372,8 +1370,6 @@ if status_ok then
   local buttons = {
     type = "group",
     val = {
-      -- { type = "text", val = "Quick links", opts = { hl = "String", position = "center" } },
-      -- { type = "padding", val = 1 },
       dashboard.button('i', '  New file',       '<cmd>ene <BAR> startinsert<CR>'),
       dashboard.button('r', '  Recent files',   '<cmd>Telescope oldfiles<CR>'),
       dashboard.button('g', '  Live grep',      '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
@@ -1381,6 +1377,7 @@ if status_ok then
       dashboard.button('L', '  Last sesion',    '<cmd>SessionManager load_last_session<CR>'),
       dashboard.button('T', '  Todos',          '<cmd>Neorg workspace gtd<CR>'),
       dashboard.button('J', '  Journal',        '<cmd>Neorg journal today<CR>'),
+      dashboard.button('M', '  Neorg main',     '<cmd>Neorg workspace main<CR>'),
       dashboard.button("P", "  Update plugins", '<cmd>PackerSync<CR>'),
       dashboard.button('q', '  Quit',           ':qa<CR>'),
     },
@@ -1406,8 +1403,8 @@ if status_ok then
       dashboard.button('nc', '  Config', '<cmd>e ~/.config/nvim/lua/config.lua<cr>'),
       dashboard.button('nk', '  Binds', '<cmd>e ~/.config/nvim/lua/binds.lua<cr>'),
       dashboard.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
-      dashboard.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.vim<cr>'),
-      dashboard.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.vim<cr>'),
+      dashboard.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.lua<cr>'),
+      dashboard.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.lua<cr>'),
       dashboard.button('ch', '  Hyprland', '<cmd>e ~/.config/hypr/hyprland.conf<cr>'),
       dashboard.button('cx', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs<cr>'),
       dashboard.button('cp', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad<cr>'),
