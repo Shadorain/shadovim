@@ -66,7 +66,7 @@ return require('packer').startup(function(use)
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'MunifTanjim/nui.nvim' }
   use { 'echasnovski/mini.nvim' }
-  use { 'edluffy/hologram.nvim' }
+  use { 'edluffy/hologram.nvim', ft = {'norg', 'md'} }
   use { 'ekickx/clipboard-image.nvim' }
   -- use { "folke/noice.nvim" }
   use { 'abecodes/tabout.nvim',
@@ -158,7 +158,7 @@ return require('packer').startup(function(use)
   use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
   use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
   use { 'saecki/crates.nvim' }       --- cargo crates!
-  use { 'nvim-neorg/neorg',
+  use { 'nvim-neorg/neorg', tag = "ab065a4c53a7877f6b046d27d8a17f81912c0d6b",
     -- config = function()
     --   require("neorg").setup(require("config").norg)
     -- end,

@@ -314,171 +314,160 @@ if status_ok then
   vim.api.nvim_set_hl(0, "CmpItemKindNvimLsp", { fg = "#6161b3" })
   vim.api.nvim_set_hl(0, "CmpItemKindCrate",   { fg = "#F64D00" })
 
+  vim.g.cmp_active = true
+
   local compare = require('cmp.config.compare')
   local luasnip = require('luasnip')
   vim.defer_fn(function()
-  cmp.setup {
-    -- preselect = cmp.PreselectMode.None,
-    completion = {
-      completeopt = "menu,menuone,noselect,noinsert",
-      keyword_length = 1,
-    },
+    cmp.setup {
+      preselect = cmp.PreselectMode.None,
+      completion = {
+        completeopt = "menu,menuone,noselect,noinsert",
+        keyword_length = 1,
+      },
 
-    snippet = {
-      expand = function(args)
-        require('luasnip').lsp_expand(args.body)
-      end
-    },
+      snippet = {
+        expand = function(args)
+          require('luasnip').lsp_expand(args.body)
+        end
+      },
 
-    confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+      confirm_opts = {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
 
-    mapping = cmp.mapping.preset.insert {
-      ["<C-j>"]     = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
-      ["<C-n>"]     = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
-      ["<C-d>"]     = cmp.mapping.scroll_docs(-4),
-      ["<C-u>"]     = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-c>"]     = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-      ['<CR>']      = cmp.mapping.confirm { select = true, },
-      ["<C-y>"]     = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
+      mapping = cmp.mapping.preset.insert {
+        ["<C-j>"]     = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
+        ["<C-n>"]     = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
+        ["<C-d>"]     = cmp.mapping.scroll_docs(-4),
+        ["<C-u>"]     = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-c>"]     = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+        ['<CR>']      = cmp.mapping.confirm { select = true, },
+        ["<C-y>"]     = cmp.mapping {
+          i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+          c = function(fallback)
+            if cmp.visible() then
+              cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+            else
+              fallback()
+            end
+          end,
+        },
+        ['<Tab>']     = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+            cmp.select_next_item()
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          elseif luasnip.jumpable(1) then
+            luasnip.jump(1)
+          elseif neogen.jumpable() then
+            neogen.jump_next()
+          elseif check_backspace() then
+            fallback()
           else
             fallback()
           end
-        end,
+        end, { "i", "s", }),
+        ['<S-Tab>'] = cmp.mapping(function()
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          elseif neogen.jumpable(true) then
+            neogen.jump_prev()
+          else
+            fallback()
+          end
+        end, { "i", "s", }),
       },
-      ['<Tab>']     = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_locally_jumpable() then
-          luasnip.expand_or_jump()
-        elseif luasnip.jumpable(1) then
-          luasnip.jump(1)
-        elseif neogen.jumpable() then
-          neogen.jump_next()
-        elseif check_backspace() then
-          fallback()
-        else
-          fallback()
-        end
-      end, { "i", "s", }),
-      ['<S-Tab>'] = cmp.mapping(function()
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        elseif neogen.jumpable(true) then
-          neogen.jump_prev()
-        else
-          fallback()
-        end
-      end, { "i", "s", }),
-      -- ['<C-l>'] = cmp.mapping(function()
-      --   if has_words_before() and luasnip.expand_or_jumpable() then
-      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
-      --   else
-      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, true, true), '', true)
-      --   end
-      -- end, { 'i', 's' }),
-      -- ['<C-h>'] = cmp.mapping(function()
-      --   if luasnip.jumpable(-1) then
-      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
-      --   else
-      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Left>', true, true, true), '', true)
-      --   end
-      -- end, { 'i', 's' }),
-    },
-    window = {
-      documentation = {
-        max_height = 30,
-        max_width = 100,
-        width = 80,
-        height = 20,
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	      winhighlight = 'FloatBorder:TelescopeBorder',
-      },
-      completion = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	      winhighlight = 'FloatBorder:VertSplit',
-      },
-    },
-    sources = {
-      { name = "nvim_lsp", },
-      { name = "copilot",
-        max_item_count = 3,
-        trigger_characters = {
-          { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" },
+      window = {
+        documentation = {
+          max_height = 30,
+          max_width = 100,
+          width = 80,
+          height = 20,
+          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	        winhighlight = 'FloatBorder:TelescopeBorder',
+        },
+        completion = {
+          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	        winhighlight = 'FloatBorder:VertSplit',
         },
       },
-      { name = "cmp_tabnine", },
-      { name = "luasnip",     },
-      { name = "crates",      },
-      { name = "ctags",       },
-      { name = "nvim_lua",    },
-      { name = "calc",        },
-      { name = "path",        },
-      { name = "buffer",      },
-      { name = "neorg",       },
-      { name = "cmdline",     },
-    },
-    sorting = {
-      priority_weight = 2,
-      comparators = {
-        require("copilot_cmp.comparators").prioritize,
-        require("copilot_cmp.comparators").score,
-        compare.offset,
-        compare.exact,
-        -- compare.scopes,
-        compare.score,
-        compare.recently_used,
-        compare.locality,
-        -- compare.kind,
-        compare.sort_text,
-        compare.length,
-        compare.order,
+      sources = {
+        { name = "crates", group_index = 1 },
+        { name = "copilot",
+          max_item_count = 3,
+          trigger_characters = {
+            { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" },
+          },
+          group_index = 2,
+        },
+        { name = "nvim_lsp",    group_index = 2 },
+        { name = "cmp_tabnine", group_index = 2 },
+        { name = "luasnip",     group_index = 2 },
+        { name = "nvim_lua",    group_index = 2 },
+        { name = "buffer",      group_index = 2 },
+        { name = "path",        group_index = 2 },
+        { name = "neorg",       group_index = 2 },
+        -- { name = "calc",        group_index = 2 },
+        -- { name = "ctags",       group_index = 2 },
+        -- { name = "cmdline",     group_index = 2 },
       },
-    },
-    formatting = {
-      -- fields = { "kind", "abbr", "menu" },
-      fields = { "kind", "abbr" },
-      format = function(entry, vim_item)
-        vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-        -- vim_item.menu = ({
-        -- 	copilot = git_icons.Octoface,
-        -- 	nvim_lsp = ui_icons.Code,
-        -- 	cmp_tabnine = misc_icons.Robot,
-        -- 	crates = misc_icons.Rust,
-        -- 	ctags = misc_icons.Tag,
-        -- 	luasnip = ui_icons.Pencil,
-        -- 	buffer = "[B]",
-        -- 	calc = "[+]",
-        -- 	path = "[/]",
-        -- 	neorg = "[N]",
-        -- 	cmdline = "[>]",
-        -- })[entry.source.name]
-        -- if entry.source.name == "copilot" then
-        --   vim_item.menu_hl_group = "CmpItemKindCopilot"
-        -- end
-        -- if entry.source.name == "nvim_lsp" or "luasnip" then
-        --   vim_item.menu_hl_group = "CmpItemKindNvimLsp"
-        -- end
-        -- if entry.source.name == "cmp_tabnine" then
-        --   vim_item.menu_hl_group = "CmpItemKindTabnine"
-        -- end
-        -- if entry.source.name == "crates" then
-        --   vim_item.menu_hl_group = "CmpItemKindCrate"
-        -- end
-        return vim_item
-      end,
-    },
-    experimental = { ghost_text = true } --,  custom_menu = true }
-  }
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          -- require("copilot_cmp.comparators").prioritize,
+          -- require("copilot_cmp.comparators").score,
+          compare.offset,
+          compare.exact,
+          -- compare.scopes,
+          compare.score,
+          compare.recently_used,
+          compare.locality,
+          -- compare.kind,
+          compare.sort_text,
+          compare.length,
+          compare.order,
+        },
+      },
+      formatting = {
+        -- fields = { "kind", "abbr", "menu" },
+        fields = { "kind", "abbr" },
+        format = function(entry, vim_item)
+          vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+          -- vim_item.menu = ({
+          -- 	copilot = git_icons.Octoface,
+          -- 	nvim_lsp = ui_icons.Code,
+          -- 	cmp_tabnine = misc_icons.Robot,
+          -- 	crates = misc_icons.Rust,
+          -- 	ctags = misc_icons.Tag,
+          -- 	luasnip = ui_icons.Pencil,
+          -- 	buffer = "[B]",
+          -- 	calc = "[+]",
+          -- 	path = "[/]",
+          -- 	neorg = "[N]",
+          -- 	cmdline = "[>]",
+          -- })[entry.source.name]
+          -- if entry.source.name == "copilot" then
+          --   vim_item.menu_hl_group = "CmpItemKindCopilot"
+          -- end
+          -- if entry.source.name == "nvim_lsp" or "luasnip" then
+          --   vim_item.menu_hl_group = "CmpItemKindNvimLsp"
+          -- end
+          -- if entry.source.name == "cmp_tabnine" then
+          --   vim_item.menu_hl_group = "CmpItemKindTabnine"
+          -- end
+          -- if entry.source.name == "crates" then
+          --   vim_item.menu_hl_group = "CmpItemKindCrate"
+          -- end
+          return vim_item
+        end,
+      },
+      experimental = { ghost_text = true } --,  custom_menu = true }
+    }
   end, 100)
 end
 --- }}}
@@ -536,58 +525,58 @@ if status_ok then
       keymaps = { [','] = 'textsubjects-smart', }
     },
     -- autopairs = { enable = true },
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["il"] = "@loop.outer",
-          ["al"] = "@loop.outer",
-          ["icd"] = "@conditional.inner",
-          ["acd"] = "@conditional.outer",
-          ["acm"] = "@comment.outer",
-          ["ast"] = "@statement.outer",
-          ["isc"] = "@scopename.inner",
-          ["iB"] = "@block.inner",
-          ["aB"] = "@block.outer",
-          ["p"] = "@parameter.inner",
-        },
-      },
-	    move = {
-        enable = true,
-        set_jumps = true, -- Whether to set jumps in the jumplist
-        goto_next_start = {
-          ["gnf"] = "@function.outer",
-          ["gnif"] = "@function.inner",
-          ["gnp"] = "@parameter.inner",
-          ["gnc"] = "@call.outer",
-          ["gnic"] = "@call.inner",
-        },
-        goto_next_end = {
-          ["gnF"] = "@function.outer",
-          ["gniF"] = "@function.inner",
-          ["gnP"] = "@parameter.inner",
-          ["gnC"] = "@call.outer",
-          ["gniC"] = "@call.inner",
-        },
-        goto_previous_start = {
-          ["gpf"] = "@function.outer",
-          ["gpif"] = "@function.inner",
-          ["gpp"] = "@parameter.inner",
-          ["gpc"] = "@call.outer",
-          ["gpic"] = "@call.inner",
-        },
-        goto_previous_end = {
-          ["gpF"] = "@function.outer",
-          ["gpiF"] = "@function.inner",
-          ["gpP"] = "@parameter.inner",
-          ["gpC"] = "@call.outer",
-          ["gpiC"] = "@call.inner",
-        },
-      },
-    },
+    -- textobjects = {
+    --   select = {
+    --     enable = true,
+    --     lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+    --     keymaps = {
+    --       ["af"] = "@function.outer",
+    --       ["if"] = "@function.inner",
+    --       ["il"] = "@loop.outer",
+    --       ["al"] = "@loop.outer",
+    --       ["icd"] = "@conditional.inner",
+    --       ["acd"] = "@conditional.outer",
+    --       ["acm"] = "@comment.outer",
+    --       ["ast"] = "@statement.outer",
+    --       ["isc"] = "@scopename.inner",
+    --       ["iB"] = "@block.inner",
+    --       ["aB"] = "@block.outer",
+    --       ["p"] = "@parameter.inner",
+    --     },
+    --   },
+	  --  move = {
+    --     enable = true,
+    --     set_jumps = true, -- Whether to set jumps in the jumplist
+    --     goto_next_start = {
+    --       ["gnf"] = "@function.outer",
+    --       ["gnif"] = "@function.inner",
+    --       ["gnp"] = "@parameter.inner",
+    --       ["gnc"] = "@call.outer",
+    --       ["gnic"] = "@call.inner",
+    --     },
+    --     goto_next_end = {
+    --       ["gnF"] = "@function.outer",
+    --       ["gniF"] = "@function.inner",
+    --       ["gnP"] = "@parameter.inner",
+    --       ["gnC"] = "@call.outer",
+    --       ["gniC"] = "@call.inner",
+    --     },
+    --     goto_previous_start = {
+    --       ["gpf"] = "@function.outer",
+    --       ["gpif"] = "@function.inner",
+    --       ["gpp"] = "@parameter.inner",
+    --       ["gpc"] = "@call.outer",
+    --       ["gpic"] = "@call.inner",
+    --     },
+    --     goto_previous_end = {
+    --       ["gpF"] = "@function.outer",
+    --       ["gpiF"] = "@function.inner",
+    --       ["gpP"] = "@parameter.inner",
+    --       ["gpC"] = "@call.outer",
+    --       ["gpiC"] = "@call.inner",
+    --     },
+    --   },
+    -- },
     playground = {
       enable = true,
       updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
@@ -656,7 +645,7 @@ local status_ok, crates = pcall(require, "crates")
 if status_ok then
   local null_ls = require('null-ls')
   crates.setup {
-       null_ls = { enabled = true, name = "crates.nvim", },
+    null_ls = { enabled = true, name = "crates.nvim", },
   }
 end
 --- }}}
@@ -686,7 +675,7 @@ if status_ok then
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")
   local cmp_status_ok, cmp = pcall(require, "cmp")
   if cmp_status_ok then
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
   end
 end
 --- }}}
@@ -759,7 +748,7 @@ vim.g.symbols_outline = {
 --- LSP Lines {{{
 local status_ok, lsp_lines = pcall(require, "lsp_lines")
 if status_ok then
-  lsp_lines.setup()
+  -- lsp_lines.setup()
 end
 --- }}}
 --- }}}
@@ -854,13 +843,13 @@ if status_ok then
     fold_virt_text_handler = require('mod').fold_handler,
     preview = {
       win_config = {
-          border = {'', '─', '', '', '', '─', '', ''},
-          winhighlight = 'Normal:Folded',
-          winblend = 10
+        border = {'', '─', '', '', '', '─', '', ''},
+        winhighlight = 'Normal:Folded',
+        winblend = 10
       },
       mappings = {
-          scrollU = '<C-u>',
-          scrollD = '<C-d>'
+        scrollU = '<C-u>',
+        scrollD = '<C-d>'
       }
     },
   }
@@ -1115,10 +1104,10 @@ end
 local status_ok, session_manager = pcall(require, "session_manager")
 if status_ok then
   session_manager.setup({
-  autoload_mode = require('session_manager.config').AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
-  autosave_last_session = false, -- Automatically save last session on exit.
-  autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
-})
+    autoload_mode = require('session_manager.config').AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+    autosave_last_session = false, -- Automatically save last session on exit.
+    autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
+  })
 end
 
 -- local tele_status_ok, telescope = pcall(require, "telescope")
@@ -1235,112 +1224,112 @@ if status_ok then
   --- }}}
   --- File Button Fn {{{
   local function get_extension(fn)
-      local match = fn:match("^.+(%..+)$")
-      local ext = ""
-      if match ~= nil then
-          ext = match:sub(2)
-      end
-      return ext
+    local match = fn:match("^.+(%..+)$")
+    local ext = ""
+    if match ~= nil then
+      ext = match:sub(2)
+    end
+    return ext
   end
 
   local function icon(fn)
-      local nwd = require("nvim-web-devicons")
-      local ext = get_extension(fn)
-      return nwd.get_icon(fn, ext, { default = true })
+    local nwd = require("nvim-web-devicons")
+    local ext = get_extension(fn)
+    return nwd.get_icon(fn, ext, { default = true })
   end
 
   local function file_button(fn, sc, short_fn)
-      short_fn = short_fn or fn
-      local ico_txt
-      local fb_hl = {}
+    short_fn = short_fn or fn
+    local ico_txt
+    local fb_hl = {}
 
-      local ico, hl = icon(fn)
-      local hl_option_type = type(nvim_web_devicons.highlight)
-      if hl_option_type == "boolean" then
-          if hl and nvim_web_devicons.highlight then
-              table.insert(fb_hl, { hl, 0, 1 })
-          end
+    local ico, hl = icon(fn)
+    local hl_option_type = type(nvim_web_devicons.highlight)
+    if hl_option_type == "boolean" then
+      if hl and nvim_web_devicons.highlight then
+        table.insert(fb_hl, { hl, 0, 1 })
       end
-      if hl_option_type == "string" then
-          table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 1 })
-      end
-      ico_txt = ico .. "  "
+    end
+    if hl_option_type == "string" then
+      table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 1 })
+    end
+    ico_txt = ico .. "  "
 
-      local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
-      local fn_start = short_fn:match(".*/")
-      if fn_start ~= nil then
-          table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt - 2 })
-      end
-      file_button_el.opts.hl = fb_hl
-      return file_button_el
+    local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
+    local fn_start = short_fn:match(".*/")
+    if fn_start ~= nil then
+      table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt - 2 })
+    end
+    file_button_el.opts.hl = fb_hl
+    return file_button_el
   end
   --- }}}
   --- MRU {{{
   local default_mru_ignore = { "gitcommit" }
 
   local mru_opts = {
-      ignore = function(path, ext)
-          return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
-      end,
+    ignore = function(path, ext)
+      return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
+    end,
   }
   --- @param start number
   --- @param cwd string optional
   --- @param items_number number optional number of items to generate, default = 10
   local function mru(start, cwd, items_number, opts)
-      opts = opts or mru_opts
-      items_number = items_number or 9
+    opts = opts or mru_opts
+    items_number = items_number or 9
 
-      local oldfiles = {}
-      for _, v in pairs(vim.v.oldfiles) do
-          if #oldfiles == items_number then
-              break
-          end
-          local cwd_cond
-          if not cwd then
-              cwd_cond = true
-          else
-              cwd_cond = vim.startswith(v, cwd)
-          end
-          local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
-          if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
-              oldfiles[#oldfiles + 1] = v
-          end
+    local oldfiles = {}
+    for _, v in pairs(vim.v.oldfiles) do
+      if #oldfiles == items_number then
+        break
+      end
+      local cwd_cond
+      if not cwd then
+        cwd_cond = true
+      else
+        cwd_cond = vim.startswith(v, cwd)
+      end
+      local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
+      if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
+        oldfiles[#oldfiles + 1] = v
+      end
+    end
+
+    local special_shortcuts = {'a', 's', 'd'}
+    local target_width = 35
+
+    local tbl = {}
+    for i, fn in ipairs(oldfiles) do
+      local short_fn
+      if cwd then
+        short_fn = vim.fn.fnamemodify(fn, ":.")
+      else
+        short_fn = vim.fn.fnamemodify(fn, ":~")
       end
 
-      local special_shortcuts = {'a', 's', 'd'}
-      local target_width = 35
-
-      local tbl = {}
-      for i, fn in ipairs(oldfiles) do
-          local short_fn
-          if cwd then
-              short_fn = vim.fn.fnamemodify(fn, ":.")
-          else
-              short_fn = vim.fn.fnamemodify(fn, ":~")
-          end
-
-          if(#short_fn > target_width) then
-            short_fn = path.new(short_fn):shorten(1, {-2, -1})
-            if(#short_fn > target_width) then
-              short_fn = path.new(short_fn):shorten(1, {-1})
-            end
-          end
-
-          local shortcut = ""
-          if i <= #special_shortcuts then
-            shortcut = special_shortcuts[i]
-          else
-            shortcut = tostring(i + start - 1 - #special_shortcuts)
-          end
-
-          local file_button_el = file_button(fn, shortcut, short_fn)
-          tbl[i] = file_button_el
+      if(#short_fn > target_width) then
+        short_fn = path.new(short_fn):shorten(1, {-2, -1})
+        if(#short_fn > target_width) then
+          short_fn = path.new(short_fn):shorten(1, {-1})
+        end
       end
-      return {
-          type = "group",
-          val = tbl,
-          opts = {},
-      }
+
+      local shortcut = ""
+      if i <= #special_shortcuts then
+        shortcut = special_shortcuts[i]
+      else
+        shortcut = tostring(i + start - 1 - #special_shortcuts)
+      end
+
+      local file_button_el = file_button(fn, shortcut, short_fn)
+      tbl[i] = file_button_el
+    end
+    return {
+      type = "group",
+      val = tbl,
+      opts = {},
+    }
   end
 
   local section_mru = {
@@ -1403,13 +1392,11 @@ if status_ok then
       dashboard.button('nc', '  Config', '<cmd>e ~/.config/nvim/lua/config.lua<cr>'),
       dashboard.button('nk', '  Binds', '<cmd>e ~/.config/nvim/lua/binds.lua<cr>'),
       dashboard.button('nl', '  LSP Config', '<cmd>e ~/.config/nvim/lua/lsp_config.lua<cr>'),
-      dashboard.button('nx', '  Shadotheme (local)', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.lua<cr>'),
+      dashboard.button('nx', '  ~Shadotheme', '<cmd>e ~/.local/share/nvim/site/pack/packer/opt/shadotheme/colors/shado.lua<cr>'),
       dashboard.button('nX', '  Shadotheme', '<cmd>e ~/dev/shadotheme/colors/shado.lua<cr>'),
       dashboard.button('ch', '  Hyprland', '<cmd>e ~/.config/hypr/hyprland.conf<cr>'),
-      dashboard.button('cx', '  Xmonad', '<cmd>e ~/.xmonad/xmonad.hs<cr>'),
-      dashboard.button('cp', '  Polybar', '<cmd>e ~/.config/shadobar/config-xmonad<cr>'),
-      dashboard.button('cP', '  Picom', '<cmd>e ~/.config/picom.conf<cr>'),
-      dashboard.button('cs', '  ST Config', '<cmd>e ~/dev/C/st/config.h<cr>'),
+      dashboard.button('cw', '  Waybar', '<cmd>e ~/.config/waybar/config<cr>'),
+      dashboard.button('cs', '  Kitty', '<cmd>e ~/.config/kitty/kitty.conf<cr>'),
       dashboard.button('zc', '  Zshrc', '<cmd>e ~/.zshrc<cr>'),
       dashboard.button('za', '  Zsh Aliases', '<cmd>e ~/.zsh_aliases<cr>'),
       dashboard.button('ze', '  Zsh Environment', '<cmd>e ~/.zshenv<cr>'),
@@ -1454,7 +1441,7 @@ if status_ok then
 
   vim.cmd([[
     autocmd FileType alpha setlocal nofoldenable
-  ]])
+    ]])
 
   alpha.setup(opts)
   --- }}}
@@ -1599,14 +1586,14 @@ local status_ok, zen = pcall(require, "zen-mode")
 if status_ok then
   zen.setup({
     window = {
-	  backdrop = 0.9,
-	  height = 1, -- height of the Zen window
-	  width = 1,
-	  options = {
-	    signcolumn = "yes", -- disable signcolumn
-	    number = true, -- disable number column
-	    relativenumber = true, -- disable relative numbers
-     },
+	    backdrop = 0.9,
+	    height = 1, -- height of the Zen window
+	    width = 1,
+	    options = {
+	      signcolumn = "yes", -- disable signcolumn
+	      number = true, -- disable number column
+	      relativenumber = true, -- disable relative numbers
+      },
     },
     plugins = {
       options = {
@@ -1636,25 +1623,25 @@ end
 local status_ok, venn = pcall(require, "venn")
 if status_ok then
   function _G.Toggle_venn()
-      local venn_enabled = vim.inspect(vim.b.venn_enabled)
-      if venn_enabled == "nil" then
-          vim.b.venn_enabled = true
-          vim.cmd[[setlocal ve=all]]
-          -- draw a line on HJKL keystokes
-          vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
-          -- draw a box by pressing "f" with visual selection
-          vim.api.nvim_buf_set_keymap(0, "v", "b", ":VFill<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(0, "v", "o", ":VBoxO<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(0, "v", "H", ":VBoxH<CR>", {noremap = true})
-      else
-          vim.cmd[[setlocal ve=]]
-          vim.cmd[[mapclear <buffer>]]
-          vim.b.venn_enabled = nil
-      end
+    local venn_enabled = vim.inspect(vim.b.venn_enabled)
+    if venn_enabled == "nil" then
+      vim.b.venn_enabled = true
+      vim.cmd[[setlocal ve=all]]
+      -- draw a line on HJKL keystokes
+      vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
+      vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
+      vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
+      vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
+      -- draw a box by pressing "f" with visual selection
+      vim.api.nvim_buf_set_keymap(0, "v", "b", ":VFill<CR>", {noremap = true})
+      vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
+      vim.api.nvim_buf_set_keymap(0, "v", "o", ":VBoxO<CR>", {noremap = true})
+      vim.api.nvim_buf_set_keymap(0, "v", "H", ":VBoxH<CR>", {noremap = true})
+    else
+      vim.cmd[[setlocal ve=]]
+      vim.cmd[[mapclear <buffer>]]
+      vim.b.venn_enabled = nil
+    end
   end
 end
 --- }}}
@@ -1927,146 +1914,146 @@ local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if status_ok then
   local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if config_status_ok then
-      local tree_cb = nvim_tree_config.nvim_tree_callback
+    local tree_cb = nvim_tree_config.nvim_tree_callback
 
-      vim.api.nvim_create_autocmd('BufEnter', {
-          command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
-          nested = true,
-      })
-      nvim_tree.setup {
-        hijack_directories = {
+    vim.api.nvim_create_autocmd('BufEnter', {
+      command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+      nested = true,
+    })
+    nvim_tree.setup {
+      hijack_directories = {
+        enable = false,
+      },
+      actions = {
+        open_file = {
+          quit_on_open = true,
+        }
+      },
+      -- update_to_buf_dir = {
+      --   enable = false,
+      -- },
+      -- disable_netrw = true,
+      -- hijack_netrw = true,
+      -- open_on_setup = false,
+      open_on_setup = false,
+      ignore_ft_on_setup = {
+        "startify",
+        "dashboard",
+        "alpha",
+      },
+      filters = {
+        custom = { ".git" },
+        exclude = { ".gitignore" },
+      },
+      -- open_on_tab = false,
+      -- hijack_cursor = false,
+      update_cwd = true,
+      -- update_to_buf_dir = {
+      --   enable = true,
+      --   auto_open = true,
+      -- },
+      -- --   error
+      -- --   info
+      -- --   question
+      -- --   warning
+      -- --   lightbulb
+      renderer = {
+        add_trailing = false,
+        group_empty = false,
+        highlight_git = false,
+        highlight_opened_files = "none",
+        root_folder_modifier = ":t",
+        indent_markers = {
           enable = false,
+          icons = {
+            corner = "└ ",
+            edge = "│ ",
+            none = "  ",
+          },
         },
-        actions = {
-          open_file = {
-            quit_on_open = true,
-          }
+        icons = {
+          webdev_colors = true,
+          git_placement = "before",
+          padding = " ",
+          symlink_arrow = " ➛ ",
+          show = {
+            file = true,
+            folder = true,
+            folder_arrow = true,
+            git = true,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            folder = {
+              arrow_open = ui_icons.ArrowOpen,
+              arrow_closed = ui_icons.ArrowClosed,
+              default = "",
+              open = "",
+              empty = "",
+              empty_open = "",
+              symlink = "",
+              symlink_open = "",
+            },
+            git = {
+              unstaged = "",
+              staged = "S",
+              unmerged = "",
+              renamed = "➜",
+              untracked = "U",
+              deleted = "",
+              ignored = "◌",
+            },
+          },
         },
-        -- update_to_buf_dir = {
-        --   enable = false,
-        -- },
-        -- disable_netrw = true,
-        -- hijack_netrw = true,
-        -- open_on_setup = false,
-        open_on_setup = false,
-        ignore_ft_on_setup = {
-          "startify",
-          "dashboard",
-          "alpha",
+      },
+      diagnostics = {
+        enable = true,
+        icons = {
+          hint = diagnostics_icons.Hint,
+          info = diagnostics_icons.Information,
+          warning = diagnostics_icons.Warning,
+          error = diagnostics_icons.Error,
         },
-        filters = {
-          custom = { ".git" },
-          exclude = { ".gitignore" },
-        },
-        -- open_on_tab = false,
-        -- hijack_cursor = false,
+      },
+      update_focused_file = {
+        enable = true,
         update_cwd = true,
-        -- update_to_buf_dir = {
-        --   enable = true,
-        --   auto_open = true,
-        -- },
-        -- --   error
-        -- --   info
-        -- --   question
-        -- --   warning
-        -- --   lightbulb
-        renderer = {
-          add_trailing = false,
-          group_empty = false,
-          highlight_git = false,
-          highlight_opened_files = "none",
-          root_folder_modifier = ":t",
-          indent_markers = {
-            enable = false,
-            icons = {
-              corner = "└ ",
-              edge = "│ ",
-              none = "  ",
-            },
-          },
-          icons = {
-            webdev_colors = true,
-            git_placement = "before",
-            padding = " ",
-            symlink_arrow = " ➛ ",
-            show = {
-              file = true,
-              folder = true,
-              folder_arrow = true,
-              git = true,
-            },
-            glyphs = {
-              default = "",
-              symlink = "",
-              folder = {
-                arrow_open = ui_icons.ArrowOpen,
-                arrow_closed = ui_icons.ArrowClosed,
-                default = "",
-                open = "",
-                empty = "",
-                empty_open = "",
-                symlink = "",
-                symlink_open = "",
-              },
-              git = {
-                unstaged = "",
-                staged = "S",
-                unmerged = "",
-                renamed = "➜",
-                untracked = "U",
-                deleted = "",
-                ignored = "◌",
-              },
-            },
+        ignore_list = {},
+      },
+      -- system_open = {
+      --   cmd = nil,
+      --   args = {},
+      -- },
+      -- filters = {
+      --   dotfiles = false,
+      --   custom = {},
+      -- },
+      git = {
+        enable = true,
+        ignore = true,
+        timeout = 500,
+      },
+      view = {
+        width = 30,
+        -- height = 30,
+        hide_root_folder = false,
+        side = "left",
+        -- auto_resize = true,
+        mappings = {
+          custom_only = false,
+          list = {
+            { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+            { key = "h", cb = tree_cb "close_node" },
+            { key = "v", cb = tree_cb "vsplit" },
+            { key = "s", cb = tree_cb "split" },
+            { key = "<C-x>", action = "system_open" },
           },
         },
-        diagnostics = {
-          enable = true,
-          icons = {
-            hint = diagnostics_icons.Hint,
-            info = diagnostics_icons.Information,
-            warning = diagnostics_icons.Warning,
-            error = diagnostics_icons.Error,
-          },
-        },
-        update_focused_file = {
-          enable = true,
-          update_cwd = true,
-          ignore_list = {},
-        },
-        -- system_open = {
-        --   cmd = nil,
-        --   args = {},
-        -- },
-        -- filters = {
-        --   dotfiles = false,
-        --   custom = {},
-        -- },
-        git = {
-          enable = true,
-          ignore = true,
-          timeout = 500,
-        },
-        view = {
-          width = 30,
-          -- height = 30,
-          hide_root_folder = false,
-          side = "left",
-          -- auto_resize = true,
-          mappings = {
-            custom_only = false,
-            list = {
-              { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-              { key = "h", cb = tree_cb "close_node" },
-              { key = "v", cb = tree_cb "vsplit" },
-              { key = "s", cb = tree_cb "split" },
-              { key = "<C-x>", action = "system_open" },
-            },
-          },
-          number = false,
-          relativenumber = false,
-        },
-      }
+        number = false,
+        relativenumber = false,
+      },
+    }
   end
 end
 --- }}}
@@ -2242,31 +2229,31 @@ if status_ok then
       lualine_b = {'branch'},
       lualine_c = {'filename'},
       lualine_x = {
-      -- {
-      --   'diff',
-      --   colored = true, -- Displays a colored diff status if set to true
-      --   diff_color = {
-      --     -- Same color values as the general color option can be used here.
-      --     added    = 'DiffAdd',    -- Changes the diff's added color
-      --     modified = 'DiffChange', -- Changes the diff's modified color
-      --     removed  = 'DiffDelete', -- Changes the diff's removed color you
-      --   },
-      --   symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the symbols used by the diff.
-      --   source = nil,
-      -- },
-      {
-        'diagnostics', sources = { 'nvim_lsp' },
-        sections = { 'error', 'warn' }, -- 'info', 'hint'
-        diagnostics_color = {
-          error = 'LualineDiagnosticError',
-          warn  = 'LualineDiagnosticWarn',
-          info  = 'LualineDiagnosticInfo',
-          hint  = 'LualineDiagnosticHint',
-        },
-        colored = true,
-        update_in_insert = false,
-        always_visible = false,
-      }, 'filetype'},
+        -- {
+        --   'diff',
+        --   colored = true, -- Displays a colored diff status if set to true
+        --   diff_color = {
+        --     -- Same color values as the general color option can be used here.
+        --     added    = 'DiffAdd',    -- Changes the diff's added color
+        --     modified = 'DiffChange', -- Changes the diff's modified color
+        --     removed  = 'DiffDelete', -- Changes the diff's removed color you
+        --   },
+        --   symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the symbols used by the diff.
+        --   source = nil,
+        -- },
+        {
+          'diagnostics', sources = { 'nvim_lsp' },
+          sections = { 'error', 'warn' }, -- 'info', 'hint'
+          diagnostics_color = {
+            error = 'LualineDiagnosticError',
+            warn  = 'LualineDiagnosticWarn',
+            info  = 'LualineDiagnosticInfo',
+            hint  = 'LualineDiagnosticHint',
+          },
+          colored = true,
+          update_in_insert = false,
+          always_visible = false,
+        }, 'filetype'},
       lualine_y = {'progress'},
       lualine_z = {'location'},
     },
@@ -2318,9 +2305,9 @@ end
 local status_ok, transparent = pcall(require, "transparent")
 if status_ok then
   transparent.setup({
-      enable = true,
-      extra_groups = {},
-      exclude = {},
+    enable = true,
+    extra_groups = {},
+    exclude = {},
   })
 end
 --- }}}
@@ -2409,19 +2396,19 @@ local status_ok, clipboard_image = pcall(require, "clipboard-image")
 if status_ok then
   clipboard_image.setup {
     default = {
-      img_dir = "/home/shadow/images/",
+      img_dir = "/home/shadow/Pictures/nv_img/",
+      img_dir_text = "/home/shadow/Pictures/nv_img/",
       img_name = function()
-                vim.fn.inputsave()
-                local name = vim.fn.input("Name: ")
-                vim.fn.inputrestore()
+        vim.fn.inputsave()
+        local name = vim.fn.input("Name: ")
+        vim.fn.inputrestore()
 
-                if name == nil or name == "" then
-                    return os.date("%y-%m-%d-%H-%M-%S")
-                end
-                return name
-            end,-- function() return os.date('%Y-%m-%d-%H-%M-%S') end, -- Example result: "2021-04-13-10-04-02"
+        if name == nil or name == "" then
+          return os.date("%y-%m-%d-%H-%M-%S")
+        end
+        return name
+      end,-- function() return os.date('%Y-%m-%d-%H-%M-%S') end, -- Example result: "2021-04-13-10-04-02"
       affix = "![Img](%s)",
-      img_dir_txt = "/home/shadow/images",
     },
     -- -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
     -- -- If you're uncertain what to name your field to, you can run `lua print(vim.bo.filetype)`
@@ -2463,7 +2450,6 @@ end
 -- Visualize and operate on indent scope
 local status_ok, mini_indent = pcall(require, "mini.indentscope")
 if status_ok then
-  vim.cmd[[ hi MiniIndentscopeSymbol guifg=#6a5acd ]]
   mini_indent.setup({
 	  symbol = "│",
   })
@@ -2572,7 +2558,7 @@ if status_ok then
     },
     layouts = {
       {
-      -- You can change the order of elements in the sidebar
+        -- You can change the order of elements in the sidebar
         elements = {
           -- Provide as ID strings or tables with "id" and "size" keys
           { id = "breakpoints", size = 0.15 },
