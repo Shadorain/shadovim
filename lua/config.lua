@@ -1508,8 +1508,10 @@ if status_ok then
       max_width = { 140, 0.9 },
       min_width = { 20, 0.2 },
 
-      winblend = 10, -- Window transparency (0-100)
-      winhighlight = "", -- Change default highlight groups (see :help winhl)
+      win_options = {
+        winhighlight = "", -- Change default highlight groups (see :help winhl)
+        winblend = 10, -- Window transparency (0-100)
+      },
 
       -- This is the config that will be passed to nvim_open_win.
       -- Change values here to customize the layout
@@ -1555,8 +1557,10 @@ if status_ok then
         border = "rounded",
         relative = "editor", -- 'editor' and 'win' will default to being centered
 
-        winblend = 60, -- Window transparency (0-100)
-        winhighlight = "", -- Change default highlight groups (see :help winhl)
+        win_options = {
+          winhighlight = "", -- Change default highlight groups (see :help winhl)
+          winblend = 60, -- Window transparency (0-100)
+        },
 
         -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
         -- the min_ and max_ options can be a list of mixed types.
@@ -2537,7 +2541,7 @@ local status_ok, dap = pcall(require, "dap")
 if status_ok then
   dap.defaults.fallback.force_external_terminal = true
   dap.defaults.fallback.external_terminal = {
-    command = '/usr/local/bin/st';
+    command = '/usr/bin/kitty';
     args = {''};
   }
 end
@@ -2561,27 +2565,55 @@ if status_ok then
         -- You can change the order of elements in the sidebar
         elements = {
           -- Provide as ID strings or tables with "id" and "size" keys
-          { id = "breakpoints", size = 0.15 },
-          { id = "scopes", size = 0.65, }, -- Can be float or integer > 1
-          { id = "stacks", size = 0.25 },
+          { id = "scopes", size = 0.55, }, -- Can be float or integer > 1
+          { id = "stacks", size = 0.20 },
+          { id = "repl", size = 0.15 },
+          { id = "breakpoints", size = 0.10 },
           -- { id = "watches", size = 0.25 },
         },
-        size = 40,
-        position = "left", -- Can be "left", "right", "top", "bottom"
+        size = 0.20,
+        position = "bottom", -- Can be "left", "right", "top", "bottom"
       },
       {
         elements = { },
-        size = 10,
-        position = "bottom", -- Can be "left", "right", "top", "bottom"
+        size = 0.20,
+        position = "left", -- Can be "left", "right", "top", "bottom"
       },
     },
     floating = {
       max_height = nil, -- These can be integers or a float between 0 and 1.
       max_width = nil, -- Floats will be treated as percentage of your screen.
+      border = "single",
       mappings = { close = { "q", "<Esc>" }, },
     },
     windows = { indent = 1 },
+    controls = {
+      -- Requires Neovim nightly (or 0.8 when released)
+      enabled = true,
+      -- Display controls in this element
+      element = "repl",
+      icons = {
+        pause = "",
+        play = "",
+        step_into = "",
+        step_over = "",
+        step_out = "",
+        step_back = "",
+        run_last = "",
+        terminate = "",
+      },
+    },
   })
+
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+  end
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+  end
+  dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+  end
 end
 -- }}}
 --- Termdebug {{{

@@ -239,6 +239,35 @@ function setup_codelens_refresh(client, bufnr)
   })
 end
 --- Rust-tools {{{
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = "executable",
+  command = "/usr/bin/lldb-vscode",
+  name = 'lldb',
+}
+
+dap.adapters.codelldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    command = '/usr/bin/codelldb',
+    args = {"--port", "${port}"},
+  }
+}
+
+dap.configurations.rust = {
+  {
+    name = "Rust debug",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = true,
+  },
+}
+
 local rs_opts = {
   tools = {
     on_initialized = function()
@@ -293,6 +322,11 @@ local rs_opts = {
       },
     },
   },
+  dap = {
+    type = "executable",
+    command = "/usr/bin/lldb-vscode",
+    name = 'rt_lldb',
+  }
 }
 require('rust-tools').setup(rs_opts)
 --- }}}
