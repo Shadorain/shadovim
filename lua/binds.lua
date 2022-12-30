@@ -210,6 +210,7 @@ local n_mappings = {
     p = { '<cmd>lua require("peek").Peek("definition")<CR>',    "LSP Peek" },
     J = { '<cmd>JABSOpen<CR>',                                  "JABS Buffers" },
     Z = { '<cmd>lua require("zen-mode").toggle()<CR>',          "Zen Mode" },
+    V = { '<cmd>lua _G.Toggle_venn()<CR>',                      "Venn Mode" },
     --- }}}
     --- <T> Telescope {{{
     T = {
