@@ -759,7 +759,7 @@ require('tasks').setup({
     pos = 'botright', -- Default quickfix position.
     height = 15, -- Default height.
   },
-}
+})
 --- }}}
 --- }}}
 --- }}}
