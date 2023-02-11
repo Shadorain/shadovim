@@ -426,6 +426,7 @@ if status_ok then
           -- compare.scopes,
           compare.score,
           compare.recently_used,
+          require("clangd_extensions.cmp_scores"),
           compare.locality,
           -- compare.kind,
           compare.sort_text,
@@ -750,6 +751,15 @@ local status_ok, lsp_lines = pcall(require, "lsp_lines")
 if status_ok then
   -- lsp_lines.setup()
 end
+--- }}}
+--- Neovim Tasks {{{
+require('tasks').setup({
+  params_file = '.neovim.json', -- JSON file to store module and task parameters.
+  quickfix = {
+    pos = 'botright', -- Default quickfix position.
+    height = 15, -- Default height.
+  },
+}
 --- }}}
 --- }}}
 --- }}}
@@ -1844,7 +1854,7 @@ if status_ok then
 
   lir.setup {
     show_hidden_files = false,
-    devicons_enable = true,
+    devicons = { enable = true },
     mappings = {
       ["l"] = actions.edit,
       ["<C-s>"] = actions.split,
@@ -1939,7 +1949,6 @@ if status_ok then
       -- disable_netrw = true,
       -- hijack_netrw = true,
       -- open_on_setup = false,
-      open_on_setup = false,
       ignore_ft_on_setup = {
         "startify",
         "dashboard",
@@ -2539,11 +2548,11 @@ end
 --- DAP {{{
 local status_ok, dap = pcall(require, "dap")
 if status_ok then
-  dap.defaults.fallback.force_external_terminal = true
-  dap.defaults.fallback.external_terminal = {
-    command = '/usr/bin/kitty';
-    args = {''};
-  }
+  -- dap.defaults.fallback.force_external_terminal = true
+  -- dap.defaults.fallback.external_terminal = {
+  --   command = '/usr/bin/kitty';
+  --   args = {''};
+  -- }
 end
 --- }}}
 --- DAP UI {{{
@@ -2565,9 +2574,10 @@ if status_ok then
         -- You can change the order of elements in the sidebar
         elements = {
           -- Provide as ID strings or tables with "id" and "size" keys
-          { id = "scopes", size = 0.55, }, -- Can be float or integer > 1
-          { id = "stacks", size = 0.20 },
-          { id = "repl", size = 0.15 },
+          { id = "scopes", size = 0.40, }, -- Can be float or integer > 1
+          { id = "stacks", size = 0.25 },
+          -- { id = "console", size = 0.15, },
+          { id = "repl", size = 0.25 },
           { id = "breakpoints", size = 0.10 },
           -- { id = "watches", size = 0.25 },
         },

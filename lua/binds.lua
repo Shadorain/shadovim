@@ -149,6 +149,11 @@ map('n', '<leader>7', '<cmd>Tabbot go 7<cr>', { noremap = true, silent = true })
 map('n', '<leader>8', '<cmd>Tabbot go 8<cr>', { noremap = true, silent = true })
 map('n', '<leader>9', '<cmd>Tabbot go 9<cr>', { noremap = true, silent = true })
 --- }}}
+-- Debugging
+map('n', '<F11>', '<cmd>lua require("dap").step_into()<CR>', { noremap = true, silent = true })
+map('n', '<F10>', '<cmd>lua require("dap").step_over()<CR>', { noremap = true, silent = true })
+map('n', '<F9>',  '<cmd>lua require("dap").step_out()<CR>',  { noremap = true, silent = true })
+--- }}}
 --- }}}
 --- Which Key {{{
 --- Opts {{{
@@ -343,8 +348,10 @@ local n_mappings = {
       l     = { '<cmd>lua require("dap").run_last()<CR>',            "Run Last"    },
       q     = { '<cmd>lua require("dap").terminate()<CR>',           "Terminate"   },
       u     = { '<cmd>lua require("dapui").toggle()<CR>',            "UI"          },
-      K     = { '<cmd>lua require("dap.ui.variables").hover()<CR>',  "Var Hover"   },
-      ["{"] = { '<cmd>lua require("dap.ui.variables").scopes()<CR>', "Var Scopes"  },
+      f     = { '<cmd>lua require("dapui").float_element()<CR>',     "Float"       },
+      p     = { '<cmd>lua require("dap.ui.widgets").preview()<CR>',  "Preview"     },
+      K     = { '<cmd>lua require("dap.ui.widgets").hover()<CR>',    "Hover"       },
+      -- ["{"] = { '<cmd>lua require("dap.ui.variables").scopes()<CR>',   "Scopes" },
       s = {
         name = "+step",
         i = { '<cmd>lua require("dap").step_into()<CR>',             "Into" },
