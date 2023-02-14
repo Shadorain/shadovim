@@ -25,6 +25,9 @@ cmd('au FileType norg set softtabstop=2')
 cmd('au FileType lua set shiftwidth=2')
 cmd('au FileType lua set tabstop=2')
 cmd('au FileType lua set softtabstop=2')
+cmd('au FileType cpp set shiftwidth=4')
+cmd('au FileType cpp set tabstop=4')
+cmd('au FileType cpp set softtabstop=4')
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 vim.opt.autoindent = true
@@ -632,8 +635,13 @@ if status_ok then
       null_ls.builtins.completion.luasnip,
       null_ls.builtins.completion.tags,
       null_ls.builtins.diagnostics.checkmake,
-      null_ls.builtins.diagnostics.cppcheck,
+      -- null_ls.builtins.diagnostics.cppcheck,
+      null_ls.builtins.diagnostics.clang_check,
+      -- null_ls.builtins.diagnostics.cpplint,
+
       -- null_ls.builtins.diagnostics.luacheck,
+      null_ls.builtins.formatting.uncrustify,
+      null_ls.builtins.formatting.clang_format,
       null_ls.builtins.formatting.cmake_format,
       null_ls.builtins.formatting.rustfmt,
     },

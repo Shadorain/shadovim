@@ -76,6 +76,9 @@ local on_attach = function(client, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   attach_navic(client, bufnr)
+  vim.opt.shiftwidth = 4
+  vim.opt.tabstop = 4
+  vim.opt.softtabstop = 4
 
   local l_mappings = {
     ["{"]  = { '<cmd>AerialPrev<cr>', "Prev Func" },

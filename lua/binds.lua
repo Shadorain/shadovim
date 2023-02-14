@@ -279,6 +279,7 @@ local n_mappings = {
     --- <b> Buffer {{{
     b = {
       name = "+buffer",
+      f     = { '<cmd>set shiftwidth=4 | set tabstop=4 | set softtabstop=4<CR>',  "Fix Buffer Indents" },
       l     = { '<cmd>ls<CR>',  "List"   },
       b     = { '<cmd>bn<CR>',  "Next"   },
       n     = { '<cmd>bp<CR>',  "Prev"   },
