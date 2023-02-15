@@ -115,10 +115,10 @@ local on_attach = function(client, bufnr)
         T = { '<cmd>ClangdSwitchSourceHeader<CR>',      "Clang Toggle Source/Header" },
         t = { '<cmd>ClangdTypeHierarchy<CR>',           "Clang Type Hierarchy" },
         s = { '<cmd>ClangdSymbolInfo<CR>',              "Clang Symbol Info" },
-        b = { '<cmd>Task start cmake build<CR>',        "CMake Build" },
-        r = { '<cmd>Task start cmake run<CR>',          "CMake Run" },
-        C = { '<cmd>Task start cmake configure<CR>',    "CMake Configure" },
-        S = { '<cmd>Task set_module_param cmake target<CR>', "CMake Set Target" },
+        b = { '<cmd>Task start auto build<CR>',         "Task Build" },
+        r = { '<cmd>Task start auto run<CR>',           "Task Run" },
+        C = { '<cmd>Task start auto configure<CR>',     "Task Configure" },
+        S = { '<cmd>Task set_module_param auto target<CR>', "Task Set Target" },
       },
       w = {
         a = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',                       "Add Workspace" },
@@ -305,6 +305,7 @@ local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 local rs_opts = {
   tools = {
     on_initialized = function()
+
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
         pattern = { "*.rs" },
         callback = function()
