@@ -79,6 +79,7 @@ local on_attach = function(client, bufnr)
   vim.opt.shiftwidth = 4
   vim.opt.tabstop = 4
   vim.opt.softtabstop = 4
+  vim.cmd[[let g:rustfmt_autosave = 1]]
 
   local l_mappings = {
     ["{"]  = { '<cmd>AerialPrev<cr>', "Prev Func" },
