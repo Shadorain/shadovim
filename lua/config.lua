@@ -1713,8 +1713,8 @@ function M.neorg()
   neorg.setup {
     load = {
       ["core.defaults"] = {}, -- Load all the defaults
-      ["core.norg.concealer"] = {}, -- Allows the use of icons
-      ["core.norg.manoeuvre"] = {},
+      ["core.concealer"] = {}, -- Allows the use of icons
+      ["core.manoeuvre"] = {},
       ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
       ["core.gtd.base"] = {
 	      config = {
@@ -1723,13 +1723,13 @@ function M.neorg()
 	      }
       },
       ["core.integrations.treesitter"] = {},
-      ["core.norg.journal"] = {
+      ["core.journal"] = {
         config = {
           journal_folder = "dev/neorg/journal",
           use_template = true,
         }
       },
-      ["core.norg.dirman"] = { -- Manage Neorg directories
+      ["core.dirman"] = { -- Manage Neorg directories
 	      config = {
 	        workspaces = {
 		        main     = "~/dev/neorg",
@@ -1741,7 +1741,7 @@ function M.neorg()
 	      }
       },
       ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
-      ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
+      ["core.completion"] = { config = { engine = "nvim-cmp", } },
       ["core.integrations.telescope"] = {},
       ["external.kanban"] = {
         config = {
@@ -1957,10 +1957,12 @@ if status_ok then
       -- disable_netrw = true,
       -- hijack_netrw = true,
       -- open_on_setup = false,
-      ignore_ft_on_setup = {
-        "startify",
-        "dashboard",
-        "alpha",
+      update_focused_file = {
+        ignore_list = {
+          "startify",
+          "dashboard",
+          "alpha",
+        }
       },
       filters = {
         custom = { ".git" },
@@ -2326,9 +2328,9 @@ end
 local status_ok, transparent = pcall(require, "transparent")
 if status_ok then
   transparent.setup({
-    enable = true,
+    -- enable = true,
     extra_groups = {},
-    exclude = {},
+    exclude_groups = {},
   })
 end
 --- }}}

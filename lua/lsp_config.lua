@@ -360,6 +360,11 @@ local rs_opts = {
       ["rust-analyzer"] = {
         lens = { enable = true },
         checkOnSave = { command = "clippy" },
+        diagnostics = {
+          enabled = true,
+          disabled = { "unresolved-proc-macro" },
+          enableExperimental = true,
+        }
       },
     },
   },

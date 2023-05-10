@@ -160,7 +160,7 @@ return require('packer').startup(function(use)
   use { 'saecki/crates.nvim' }       --- cargo crates!
   use { 'p00f/clangd_extensions.nvim' } --- C++
   use { 'Shatur/neovim-tasks' } --- CMake/Cargo
-  use { 'nvim-neorg/neorg', tag = "ab065a4c53a7877f6b046d27d8a17f81912c0d6b",
+  use { 'nvim-neorg/neorg', -- tag = "ab065a4c53a7877f6b046d27d8a17f81912c0d6b",
     -- config = function()
     --   require("neorg").setup(require("config").norg)
     -- end,
