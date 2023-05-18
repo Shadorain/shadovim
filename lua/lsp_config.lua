@@ -450,6 +450,36 @@ vim.cmd [[
 ]]
 
 local nvim_lsp = require('lspconfig')
+local util = require('lspconfig/util')
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
+
+require('go').setup({
+  lsp_cfg = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+      gopls = {
+        completeUnimported = true,
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+        },
+      },
+    },
+  }
+})
+
 local servers = { 'taplo' } -- 'clangd',
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {

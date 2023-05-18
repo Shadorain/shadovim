@@ -50,7 +50,14 @@ return require('packer').startup(function(use)
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
   use { 'LudoPinelli/comment-box.nvim' }
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+  use { 'leoluz/nvim-dap-go', ft = "go", dependencies = "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      require("dap-go").setup(opts)
+    end
+  }
   use { 'ravenxrz/DAPInstall.nvim' }
+  use { 'ray-x/go.nvim' }
+  use { 'ray-x/guihua.lua' }
   use { 'ahmedkhalf/project.nvim' }
   use { 'nacro90/numb.nvim' }
   use { 'rcarriga/nvim-notify' }

@@ -501,7 +501,7 @@ if status_ok then
     },
   }
   require('nvim-treesitter.configs').setup {
-    ensure_installed = { "c", "cpp", "rust", "bash", "comment", "norg", "norg_meta", "norg_table" }, --, "lua"
+    ensure_installed = { "c", "cpp", "rust", "bash", "comment", "norg", "norg_meta", "norg_table", "go" }, --, "lua"
     rainbow = {
 	    enable = true,
 	    extended_mode = true,
@@ -644,6 +644,10 @@ if status_ok then
       null_ls.builtins.formatting.clang_format,
       null_ls.builtins.formatting.cmake_format,
       null_ls.builtins.formatting.rustfmt,
+
+      null_ls.builtins.formatting.gofumpt,
+      null_ls.builtins.formatting.goimports_reviser,
+      null_ls.builtins.formatting.golines,
     },
     update_in_insert = false,
   }
