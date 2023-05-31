@@ -33,9 +33,9 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false,
 })
 -- }}}
-vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
--- vim.diagnostic.config({virtual_lines = { only_current_line = true }})
-vim.diagnostic.config({virtual_text = false })
+-- vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
+vim.diagnostic.config({virtual_lines = { only_current_line = true }})
+-- vim.diagnostic.config({virtual_text = false })
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -75,11 +75,19 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
+  -- if client.server_capabilities.documentFormattingProvider then
+  --   vim.api.nvim_create_autocmd("BufWritePre", {
+  --     group = vim.api.nvim_create_augroup("Format", { clear = true }),
+  --     buffer = bufnr,
+  --     callback = function() vim.lsp.buf.formatting_seq_sync() end
+  --   })
+  -- end
+
   attach_navic(client, bufnr)
   vim.opt.shiftwidth = 4
   vim.opt.tabstop = 4
   vim.opt.softtabstop = 4
-  vim.cmd[[let g:rustfmt_autosave = 1]]
+  -- vim.cmd[[let g:rustfmt_autosave = 1]]
 
   local l_mappings = {
     ["{"]  = { '<cmd>AerialPrev<cr>', "Prev Func" },
@@ -442,12 +450,46 @@ require("clangd_extensions").setup {
   },
 }
 vim.cmd [[
-  command ClangdToggleInlayHints lua require('clangd_extensions.inlay_hints').toggle_inlay_hints()
-  command -range ClangdAST lua require('clangd_extensions.ast').display_ast(<line1>, <line2>)
-  command ClangdTypeHierarchy lua require('clangd_extensions.type_hierarchy').show_hierarchy()
-  command ClangdSymbolInfo lua require('clangd_extensions.symbol_info').show_symbol_info()
-  command -nargs=? -complete=customlist,s:memuse_compl ClangdMemoryUsage lua require('clangd_extensions.memory_usage').show_memory_usage('<args>' == 'expand_preamble')
+command! ClangdToggleInlayHints lua require('clangd_extensions.inlay_hints').toggle_inlay_hints()
+command! -range ClangdAST lua require('clangd_extensions.ast').display_ast(<line1>, <line2>)
+command! ClangdTypeHierarchy lua require('clangd_extensions.type_hierarchy').show_hierarchy()
+command! ClangdSymbolInfo lua require('clangd_extensions.symbol_info').show_symbol_info()
+command! -nargs=? -complete=customlist,s:memuse_compl ClangdMemoryUsage lua require('clangd_extensions.memory_usage').show_memory_usage('<args>' == 'expand_preamble')
 ]]
+
+-- local ls = require("luasnip")
+-- vim.keymap.set({ "i", "s" }, "<C-k>", function()
+-- 	if ls.expand_or_jumpable() then
+-- 		ls.expand_or_jump()
+-- 	end
+-- end, { silent = true })
+--
+-- vim.keymap.set({ "i", "s" }, "<C-j>", function()
+-- 	if ls.jumpable(-1) then
+-- 		ls.jump(-1)
+-- 	end
+-- end, { silent = true })
+--
+-- vim.keymap.set("i", "<C-l>", function()
+-- 	if ls.choice_active() then
+-- 		ls.change_choice(1)
+-- 	end
+-- end)
+--
+-- vim.cmd[[
+--   " press <Tab> to expand or jump in a snippet. These can also be mapped separately
+--   " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+--   imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+--   " -1 for jumping backwards.
+--   inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+--
+--   snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+--   snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+--
+--   " For changing choices in choiceNodes (not strictly necessary for a basic setup).
+--   imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+--   smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+-- ]]
 
 local nvim_lsp = require('lspconfig')
 local util = require('lspconfig/util')
@@ -456,7 +498,7 @@ local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
-   require('go.format').goimport()
+    require('go.format').goimport()
   end,
   group = format_sync_grp,
 })
@@ -470,15 +512,30 @@ require('go').setup({
     root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
       gopls = {
+        experimentalPostfixCompletions = true,
         completeUnimported = true,
         usePlaceholders = true,
+        staticcheck = true,
         analyses = {
           unusedparams = true,
+          shadow = true,
         },
       },
     },
-  }
+    init_options = {
+      usePlaceholders = true,
+    }
+  },
+  luasnip = false,
 })
+
+nvim_lsp.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  cmd = { "typescript-language-server", "--stdio" }
+}
+nvim_lsp.tailwindcss.setup {}
 
 local servers = { 'taplo' } -- 'clangd',
 for _, lsp in ipairs(servers) do

@@ -158,6 +158,7 @@ return require('packer').startup(function(use)
 	use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
 	use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
 	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+  use { 'windwp/nvim-ts-autotag' }
     --- }}}
   --- [[ Languages ]]
   use { 'sheerun/vim-polyglot' }     --- *
@@ -167,20 +168,21 @@ return require('packer').startup(function(use)
   use { 'saecki/crates.nvim' }       --- cargo crates!
   use { 'p00f/clangd_extensions.nvim' } --- C++
   use { 'Shatur/neovim-tasks' } --- CMake/Cargo
-  use { 'nvim-neorg/neorg', -- tag = "ab065a4c53a7877f6b046d27d8a17f81912c0d6b",
-    -- config = function()
-    --   require("neorg").setup(require("config").norg)
-    -- end,
-    -- run = ":Neorg sync-parsers",
-    -- ft = "norg",
-    -- after = "nvim-treesitter",
-    requires = {"nvim-neorg/neorg-telescope", "max397574/neorg-kanban", "max397574/neorg-contexts"},
-  }
+  use { 'MunifTanjim/prettier.nvim' }
+  -- use { 'nvim-neorg/neorg', -- tag = "ab065a4c53a7877f6b046d27d8a17f81912c0d6b",
+  --   -- config = function()
+  --   --   require("neorg").setup(require("config").norg)
+  --   -- end,
+  --   -- run = ":Neorg sync-parsers",
+  --   -- ft = "norg",
+  --   -- after = "nvim-treesitter",
+  --   requires = {"nvim-neorg/neorg-telescope", "max397574/neorg-kanban", "max397574/neorg-contexts"},
+  -- }
 
   -- [[ Make it pretty ]]
   use { 'kyazdani42/nvim-web-devicons' }      --- icons
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
-  use { 'nvim-colortils/colortils.nvim' }     --- Colorpicker!
+  -- use { 'nvim-colortils/colortils.nvim' }     --- Colorpicker!
   use { 'xiyaowong/nvim-transparent' }        --- transparency
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
   -- use { 'lukas-reineke/indent-blankline.nvim' }

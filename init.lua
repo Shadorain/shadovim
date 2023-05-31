@@ -26,6 +26,9 @@ require('plugins')
 require('config')
 require('binds')
 require('lsp_config')
+require('snippets/all')
+require('snippets/go')
+
 
 vim.opt.shadafile = ""
 vim.opt.termguicolors = true

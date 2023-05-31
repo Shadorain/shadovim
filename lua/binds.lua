@@ -112,8 +112,8 @@ map("n", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.Hint
 map("n", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
 --- }}}
 --- Cybu {{{
-map('n', '<C-j>', '<Plug>(CybuNext)', { noremap = true, silent = true })
-map('n', '<C-k>', '<Plug>(CybuPrev)', { noremap = true, silent = true })
+-- map('n', '<C-j>', '<Plug>(CybuNext)', { noremap = true, silent = true })
+-- map('n', '<C-k>', '<Plug>(CybuPrev)', { noremap = true, silent = true })
 map('n', '<C-S-j>', '<Plug>(CybuLastusedNext)', { noremap = true, silent = true })
 map('n', '<C-S-k>', '<Plug>(CybuLastusedPrev)', { noremap = true, silent = true })
 --- }}}
