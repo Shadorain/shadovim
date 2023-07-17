@@ -40,6 +40,7 @@ map('n', '<C-q>', ':source ~/.config/nvim/init.lua<CR>')
 
 -- Save
 map('n', '<C-s>', ':w<CR>')
+map('n', '<C-S-s>', ':noautocmd w<CR>')
 --- }}}
 --- Splits {{{
 map('n', '<leader>h', '<C-w>h', { noremap = true, silent = true })
