@@ -2084,9 +2084,9 @@ if status_ok then
     vim.keymap.set('n', '<C-x>', api.node.run.system, opts('Run System'))
   end
 
-  local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-  if config_status_ok then
-    local tree_cb = nvim_tree_config.nvim_tree_callback
+  -- local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  -- if config_status_ok then
+  --   local tree_cb = nvim_tree_config.nvim_tree_callback
 
     vim.api.nvim_create_autocmd('BufEnter', {
       command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
@@ -2228,7 +2228,7 @@ if status_ok then
         relativenumber = false,
       },
     }
-  end
+  -- end
 end
 --- }}}
 --- }}}
