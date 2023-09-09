@@ -2378,9 +2378,18 @@ if status_ok then
 	  },
 	  mode_colors = {
 	    i = "#4654b3",
+	    ic = "#4654b3",
+	    s = "#4654b3",
+	    S = "#4654b3",
 	    n = "#e95680",
 	    c = "#bd93f9",
+	    t = "#bd93f9",
 	    v = "#6546e0",
+	    V = "#6546e0",
+      [''] = "#6546e0",
+      ['!'] = "#6546e0",
+      r = "#db3567",
+      R = "#db3567",
 	  },
 	  defaults = {
 	    true_colors = true,
