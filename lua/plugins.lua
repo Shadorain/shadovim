@@ -131,7 +131,8 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-nvim-lsp' }
   -- use { 'github/copilot.vim' }
   use { 'zbirenbaum/copilot.lua',
-    after = 'lualine.nvim',
+    -- after = 'lualine.nvim',
+    -- after = 'statline.nvim',
     config = function()
       vim.defer_fn(function()
         require('copilot').setup {
@@ -184,12 +185,15 @@ return require('packer').startup(function(use)
   use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
   -- use { 'nvim-colortils/colortils.nvim' }     --- Colorpicker!
   use { 'xiyaowong/nvim-transparent' }        --- transparency
-  use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+  -- use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+  use { 'tamton-aquib/staline.nvim' }
+  use { 'tamton-aquib/stuff.nvim' }
+  use { 'willothy/flatten.nvim' }
   -- use { 'lukas-reineke/indent-blankline.nvim' }
   use { 'RRethy/vim-illuminate' }
   use { 'stevearc/dressing.nvim' }
   use { 'ghillb/cybu.nvim' }
-  use { 'samodostal/image.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  -- use { 'samodostal/image.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'levouh/tint.nvim' }
   -- use { 'lukas-reineke/headlines.nvim' }
 

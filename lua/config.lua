@@ -40,7 +40,7 @@ vim.opt.relativenumber = true
 --- }}}
 --- Misc {{{
 vim.opt.path = '$PWD/**'
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 0
 vim.opt.showmode = false
 vim.opt.conceallevel = 2
 vim.opt.listchars = 'space:·'
@@ -405,11 +405,11 @@ if status_ok then
           width = 80,
           height = 20,
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	        winhighlight = 'FloatBorder:TelescopeBorder',
+	      winhighlight = 'FloatBorder:TelescopeBorder',
         },
         completion = {
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	        winhighlight = 'FloatBorder:VertSplit',
+	      winhighlight = 'FloatBorder:VertSplit',
         },
       },
       sources = {
@@ -520,14 +520,14 @@ if status_ok then
     ensure_installed = { "c", "cpp", "rust", "bash", "comment", "go", "tsx", "toml", "json", "yaml", "css", "html" }, --, "lua", "norg", "norg_meta", "norg_table"
     autotag = { enable = true },
     rainbow = {
-	    enable = true,
-	    extended_mode = true,
-	    max_file_lines = 1000,
-	    colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },
+	  enable = true,
+	  extended_mode = true,
+	  max_file_lines = 1000,
+	  colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },
     },
     highlight = { enable = true },
     incremental_selection = {
-	    enable = true,
+	  enable = true,
       keymaps = {
         init_selection = "gnn",
         node_incremental = "gnn",
@@ -565,7 +565,7 @@ if status_ok then
     --       ["p"] = "@parameter.inner",
     --     },
     --   },
-	  --  move = {
+	--  move = {
     --     enable = true,
     --     set_jumps = true, -- Whether to set jumps in the jumplist
     --     goto_next_start = {
@@ -640,11 +640,11 @@ if status_ok then
   local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
   local lsp_formatting = function(bufnr)
     vim.lsp.buf.format({
-        filter = function(client)
-            -- apply whatever logic you want (in this example, we'll only use null-ls)
-            return client.name == "null-ls"
-        end,
-        bufnr = bufnr,
+      filter = function(client)
+        -- apply whatever logic you want (in this example, we'll only use null-ls)
+        return client.name == "null-ls"
+      end,
+      bufnr = bufnr,
     })
   end
 
@@ -762,36 +762,36 @@ end
 --- }}}
 --- Renamer {{{
 vim.api.nvim_set_keymap(
-	"i",
-	"<F2>",
-	'<cmd>lua require("renamer").rename({empty = true})<cr>',
-	{ noremap = true, silent = true }
+  "i",
+  "<F2>",
+  '<cmd>lua require("renamer").rename({empty = true})<cr>',
+  { noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap(
-	"n",
-	"<F2>",
-	'<cmd>lua require("renamer").rename({empty = true})<cr>',
-	{ noremap = true, silent = true }
+  "n",
+  "<F2>",
+  '<cmd>lua require("renamer").rename({empty = true})<cr>',
+  { noremap = true, silent = true }
 )
 local mappings_utils = require("renamer.mappings.utils")
 require('renamer').setup({
-	title = "Rename",
-	padding = { top = 0, left = 0, bottom = 0, right = 0 },
-	border = true,
-	border_chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-	-- Whether or not to highlight the current word references through LSP
-	show_refs = true,
-	-- The keymaps available while in the `renamer` buffer. The example below
-	-- overrides the default values, but you can add others as well.
-	mappings = {
-		["<c-i>"] = mappings_utils.set_cursor_to_start,
-		["<c-a>"] = mappings_utils.set_cursor_to_end,
-		["<c-e>"] = mappings_utils.set_cursor_to_word_end,
-		["<c-b>"] = mappings_utils.set_cursor_to_word_start,
-		["<c-c>"] = mappings_utils.clear_line,
-		["<c-u>"] = mappings_utils.undo,
-		["<c-r>"] = mappings_utils.redo,
-	},
+  title = "Rename",
+  padding = { top = 0, left = 0, bottom = 0, right = 0 },
+  border = true,
+  border_chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  -- Whether or not to highlight the current word references through LSP
+  show_refs = true,
+  -- The keymaps available while in the `renamer` buffer. The example below
+  -- overrides the default values, but you can add others as well.
+  mappings = {
+	["<c-i>"] = mappings_utils.set_cursor_to_start,
+	["<c-a>"] = mappings_utils.set_cursor_to_end,
+	["<c-e>"] = mappings_utils.set_cursor_to_word_end,
+	["<c-b>"] = mappings_utils.set_cursor_to_word_start,
+	["<c-c>"] = mappings_utils.clear_line,
+	["<c-u>"] = mappings_utils.undo,
+	["<c-r>"] = mappings_utils.redo,
+  },
 })
 --- }}}
 --- Aerial {{{
@@ -915,6 +915,12 @@ if status_ok then
       filetypes = { "TelescopePrompt" },
     },
   }
+end
+--- }}}
+--- Flatten {{{
+local status_ok, flatten = pcall(require, "flatten")
+if status_ok then
+  flatten.setup()
 end
 --- }}}
 --- Hop {{{
@@ -1530,7 +1536,7 @@ if status_ok then
   }
 
   vim.cmd([[
-autocmd FileType alpha setlocal nofoldenable
+  autocmd FileType alpha setlocal nofoldenable
 ]])
 
   alpha.setup(opts)
@@ -1586,7 +1592,7 @@ if status_ok then
       default_prompt = "❱ ", -- Default prompt string
       prompt_align = "left", -- Can be 'left', 'right', or 'center'
       insert_only = true, -- When true, <Esc> will close the modal
-      anchor = "SW", -- These are passed to nvim_open_win
+      -- anchor = "SW", -- These are passed to nvim_open_win
       border = "single",
       relative = "cursor", -- 'editor' and 'win' will default to being centered
 
@@ -1643,7 +1649,7 @@ if status_ok then
 
       -- Options for built-in selector
       builtin = {
-        anchor = "NW", -- These are passed to nvim_open_win
+        -- anchor = "NW", -- These are passed to nvim_open_win
         border = "rounded",
         relative = "editor", -- 'editor' and 'win' will default to being centered
 
@@ -1680,13 +1686,13 @@ local status_ok, zen = pcall(require, "zen-mode")
 if status_ok then
   zen.setup({
     window = {
-	    backdrop = 0.9,
-	    height = 1, -- height of the Zen window
-	    width = 1,
-	    options = {
-	      signcolumn = "yes", -- disable signcolumn
-	      number = true, -- disable number column
-	      relativenumber = true, -- disable relative numbers
+	  backdrop = 0.9,
+	  height = 1, -- height of the Zen window
+	  width = 1,
+	  options = {
+	    signcolumn = "yes", -- disable signcolumn
+	    number = true, -- disable number column
+	    relativenumber = true, -- disable relative numbers
       },
     },
     plugins = {
@@ -1789,10 +1795,10 @@ function M.neorg()
       ["core.manoeuvre"] = {},
       ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
       ["core.gtd.base"] = {
-	      config = {
-	        workspace = "gtd",
-	        exclude = { "archive.norg", },
-	      }
+	    config = {
+	      workspace = "gtd",
+	      exclude = { "archive.norg", },
+	    }
       },
       ["core.integrations.treesitter"] = {},
       ["core.journal"] = {
@@ -1802,15 +1808,15 @@ function M.neorg()
         }
       },
       ["core.dirman"] = { -- Manage Neorg directories
-	      config = {
-	        workspaces = {
-		        main     = "~/dev/neorg",
-		        gtd      = "~/dev/neorg/gtd",
-	        },
-	        default_workspace = main,
-	        autochdir = true,
-	        index = "index.norg",
-	      }
+	    config = {
+	      workspaces = {
+		    main     = "~/dev/neorg",
+		    gtd      = "~/dev/neorg/gtd",
+	      },
+	      default_workspace = main,
+	      autochdir = true,
+	      index = "index.norg",
+	    }
       },
       ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
       ["core.completion"] = { config = { engine = "nvim-cmp", } },
@@ -2361,6 +2367,31 @@ if status_ok then
   }
 end
 --- }}}
+--- Staline {{{
+local status_ok, staline = pcall(require, "staline")
+if status_ok then
+  staline.setup {
+	  sections = {
+	    left = { '  ', 'mode', ' ', 'branch' },
+	    mid = { 'file_name' },
+	    right = { 'lsp', ' ',  'line_column' }
+	  },
+	  mode_colors = {
+	    i = "#4654b3",
+	    n = "#e95680",
+	    c = "#bd93f9",
+	    v = "#6546e0",
+	  },
+	  defaults = {
+	    true_colors = true,
+	    line_column = "並%l:%L ",
+	    branch_symbol = " ",
+	    inactive_color = "#6c6fB0",
+	    font_active = "bold"
+	  }
+  }
+end
+--- }}}
 --- Lualine {{{
 local status_ok, lualine = pcall(require, "lualine")
 if status_ok then
@@ -2619,7 +2650,7 @@ end
 local status_ok, mini_indent = pcall(require, "mini.indentscope")
 if status_ok then
   mini_indent.setup({
-	  symbol = "│",
+	symbol = "│",
   })
 end
 
@@ -2632,7 +2663,7 @@ local status_ok, mini_cursorword = pcall(require, "mini.cursorword")
 if status_ok then
   vim.cmd[[ hi MiniCursorword gui=bold ]]
   mini_cursorword.setup({
-	  delay = 100,
+	delay = 100,
   })
 end
 
@@ -2649,11 +2680,11 @@ if status_ok then
     symbols = {
       encode = mini_map.gen_encode_symbols.dot('4x2'),
     },
-	  integrations = {
-		  mini_map.gen_integration.builtin_search(),
-		  -- mini_map.gen_integration.gitsigns(),
-		  diagnostic_integration,
-	  },
+	integrations = {
+	  mini_map.gen_integration.builtin_search(),
+	  -- mini_map.gen_integration.gitsigns(),
+	  diagnostic_integration,
+	},
   })
 end
 -- }}}

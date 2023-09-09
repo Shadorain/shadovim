@@ -366,7 +366,10 @@ local n_mappings = {
       name = "+misc",
       t     = { '<cmd>lua MiniTrailspace.trim()<CR>', "Trim Trailspace" },
       m     = { '<cmd>lua MiniMap.toggle()<CR>',      "Minimap" },
-      r     = { '<cmd>lua MiniMap.refresh()<CR>',     "Refresh Minimap" },
+      R     = { '<cmd>lua MiniMap.refresh()<CR>',     "Refresh Minimap" },
+      r     = { '<cmd>lua require("rain").rain()<CR>', "Rain" },
+      s     = { '<cmd>lua require("scratch").toggle()<CR>', "Scratch" },
+      c     = { '<cmd>lua require("calc").toggle()<CR>', "Calculator" },
     },
     --- }}}
     --- <o> Neorg {{{

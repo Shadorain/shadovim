@@ -33,8 +33,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false,
 })
 -- }}}
--- vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
-vim.diagnostic.config({virtual_lines = { only_current_line = true }})
+vim.cmd ('autocmd CursorHold * lua vim.diagnostic.open_float({border="single", focusable=false, max_width = 60})')
+-- vim.diagnostic.config({virtual_lines = { only_current_line = true }})
 -- vim.diagnostic.config({virtual_text = false })
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -522,9 +522,9 @@ require('go').setup({
         },
       },
     },
-    init_options = {
-      usePlaceholders = true,
-    }
+    -- init_options = {
+    --   usePlaceholders = true,
+    -- }
   },
   luasnip = false,
 })
