@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
   -- [[ Custom ]]
   use { 'Shadorain/shadotheme', after = "nvim-treesitter" }
 
-  -- [[ Speed up ]]
+  -- [[ Speed up ]] DEPRECATED
   use { 'lewis6991/impatient.nvim', opt = true, config = function() require('impatient') end }
 
   -- [[ Utility ]]
@@ -156,9 +156,9 @@ return require('packer').startup(function(use)
   --- [[ Treesitter ]] {{{
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
   use { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' }
-	use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
-	use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
-	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
+  use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
+  use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
   use { 'windwp/nvim-ts-autotag' }
     --- }}}
   --- [[ Languages ]]

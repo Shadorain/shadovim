@@ -354,7 +354,8 @@ if status_ok then
       },
 
       mapping = cmp.mapping.preset.insert {
-        ["<C-j>"]     = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
+        ["<C-k>"]     = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
+        ["<C-j>"]     = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
         ["<C-n>"]     = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
         ["<C-d>"]     = cmp.mapping.scroll_docs(-4),
         ["<C-u>"]     = cmp.mapping.scroll_docs(4),
@@ -399,17 +400,23 @@ if status_ok then
         end, { "i", "s", }),
       },
       window = {
+        -- documentation = cmp.config.window.bordered(),
+        -- completion = cmp.config.window.bordered(),
         documentation = {
           max_height = 30,
           max_width = 100,
-          width = 80,
+          width = 40,
           height = 20,
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	      winhighlight = 'FloatBorder:TelescopeBorder',
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          winhighlight = 'FloatBorder:TelescopeBorder',
         },
         completion = {
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	      winhighlight = 'FloatBorder:VertSplit',
+          max_height = 20,
+          max_width = 80,
+          width = 15,
+          height = 70,
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+	  winhighlight = 'FloatBorder:VertSplit',
         },
       },
       sources = {
@@ -530,9 +537,9 @@ if status_ok then
 	  enable = true,
       keymaps = {
         init_selection = "gnn",
-        node_incremental = "gnn",
+        node_incremental = "gni",
         scope_incremental = "gns",
-        node_decremental = "gnp",
+        node_decremental = "gnd",
       },
     },
     indent = { enable = true },
@@ -2211,7 +2218,7 @@ if status_ok then
       view = {
         width = 30,
         -- height = 30,
-        hide_root_folder = false,
+        --hide_root_folder = false,
         side = "left",
         -- auto_resize = true,
         -- mappings = {
