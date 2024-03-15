@@ -1,55 +1,25 @@
---[[ ========================================================================
-"  .__       .__  __     .__
-"  |__| ____ |__|/  |_   |  |  __ _______
-"  |  |/    \|  \   __\  |  | |  |  \__  \
-"  |  |   |  \  ||  |    |  |_|  |  // __ \_
-"  |__|___|  /__||__| /\ |____/____/(____  /
-"          \/         \/                 \/
-" =========================================================================== ]]
--- [[ Startup ]] ------------------------------------------------------------ ]]
---- Speed up {{{
---> [[[ Credits to Vhyrro for these tips here ]]] <--
-vim.opt.termguicolors = true
-vim.g.loaded_gzip = false
-vim.g.loaded_matchit = false
-vim.g.loaded_netrwPlugin = false
-vim.g.loaded_tarPlugin = false
-vim.g.loaded_zipPlugin = false
-vim.g.loaded_man = false
-vim.g.loaded_2html_plugin = false
-vim.g.loaded_remote_plugins = false
-vim.g.loaded_perl_provider = false
-vim.g.loaded_ruby_provider = false
---- }}}
---- Sourcing {{{
-require('plugins')
-require('config')
-require('binds')
-require('lsp_config')
-require('snippets/all')
-require('snippets/go')
+-- NOTE: Author : Nguyen Thanh Son - SownteeNguyen
+-- NOTE: Github : @sownteedev
 
+------------------------------- WELCOME TO TEVIM -------------------------------
+-- WARNING: THIS IS A PERSONAL CONFIGURATION NOT A DISTRO, YOU CAN USE DEFAULT CONFIGURATION OR CUSTOMIZE IT
 
-vim.opt.shadafile = ""
-vim.opt.termguicolors = true
+require("tevim.core")
 
-vim.cmd [[
-	rshada!
-	doautocmd BufRead
-	filetype on
-	filetype plugin indent on
-	syntax enable
-]]
-
-vim.defer_fn(function()
-	vim.cmd [[
-		set t_ut=
-		silent! bufdo e
-		PackerLoad impatient.nvim
-		PackerLoad nvim-treesitter
-		lua require'colorizer'.setup()
-		colorscheme shado
-	]]
-end, 15)
---- }}}
--- [[ ----------------------------------------------------------------------- ]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.cmd("TeVimCreateCustom")
+	require("tevim.themes").load()
+	vim.cmd("redraw")
+	vim.api.nvim_echo({ { "Hi there, welcome to TEVIM 󱠡 ", "Bold" } }, true, {})
+	local repo = "https://github.com/folke/lazy.nvim.git"
+	local output = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath })
+	assert(vim.v.shell_error == 0, "External call failed with error code: " .. vim.v.shell_error .. "\n" .. output)
+	vim.opt.rtp:prepend(lazypath)
+	require("tevim.plugins")
+	vim.cmd("TeVimCheckMason")
+	vim.cmd("redraw")
+	vim.api.nvim_echo({ { "Wait for everything install. Reopen Neovim then ENJOY!", "Bold" } }, true, {})
+end
+vim.opt.rtp:prepend(lazypath)
+require("tevim.plugins")
