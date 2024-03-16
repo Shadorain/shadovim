@@ -5,8 +5,8 @@ vim.g.loadTeDash = true -- Loads Dashboard
 
 -- Options
 local options = {
-  -- Tab Configuration
-  smartindent = true,
+	-- Tab Configuration
+	smartindent = true,
 	smarttab = true,
 	autoindent = true,
 	copyindent = true,
@@ -42,15 +42,19 @@ local options = {
 	-- Cursor
 	cursorline = true,
 	cursorlineopt = "number",
-  
+
 	-- Miscellaneous
 	path = "$PWD/**",
-  sessionoptions = "tabpages,globals,blank,buffers,curdir,folds,help,winsize,winpos,terminal",
-  conceallevel = 2,
-  listchars = 'space:·',
-  virtualedit = "block",
-  mousefocus = true,
-  inccommand = "split",
+	sessionoptions = "tabpages,globals,blank,buffers,curdir,folds,help,winsize,winpos,terminal",
+	conceallevel = 2,
+	listchars = "space:·",
+	virtualedit = "block",
+	mousefocus = true,
+	inccommand = "split",
+
+	textwidth = 0,
+	wrapmargin = 0,
+	wrap = false,
 }
 
 for k, v in pairs(options) do
