@@ -68,12 +68,20 @@ return {
 	TeSTTFileName = { fg = colors.red, bg = utils.blend(colors.red, colors.background, 0.1), bold = true },
 	TeSTTFolder = { fg = colors.red, bg = utils.blend(colors.red, colors.background, 0.1), italic = true },
 
-	TeSTTNothing = { bg = utils.blend(colors.foreground, colors.background, 0.015) },
+	TeSTTNothing = { bg = utils.blend(colors.foreground, colors.background, 0.03) },
 	TeSTTNothing2 = { bg = colors.background },
 
 	TeSTTLsp = { fg = colors.green, bg = utils.blend(colors.green, colors.background, 0.1) },
 	TeSTTLspIcon = { fg = colors.background, bg = colors.green },
 	TeSTTCopilot = {
+		fg = utils.mix(colors.foreground, colors.blue, 0.7),
+		bg = utils.blend(colors.green, colors.background, 0.1),
+	},
+	TeSTTCodeium = {
+		fg = utils.mix(colors.foreground, colors.blue, 0.7),
+		bg = utils.blend(colors.green, colors.background, 0.1),
+	},
+	TeSTTTabnine = {
 		fg = utils.mix(colors.foreground, colors.blue, 0.7),
 		bg = utils.blend(colors.green, colors.background, 0.1),
 	},

@@ -310,6 +310,9 @@ if check then
 	local custom_plugins = require("custom.plugins")
 	if #custom_plugins > 0 then
 		for _, plugin in ipairs(custom_plugins) do
+			-- local plugin_name = string.sub(plugin[1], -(string.len(plugin[1]) - string.find(plugin[1], "/")))
+			-- print(string.gsub(plugin_name, "nvim-", ""))
+			-- print(plugin_name)
 			table.insert(plugins, plugin)
 		end
 	end

@@ -139,6 +139,15 @@ return {
 		version = "*",
 		opts = { case_insensitive = false },
 	},
+	{
+		"ghillb/cybu.nvim",
+		opts = {
+			position = {
+				anchor = "topright",
+			},
+			display_time = 1750,
+		},
+	},
 
 	-- Session Management
 	{

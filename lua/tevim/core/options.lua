@@ -38,8 +38,10 @@ local globals = {
 	TeVimTheme = "yoru",
 	themeCache = vim.fn.stdpath("data") .. "/colors_data/",
 	transparency = false,
-	snipmate_snippets_path = "",
 	loadTeDash = true,
+	loadTeBufLine = true,
+	loadTeStatusLine = true,
+	loadTeVimTheme = true,
 }
 
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
