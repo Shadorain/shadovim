@@ -17,6 +17,7 @@ return {
 	-- Completion
 	{
 		"github/copilot.vim",
+		event = "InsertEnter",
 	},
 	{
 		"Exafunction/codeium.nvim",
@@ -51,21 +52,20 @@ return {
 		config = true,
 	},
 	{
-		"Shatur/neovim-tasks",
+		"stevearc/overseer.nvim",
+		cmd = { "OverseerToggle", "OverseerRun", "OverseerBuild" },
 		opts = {
-			params_file = ".neovim.json", -- JSON file to store module and task parameters.
-			quickfix = {
-				pos = "botright", -- Default quickfix position.
-				height = 15, -- Default height.
-			},
+			dap = false, -- Manually set once dap is loaded
 		},
 	},
 
 	-- Debugging
 	{
 		"rcarriga/nvim-dap-ui",
-		requires = {
-			"mfussenegger/nvim-dap",
+		dependencies = {
+			{
+				"mfussenegger/nvim-dap",
+			},
 		},
 		config = function()
 			require("custom.configs.dapui")
@@ -79,7 +79,6 @@ return {
 	{
 		"tomasky/bookmarks.nvim",
 		after = "telescope.nvim",
-		event = "VimEnter",
 		config = function()
 			require("bookmarks").setup()
 			require("telescope").load_extension("bookmarks")
@@ -87,6 +86,7 @@ return {
 	},
 	{
 		"LudoPinelli/comment-box.nvim",
+		cmd = { "CBccbox", "CBllline", "CBline", "CBllbox14", "CBd" },
 		config = true,
 	},
 	{
@@ -98,32 +98,36 @@ return {
 	},
 	{
 		"danymat/neogen",
+		cmd = { "Neogen" },
 		config = true,
 	},
 
 	-- Movement
 	{
 		"nacro90/numb.nvim",
+		event = "BufWinEnter",
 		config = true,
 	},
 	{
 		"matbme/JABS.nvim",
+		cmd = { "JABSOpen" },
 		config = function()
 			require("custom.configs.jabs")
 		end,
 	},
 	{
 		"nat-418/bufala.nvim",
-		opts = {
-			layout = "stack",
-		},
+		event = "BufWinEnter",
+		opts = { layout = "stack" },
 	},
 	{
 		"nat-418/tabbot.nvim",
+		event = "BufWinEnter",
 		config = true,
 	},
 	{
 		"ThePrimeagen/harpoon",
+		event = "BufWinEnter",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
@@ -132,27 +136,48 @@ return {
 	},
 	{
 		"gbprod/stay-in-place.nvim",
+		event = "BufWinEnter",
 		config = true,
 	},
 	{
-		"smoka7/hop.nvim",
-		version = "*",
-		opts = { case_insensitive = false },
+		"phaazon/hop.nvim",
+		keys = { "f", "F", "t", "T", "s", "S" },
+		branch = "v2",
+		opts = { keys = "etovxqpdygfblzhckisuran", case_insensitive = false },
 	},
 	{
 		"ghillb/cybu.nvim",
+		cmd = { "CybuNext", "CybuPrev", "CybuLastusedNext", "CybuLastusedPrev" },
 		opts = {
 			position = {
 				anchor = "topright",
 			},
+			behavior = {
+				mode = { last_used = { switch = "immediate" }, auto = { view = "paging" } },
+			},
 			display_time = 1750,
 		},
+	},
+	{
+		"declancm/cinnamon.nvim",
+		event = "BufWinEnter",
+		opts = { extra_keymaps = true, extended_keymaps = true },
 	},
 
 	-- Session Management
 	{
-		"tiagovla/scope.nvim",
-		config = true,
+		"stevearc/resession.nvim",
+		lazy = false,
+		config = function()
+			require("custom.configs.resession")
+		end,
+		dependencies = {
+			{
+				"tiagovla/scope.nvim",
+				lazy = false,
+				config = true,
+			},
+		},
 	},
 
 	-- Images
@@ -163,6 +188,7 @@ return {
 	},
 	{
 		"ekickx/clipboard-image.nvim",
+		ft = { "norg", "md" },
 		config = function()
 			require("custom.configs.clipboard-image")
 		end,
@@ -171,6 +197,7 @@ return {
 	-- Git
 	{
 		"pwntester/octo.nvim",
+		cmd = { "Octo" },
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -180,13 +207,7 @@ return {
 	},
 	{
 		"kdheepak/lazygit.nvim",
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
+		cmd = { "LazyGit", "LazyGitConfig", "LazyGitCurrentFile", "LazyGitFilter", "LazyGitFilterCurrentFile" },
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
@@ -199,12 +220,14 @@ return {
 	-- Productivity Tools
 	{
 		"folke/zen-mode.nvim",
+		cmd = { "ZenMode" },
 		config = function()
 			require("custom.configs.zen-mode")
 		end,
 	},
 	{
 		"stevearc/aerial.nvim",
+		cmd = { "AerialToggle", "AerialNavToggle", "AerialCloseAll", "A" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons",
@@ -218,18 +241,44 @@ return {
 		},
 	},
 	{
+		"SmiteshP/nvim-navbuddy",
+		cmd = { "Navbuddy" },
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim",
+		},
+		opts = { lsp = { auto_attach = true } },
+	},
+	{
 		"jbyuki/venn.nvim",
+		cmd = { "ToggleVenn" },
 		config = function()
 			require("custom.configs.venn")
 		end,
 	},
 
+	-- Theme
+	{
+		"Shadorain/shadotheme",
+		lazy = false,
+		config = function()
+			vim.cmd.colorscheme("shado")
+		end,
+	},
+	{
+		"xiyaowong/nvim-transparent",
+		event = "VimEnter",
+		config = true,
+	},
+
 	-- Utilities
 	{
 		"LunarVim/peek.lua",
+		keys = { { "gp", ":lua require('peek').Peek('definition')<CR>", mode = { "n", "x", "o" }, desc = "Peek" } },
 	},
 	{
 		"echasnovski/mini.nvim",
+		event = "BufWinEnter",
 		config = function()
 			require("custom.configs.mini")
 		end,
@@ -237,14 +286,22 @@ return {
 	{
 		"willothy/flatten.nvim",
 		config = true,
-		lazy = false, -- Ensure that it runs first to minimize delay when opening file from terminal
+		lazy = false,
 		priority = 1001,
 	},
 	{
 		"jghauser/mkdir.nvim",
+		event = "BufWritePre",
 		config = function()
 			require("mkdir")
 		end,
-		event = "BufWritePre",
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		lazy = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("custom.configs.lualine")
+		end,
 	},
 }

@@ -94,42 +94,42 @@ function M.build_run()
 	end
 end
 
-function M.LazyGit()
-	local status_ok, _ = pcall(require, "toggleterm")
-	if not status_ok then
-		return vim.notify("toggleterm.nvim isn't installed!")
-	end
-	if vim.fn.executable("lazygit") == 0 then
-		return vim.notify("lazygit isn't installed")
-	end
-	local lazygit = require("toggleterm.terminal").Terminal:new({
-		cmd = "lazygit",
-		dir = "git_dir",
-		direction = "float",
-		on_open = function(term)
-			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-		end,
-	})
-	lazygit:toggle()
-end
-
-function M.Ranger()
-	local status_ok, _ = pcall(require, "toggleterm")
-	if not status_ok then
-		return vim.notify("toggleterm.nvim isn't installed!")
-	end
-	if vim.fn.executable("ranger") == 0 then
-		return vim.notify("ranger isn't installed")
-	end
-	local ranger = require("toggleterm.terminal").Terminal:new({
-		cmd = "ranger",
-		direction = "float",
-		on_open = function(term)
-			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-		end,
-	})
-	ranger:toggle()
-end
+-- function M.LazyGit()
+-- 	local status_ok, _ = pcall(require, "toggleterm")
+-- 	if not status_ok then
+-- 		return vim.notify("toggleterm.nvim isn't installed!")
+-- 	end
+-- 	if vim.fn.executable("lazygit") == 0 then
+-- 		return vim.notify("lazygit isn't installed")
+-- 	end
+-- 	local lazygit = require("toggleterm.terminal").Terminal:new({
+-- 		cmd = "lazygit",
+-- 		dir = "git_dir",
+-- 		direction = "float",
+-- 		on_open = function(term)
+-- 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+-- 		end,
+-- 	})
+-- 	lazygit:toggle()
+-- end
+--
+-- function M.Ranger()
+-- 	local status_ok, _ = pcall(require, "toggleterm")
+-- 	if not status_ok then
+-- 		return vim.notify("toggleterm.nvim isn't installed!")
+-- 	end
+-- 	if vim.fn.executable("ranger") == 0 then
+-- 		return vim.notify("ranger isn't installed")
+-- 	end
+-- 	local ranger = require("toggleterm.terminal").Terminal:new({
+-- 		cmd = "ranger",
+-- 		direction = "float",
+-- 		on_open = function(term)
+-- 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+-- 		end,
+-- 	})
+-- 	ranger:toggle()
+-- end
 
 M.checkMason = function()
 	local status_ok, _ = pcall(require, "mason")

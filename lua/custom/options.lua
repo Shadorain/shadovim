@@ -1,7 +1,9 @@
 -- Globals
-vim.g.TeVimTheme = "yoru"
-vim.g.transparency = true
+vim.g.transparency = false
+vim.g.loadTeVimTheme = false
 vim.g.loadTeDash = true -- Loads Dashboard
+vim.g.loadTeStatusLine = false
+vim.g.loadTeBufLine = false
 
 -- Options
 local options = {
@@ -20,7 +22,7 @@ local options = {
 	-- foldmethod = 'marker',
 
 	-- Status line
-	laststatus = 2,
+	laststatus = 3, -- Set to 2 to have bar per window
 
 	-- Undo
 	undofile = true,
@@ -45,16 +47,21 @@ local options = {
 
 	-- Miscellaneous
 	path = "$PWD/**",
+	cmdheight = 0,
 	sessionoptions = "tabpages,globals,blank,buffers,curdir,folds,help,winsize,winpos,terminal",
 	conceallevel = 2,
 	listchars = "space:·",
 	virtualedit = "block",
 	mousefocus = true,
 	inccommand = "split",
+	showtabline = 0,
 
 	textwidth = 0,
 	wrapmargin = 0,
 	wrap = false,
+
+	clipboard = "",
+	shortmess = vim.o.shortmess .. "F",
 }
 
 for k, v in pairs(options) do

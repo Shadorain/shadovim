@@ -12,6 +12,8 @@ local bookmarks = {
 		["pulls_search"] = "https://github.com/search?q=%s&type=pullrequests",
 	},
 }
+
+local browse = require("browse")
 command("BrowseInput", function()
 	browse.input_search()
 end, {})

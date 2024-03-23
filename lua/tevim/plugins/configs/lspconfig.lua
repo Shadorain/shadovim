@@ -4,26 +4,39 @@ local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 M.on_attach = function(client, bufnr)
-	if client.supports_method("textDocument/inlayHint") then
-		local value
-		local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-		if type(ih) == "function" then
-			ih(bufnr, value)
-		elseif type(ih) == "table" and ih.enable then
-			if value == nil then
-				value = not ih.is_enabled(bufnr)
-			end
-			ih.enable(bufnr, value)
+	-- Enable completion triggered by <c-x><c-o>
+	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+	-- Mappings.
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+	-- vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<space>ca", function()
+		if vim.bo[bufnr].filetype == "rust" then
+			vim.cmd.RustLsp("codeAction")
+		else
+			vim.lsp.buf.code_action()
 		end
+	end, bufopts)
+	vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.inlay_hint.enable(bufnr)
 	end
+
 	require("lsp_signature").on_attach({
 		bind = true,
 		handler_opts = { border = "rounded" },
 	}, bufnr)
 end
 
-M.capabilities =
-	vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), cmp_nvim_lsp.default_capabilities())
+M.capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), cmp_nvim_lsp.default_capabilities())
 
 M.capabilities.offsetEncoding = { "utf-16", "utf-8" }
 

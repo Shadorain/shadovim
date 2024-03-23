@@ -84,14 +84,14 @@ local plugins = {
 	},
 	{
 		"folke/which-key.nvim",
-		keys = { "<leader>", " ", "'", "`" },
+		keys = { "<leader>", " ", "'", "`", '"', "m", "g" },
 		cmd = "WhichKey",
 		opts = function()
 			return require("tevim.plugins.configs.whichkey")
 		end,
 		config = function(_, opts)
 			require("which-key").setup(opts.setup)
-			require("which-key").register(opts.mappings, opts.opts)
+			require("tevim.core.keymaps").whichkeys()
 		end,
 	},
 	{
@@ -182,11 +182,27 @@ local plugins = {
 				{ desc = "Toggle Terminal" },
 			},
 		},
-		version = "*",
+		version = "nightly",
 		opts = {
+			autochdir = true,
 			shading_factor = 0.2,
-			highlights = { NormalFloat = { link = "NormalFloat" } },
-			float_opts = { border = "none" },
+			highlights = { NormalFloat = { link = "NormalFloat" }, FloatBorder = { link = "FloatBorder" } },
+			float_opts = {
+				border = "single",
+				width = function()
+					return math.ceil(vim.o.columns * 0.6)
+				end,
+				height = function()
+					return math.ceil(vim.o.lines * 0.5)
+				end,
+				winblend = 25,
+			},
+			winbar = {
+				enabled = false,
+				name_formatter = function(term) --  term: Terminal
+					return term.name
+				end,
+			},
 		},
 	},
 	{
@@ -272,10 +288,7 @@ local plugins = {
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
 		dependencies = {
-			{
-				"nvimdev/lspsaga.nvim",
-				opts = { symbol_in_winbar = { show_file = false } },
-			},
+			"utilyre/barbecue.nvim",
 			{
 				"williamboman/mason.nvim",
 				cmd = { "Mason", "MasonInstall", "MasonUpdate" },
@@ -296,11 +309,23 @@ local plugins = {
 		"stevearc/conform.nvim",
 		event = "BufWritePre",
 		config = function()
-			require("custom.configs.conform")
+			require("tevim.plugins.configs.conform")
 		end,
 	},
 	{
 		"rCarriga/nvim-notify",
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		lazy = false,
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+		},
+		config = function()
+			require("tevim.plugins.configs.barbecue")
+		end,
 	},
 }
 
@@ -311,8 +336,16 @@ if check then
 	if #custom_plugins > 0 then
 		for _, plugin in ipairs(custom_plugins) do
 			-- local plugin_name = string.sub(plugin[1], -(string.len(plugin[1]) - string.find(plugin[1], "/")))
-			-- print(string.gsub(plugin_name, "nvim-", ""))
-			-- print(plugin_name)
+			-- print(
+			-- 	(
+			-- 		plugin_name
+			-- 			:gsub("nvim%-", "", 1)
+			-- 			:gsub("%.nvim", "", 1)
+			-- 			:gsub("%.vim", "", 1)
+			-- 			:gsub("%.lua", "", 1)
+			-- 			:gsub("neovim%-", "", 1)
+			-- 	)
+			-- )
 			table.insert(plugins, plugin)
 		end
 	end
