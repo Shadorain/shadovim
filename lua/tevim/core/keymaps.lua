@@ -97,21 +97,25 @@ M.whichkeys = function()
 		},
 		f = {
 			name = "  TELESCOPE",
-			c = { "<cmd>TeVimThemes<cr>", "TeVim Themes" },
 			f = { "<cmd>Telescope find_files<cr>", "Find File" },
 			r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
 			w = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-			m = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+			k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 			M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 			R = { "<cmd>Telescope registers<cr>", "Registers" },
 			j = { "<cmd>Telescope commands<cr>", "Commands" },
 			h = { "<cmd>Telescope help_tags<cr>", "Highlights" },
 			H = { "<cmd>Telescope highlights<cr>", "Highlights" },
+
+			n = { "<cmd>Telescope noice<cr>", "Noice Messages" },
+			u = { "<cmd>Telescope undo<cr>", "Undo" },
+			m = { "<cmd>Telescope macroscope<cr>", "Macros" },
+			y = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
 			t = { "<cmd>TodoTelescope<cr>", "Todo" },
 		},
 		g = {
 			name = "󰊢  GIT",
-			l = { "<cmd>LazyGit<cr>", "Lazygit" },
+			g = { "<cmd>LazyGit<cr>", "Lazygit" },
 			j = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
 			k = { "<cmd>Gitsigns prev_hunk<cr>", "Prev Hunk" },
 			r = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
@@ -143,9 +147,24 @@ M.whichkeys = function()
 		},
 		s = {
 			name = "  SESSION",
-			s = { "<cmd>lua require('resession').save<cr>", "Save" },
-			l = { "<cmd>lua require('resession').load<cr>", "Load" },
-			d = { "<cmd>lua require('resession').delete<cr>", "Delete" },
+			s = {
+				function()
+					require("resession").save()
+				end,
+				"Save",
+			},
+			l = {
+				function()
+					require("resession").load()
+				end,
+				"Load",
+			},
+			d = {
+				function()
+					require("resession").delete()
+				end,
+				"Delete",
+			},
 		},
 		["<leader>"] = {
 			name = "󰢚  TeVim",
@@ -229,6 +248,7 @@ map("n", "<TAB>", ":CybuLastusedNext<cr>", opts, { desc = "Cybu goto last next b
 map("n", "<S-TAB>", ":CybuLastusedPrev<cr>", opts, { desc = "Cybu goto last prev buffer" })
 map("n", "<c-i>", "<c-i>", opts)
 map("n", "<leader><cr>", "<cmd>Bufala split<cr>", opts, { desc = "Stack split" })
+map("n", "<leader>J", ":JABSOpen<CR>", opts, { desc = "Open JABS" })
 
 -- Tabs
 --- Switch Tab

@@ -31,11 +31,11 @@ return {
 			i = {
 				["<C-j>"] = require("telescope.actions").move_selection_next,
 				["<C-k>"] = require("telescope.actions").move_selection_previous,
-				["<C-q>"] = require("telescope.actions").smart_send_to_qflist
-					+ require("telescope.actions").open_qflist,
+				["<C-q>"] = require("telescope.actions").smart_send_to_qflist + require("telescope.actions").open_qflist,
 				["<esc>"] = require("telescope.actions").close,
 				["<CR>"] = require("telescope.actions").select_default + require("telescope.actions").center,
 			},
 		},
 	},
+	extensions = { undo = { side_by_side = true, layout_strategy = "vertical", layout_config = { preview_height = 0.8 } } },
 }

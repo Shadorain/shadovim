@@ -72,7 +72,14 @@ return {
 		end,
 	},
 	{
-		"ravenxrz/DAPInstall.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = "mason.nvim",
+		cmd = { "DapInstall", "DapUninstall" },
+		opts = {
+			automatic_installation = true,
+			handlers = {},
+			ensure_installed = {},
+		},
 	},
 
 	-- Commenting/Bookmarks
@@ -161,7 +168,7 @@ return {
 	{
 		"declancm/cinnamon.nvim",
 		event = "BufWinEnter",
-		opts = { extra_keymaps = true, extended_keymaps = true },
+		opts = { extra_keymaps = true, extended_keymaps = true, max_length = 100 },
 	},
 
 	-- Session Management
@@ -303,5 +310,9 @@ return {
 		config = function()
 			require("custom.configs.lualine")
 		end,
+	},
+	{
+		"tummetott/unimpaired.nvim",
+		config = true,
 	},
 }

@@ -1,8 +1,8 @@
 return {
 	setup = {
 		key_labels = {
-			["<space>"] = "SPACE",
-			["<leader>"] = "SPACE",
+			["<space>"] = "SPC",
+			["<leader>"] = "SPC",
 			["<cr>"] = "RET",
 			["<tab>"] = "TAB",
 		},
@@ -17,8 +17,11 @@ return {
 			spacing = 15,
 			align = "center",
 		},
+		window = {
+			border = "none",
+			winblend = 15,
+		},
 		ignore_missing = true,
 		show_help = true,
-		triggers = { "<leader>", "'", "g", "m", '"' },
 	},
 }

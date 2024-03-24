@@ -24,6 +24,27 @@ local plugins = {
 		deactivate = function()
 			vim.cmd([[Neotree close]])
 		end,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"3rd/image.nvim",
+			{
+				"s1n7ax/nvim-window-picker",
+				event = "VeryLazy",
+				version = "2.*",
+				opts = {
+					hint = "floating-big-letter",
+					selection_chars = "ABCFJDKSL;CMRUEIWOQP",
+					filter_rules = {
+						include_current_win = false,
+						autoselect_one = true,
+						bo = { -- filter using buffer options
+							filetype = { "neo-tree", "neo-tree-popup", "notify", "JABSwindow" },
+							buftype = { "terminal", "quickfix" },
+						},
+					},
+				},
+			},
+		},
 		init = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
 			if vim.fn.argc(-1) == 1 then
@@ -105,9 +126,7 @@ local plugins = {
 		},
 		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
 		config = function()
-			require("Comment").setup({
-				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-			})
+			require("Comment").setup({ pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook() })
 		end,
 	},
 	{
@@ -132,8 +151,30 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		dependencies = {
+			"debugloop/telescope-undo.nvim",
+		},
 		opts = function()
 			return require("tevim.plugins.configs.telescope")
+		end,
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			require("telescope").load_extension("undo")
+		end,
+	},
+	{
+		"AckslD/nvim-neoclip.lua",
+		event = "VeryLazy",
+		dependencies = {
+			{ "kkharji/sqlite.lua", module = "sqlite" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		opts = {
+			enable_macro_history = true,
+		},
+		config = function(_, opts)
+			require("neoclip").setup(opts)
+			require("telescope").load_extension("neoclip")
 		end,
 	},
 	{
@@ -158,7 +199,7 @@ local plugins = {
 			})
 		end,
 		opts = function()
-			return require("tevim.plugins.configs.gitsign")
+			return require("tevim.plugins.configs.gitsigns")
 		end,
 	},
 	{
@@ -198,7 +239,7 @@ local plugins = {
 				winblend = 25,
 			},
 			winbar = {
-				enabled = false,
+				enabled = true,
 				name_formatter = function(term) --  term: Terminal
 					return term.name
 				end,
@@ -226,7 +267,7 @@ local plugins = {
 						ft_ignore = { "neo-tree", "Outline" },
 						segments = {
 							{ sign = { namespace = { "diagnostic*" } } },
-							{ sign = { namespace = { "gitsign" } }, click = "v:lua.ScSa" },
+							{ sign = { namespace = { "gitsigns" } }, click = "v:lua.ScSa" },
 							{ text = { builtin.lnumfunc, "  " }, click = "v:lua.ScLa" },
 							{ text = { builtin.foldfunc, "  " }, click = "v:lua.ScFa" },
 						},
@@ -241,6 +282,10 @@ local plugins = {
 			vim.o.foldenable = true
 		end,
 		config = function()
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+			vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+			vim.keymap.set("n", "zm", require("ufo").closeFoldsWith)
 			require("ufo").setup({
 				provider_selector = function()
 					return { "treesitter", "indent" }
@@ -258,6 +303,7 @@ local plugins = {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
+			-- "hrsh7th/cmp-cmdline",
 			"saadparwaiz1/cmp_luasnip",
 			"delphinus/cmp-ctags",
 			"onsails/lspkind.nvim",
@@ -313,9 +359,6 @@ local plugins = {
 		end,
 	},
 	{
-		"rCarriga/nvim-notify",
-	},
-	{
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
 		lazy = false,
@@ -326,6 +369,23 @@ local plugins = {
 		config = function()
 			require("tevim.plugins.configs.barbecue")
 		end,
+	},
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			{
+				"j-hui/fidget.nvim",
+				opts = {},
+			},
+		},
+		config = function()
+			require("tevim.plugins.configs.noice")
+		end,
+	},
+	{
+		"mbbill/undotree",
 	},
 }
 
