@@ -1,7 +1,7 @@
 -- Globals
 vim.g.transparency = false
 vim.g.loadTeVimTheme = false
-vim.g.loadTeDash = true -- Loads Dashboard
+vim.g.loadTeDash = false -- Loads Dashboard
 vim.g.loadTeStatusLine = false
 vim.g.loadTeBufLine = false
 

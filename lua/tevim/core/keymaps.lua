@@ -54,6 +54,7 @@ M.whichkeys = function()
 	}
 
 	local n_mappings = {
+		-- A = { "<cmd>Alpha<CR>" },
 		b = {
 			name = "  BUFFERS",
 			l = { "<cmd>ls<CR>", "List" },
@@ -95,27 +96,31 @@ M.whichkeys = function()
 			e = { "<C-w>=", "Make Splits Equal" },
 			q = { "<cmd>close<CR>", "Close Split" },
 		},
-		f = {
+		t = {
 			name = "  TELESCOPE",
-			f = { "<cmd>Telescope find_files<cr>", "Find File" },
-			r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+			r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
 			w = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 			k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 			M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 			R = { "<cmd>Telescope registers<cr>", "Registers" },
-			j = { "<cmd>Telescope commands<cr>", "Commands" },
-			h = { "<cmd>Telescope help_tags<cr>", "Highlights" },
+			c = { "<cmd>Telescope commands<cr>", "Commands" },
+			j = { "<cmd>Telescope jumplist<cr>", "Jumplist" },
+			h = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
 			H = { "<cmd>Telescope highlights<cr>", "Highlights" },
+			p = { "<cmd>Telescope projects<cr>", "Projects" },
 
 			n = { "<cmd>Telescope noice<cr>", "Noice Messages" },
 			u = { "<cmd>Telescope undo<cr>", "Undo" },
 			m = { "<cmd>Telescope macroscope<cr>", "Macros" },
 			y = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
+			o = { "<cmd>Telescope harpoon marks<cr>", "Harpoon" },
 			t = { "<cmd>TodoTelescope<cr>", "Todo" },
 		},
 		g = {
 			name = "󰊢  GIT",
 			g = { "<cmd>LazyGit<cr>", "Lazygit" },
+			G = { "<cmd>LazyGitConfig<cr>", "Lazygit Config" },
 			j = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
 			k = { "<cmd>Gitsigns prev_hunk<cr>", "Prev Hunk" },
 			r = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
@@ -123,6 +128,7 @@ M.whichkeys = function()
 			s = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
 			S = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
 			b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
+			B = { "<cmd>Gitsigns blame_line{full=true}<cr>", "Blame Line Full" },
 			o = { "<cmd>Telescope git_status<cr>", "Open Changed File" },
 			c = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
 			m = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
@@ -144,6 +150,49 @@ M.whichkeys = function()
 
 			i = { "<cmd>TSInstallInfo<cr>", "Treesitter Info" },
 			u = { "<cmd>TSUpdate<cr>", "Treesitter Update" },
+		},
+		f = {
+			name = "  FILES",
+			e = { "<cmd>Neotree toggle<CR>", "Neo-Tree" },
+			r = { "<cmd>Telescope oldfiles<CR>", "Recent" },
+			f = { "<cmd>Telescope find_files<cr>", "Find" },
+		},
+		n = {
+			name = "  NEOGEN",
+			n = { "<cmd>Neogen<CR>", "Any" },
+			f = { "<cmd>Neogen func<CR>", "Function" },
+			t = { "<cmd>Neogen type<CR>", "Type" },
+			c = { "<cmd>Neogen class<CR>", "Class" },
+			l = { "<cmd>Neogen file<CR>", "File" },
+		},
+		d = {
+			name = "  DEBUG",
+			b = { '<cmd>lua require("dap").toggle_breakpoint()<CR>', "Breakpoint" },
+			c = { '<cmd>lua require("dap").continue()<CR>', "Continue" },
+			j = { '<cmd>lua require("dap").down()<CR>', "Down STrace" },
+			k = { '<cmd>lua require("dap").up()<CR>', "Up STrace" },
+			l = { '<cmd>lua require("dap").run_last()<CR>', "Run Last" },
+			q = { '<cmd>lua require("dap").terminate()<CR>', "Terminate" },
+			u = { '<cmd>lua require("dapui").toggle()<CR>', "UI" },
+			f = { '<cmd>lua require("dapui").float_element()<CR>', "Float" },
+			p = { '<cmd>lua require("dap.ui.widgets").preview()<CR>', "Preview" },
+			K = { '<cmd>lua require("dap.ui.widgets").hover()<CR>', "Hover" },
+			-- ["{"] = { '<cmd>lua require("dap.ui.variables").scopes()<CR>',   "Scopes" },
+			s = {
+				name = " STEP",
+				i = { '<cmd>lua require("dap").step_into()<CR>', "Into" },
+				o = { '<cmd>lua require("dap").step_over()<CR>', "Over" },
+				x = { '<cmd>lua require("dap").step_out()<CR>', "Out" },
+			},
+		},
+		m = {
+			name = "  MISC",
+			t = { "<cmd>lua MiniTrailspace.trim()<CR>", "Trim Trailspace" },
+			m = { "<cmd>lua MiniMap.toggle()<CR>", "Minimap" },
+			R = { "<cmd>lua MiniMap.refresh()<CR>", "Refresh Minimap" },
+			r = { '<cmd>lua require("rain").rain()<CR>', "Rain" },
+			s = { '<cmd>lua require("scratch").toggle()<CR>', "Scratch" },
+			c = { '<cmd>lua require("calc").toggle()<CR>', "Calculator" },
 		},
 		s = {
 			name = "  SESSION",
@@ -274,5 +323,7 @@ map("n", "<F9>", '<cmd>lua require("dap").step_out()<CR>', opts, { desc = "Debug
 
 -- Miscellaneous
 map("n", "<F3>", ":set invnumber invrelativenumber<CR>", opts, { desc = "Toggle Line Numbers" })
+map("n", "<leader>A", ":Alpha<CR>", opts, { desc = "Open Alpha" })
+map("n", "<leader>V", ":ToggleVenn<CR>", opts, { desc = "Toggle Venn Mode" })
 
 return M

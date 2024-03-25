@@ -186,6 +186,18 @@ return {
 			},
 		},
 	},
+	{
+		"ahmedkhalf/project.nvim",
+		event = "VeryLazy",
+		opts = {
+			detection_methods = { "lsp", "pattern" },
+			patterns = { ".git", "Cargo.toml", ".hg", ".bzr", ".svn", "Makefile" },
+		},
+		config = function(_, opts)
+			require("project_nvim").setup(opts)
+			require("telescope").load_extension("projects")
+		end,
+	},
 
 	-- Images
 	{
@@ -276,6 +288,17 @@ return {
 		"xiyaowong/nvim-transparent",
 		event = "VimEnter",
 		config = true,
+	},
+	{
+		"goolord/alpha-nvim",
+		event = "VimEnter",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"nvvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("custom.configs.alpha")
+		end,
 	},
 
 	-- Utilities
