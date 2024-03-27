@@ -294,7 +294,7 @@ return {
 		event = "VimEnter",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			"nvvim-lua/plenary.nvim",
+			"nvim-lua/plenary.nvim",
 		},
 		config = function()
 			require("custom.configs.alpha")
