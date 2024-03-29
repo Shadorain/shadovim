@@ -334,6 +334,7 @@ local plugins = {
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
 		dependencies = {
+			"folke/which-key.nvim",
 			"utilyre/barbecue.nvim",
 			{
 				"williamboman/mason.nvim",

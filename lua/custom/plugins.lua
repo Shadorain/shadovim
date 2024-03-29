@@ -256,6 +256,8 @@ return {
 				-- Jump forwards/backwards with '{' and '}'
 				vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
 				vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				vim.keymap.set("n", "[[", "<cmd>AerialPrevUp<CR>", { buffer = bufnr })
+				vim.keymap.set("n", "]]", "<cmd>AerialNextUp<CR>", { buffer = bufnr })
 			end,
 		},
 	},
@@ -274,6 +276,19 @@ return {
 		config = function()
 			require("custom.configs.venn")
 		end,
+	},
+	{
+		"epwalsh/pomo.nvim",
+		version = "*",
+		lazy = true,
+		cmd = { "TimerStart", "TimerRepeat" },
+		dependencies = {
+			-- "rcarriga/nvim-notify",
+			"j-hui/fidget.nvim",
+		},
+		opts = {
+			notifiers = { { name = "Default", opts = { sticky = false } } },
+		},
 	},
 
 	-- Theme

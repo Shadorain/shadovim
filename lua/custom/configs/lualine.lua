@@ -1,6 +1,20 @@
 local lualine = require("lualine")
 local shadoline = require("custom.themes.lualine.shadoline")
 
+local pomo = function()
+	local ok, pomo = pcall(require, "pomo")
+	if not ok then
+		return ""
+	end
+
+	local timer = pomo.get_first_to_finish()
+	if timer == nil then
+		return ""
+	end
+
+	return "󰄉 " .. tostring(timer)
+end
+
 local lazy = require("lazy")
 local sections = {
 	lualine_a = { "mode" },
@@ -23,6 +37,7 @@ local sections = {
 			update_in_insert = false,
 			always_visible = false,
 		},
+		pomo,
 	},
 	lualine_y = {
 		{

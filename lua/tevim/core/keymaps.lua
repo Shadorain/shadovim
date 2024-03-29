@@ -81,6 +81,19 @@ M.whichkeys = function()
 			S = { "<cmd>Lazy show<cr>", "Status" },
 			u = { "<cmd>Lazy update<cr>", "Update" },
 		},
+		P = {
+			name = "  POMO",
+			["1"] = { "<cmd>TimerStart 1m<cr>", "1m" },
+			["5"] = { "<cmd>TimerStart 5m<cr>", "5m" },
+			H = { "<cmd>TimerStart 30m<cr>", "30m" },
+			h = { "<cmd>TimerStart 1h<cr>", "1h" },
+			s = { "<cmd>TimerStart ", "Start" },
+			r = { "<cmd>TimerRepeat<cr>", "Repeat" },
+			R = { "<cmd>TimerResume<cr>", "Resume" },
+			p = { "<cmd>TimerPause<cr>", "Pause" },
+			v = { "<cmd>TimerShow<cr>", "Show" },
+			S = { "<cmd>TimerStop<cr>", "Stop" },
+		},
 		o = {
 			name = "  OPTIONS",
 			o = { "<cmd>Ranger<cr>", "Ranger" },
@@ -153,7 +166,7 @@ M.whichkeys = function()
 		},
 		f = {
 			name = "  FILES",
-			e = { "<cmd>Neotree toggle<CR>", "Neo-Tree" },
+			e = { ":Neotree toggle<CR>", "Neo-Tree" },
 			r = { "<cmd>Telescope oldfiles<CR>", "Recent" },
 			f = { "<cmd>Telescope find_files<cr>", "Find" },
 		},
