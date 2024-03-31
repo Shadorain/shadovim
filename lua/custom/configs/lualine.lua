@@ -77,7 +77,7 @@ local neotree_ext = {
 				return "FILES"
 			end,
 		},
-		lualine_y = {
+		lualine_b = {
 			function()
 				return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
 			end,
@@ -85,6 +85,31 @@ local neotree_ext = {
 	},
 	filetypes = { "neo-tree" },
 }
+
+local function is_loclist()
+	return vim.fn.getloclist(0, { filewinid = 1 }).filewinid ~= 0
+end
+vim.g.qf_disable_statusline = true
+local quickfix_ext = {
+	sections = {
+		lualine_a = {
+			function()
+				return is_loclist() and "Location List" or "Quickfix List"
+			end,
+		},
+		lualine_b = {
+			function()
+				if is_loclist() then
+					return vim.fn.getloclist(0, { title = 0 }).title
+				end
+				return vim.fn.getqflist({ title = 0 }).title
+			end,
+		},
+		lualine_z = { "location" },
+	},
+	filetypes = { "qf" },
+}
+
 local blank_ext = {
 	sections = {},
 	filetypes = { "toggleterm" },
@@ -107,5 +132,5 @@ lualine.setup({
 	},
 	tabline = {},
 	winbar = {},
-	extensions = { lazy_ext, neotree_ext, blank_ext },
+	extensions = { lazy_ext, neotree_ext, blank_ext, quickfix_ext },
 })

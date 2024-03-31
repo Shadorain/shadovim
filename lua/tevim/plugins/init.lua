@@ -112,7 +112,7 @@ local plugins = {
 		end,
 		config = function(_, opts)
 			require("which-key").setup(opts.setup)
-			require("tevim.core.keymaps").whichkeys()
+			require("custom.keymaps").whichkeys()
 		end,
 	},
 	{
@@ -223,7 +223,7 @@ local plugins = {
 				{ desc = "Toggle Terminal" },
 			},
 		},
-		version = "nightly",
+		-- version = "nightly",
 		opts = {
 			autochdir = true,
 			shading_factor = 0.2,
@@ -238,12 +238,12 @@ local plugins = {
 				end,
 				winblend = 25,
 			},
-			winbar = {
-				enabled = true,
-				name_formatter = function(term) --  term: Terminal
-					return term.name
-				end,
-			},
+			-- winbar = {
+			-- 	enabled = false,
+			-- 	name_formatter = function(_)
+			-- 		return "ToggleTerm #" .. vim.b.toggle_number
+			-- 	end,
+			-- },
 		},
 	},
 	{
@@ -264,7 +264,7 @@ local plugins = {
 				config = function()
 					local builtin = require("statuscol.builtin")
 					require("statuscol").setup({
-						ft_ignore = { "neo-tree", "Outline" },
+						ft_ignore = { "neo-tree", "Outline", "toggleterm" },
 						segments = {
 							{ sign = { namespace = { "diagnostic*" } } },
 							{ sign = { namespace = { "gitsigns" } }, click = "v:lua.ScSa" },

@@ -35,13 +35,6 @@ local globals = {
 	mapleader = " ",
 	maplocalleader = " ",
 	speeddating_no_mappings = 1,
-	TeVimTheme = "yoru",
-	themeCache = vim.fn.stdpath("data") .. "/colors_data/",
-	transparency = false,
-	loadTeDash = true,
-	loadTeBufLine = true,
-	loadTeStatusLine = true,
-	loadTeVimTheme = true,
 }
 
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"

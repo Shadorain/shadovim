@@ -14,21 +14,6 @@ autocmd("BufWritePre", {
 })
 
 if is_available("neo-tree.nvim") then
-	autocmd("BufEnter", {
-		group = augroup("neotree_start", { clear = true }),
-		callback = function()
-			if package.loaded["neo-tree"] then
-				vim.api.nvim_del_augroup_by_name("neotree_start")
-			else
-				local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0))
-				if stats and stats.type == "directory" then
-					vim.api.nvim_del_augroup_by_name("neotree_start")
-					require("neo-tree")
-				end
-			end
-		end,
-		desc = "Open Neo-Tree on startup with directory",
-	})
 	autocmd("TermClose", {
 		pattern = "*lazygit*",
 		group = augroup("neotree_refresh", { clear = true }),
@@ -55,30 +40,19 @@ autocmd("CursorHold", {
 			border = "rounded",
 			scope = "cursor",
 			focusable = false,
-			max_width = 60 })
+			max_width = 60,
+		})
 	end,
 	desc = "Open Float Window for LSP Diagnostics",
-})
-
-autocmd("TextYankPost", {
-	group = augroup("highlightyank", { clear = true }),
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	desc = "Highlight yanked text",
 })
 
 autocmd("TermOpen", {
 	pattern = "*",
 	callback = function()
-		vim.opt_local.number = false
-		vim.opt_local.cursorline = false
-		vim.opt_local.foldcolumn = "0"
-		vim.opt_local.signcolumn = "no"
+		vim.opt_local.winbar = nil
 		vim.cmd("startinsert")
 	end,
-	desc = "Disable number and cursorline in terminal",
+	desc = "Start insert in terminal",
 })
 
 autocmd("FileType", {
@@ -106,8 +80,11 @@ autocmd("FileType", {
 		"toggleterm",
 	},
 	callback = function()
+		vim.opt_local.winbar = nil
 		vim.opt_local.number = false
 		vim.opt_local.cursorline = false
+		vim.opt_local.foldcolumn = "0"
+		vim.opt_local.signcolumn = "no"
 		vim.b.miniindentscope_disable = true
 	end,
 	desc = "Disable miniindentscope, number and cursorline in specific filetypes",
@@ -138,30 +115,6 @@ autocmd("FileType", {
 	desc = "Don't list quickfix buffer",
 })
 
-autocmd({ "BufNewFile", "BufRead" }, {
-	callback = function()
-		if vim.g.loadTeBufLine then
-			require("tevim.ui.tebufline").setup()
-		end
-	end,
-})
-autocmd("UIEnter", {
-	callback = function()
-		if vim.g.loadTeVimTheme then
-			dofile(vim.g.themeCache .. "allThemes")
-		end
-		if vim.g.loadTeStatusLine then
-			vim.opt.statusline = "%!v:lua.require('tevim.ui.testatusline').setup()"
-		end
-		local buf_lines = vim.api.nvim_buf_get_lines(0, 0, 1, false)
-		local no_buf_content = vim.api.nvim_buf_line_count(0) == 1 and buf_lines[1] == ""
-		local bufname = vim.api.nvim_buf_get_name(0)
-		if bufname == "" and no_buf_content then
-			require("tevim.ui.tedash").setup()
-		end
-	end,
-})
-
 autocmd("BufWritePost", {
 	pattern = vim.fn.stdpath("config") .. "/lua/*.lua",
 	group = augroup("TeVimReload", { clear = true }),
@@ -170,23 +123,8 @@ autocmd("BufWritePost", {
 		local app_name = vim.env.NVIM_APPNAME and vim.env.NVIM_APPNAME or "nvim"
 		local module = string.gsub(fp, "^.*/" .. app_name .. "/lua/", ""):gsub("/", ".")
 		vim.cmd("silent source %")
-		if vim.g.loadTeVimTheme then
-			require("plenary.reload").reload_module("tevim.themes")
-		end
 		require("plenary.reload").reload_module(module)
 		require("plenary.reload").reload_module("custom")
-
-		if vim.g.loadTeBufLine then
-			require("plenary.reload").reload_module("tevim.ui.tebufline")
-			vim.opt.tabline = "%!v:lua.require('tevim.ui.tebufline').getTabline()"
-		end
-		if vim.g.loadTeStatusLine then
-			require("plenary.reload").reload_module("tevim.ui.testatusline")
-			vim.opt.statusline = "%!v:lua.require('tevim.ui.testatusline').setup()"
-		end
-		if vim.g.loadTeVimTheme then
-			require("tevim.themes").load()
-		end
 	end,
 	desc = "Reload neovim config on save",
 })
@@ -200,16 +138,4 @@ vim.api.nvim_create_user_command("TeVimCreateCustom", function()
 end, {})
 vim.api.nvim_create_user_command("TeVimCheckMason", function()
 	require("tevim.core.utils").checkMason()
-end, {})
-vim.api.nvim_create_user_command("TeVimThemes", function()
-	require("tevim.themes.pick").setup()
-end, {})
-vim.api.nvim_create_user_command("TeVimToggleTrans", function()
-	require("tevim.themes.pick").toggleTransparency()
-end, {})
-vim.api.nvim_create_user_command("LazyGit", function()
-	require("tevim.core.utils").LazyGit()
-end, {})
-vim.api.nvim_create_user_command("Ranger", function()
-	require("tevim.core.utils").Ranger()
 end, {})

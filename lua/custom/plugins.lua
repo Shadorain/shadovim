@@ -49,7 +49,7 @@ return {
 	{
 		"filipdutescu/renamer.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
-		config = true,
+		opts = { border = true },
 	},
 	{
 		"stevearc/overseer.nvim",
@@ -347,6 +347,13 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("custom.configs.lualine")
+		end,
+	},
+	{
+		"kelly-lin/ranger.nvim",
+		event = "BufWinEnter",
+		config = function()
+			require("custom.configs.ranger")
 		end,
 	},
 	{
