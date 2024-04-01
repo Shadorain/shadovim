@@ -315,6 +315,7 @@ return {
 		lazy = false,
 		config = function()
 			vim.cmd.colorscheme("shado")
+			vim.cmd([[hi Keyword gui=italic]])
 		end,
 	},
 	{

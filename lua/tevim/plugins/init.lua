@@ -83,6 +83,8 @@ local plugins = {
 				"nvim-treesitter/playground",
 				cmd = "TSPlaygroundToggle",
 			},
+			"Shadorain/shadotheme",
+			"neovim/nvim-lspconfig",
 		},
 		opts = function()
 			return require("tevim.plugins.configs.treesitter")
