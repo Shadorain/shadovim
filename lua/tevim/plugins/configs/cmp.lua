@@ -57,7 +57,7 @@ return {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = false,
 		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<Tab>"] = vim.schedule_wrap(function(fallback)
 			if cmp.visible() and has_words_before() then
 				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 			elseif luasnip.jumpable(1) then
@@ -132,12 +132,10 @@ return {
 	},
 	sources = {
 		{ name = "crates", group_index = 1 },
+		{ name = "copilot", max_item_count = 3, trigger_characters = { { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" } }, group_index = 2 },
 		{ name = "nvim_lsp", group_index = 2 },
-		-- { name = "copilot", max_item_count = 3, trigger_characters = {
-		-- 	{ ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?" },
-		-- }, group_index = 2 },
-		-- { name = "codeium", max_item_count = 2, group_index = 2 },
 		{ name = "cmp_tabnine", group_index = 2 },
+		{ name = "codeium", max_item_count = 2, group_index = 2 },
 		{ name = "nvim_lua", group_index = 2 },
 		{ name = "buffer", group_index = 2 },
 		{ name = "luasnip", group_index = 2 },
@@ -171,10 +169,10 @@ return {
 		priority_weight = 2,
 		comparators = {
 			deprioritize_snippet,
-			-- require("copilot_cmp.comparators").prioritize,
-			-- require("copilot_cmp.comparators").score,
-			compare.offset,
 			compare.exact,
+			require("copilot_cmp.comparators").prioritize,
+			require("copilot_cmp.comparators").score,
+			compare.offset,
 			-- compare.scopes,
 			compare.score,
 			compare.recently_used,

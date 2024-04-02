@@ -326,6 +326,16 @@ local plugins = {
 					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 				end,
 			},
+			{
+				"zbirenbaum/copilot-cmp",
+				dependencies = { "zbirenbaum/copilot.lua", opts = {
+					suggestion = { enabled = false },
+					panel = { enabled = false },
+				} },
+				config = function()
+					require("copilot_cmp").setup()
+				end,
+			},
 		},
 		opts = function()
 			return require("tevim.plugins.configs.cmp")

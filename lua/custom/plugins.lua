@@ -16,10 +16,6 @@ return {
 
 	-- Completion
 	{
-		"github/copilot.vim",
-		event = "InsertEnter",
-	},
-	{
 		"Exafunction/codeium.nvim",
 		event = "InsertEnter",
 		config = true,
@@ -306,6 +302,20 @@ return {
 		},
 		opts = {
 			workspaces = { { name = "personal", path = "~/Documents/Sync/ObsidianVault/" } },
+		},
+	},
+	{
+		"letieu/jot.lua",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = { "<leader>fj" },
+		opts = {
+			win_opts = {
+				relative = "editor",
+				width = 80,
+				height = 25,
+				row = 2,
+				col = vim.o.columns - 85,
+			},
 		},
 	},
 

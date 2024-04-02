@@ -169,6 +169,7 @@ M.whichkeys = function()
 			e = { ":Neotree toggle<CR>", "Neo-Tree" },
 			r = { "<cmd>Telescope oldfiles<CR>", "Recent" },
 			f = { "<cmd>Telescope find_files<cr>", "Find" },
+			j = { "<cmd>lua require('jot').toggle()<CR>", "Jot" },
 		},
 		n = {
 			name = "  NEOGEN",
