@@ -1,6 +1,5 @@
 local M = {}
 
--- add overrides in here(eg: mason.nvim)
 M.mason = {
 	ensure_installed = {
 		"rust-analyzer",
@@ -10,8 +9,8 @@ M.mason = {
 		"codelldb",
 		"lua-language-server",
 		"stylua",
-		"marksman"
-	}
+		"marksman",
+	},
 }
 
 return M

@@ -31,6 +31,6 @@ return {
 	},
 	config = function(_, opts)
 		require("which-key").setup(opts.setup)
-		require("custom.keymaps").whichkeys()
+		require("config.keymaps").whichkeys()
 	end,
 }

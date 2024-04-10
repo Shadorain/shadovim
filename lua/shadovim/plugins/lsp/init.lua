@@ -41,15 +41,32 @@ return {
 				},
 			})
 
-			require("plugins.lsp").setup(on_attach, capabilities)
+			require("plugins.lsp.setup").setup(on_attach, capabilities)
 		end,
 	},
 	{
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
-		opts = function()
-			return vim.tbl_deep_extend(require("tevim.plugins.configs.mason"), require("custom.configs.overrides").mason)
-		end,
+		opts = {
+			ui = {
+				ensure_installed = require("plugins.lsp.overrides").mason.ensure_installed,
+				icons = {
+					package_pending = "󰁇 ",
+					package_installed = " ",
+					package_uninstalled = " ",
+				},
+				keymaps = {
+					toggle_server_expand = "<CR>",
+					install_server = "i",
+					update_server = "u",
+					update_all_servers = "U",
+					check_server_version = "c",
+					check_outdated_servers = "C",
+					uninstall_server = "X",
+					cancel_installation = "<C-c>",
+				},
+			},
+		},
 	},
 	{
 		"ray-x/lsp_signature.nvim",

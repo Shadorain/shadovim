@@ -38,24 +38,42 @@ local plugins = {
 	},
 }
 
-local dir_import = function(path, req_path)
-	local check, _ = pcall(require, "plugins")
-	if check then
-		require("plugins")
-		for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. path, [[v:val =~ '\.lua$']])) do
-			if file ~= "init.lua" and file:sub(1, 1) ~= "_" then
-				print(file)
-				local ps = require(req_path .. file:gsub("%.lua$", ""))
-				for _, plugin in ipairs(ps) do
-					table.insert(plugins, plugin)
+local function dir_import(path, ignore_root)
+	local results = {}
+
+	if not ignore_root then -- Evaluate the root dir
+		local result = require(path) or {}
+
+		if type(result) == "table" then
+			vim.list_extend(results, result)
+		end
+	end
+
+	local fullpath = vim.fs.joinpath(vim.fn.stdpath("config"), "lua", (path:gsub("%.", "/")))
+
+	local function skip(dir)
+		return not vim.uv.fs_stat(vim.fs.joinpath(fullpath, dir, "init.lua"))
+	end
+
+	for file, ft in vim.fs.dir(fullpath) do
+		if (vim.endswith(file, ".lua") and file ~= "init.lua") or (ft == "directory" and not skip(file)) then
+			local result = require(table.concat({ path, (file:gsub("%..*$", "")) }, ".")) or {}
+
+			if type(result) == "table" then
+				if type(result[1]) == "table" then
+					vim.list_extend(results, result)
+				else
+					table.insert(results, result)
 				end
 			end
 		end
 	end
+
+	return results
 end
 
-dir_import("/lua/shadovim/plugins", "shadovim.plugins.")
-dir_import("/lua/plugins", "plugins.")
+vim.list_extend(plugins, dir_import("shadovim.plugins", true))
+vim.list_extend(plugins, dir_import("plugins"))
 
 require("lazy").setup(plugins, {
 	defaults = { lazy = true },
