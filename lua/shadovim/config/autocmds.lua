@@ -1,6 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
--- local is_available = require("shadovim.config.utils").is_available
+local is_available = require("shadovim.config.utils").is_available
 
 autocmd("BufWritePre", {
 	group = augroup("create_dir", { clear = true }),
@@ -13,24 +13,24 @@ autocmd("BufWritePre", {
 	desc = "Automatically create parent directories if they don't exist when saving a file",
 })
 
--- if is_available("neo-tree.nvim") then
-autocmd("TermClose", {
-	pattern = "*lazygit*",
-	group = augroup("neotree_refresh", { clear = true }),
-	callback = function()
-		local manager_avail, manager = pcall(require, "neo-tree.sources.manager")
-		if manager_avail then
-			for _, source in ipairs({ "filesystem", "git_status", "document_symbols" }) do
-				local module = "neo-tree.sources." .. source
-				if package.loaded[module] then
-					manager.refresh(require(module).name)
+if is_available("neo-tree.nvim") then
+	autocmd("TermClose", {
+		pattern = "*lazygit*",
+		group = augroup("neotree_refresh", { clear = true }),
+		callback = function()
+			local manager_avail, manager = pcall(require, "neo-tree.sources.manager")
+			if manager_avail then
+				for _, source in ipairs({ "filesystem", "git_status", "document_symbols" }) do
+					local module = "neo-tree.sources." .. source
+					if package.loaded[module] then
+						manager.refresh(require(module).name)
+					end
 				end
 			end
-		end
-	end,
-	desc = "Refresh Neo-Tree when closing lazygit",
-})
--- end
+		end,
+		desc = "Refresh Neo-Tree when closing lazygit",
+	})
+end
 
 -- Diagnostics
 autocmd("CursorHold", {
@@ -124,7 +124,7 @@ autocmd("BufWritePost", {
 		local module = string.gsub(fp, "^.*/" .. app_name .. "/lua/", ""):gsub("/", ".")
 		vim.cmd("silent source %")
 		require("plenary.reload").reload_module(module)
-		require("plenary.reload").reload_module("custom")
+		require("plenary.reload").reload_module("config")
 	end,
 	desc = "Reload neovim config on save",
 })

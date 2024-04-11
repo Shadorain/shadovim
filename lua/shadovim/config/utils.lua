@@ -30,8 +30,8 @@ end
 function M.toggle_option(option)
 	local value = not vim.api.nvim_get_option_value(option, {})
 	vim.opt[option] = value
-	M.replaceword("vim.opt." .. option, tostring(not value), tostring(value), vim.fn.stdpath("config") .. "/lua/config/options.lua")
-	vim.notify(option .. " set to " .. tostring(value))
+	-- M.replaceword("vim.opt." .. option, tostring(not value), tostring(value), vim.fn.stdpath("config") .. "/lua/config/options.lua")
+	-- vim.notify(option .. " set to " .. tostring(value))
 end
 
 function M.build_run()
@@ -83,7 +83,7 @@ M.checkMason = function()
 	for _, package in ipairs(mason_packages) do
 		table.insert(mason_installed, vim.fn.fnamemodify(package, ":t"))
 	end
-	local ensure_installed = require("config.overrides").mason.ensure_installed
+	local ensure_installed = require("plugins.lsp.overrides").mason.ensure_installed
 	local default_mason = { "lua-language-server", "stylua" }
 	for _, package in ipairs(default_mason) do
 		table.insert(ensure_installed, package)
@@ -109,6 +109,9 @@ M.checkMason = function()
 end
 
 M.ShadovimUpdate = function()
-	vim.cmd("silent !git -C " .. vim.fn.stdpath("config") .. " pull")
+	vim.cmd("silent !git -C pull")
+	vim.cmd("silent Lazy sync")
 	vim.notify("Shadovim updated")
 end
+
+return M
