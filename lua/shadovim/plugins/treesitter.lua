@@ -27,7 +27,20 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 	opts = function()
-		require("rainbow-delimiters.setup").setup({
+		local rainbow_delimiters = require("rainbow-delimiters")
+		vim.g.rainbow_delimiters = {
+			strategy = {
+				[""] = rainbow_delimiters.strategy["global"],
+				vim = rainbow_delimiters.strategy["local"],
+			},
+			query = {
+				[""] = "rainbow-delimiters",
+				lua = "rainbow-blocks",
+			},
+			priority = {
+				[""] = 110,
+				lua = 210,
+			},
 			highlight = {
 				"RainbowDelimiterRed",
 				"RainbowDelimiterYellow",
@@ -37,7 +50,7 @@ return {
 				"RainbowDelimiterViolet",
 				"RainbowDelimiterCyan",
 			},
-		})
+		}
 		return {
 			ensure_installed = { "lua", "vim", "vimdoc", "rust", "cpp", "css", "json", "markdown" },
 			auto_install = false,

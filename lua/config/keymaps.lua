@@ -231,6 +231,9 @@ M.whichkeys = function()
 			u = { "<cmd>ShadovimUpdate<cr>", "Update Shadovim" },
 			m = { "<cmd>ShadovimCheckMason<cr>", "Check Mason" },
 			r = { "<cmd>source ~/.config/nvim/init.lua<cr>", "Reload Config" },
+			c = { "<cmd>Fidget clear<cr>", "Clear Notifications" },
+			l = { "<cmd>Fidget lsp_suppress<cr>", "Suppress LSP Notifications" },
+			s = { "<cmd>Fidget suppress<cr>", "Suppress Notifications" },
 		},
 	}
 

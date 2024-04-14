@@ -15,7 +15,12 @@ return {
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
 			opts = function()
-				require("nvim-autopairs").setup({ fast_wrap = {}, disable_filetype = { "TelescopePrompt", "vim" } })
+				local npairs = require("nvim-autopairs")
+				npairs.setup({ fast_wrap = {}, disable_filetype = { "TelescopePrompt", "vim" } })
+
+				local Rule = require("nvim-autopairs.rule")
+				npairs.add_rule(Rule("<", ">", "rust"))
+
 				require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 			end,
 		},

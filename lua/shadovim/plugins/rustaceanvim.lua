@@ -22,7 +22,9 @@ return {
 			local cfg = require("rustaceanvim.config")
 			return {
 				-- Plugin configuration
-				tools = {},
+				tools = {
+					code_actions = { ui_select_falback = true },
+				},
 				-- LSP configuration
 				server = {
 					on_attach = require("shadovim.plugins.lsp.attach").on_attach,

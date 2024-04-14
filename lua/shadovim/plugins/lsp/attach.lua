@@ -68,6 +68,7 @@ M.on_attach = function(client, bufnr)
 			},
 			E = { '<cmd>lua vim.cmd.RustLsp("expandMacro")()<CR>', "Expand Macro" },
 			P = { '<cmd>lua vim.cmd.RustLsp("parentModule")<CR>', "Parent Module" },
+			C = { '<cmd>lua vim.cmd.RustLsp("openCargo")<CR>', "Open Cargo.toml" },
 		},
 
 		["<leader>"] = {
@@ -75,15 +76,19 @@ M.on_attach = function(client, bufnr)
 				name = "CODE ACTIONS",
 				a = {
 					function()
-						if vim.bo[bufnr].filetype == "rust" then
-							vim.cmd.RustLsp("codeAction")
-						else
-							vim.lsp.buf.code_action()
-						end
+						-- if vim.bo[bufnr].filetype == "rust" then
+						-- 	vim.cmd.RustLsp("codeAction")
+						-- else
+						vim.lsp.buf.code_action()
+						-- end
 					end,
 					"Code Actions",
 				},
 				l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "Code Lens" },
+				o = { '<cmd>lua vim.cmd.RustLsp("openDocs")<CR>', "Open Docs" },
+				h = { '<cmd>lua vim.cmd.RustLsp({ "hover", "actions" })<CR>', "Hover Actions" },
+				e = { '<cmd>lua vim.cmd.RustLsp("explainError")<CR>', "Explain Error" },
+				R = { '<cmd>lua vim.cmd.RustLsp("renderDiagnostic")<CR>', "Render Diagnostic" },
 
 				b = { "<cmd>OverseerBuild<CR>", "Build" },
 				r = { "<cmd>OverseerRun<CR>", "Run" },

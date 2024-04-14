@@ -20,8 +20,8 @@ return {
 					include_current_win = false,
 					autoselect_one = true,
 					bo = { -- filter using buffer options
-						filetype = { "neo-tree", "neo-tree-popup", "notify", "JABSwindow" },
-						buftype = { "terminal", "quickfix" },
+						filetype = { "neo-tree", "neo-tree-popup", "notify", "JABSwindow", "fidget" },
+						buftype = { "terminal", "quickfix", "fidget" },
 					},
 				},
 			},

@@ -20,7 +20,7 @@ local plugins = {
 	},
 	{ "MunifTanjim/nui.nvim", dependencies = "nvim-lua/popup.nvim" },
 	{ "nvim-lua/plenary.nvim" },
-	{ "mbbill/undotree" },
+	{ "mbbill/undotree", event = "BufReadPost" },
 	{ "j-hui/fidget.nvim", opts = {} },
 
 	-----------------------------------------------------------------------------
