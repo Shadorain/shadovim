@@ -107,7 +107,7 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>F", vim.lsp.buf.format, bufopts)
 
 	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(bufnr)
+		vim.lsp.inlay_hint.enable(bufnr, true)
 	end
 
 	require("lsp_signature").on_attach({
