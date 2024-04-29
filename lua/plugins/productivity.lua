@@ -29,14 +29,15 @@ return {
 	{
 		"letieu/jot.lua",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = { "<leader>fj" },
 		opts = {
 			win_opts = {
+				style = "minimal",
 				relative = "editor",
-				width = 80,
-				height = 25,
+				border = "rounded",
+				width = math.floor(vim.o.columns * 0.25), -- 80
+				height = 15,
 				row = 2,
-				col = vim.o.columns - 85,
+				col = vim.o.columns - (math.floor(vim.o.columns * 0.25) + 5),
 			},
 		},
 	},

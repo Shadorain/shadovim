@@ -12,6 +12,10 @@ return {
 	-- version = "nightly",
 	opts = {
 		autochdir = true,
+		start_in_insert = true,
+		on_open = function(_)
+			vim.cmd("startinsert")
+		end,
 		shading_factor = 0.2,
 		highlights = { NormalFloat = { link = "NormalFloat" }, FloatBorder = { link = "FloatBorder" } },
 		float_opts = {

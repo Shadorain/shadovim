@@ -46,14 +46,16 @@ autocmd("CursorHold", {
 	desc = "Open Float Window for LSP Diagnostics",
 })
 
-autocmd("TermOpen", {
-	pattern = "*",
-	callback = function()
-		vim.opt_local.winbar = nil
-		vim.cmd("startinsert")
-	end,
-	desc = "Start insert in terminal",
-})
+-- autocmd({ "TermOpen", "BufEnter" }, {
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		if vim.opt.buftype:get() == "terminal" then
+-- 			vim.opt_local.winbar = nil
+-- 			vim.cmd("startinsert")
+-- 		end
+-- 	end,
+-- 	desc = "Start insert in terminal",
+-- })
 
 autocmd("FileType", {
 	pattern = {

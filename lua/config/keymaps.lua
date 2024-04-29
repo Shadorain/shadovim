@@ -169,7 +169,7 @@ M.whichkeys = function()
 			e = { ":Neotree toggle<CR>", "Neo-Tree" },
 			r = { "<cmd>Telescope oldfiles<CR>", "Recent" },
 			f = { "<cmd>Telescope find_files<cr>", "Find" },
-			j = { "<cmd>lua require('jot').toggle()<CR>", "Jot" },
+			j = { ":lua require('jot').toggle()<CR>", "Jot" },
 		},
 		n = {
 			name = "  NEOGEN",
@@ -317,6 +317,9 @@ map("n", "<leader>J", ":JABSOpen<CR>", opts, { desc = "Open JABS" })
 --- Switch Tab
 for i, sym in ipairs({ "!", "@", "#", "$", "%", "^", "&", "*", "(" }) do
 	map("n", "<leader>" .. sym, "<cmd>Tabbot send " .. i .. "<cr>", opts, { desc = "Send to Tab " .. i })
+end
+for i = 1, 9 do
+	map("n", "<leader>" .. i, "<cmd>Tabbot go " .. i .. "<cr>", opts, { desc = "Goto Tab " .. i })
 end
 
 -- Searching
