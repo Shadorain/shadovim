@@ -36,6 +36,7 @@ local plugins = {
 			require("mkdir")
 		end,
 	},
+	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
 }
 
 local function dir_import(path, ignore_root)

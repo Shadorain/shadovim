@@ -23,8 +23,12 @@ M.whichkeys = function()
 	}
 	local v_mappings = {
 		d = {
-			name = "+debug",
+			name = "Debug",
 			K = { '<cmd>lua require("dap.ui.variables").visual_hover()<cr>', "Range Hover" },
+		},
+		D = {
+			name = "Dioxus",
+			x = { "<cmd>!dx translate<cr>", "Range DX Translate" },
 		},
 	}
 	local t_mappings = {
@@ -198,6 +202,10 @@ M.whichkeys = function()
 				o = { '<cmd>lua require("dap").step_over()<CR>', "Over" },
 				x = { '<cmd>lua require("dap").step_out()<CR>', "Out" },
 			},
+		},
+		D = {
+			name = "Dioxus",
+			x = { "<cmd>%!dx translate<cr>", "DX Translate File" },
 		},
 		m = {
 			name = "  MISC",
