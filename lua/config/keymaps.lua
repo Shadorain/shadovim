@@ -2,255 +2,237 @@ local M = {}
 
 -- Leader
 M.whichkeys = function()
-	local m_mappings = {
-		["m"] = {
-			name = "  BOOKMARKS",
-			-- Bookmarks
-			A = { "<cmd>silent BookmarkAnnotate<cr>", "Annotate" },
-			B = { "<cmd>silent BookmarkToggle<cr>", "Toggle" },
-			C = { "<cmd>silent BookmarkClear<cr>", "Clear" },
-			X = { "<cmd>silent BookmarkClearAll<cr>", "Clear All" },
-			j = { "<cmd>silent BookmarkNext<cr>", "Next" },
-			k = { "<cmd>silent BookmarkPrev<cr>", "Prev" },
-			S = { "<cmd>silent BookmarkShowAll<cr>", "Show" },
+  -- local m_mappings = {
+  --   ["m"] = {
+  --     name = "  BOOKMARKS",
+  --     -- Bookmarks
+  --     A = { "<cmd>silent BookmarkAnnotate<cr>", "Annotate" },
+  --     B = { "<cmd>silent BookmarkToggle<cr>", "Toggle" },
+  --     C = { "<cmd>silent BookmarkClear<cr>", "Clear" },
+  --     X = { "<cmd>silent BookmarkClearAll<cr>", "Clear All" },
+  --     j = { "<cmd>silent BookmarkNext<cr>", "Next" },
+  --     k = { "<cmd>silent BookmarkPrev<cr>", "Prev" },
+  --     S = { "<cmd>silent BookmarkShowAll<cr>", "Show" },
+  --
+  --     -- Harpoon
+  --     m = { '<cmd>lua require("harpoon"):list():append()<cr>', "Harpoon" },
+  --     ["."] = { '<cmd>lua require("harpoon"):list():prev()<cr>', "Harpoon Next" },
+  --     [","] = { '<cmd>lua require("harpoon"):list():next()<cr>', "Harpoon Prev" },
+  --     [";"] = { '<cmd>lua require("harpoon.ui"):toggle_quick_menu(require("harpoon"):list())<cr>', "Harpoon UI" },
+  --   },
+  -- }
+  local m_mappings = {
+    { "m", group = " BOOKMARKS" },
+    -- Bookmarks
+    { "mA", "<cmd>silent BookmarkAnnotate<cr>", desc = "Annotate" },
+    { "mB", "<cmd>silent BookmarkToggle<cr>", desc = "Toggle" },
+    { "mC", "<cmd>silent BookmarkClear<cr>", desc = "Clear" },
+    { "mS", "<cmd>silent BookmarkShowAll<cr>", desc = "Show" },
+    { "mX", "<cmd>silent BookmarkClearAll<cr>", desc = "Clear All" },
+    { "mj", "<cmd>silent BookmarkNext<cr>", desc = "Next" },
+    { "mk", "<cmd>silent BookmarkPrev<cr>", desc = "Prev" },
+    -- Harpoon
+    { "m,", '<cmd>lua require("harpoon"):list():next()<cr>', desc = "Harpoon Prev" },
+    { "m.", '<cmd>lua require("harpoon"):list():prev()<cr>', desc = "Harpoon Next" },
+    { "m;", '<cmd>lua require("harpoon.ui"):toggle_quick_menu(require("harpoon"):list())<cr>', desc = "Harpoon UI" },
+    { "mm", '<cmd>lua require("harpoon"):list():append()<cr>', desc = "Harpoon" },
+  }
+  -- local v_mappings = {
+  --   d = {
+  --     name = "Debug",
+  --     K = { '<cmd>lua require("dap.ui.variables").visual_hover()<cr>', "Range Hover" },
+  --   },
+  --   D = {
+  --     name = "Dioxus",
+  --     x = { "<cmd>!dx translate<cr>", "Range DX Translate" },
+  --   },
+  -- }
+  local v_mappings = {
+    {
+      mode = { "v" },
+      { "<leader>D",  group = "Dioxus", },
+      { "<leader>Dx", "<cmd>!dx translate<cr>",                                  desc = "Range DX Translate", },
+      { "<leader>d",  group = "Debug", },
+      { "<leader>dK", '<cmd>lua require("dap.ui.variables").visual_hover()<cr>', desc = "Range Hover" },
+    },
+  }
+  local t_mappings = {
+    { "<leader>b", group = " TERMINAL" },
+    -- { "<leader>bk", "<C-\\><C-n><cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
+    { "<leader>bm", "<C-\\><C-n><cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
+    { "<leader>bv", "<C-\\><C-n><cmd>ToggleTerm size=50 direction=vertical<cr>", desc = "Terminal Side" },
+    { "<leader>b,", "<C-\\><C-n><cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Terminal Bottom" },
+    { "<leader>b1", "<C-\\><C-n><cmd>1ToggleTerm<cr>", desc = "Terminal 1" },
+    { "<leader>b2", "<C-\\><C-n><cmd>2ToggleTerm<cr>", desc = "Terminal 2" },
+    { "<leader>b3", "<C-\\><C-n><cmd>3ToggleTerm<cr>", desc = "Terminal 3" },
+    { "<leader>b4", "<C-\\><C-n><cmd>4ToggleTerm<cr>", desc = "Terminal 4" },
+  }
 
-			-- Harpoon
-			m = { '<cmd>lua require("harpoon"):list():append()<cr>', "Harpoon" },
-			["."] = { '<cmd>lua require("harpoon"):list():prev()<cr>', "Harpoon Next" },
-			[","] = { '<cmd>lua require("harpoon"):list():next()<cr>', "Harpoon Prev" },
-			[";"] = { '<cmd>lua require("harpoon.ui"):toggle_quick_menu(require("harpoon"):list())<cr>', "Harpoon UI" },
-		},
-	}
-	local v_mappings = {
-		d = {
-			name = "Debug",
-			K = { '<cmd>lua require("dap.ui.variables").visual_hover()<cr>', "Range Hover" },
-		},
-		D = {
-			name = "Dioxus",
-			x = { "<cmd>!dx translate<cr>", "Range DX Translate" },
-		},
-	}
-	local t_mappings = {
-		b = {
-			name = "  TERMINAL",
-			k = { "<C-\\><C-n><cmd>ToggleTerm direction=float<CR>", "Terminal Float" },
-			m = { "<C-\\><C-n><cmd>ToggleTerm direction=float<CR>", "Terminal Float" },
-			[","] = { "<C-\\><C-n><cmd>ToggleTerm size=10 direction=horizontal<cr>", "Terminal Bottom" },
-			v = { "<C-\\><C-n><cmd>ToggleTerm size=50 direction=vertical<cr>", "Terminal Side" },
-			["1"] = { "<C-\\><C-n><cmd>1ToggleTerm<cr>", "Terminal 1" },
-			["2"] = { "<C-\\><C-n><cmd>2ToggleTerm<cr>", "Terminal 2" },
-			["3"] = { "<C-\\><C-n><cmd>3ToggleTerm<cr>", "Terminal 3" },
-			["4"] = { "<C-\\><C-n><cmd>4ToggleTerm<cr>", "Terminal 4" },
-		},
-	}
-	local g_mappings = {
-		c = {
-			b = {
-				name = "□  COMMENT BOX",
-				b = { "<Cmd>CBccbox<CR>", "Box Title" },
-				t = { "<Cmd>CBllline<CR>", "Titled Line" },
-				l = { "<Cmd>CBline<CR>", "Simple Line" },
-				m = { "<Cmd>CBllbox14<CR>", "Marked" },
-				d = { "<Cmd>CBd<CR>", "Remove a box" },
-			},
-		},
-	}
+  local g_mappings = {
+    { "<leader>c", group = "// COMMENTS" },
+    { "<leader>cB", group = "□ COMMENT BOX" },
+    { "<leader>cbb", "<Cmd>CBccbox<CR>", desc = "Box Title" },
+    { "<leader>cbd", "<Cmd>CBd<CR>", desc = "Remove a box" },
+    { "<leader>cbl", "<Cmd>CBline<CR>", desc = "Simple Line" },
+    { "<leader>cbm", "<Cmd>CBllbox14<CR>", desc = "Marked" },
+    { "<leader>cbt", "<Cmd>CBllline<CR>", desc = "Titled Line" },
+  }
 
-	local n_mappings = {
-		-- A = { "<cmd>Alpha<CR>" },
-		b = {
-			name = "  BUFFERS",
-			l = { "<cmd>ls<CR>", "List" },
-			b = { "<cmd>bn<CR>", "Next" },
-			n = { "<cmd>bp<CR>", "Prev" },
-			k = { "<cmd>lua MiniBufremove.delete()<CR>", "Delete" },
-			u = { "<cmd>lua MiniBufremove.unshow<CR>", "Unload" },
-			f = { "<cmd>set shiftwidth=4 | set tabstop=4 | set softtabstop=4<CR>", "Fix Spacing" },
+  local n_mappings = {
+    { "<leader><leader>", group = "Shadovim" },
+    { "<leader><leader>u", "<cmd>ShadovimUpdate<cr>", desc = "Update Shadovim" },
+    { "<leader><leader>m", "<cmd>ShadovimCheckMason<cr>", desc = "Check Mason" },
+    { "<leader><leader>r", "<cmd>source ~/.config/nvim/init.lua<cr>", desc = "Reload Config" },
+    { "<leader><leader>s", "<cmd>Fidget suppress<cr>", desc = "Suppress Notifications" },
+    { "<leader><leader>c", "<cmd>Fidget clear<cr>", desc = "Clear Notifications" },
+    { "<leader><leader>l", "<cmd>Fidget lsp_suppress<cr>", desc = "Suppress LSP Notifications" },
 
-			m = { "<cmd>ToggleTerm direction=float<CR>", "Terminal Float" },
-			[","] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Terminal Bottom" },
-			v = { "<cmd>ToggleTerm size=50 direction=vertical<cr>", "Terminal Side" },
-			["1"] = { "<cmd>1ToggleTerm<cr>", "Terminal 1" },
-			["2"] = { "<cmd>2ToggleTerm<cr>", "Terminal 2" },
-			["3"] = { "<cmd>3ToggleTerm<cr>", "Terminal 3" },
-			["4"] = { "<cmd>4ToggleTerm<cr>", "Terminal 4" },
-		},
-		p = {
-			name = "󰏖  LAZY",
-			C = { "<cmd>Lazy clean<cr>", "Clean" },
-			c = { "<cmd>Lazy log<cr>", "Log" },
-			i = { "<cmd>Lazy install<cr>", "Install" },
-			s = { "<cmd>Lazy sync<cr>", "Sync" },
-			S = { "<cmd>Lazy show<cr>", "Status" },
-			u = { "<cmd>Lazy update<cr>", "Update" },
-		},
-		P = {
-			name = "  POMO",
-			["1"] = { "<cmd>TimerStart 1m<cr>", "1m" },
-			["5"] = { "<cmd>TimerStart 5m<cr>", "5m" },
-			H = { "<cmd>TimerStart 30m<cr>", "30m" },
-			h = { "<cmd>TimerStart 1h<cr>", "1h" },
-			s = { "<cmd>TimerStart ", "Start" },
-			r = { "<cmd>TimerRepeat<cr>", "Repeat" },
-			R = { "<cmd>TimerResume<cr>", "Resume" },
-			p = { "<cmd>TimerPause<cr>", "Pause" },
-			v = { "<cmd>TimerShow<cr>", "Show" },
-			S = { "<cmd>TimerStop<cr>", "Stop" },
-		},
-		o = {
-			name = "  OPTIONS",
-			o = { "<cmd>Ranger<cr>", "Ranger" },
-			w = { "<cmd>lua require('shadovim.config.utils').toggle_option('wrap')<cr>", "Wrap" },
-			s = { "<cmd>lua require('shadovim.config.utils').toggle_option('spell')<cr>", "Spell" },
-			n = { "<cmd>lua require('shadovim.config.utils').toggle_option('number')<cr>", "Number" },
-			r = { "<cmd>lua require('shadovim.config.utils').toggle_option('relativenumber')<cr>", "Relative Number" },
-		},
-		w = {
-			name = "  WINDOWS",
-			v = { "<C-w>v", "Vertical Split" },
-			h = { "<C-w>s", "Horizontal Split" },
-			e = { "<C-w>=", "Make Splits Equal" },
-			q = { "<cmd>close<CR>", "Close Split" },
-		},
-		t = {
-			name = "  TELESCOPE",
-			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
-			r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
-			w = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-			k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-			M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-			R = { "<cmd>Telescope registers<cr>", "Registers" },
-			c = { "<cmd>Telescope commands<cr>", "Commands" },
-			j = { "<cmd>Telescope jumplist<cr>", "Jumplist" },
-			h = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
-			H = { "<cmd>Telescope highlights<cr>", "Highlights" },
-			p = { "<cmd>Telescope projects<cr>", "Projects" },
+    -- { "<leader>D", group = "Dioxus" },
+    -- { "<leader>Dx", "<cmd>%!dx translate<cr>", desc = "DX Translate File" },
 
-			n = { "<cmd>Telescope noice<cr>", "Noice Messages" },
-			u = { "<cmd>Telescope undo<cr>", "Undo" },
-			m = { "<cmd>Telescope macroscope<cr>", "Macros" },
-			y = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
-			o = { "<cmd>Telescope harpoon marks<cr>", "Harpoon" },
-			t = { "<cmd>TodoTelescope<cr>", "Todo" },
-		},
-		g = {
-			name = "󰊢  GIT",
-			g = { "<cmd>LazyGit<cr>", "Lazygit" },
-			G = { "<cmd>LazyGitConfig<cr>", "Lazygit Config" },
-			j = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
-			k = { "<cmd>Gitsigns prev_hunk<cr>", "Prev Hunk" },
-			r = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
-			R = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
-			s = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
-			S = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
-			b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
-			B = { "<cmd>Gitsigns blame_line{full=true}<cr>", "Blame Line Full" },
-			o = { "<cmd>Telescope git_status<cr>", "Open Changed File" },
-			c = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
-			m = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
-			d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
-		},
-		l = {
-			name = "  LSP",
-			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-			I = { "<cmd>LspInfo<cr>", "Info" },
-			j = { "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>", "Next Diagnostic" },
-			k = { "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Prev Diagnostic" },
-			r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-			s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-			S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+    { "<leader>P", group = " POMO" },
+    { "<leader>Pv", "<cmd>TimerShow<cr>", desc = "Show" },
+    { "<leader>Ps", "<cmd>TimerStart", desc = "Start" },
+    { "<leader>PR", "<cmd>TimerResume<cr>", desc = "Resume" },
+    { "<leader>Pp", "<cmd>TimerPause<cr>", desc = "Pause" },
+    { "<leader>PS", "<cmd>TimerStop<cr>", desc = "Stop" },
+    { "<leader>Pr", "<cmd>TimerRepeat<cr>", desc = "Repeat" },
+    { "<leader>P1", "<cmd>TimerStart 1m<cr>", desc = "1m" },
+    { "<leader>P5", "<cmd>TimerStart 5m<cr>", desc = "5m" },
+    { "<leader>PH", "<cmd>TimerStart 30m<cr>", desc = "30m" },
+    { "<leader>Ph", "<cmd>TimerStart 1h<cr>", desc = "1h" },
 
-			A = { "<cmd>AerialToggle", "Aerial" },
-			N = { "<cmd>AerialNavToggle", "Aerial Nav" },
-			n = { "<cmd>Navbuddy", "Navbuddy" },
+    { "<leader>b", group = " BUFFERS" },
+    { "<leader>b,", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Terminal Bottom" },
+    { "<leader>b1", "<cmd>1ToggleTerm<cr>", desc = "Terminal 1" },
+    { "<leader>b2", "<cmd>2ToggleTerm<cr>", desc = "Terminal 2" },
+    { "<leader>b3", "<cmd>3ToggleTerm<cr>", desc = "Terminal 3" },
+    { "<leader>b4", "<cmd>4ToggleTerm<cr>", desc = "Terminal 4" },
+    { "<leader>bb", "<cmd>bn<CR>", desc = "Next" },
+    { "<leader>bf", "<cmd>set shiftwidth=4 | set tabstop=4 | set softtabstop=4<CR>", desc = "Fix Spacing" },
+    { "<leader>bk", "<cmd>lua MiniBufremove.delete()<CR>", desc = "Delete" },
+    { "<leader>bl", "<cmd>ls<CR>", desc = "List" },
+    { "<leader>bm", "<cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
+    { "<leader>bn", "<cmd>bp<CR>", desc = "Prev" },
+    { "<leader>bu", "<cmd>lua MiniBufremove.unshow<CR>", desc = "Unload" },
+    { "<leader>bv", "<cmd>ToggleTerm size=50 direction=vertical<cr>", desc = "Terminal Side" },
 
-			i = { "<cmd>TSInstallInfo<cr>", "Treesitter Info" },
-			u = { "<cmd>TSUpdate<cr>", "Treesitter Update" },
-		},
-		f = {
-			name = "  FILES",
-			e = { ":Neotree toggle<CR>", "Neo-Tree" },
-			r = { "<cmd>Telescope oldfiles<CR>", "Recent" },
-			f = { "<cmd>Telescope find_files<cr>", "Find" },
-			j = { ":lua require('jot').toggle()<CR>", "Jot" },
-		},
-		n = {
-			name = "  NEOGEN",
-			n = { "<cmd>Neogen<CR>", "Any" },
-			f = { "<cmd>Neogen func<CR>", "Function" },
-			t = { "<cmd>Neogen type<CR>", "Type" },
-			c = { "<cmd>Neogen class<CR>", "Class" },
-			l = { "<cmd>Neogen file<CR>", "File" },
-		},
-		d = {
-			name = "  DEBUG",
-			b = { '<cmd>lua require("dap").toggle_breakpoint()<CR>', "Breakpoint" },
-			c = { '<cmd>lua require("dap").continue()<CR>', "Continue" },
-			j = { '<cmd>lua require("dap").down()<CR>', "Down STrace" },
-			k = { '<cmd>lua require("dap").up()<CR>', "Up STrace" },
-			l = { '<cmd>lua require("dap").run_last()<CR>', "Run Last" },
-			q = { '<cmd>lua require("dap").terminate()<CR>', "Terminate" },
-			u = { '<cmd>lua require("dapui").toggle()<CR>', "UI" },
-			f = { '<cmd>lua require("dapui").float_element()<CR>', "Float" },
-			p = { '<cmd>lua require("dap.ui.widgets").preview()<CR>', "Preview" },
-			K = { '<cmd>lua require("dap.ui.widgets").hover()<CR>', "Hover" },
-			-- ["{"] = { '<cmd>lua require("dap.ui.variables").scopes()<CR>',   "Scopes" },
-			s = {
-				name = " STEP",
-				i = { '<cmd>lua require("dap").step_into()<CR>', "Into" },
-				o = { '<cmd>lua require("dap").step_over()<CR>', "Over" },
-				x = { '<cmd>lua require("dap").step_out()<CR>', "Out" },
-			},
-		},
-		D = {
-			name = "Dioxus",
-			x = { "<cmd>%!dx translate<cr>", "DX Translate File" },
-		},
-		m = {
-			name = "  MISC",
-			t = { "<cmd>lua MiniTrailspace.trim()<CR>", "Trim Trailspace" },
-			m = { "<cmd>lua MiniMap.toggle()<CR>", "Minimap" },
-			R = { "<cmd>lua MiniMap.refresh()<CR>", "Refresh Minimap" },
-		},
-		s = {
-			name = "  SESSION",
-			s = {
-				function()
-					require("resession").save()
-				end,
-				"Save",
-			},
-			l = {
-				function()
-					require("resession").load()
-				end,
-				"Load",
-			},
-			d = {
-				function()
-					require("resession").delete()
-				end,
-				"Delete",
-			},
-		},
-		["<leader>"] = {
-			name = "󰢚  Shadovim",
-			u = { "<cmd>ShadovimUpdate<cr>", "Update Shadovim" },
-			m = { "<cmd>ShadovimCheckMason<cr>", "Check Mason" },
-			r = { "<cmd>source ~/.config/nvim/init.lua<cr>", "Reload Config" },
-			c = { "<cmd>Fidget clear<cr>", "Clear Notifications" },
-			l = { "<cmd>Fidget lsp_suppress<cr>", "Suppress LSP Notifications" },
-			s = { "<cmd>Fidget suppress<cr>", "Suppress Notifications" },
-		},
-	}
+    { "<leader>d", group = " DEBUG" },
+    { "<leader>dK", '<cmd>lua require("dap.ui.widgets").hover()<CR>', desc = "Hover" },
+    { "<leader>db", '<cmd>lua require("dap").toggle_breakpoint()<CR>', desc = "Breakpoint" },
+    { "<leader>dc", '<cmd>lua require("dap").continue()<CR>', desc = "Continue" },
+    { "<leader>df", '<cmd>lua require("dapui").float_element()<CR>', desc = "Float" },
+    { "<leader>dj", '<cmd>lua require("dap").down()<CR>', desc = "Down STrace" },
+    { "<leader>dk", '<cmd>lua require("dap").up()<CR>', desc = "Up STrace" },
+    { "<leader>dl", '<cmd>lua require("dap").run_last()<CR>', desc = "Run Last" },
+    { "<leader>dp", '<cmd>lua require("dap.ui.widgets").preview()<CR>', desc = "Preview" },
+    { "<leader>dq", '<cmd>lua require("dap").terminate()<CR>', desc = "Terminate" },
+    { "<leader>ds", group = " STEP" },
+    { "<leader>du", '<cmd>lua require("dapui").toggle()<CR>', desc = "UI" },
+    { "<leader>dsi", '<cmd>lua require("dap").step_into()<CR>', desc = "Into" },
+    { "<leader>dso", '<cmd>lua require("dap").step_over()<CR>', desc = "Over" },
+    { "<leader>dsx", '<cmd>lua require("dap").step_out()<CR>', desc = "Out" },
 
-	local wk = require("which-key")
-	wk.register(m_mappings, { buffer = nil, silent = true, noremap = true, nowait = true, mode = "n" })
-	wk.register(n_mappings, { buffer = nil, silent = true, noremap = true, nowait = true, mode = "n", prefix = "<leader>" })
-	wk.register(g_mappings, { buffer = nil, silent = true, noremap = true, nowait = true, mode = "n", prefix = "<leader>" })
-	wk.register(v_mappings, { buffer = nil, silent = true, noremap = true, nowait = true, mode = "v", prefix = "<leader>" })
-	wk.register(t_mappings, { buffer = nil, silent = true, noremap = true, nowait = true, mode = "t", prefix = "<leader>" })
+    { "<leader>f", group = " FILES" },
+    { "<leader>fe", "<cmd>Neotree toggle<CR>", desc = "Neo-Tree" },
+    { "<leader>fj", "<cmd>lua require('jot').toggle()<CR>", desc = "Jot" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Recent" },
+
+    { "<leader>g", group = "󰊢 GIT" },
+    { "<leader>gB", "<cmd>Gitsigns blame_line{full=true}<cr>", desc = "Blame Line Full" },
+    { "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset Buffer" },
+    { "<leader>gS", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Undo Stage Hunk" },
+    { "<leader>gb", "<cmd>Gitsigns blame_line<cr>", desc = "Blame Line" },
+    { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Diff" },
+    { "<leader>gj", "<cmd>Gitsigns next_hunk<cr>", desc = "Next Hunk" },
+    { "<leader>gk", "<cmd>Gitsigns prev_hunk<cr>", desc = "Prev Hunk" },
+    { "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset Hunk" },
+    { "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage Hunk" },
+    { "<leader>gm", "<cmd>Telescope git_commits<cr>", desc = "Checkout Commit" },
+    { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open Changed File" },
+    { "<leader>gc", "<cmd>Telescope git_branches<cr>", desc = "Checkout Branch" },
+    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Lazygit" },
+    { "<leader>gG", "<cmd>LazyGitConfig<cr>", desc = "Lazygit Config" },
+
+    { "<leader>l", group = " LSP" },
+    { "<leader>lA", "<cmd>AerialToggle", desc = "Aerial" },
+    { "<leader>lN", "<cmd>AerialNavToggle", desc = "Aerial Nav" },
+    { "<leader>ln", "<cmd>Navbuddy", desc = "Navbuddy" },
+    { "<leader>lI", "<cmd>LspInfo<cr>", desc = "Info" },
+    { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
+    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
+    { "<leader>lu", "<cmd>TSUpdate<cr>", desc = "Treesitter Update" },
+    { "<leader>li", "<cmd>TSInstallInfo<cr>", desc = "Treesitter Info" },
+    { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>", desc = "Next Diagnostic" },
+    { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "Prev Diagnostic" },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+
+    { "<leader>m", group = " MISC" },
+    { "<leader>mm", "<cmd>lua MiniMap.toggle()<CR>", desc = "Minimap" },
+    { "<leader>mR", "<cmd>lua MiniMap.refresh()<CR>", desc = "Refresh Minimap" },
+    { "<leader>mt", "<cmd>lua MiniTrailspace.trim()<CR>", desc = "Trim Trailspace" },
+
+    { "<leader>n", group = " NEOGEN" },
+    { "<leader>nc", "<cmd>Neogen class<CR>", desc = "Class" },
+    { "<leader>nt", "<cmd>Neogen type<CR>", desc = "Type" },
+    { "<leader>nf", "<cmd>Neogen func<CR>", desc = "Function" },
+    { "<leader>nl", "<cmd>Neogen file<CR>", desc = "File" },
+    { "<leader>nn", "<cmd>Neogen<CR>", desc = "Any" },
+
+    { "<leader>o", group = " OPTIONS" },
+    { "<leader>on", "<cmd>lua require('shadovim.config.utils').toggle_option('number')<cr>", desc = "Number" },
+    { "<leader>oo", "<cmd>Ranger<cr>", desc = "Ranger" },
+    { "<leader>or", "<cmd>lua require('shadovim.config.utils').toggle_option('relativenumber')<cr>", desc = "Relative Number" },
+    { "<leader>os", "<cmd>lua require('shadovim.config.utils').toggle_option('spell')<cr>", desc = "Spell" },
+    { "<leader>ow", "<cmd>lua require('shadovim.config.utils').toggle_option('wrap')<cr>", desc = "Wrap" },
+
+    { "<leader>p", group = "󰏖 LAZY" },
+    { "<leader>pi", "<cmd>Lazy install<cr>", desc = "Install" },
+    { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync" },
+    { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update" },
+    { "<leader>pC", "<cmd>Lazy clean<cr>", desc = "Clean" },
+    { "<leader>pS", "<cmd>Lazy show<cr>", desc = "Status" },
+    { "<leader>pc", "<cmd>Lazy log<cr>", desc = "Log" },
+
+    { "<leader>s", group = " SESSION" },
+    { "<leader>ss", function() require("resession").save() end, desc = "Save" },
+    { "<leader>sl", function() require("resession").load() end, desc = "Load" },
+    { "<leader>sd", function() require("resession").delete() end, desc = "Delete" },
+
+    { "<leader>t", group = " TELESCOPE" },
+    { "<leader>tH", "<cmd>Telescope highlights<cr>", desc = "Highlights" },
+    { "<leader>tM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+    { "<leader>tR", "<cmd>Telescope registers<cr>", desc = "Registers" },
+    { "<leader>tc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>tf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+    { "<leader>th", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+    { "<leader>tj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
+    { "<leader>tk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+    { "<leader>tm", "<cmd>Telescope macroscope<cr>", desc = "Macros" },
+    { "<leader>tn", "<cmd>Telescope noice<cr>", desc = "Noice Messages" },
+    { "<leader>to", "<cmd>Telescope harpoon marks<cr>", desc = "Harpoon" },
+    { "<leader>tp", "<cmd>Telescope projects<cr>", desc = "Projects" },
+    { "<leader>tr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
+    { "<leader>tt", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+    { "<leader>tu", "<cmd>Telescope undo<cr>", desc = "Undo" },
+    { "<leader>tw", "<cmd>Telescope live_grep<cr>", desc = "Find Text" },
+    { "<leader>ty", "<cmd>Telescope neoclip<cr>", desc = "Clipboard" },
+
+    { "<leader>w", group = " WINDOWS" },
+    { "<leader>wh", "<C-w>s", desc = "Horizontal Split" },
+    { "<leader>wv", "<C-w>v", desc = "Vertical Split" },
+    { "<leader>we", "<C-w>=", desc = "Make Splits Equal" },
+    { "<leader>wq", "<cmd>close<CR>", desc = "Close Split" },
+  }
+
+  local wk = require("which-key")
+  wk.add(m_mappings, { silent = true, noremap = true, nowait = true, mode = "n" })
+  wk.add(n_mappings, { silent = true, noremap = true, nowait = true, mode = "n" })
+  wk.add(g_mappings, { silent = true, noremap = true, nowait = true, mode = "n" })
+  wk.add(v_mappings, { silent = true, noremap = true, nowait = true, mode = "v" })
+  wk.add(t_mappings, { silent = true, noremap = true, nowait = true, mode = "t" })
 end
 
 --------------------------------------------------------------------------------
@@ -295,10 +277,18 @@ map("i", "<C-l>", "<Right>", opts, { desc = "Move Cursor Right in Insert Mode" }
 map("n", "s", ":HopChar1<cr>", opts)
 map("n", "S", ":HopPattern<cr>", opts)
 
-map({ "n", "o" }, "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
-map({ "n", "o" }, "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
-map({ "n", "o" }, "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
-map({ "n", "o" }, "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
+map({ "n", "o" }, "f",
+  ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>",
+  opts)
+map({ "n", "o" }, "F",
+  ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>",
+  opts)
+map({ "n", "o" }, "t",
+  ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>",
+  opts)
+map({ "n", "o" }, "T",
+  ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>",
+  opts)
 
 -- Split Management
 map("t", "<C-S-h>", "<C-\\><C-N><C-w>h", opts, { desc = "Move out of terminal to split left" })
@@ -324,10 +314,10 @@ map("n", "<leader>J", ":JABSOpen<CR>", opts, { desc = "Open JABS" })
 -- Tabs
 --- Switch Tab
 for i, sym in ipairs({ "!", "@", "#", "$", "%", "^", "&", "*", "(" }) do
-	map("n", "<leader>" .. sym, "<cmd>Tabbot send " .. i .. "<cr>", opts, { desc = "Send to Tab " .. i })
+  map("n", "<leader>" .. sym, "<cmd>Tabbot send " .. i .. "<cr>", opts, { desc = "Send to Tab " .. i })
 end
 for i = 1, 9 do
-	map("n", "<leader>" .. i, "<cmd>Tabbot go " .. i .. "<cr>", opts, { desc = "Goto Tab " .. i })
+  map("n", "<leader>" .. i, "<cmd>Tabbot go " .. i .. "<cr>", opts, { desc = "Goto Tab " .. i })
 end
 
 -- Searching
@@ -351,7 +341,9 @@ map("n", "<F3>", ":set invnumber invrelativenumber<CR>", opts, { desc = "Toggle 
 map("n", "<leader>A", ":Alpha<CR>", opts, { desc = "Open Alpha" })
 map("n", "<leader>V", ":ToggleVenn<CR>", opts, { desc = "Toggle Venn Mode" })
 
-map("n", "<Leader><TAB>", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, no_ignore=true, follow=true, hidden=true})<cr>", opts)
+map("n", "<Leader><TAB>",
+  "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, no_ignore=true, follow=true, hidden=true})<cr>",
+  opts)
 vim.cmd([[imap <silent><script><expr> <C-c> copilot#Accept("\<CR>")]])
 
 -- Renaming

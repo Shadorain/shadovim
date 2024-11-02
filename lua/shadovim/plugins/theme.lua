@@ -4,7 +4,11 @@ return {
     lazy = false,
     config = function()
       vim.cmd.colorscheme("shado")
-      vim.cmd([[hi Keyword gui=italic]])
+      vim.cmd([[
+        hi Keyword gui=italic
+        hi WinBar guibg=None
+        hi WinBarNC guibg=None
+      ]])
     end,
   },
 
