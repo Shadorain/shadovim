@@ -5,7 +5,7 @@ return {
   opts = {
     setup = {
       delay = function(ctx)
-        return ctx.plugin and 0 or 100
+        return ctx.plugin and 0 or 200
       end,
       filter = function(mapping)
         return mapping.desc and mapping.desc ~= ""

@@ -50,6 +50,7 @@ M.on_attach = function(client, bufnr)
     { "<leader>ch", '<cmd>lua vim.cmd.RustLsp({ "hover", "actions" })<CR>',                  desc = "Hover Actions" },
     { "<leader>cR", '<cmd>lua vim.cmd.RustLsp("renderDiagnostic")<CR>',                      desc = "Render Diagnostic" },
     { "<leader>co", '<cmd>lua vim.cmd.RustLsp("openDocs")<CR>',                              desc = "Open Docs" },
+    { "<leader>cT", "<cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>",   desc = "Toggle Diagnostics" },
 
     { "<leader>cr", "<cmd>OverseerRun<CR>",                                                  desc = "Overseer Run" },
     { "<leader>cb", "<cmd>OverseerBuild<CR>",                                                desc = "Build" },

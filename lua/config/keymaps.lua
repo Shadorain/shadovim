@@ -340,6 +340,8 @@ map("n", "<F9>", '<cmd>lua require("dap").step_out()<CR>', opts, { desc = "Debug
 map("n", "<F3>", ":set invnumber invrelativenumber<CR>", opts, { desc = "Toggle Line Numbers" })
 map("n", "<leader>A", ":Alpha<CR>", opts, { desc = "Open Alpha" })
 map("n", "<leader>V", ":ToggleVenn<CR>", opts, { desc = "Toggle Venn Mode" })
+map("n", "<C-j>", "<cmd>ToggleTerm direction=float<CR>", opts, { desc = "Toggle Terminal" })
+map("t", "<C-j>", "<C-\\><C-n><cmd>ToggleTerm direction=float<CR>", opts, { desc = "Toggle Terminal" })
 
 map("n", "<Leader><TAB>",
   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, no_ignore=true, follow=true, hidden=true})<cr>",
