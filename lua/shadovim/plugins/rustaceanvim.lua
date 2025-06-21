@@ -1,7 +1,7 @@
 return {
   "mrcjkb/rustaceanvim",
-  version = "^4",
   ft = { "rust" },
+  lazy = false,
   config = function()
     vim.g.rustaceanvim = function()
       -- Update this path
@@ -31,10 +31,7 @@ return {
           default_settings = {
             -- rust-analyzer language server configuration
             ["rust-analyzer"] = {
-              lens = { enable = true },
-              checkOnSave = { command = "clippy" },
               diagnostics = {
-                enabled = true,
                 disabled = { "unresolved-proc-macro" },
                 enableExperimental = true,
               },

@@ -116,6 +116,8 @@ M.whichkeys = function()
     { "<leader>bn", "<cmd>bp<CR>", desc = "Prev" },
     { "<leader>bu", "<cmd>lua MiniBufremove.unshow<CR>", desc = "Unload" },
     { "<leader>bv", "<cmd>ToggleTerm size=50 direction=vertical<cr>", desc = "Terminal Side" },
+    { "<leader>bp", "<cmd>:BufferPin<CR>", desc = "List" },
+    { "<leader>bp", "<cmd>:BufferRestore<CR>", desc = "List" },
 
     { "<leader>d", group = " DEBUG" },
     { "<leader>dK", '<cmd>lua require("dap.ui.widgets").hover()<CR>', desc = "Hover" },
@@ -303,13 +305,14 @@ map("n", "Ww", "<C-w>c", opts, { desc = "Close split" })
 map("n", "Wb", "<C-w>=", opts, { desc = "Balance splits" })
 
 -- Buffers
-map("n", "<C-S-j>", ":CybuLastusedNext<cr>", opts, { desc = "Cybu goto last next buffer" })
-map("n", "<C-S-k>", ":CybuLastusedPrev<cr>", opts, { desc = "Cybu goto last prev buffer" })
-map("n", "<TAB>", ":CybuLastusedNext<cr>", opts, { desc = "Cybu goto last next buffer" })
-map("n", "<S-TAB>", ":CybuLastusedPrev<cr>", opts, { desc = "Cybu goto last prev buffer" })
+map("n", "<C-TAB>", "<cmd>CybuLastusedNext<cr>", opts, { desc = "Cybu goto last next buffer" })
+map("n", "<C-S-TAB>", "<cmd>CybuLastusedPrev<cr>", opts, { desc = "Cybu goto last prev buffer" })
+map("n", "<TAB>", "<cmd>BufferNext<cr>", opts, { desc = "Goto next buffer" })
+map("n", "<S-TAB>", "<cmd>BufferPrevious<cr>", opts, { desc = "Goto prev buffer" })
+map("n", "-", "<cmd>BufferPick<cr>", opts, { desc = "Pick Buffer" })
 map("n", "<c-i>", "<c-i>", opts)
 map("n", "<leader><cr>", "<cmd>Bufala split<cr>", opts, { desc = "Stack split" })
-map("n", "<leader>J", ":JABSOpen<CR>", opts, { desc = "Open JABS" })
+map("n", "<leader>J", "<cmd>JABSOpen<CR>", opts, { desc = "Open JABS" })
 
 -- Tabs
 --- Switch Tab
