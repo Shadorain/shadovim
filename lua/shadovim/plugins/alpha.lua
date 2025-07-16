@@ -76,9 +76,9 @@ return {
     -- Info Text
     local function info_value()
       -- local plugins = string.format(" %d", vim.tbl_count(packer_plugins))
-      local datetime = os.date(" %d-%m-%Y")
+      local datetime = os.date("  %b %d, %Y")
       local version = vim.version()
-      local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+      local nvim_version_info = "    v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
       return "" .. datetime .. nvim_version_info
     end
@@ -239,8 +239,8 @@ return {
         dashboard.button("i", "  New file", "<cmd>ene <BAR> startinsert<CR>"),
         dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<CR>"),
         -- dashboard.button("g", "  Live grep", '<cmd>lua require("telescope.builtin").live_grep({shorten_path=true})<CR>'),
-        dashboard.button("S", "  Open sesion", "<cmd>lua require('resession').load()<CR>"),
-        dashboard.button("L", "  Last sesion", "<cmd>lua require('resession').load('last')<CR>"),
+        dashboard.button("S", "  Open session", "<cmd>lua require('resession').load()<CR>"),
+        dashboard.button("L", "  Last session", "<cmd>lua require('resession').load('last')<CR>"),
         -- dashboard.button("T", "  Todos", "<cmd>Neorg workspace gtd<CR>"),
         -- dashboard.button("J", "  Journal", "<cmd>Neorg journal today<CR>"),
         -- dashboard.button("M", "  Neorg main", "<cmd>Neorg workspace main<CR>"),
@@ -267,13 +267,14 @@ return {
         dashboard.button("nc", "  Options", "<cmd>e ~/.config/nvim/lua/config/options.lua<cr>"),
         dashboard.button("nk", "  Keybinds", "<cmd>e ~/.config/nvim/lua/config/keymaps.lua<cr>"),
         dashboard.button("nl", "  LSP", "<cmd>e ~/.config/nvim/lua/shadovim/plugins/lsp/attach.lua<cr>"),
-        dashboard.button("nx", "  Shadotheme", "<cmd>e ~/dev/shadotheme/colors/shado.lua<cr>"),
+        dashboard.button("nx", "  Shadotheme", "<cmd>e ~/.local/share/nvim/lazy/shadotheme/colors/shado.lua<cr>"),
         dashboard.button("ch", "  Hyprland", "<cmd>e ~/.config/hypr/hyprland.conf<cr>"),
         dashboard.button("cw", "  Waybar", "<cmd>e ~/.config/waybar/config<cr>"),
         dashboard.button("ck", "  Kitty", "<cmd>e ~/.config/kitty/kitty.conf<cr>"),
         dashboard.button("zc", "  Zshrc", "<cmd>e ~/.config/zsh/.zshrc<cr>"),
         dashboard.button("za", "  Zsh Aliases", "<cmd>e ~/.config/zsh/.zsh_aliases<cr>"),
-        dashboard.button("ze", "  Zsh Environment", "<cmd>e ~/.config/zsh/.zshenv<cr>"),
+        dashboard.button("ze", "  Zsh Environment", "<cmd>e ~/.zshenv<cr>"),
+        dashboard.button("zj", "  Zellij", "<cmd>e ~/.config/zellij/config.kdl<cr>"),
       },
       opts = { position = "center" },
     }
