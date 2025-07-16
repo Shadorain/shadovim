@@ -12,6 +12,22 @@ M.setup = function(on_attach, capabilities)
     })
   end
 
+  lspconfig.gopls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+      gopls = {
+        completeUnimported = true,
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+        }
+      }
+    }
+  })
 
   lspconfig.tailwindcss.setup({
     on_attach = on_attach,
@@ -26,6 +42,7 @@ M.setup = function(on_attach, capabilities)
     },
     workspace_required = false,
   })
+
   lspconfig.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
