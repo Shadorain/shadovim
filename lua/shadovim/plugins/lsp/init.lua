@@ -10,7 +10,7 @@ return {
 			"ray-x/lsp_signature.nvim",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
+			local lspconfig = vim.lsp.config()
 			local on_attach = require("shadovim.plugins.lsp.attach").on_attach
 			local capabilities = require("shadovim.plugins.lsp.attach").capabilities
 
@@ -66,6 +66,15 @@ return {
 					cancel_installation = "<C-c>",
 				},
 			},
+		},
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
+		lazy = false,
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
 		},
 	},
 	{
