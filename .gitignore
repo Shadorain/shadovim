@@ -1,8 +1,9 @@
-plugin
-ftplugin
-spell
 lazy-lock.json
-
-.comments
-.vim-bookmarks
-.ignore/
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
