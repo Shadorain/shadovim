@@ -124,4 +124,15 @@ return {
   },
 
   { "filipdutescu/renamer.nvim", requires = { "nvim-lua/plenary.nvim" }, opts = { border = true } },
+
+  {
+    "nat-418/bufala.nvim",
+    cmd = "Bufala",
+    opts = { layout = "stack" },
+  },
+  {
+    "nat-418/tabbot.nvim",
+    cmd = "Tabbot",
+    config = true,
+  },
 }
