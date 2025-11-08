@@ -16,10 +16,10 @@ del("n", "<S-l>")
 del("n", "<leader>l")
 
 --- Split Navigation
-del("n", "<C-h>")
-del("n", "<C-j>")
-del("n", "<C-k>")
-del("n", "<C-l>")
+del("n", "<c-h>")
+del("n", "<c-j>")
+del("n", "<c-k>")
+del("n", "<c-l>")
 
 --------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ end, { desc = "LazyVim Changelog" })
 -- Terminals
 map({ "n", "t" }, "<c-j>", function()
   Snacks.terminal(nil, { cwd = LazyVim.root() })
-end, { desc = "Terminal (Root Dir)" })
+end, opts("Terminal (Root Dir)"))
 
 -- Searching
 map("n", "n", "'Nn'[v:searchforward].'zzzv'", { expr = true, desc = "Next Search Result" })
@@ -84,77 +84,6 @@ map("n", "<leader>D", function()
 end, opts("Dashboard"))
 
 -- Renaming
-vim.api.nvim_set_keymap("i", "<F2>", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
-vim.api.nvim_set_keymap("n", "<leader>rn", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
-vim.api.nvim_set_keymap("v", "<leader>rn", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
-
---------------------------------------------------------------------------------
-
--- Leader
-Whichkeys = function()
-  local m_mappings = {
-    { "m", group = " BOOKMARKS" },
-    { "mA", "<cmd>silent BookmarkAnnotate<cr>", desc = "Annotate" },
-    { "mB", "<cmd>silent BookmarkToggle<cr>", desc = "Toggle" },
-    { "mC", "<cmd>silent BookmarkClear<cr>", desc = "Clear" },
-    { "mS", "<cmd>silent BookmarkShowAll<cr>", desc = "Show" },
-    { "mX", "<cmd>silent BookmarkClearAll<cr>", desc = "Clear All" },
-    { "mj", "<cmd>silent BookmarkNext<cr>", desc = "Next" },
-    { "mk", "<cmd>silent BookmarkPrev<cr>", desc = "Prev" },
-  }
-
-  local t_mappings = {
-    { "<leader>b", group = " TERMINAL" },
-    { "<leader>bm", "<C-\\><C-n><cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
-    { "<leader>bv", "<C-\\><C-n><cmd>ToggleTerm size=50 direction=vertical<cr>", desc = "Terminal Side" },
-    { "<leader>b,", "<C-\\><C-n><cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Terminal Bottom" },
-    { "<leader>b1", "<C-\\><C-n><cmd>1ToggleTerm<cr>", desc = "Terminal 1" },
-    { "<leader>b2", "<C-\\><C-n><cmd>2ToggleTerm<cr>", desc = "Terminal 2" },
-    { "<leader>b3", "<C-\\><C-n><cmd>3ToggleTerm<cr>", desc = "Terminal 3" },
-    { "<leader>b4", "<C-\\><C-n><cmd>4ToggleTerm<cr>", desc = "Terminal 4" },
-  }
-
-  local g_mappings = {
-    { "gcb", group = "□ COMMENT BOX" },
-    { "gcbb", "<Cmd>CBccbox<CR>", desc = "Box Title" },
-    { "gcbm", "<Cmd>CBllbox14<CR>", desc = "Marked" },
-    { "gcbl", "<Cmd>CBline<CR>", desc = "Simple Line" },
-    { "gcbt", "<Cmd>CBllline<CR>", desc = "Titled Line" },
-    { "gcbd", "<Cmd>CBd<CR>", desc = "Remove a box" },
-  }
-
-  local n_mappings = {
-    -- POMO --
-    { "<leader>P", group = " +pomo" },
-    { "<leader>Pv", "<cmd>TimerShow<cr>", desc = "Show" },
-    { "<leader>Ps", "<cmd>TimerStart", desc = "Start" },
-    { "<leader>PR", "<cmd>TimerResume<cr>", desc = "Resume" },
-    { "<leader>Pp", "<cmd>TimerPause<cr>", desc = "Pause" },
-    { "<leader>PS", "<cmd>TimerStop<cr>", desc = "Stop" },
-    { "<leader>Pr", "<cmd>TimerRepeat<cr>", desc = "Repeat" },
-    { "<leader>P1", "<cmd>TimerStart 1m<cr>", desc = "1m" },
-    { "<leader>P5", "<cmd>TimerStart 5m<cr>", desc = "5m" },
-    { "<leader>PH", "<cmd>TimerStart 30m<cr>", desc = "30m" },
-    { "<leader>Ph", "<cmd>TimerStart 1h<cr>", desc = "1h" },
-
-    -- BUFFER --
-    { "<leader>b,", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Terminal Bottom" },
-    { "<leader>b1", "<cmd>1ToggleTerm<cr>", desc = "Terminal 1" },
-    { "<leader>b2", "<cmd>2ToggleTerm<cr>", desc = "Terminal 2" },
-    { "<leader>b3", "<cmd>3ToggleTerm<cr>", desc = "Terminal 3" },
-    { "<leader>b4", "<cmd>4ToggleTerm<cr>", desc = "Terminal 4" },
-    { "<leader>bf", "<cmd>set shiftwidth=4 | set tabstop=4 | set softtabstop=4<CR>", desc = "Fix Spacing" },
-    { "<leader>bm", "<cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
-    { "<leader>bp", "<cmd>:BufferPin<CR>", desc = "List" },
-    { "<leader>br", "<cmd>:BufferRestore<CR>", desc = "List" },
-
-    -- SESSION --
-    { "<leader>p", group = " +session" },
-  }
-
-  local wk = require("which-key")
-  wk.add(m_mappings, { silent = true, noremap = true, nowait = true, mode = "n" })
-  wk.add(n_mappings, { silent = true, noremap = true, nowait = true, mode = "n" })
-  wk.add(g_mappings, { silent = true, noremap = true, nowait = true, mode = "n" })
-  wk.add(t_mappings, { silent = true, noremap = true, nowait = true, mode = "t" })
-end
+map("i", "<F2>", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
+map("n", "<leader>rn", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
+map("v", "<leader>rn", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))

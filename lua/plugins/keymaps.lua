@@ -19,23 +19,35 @@ return {
       },
     },
   },
-    {
-  "MagicDuck/grug-far.nvim",
-  keys = {
-    {
-      "<leader>sr",
-      function()
-        local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
-        require("grug-far").toggle_instance({
-          transient = true,
-          prefills = {
-            filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-          },
-        })
-      end,
-      mode = { "n", "x" },
-      desc = "Search and Replace",
+  {
+    "MagicDuck/grug-far.nvim",
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+          require("grug-far").toggle_instance({
+            transient = true,
+            prefills = {
+              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+            },
+          })
+        end,
+        mode = { "n", "x" },
+        desc = "Search and Replace",
+      },
     },
   },
-}
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        mode = { "n", "x" },
+        { "<leader>T", icon = " ", group = "pomo" },
+        { "gcb", icon = "□ ", group = "comment-box" },
+        { "<leader>p", icon = " ", group = "session" },
+        { "m", icon = " ", group = "bookmarks" },
+      },
+    },
+  },
 }

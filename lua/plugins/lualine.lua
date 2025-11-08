@@ -61,29 +61,23 @@ return {
       local sections = {
         lualine_c = { "filename" },
         lualine_x = {
-          table.insert(opts.sections.lualine_x, {
-            function()
-              return {
-                "overseer",
-                {
-                  "diagnostics",
-                  icons_enabled = true,
-                  sources = { "nvim_lsp" },
-                  sections = { "error", "warn" }, -- 'info', 'hint'
-                  diagnostics_color = {
-                    error = "LualineDiagnosticError",
-                    warn = "LualineDiagnosticWarn",
-                    info = "LualineDiagnosticInfo",
-                    hint = "LualineDiagnosticHint",
-                  },
-                  colored = true,
-                  update_in_insert = false,
-                  always_visible = false,
-                },
-                pomo,
-              }
-            end,
-          }),
+          "overseer",
+          {
+            "diagnostics",
+            icons_enabled = true,
+            sources = { "nvim_lsp" },
+            sections = { "error", "warn" }, -- 'info', 'hint'
+            diagnostics_color = {
+              error = "LualineDiagnosticError",
+              warn = "LualineDiagnosticWarn",
+              info = "LualineDiagnosticInfo",
+              hint = "LualineDiagnosticHint",
+            },
+            colored = true,
+            update_in_insert = false,
+            always_visible = false,
+          },
+          pomo,
         },
         lualine_y = {
           {
@@ -125,6 +119,7 @@ return {
               return "  Files"
             end,
           },
+          lualine_x = { pomo },
           lualine_y = {},
           lualine_z = {},
         },
@@ -137,6 +132,7 @@ return {
               return "Dashboard"
             end,
           },
+          lualine_x = { pomo },
           lualine_y = {},
           lualine_z = {
             function()
@@ -172,8 +168,10 @@ return {
       }
 
       local blank_ext = {
-        sections = {},
-        filetypes = { "toggleterm", "trouble" },
+        sections = {
+          lualine_x = { pomo },
+        },
+        filetypes = { "toggleterm", "trouble", "snacks_terminal" },
       }
 
       -- Setup

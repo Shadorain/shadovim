@@ -72,13 +72,32 @@ return {
     "LudoPinelli/comment-box.nvim",
     cmd = { "CBccbox", "CBllline", "CBline", "CBllbox14", "CBd" },
     config = true,
+    keys = {
+      { mode = { "n", "v" }, "gcbb", "<Cmd>CBccbox<CR>", desc = "Box Title" },
+      { mode = { "n", "v" }, "gcbm", "<Cmd>CBllbox14<CR>", desc = "Marked" },
+      { mode = { "n", "v" }, "gcbl", "<Cmd>CBline<CR>", desc = "Simple Line" },
+      { mode = { "n", "v" }, "gcbt", "<Cmd>CBllline<CR>", desc = "Titled Line" },
+      { mode = { "n", "v" }, "gcbd", "<Cmd>CBd<CR>", desc = "Remove a box" },
+    },
   },
 
   {
     "epwalsh/pomo.nvim",
     version = "*",
-    cmd = { "TimerStart", "TimerRepeat" },
+    cmd = { "TimerStart", "TimerRepeat", "TimerShow" },
     opts = { notifiers = { { name = "Default", opts = { sticky = false } } } },
+    keys = {
+      { mode = { "n", "v" }, "<leader>Tv", "<cmd>TimerShow<cr>", desc = "Show" },
+      { mode = { "n", "v" }, "<leader>Ts", "<cmd>TimerStart", desc = "Start" },
+      { mode = { "n", "v" }, "<leader>TR", "<cmd>TimerResume<cr>", desc = "Resume" },
+      { mode = { "n", "v" }, "<leader>Tp", "<cmd>TimerPause<cr>", desc = "Pause" },
+      { mode = { "n", "v" }, "<leader>TS", "<cmd>TimerStop<cr>", desc = "Stop" },
+      { mode = { "n", "v" }, "<leader>Tr", "<cmd>TimerRepeat<cr>", desc = "Repeat" },
+      { mode = { "n", "v" }, "<leader>T1", "<cmd>TimerStart 1m<cr>", desc = "1m" },
+      { mode = { "n", "v" }, "<leader>T5", "<cmd>TimerStart 5m<cr>", desc = "5m" },
+      { mode = { "n", "v" }, "<leader>TH", "<cmd>TimerStart 30m<cr>", desc = "30m" },
+      { mode = { "n", "v" }, "<leader>Th", "<cmd>TimerStart 1h<cr>", desc = "1h" },
+    },
   },
 
   {
@@ -93,6 +112,15 @@ return {
       "BookmarkPrev",
     },
     config = true,
+    keys = {
+      { mode = { "n", "v" }, "mA", "<cmd>silent BookmarkAnnotate<cr>", desc = "Annotate" },
+      { mode = { "n", "v" }, "mB", "<cmd>silent BookmarkToggle<cr>", desc = "Toggle" },
+      { mode = { "n", "v" }, "mC", "<cmd>silent BookmarkClear<cr>", desc = "Clear" },
+      { mode = { "n", "v" }, "mS", "<cmd>silent BookmarkShowAll<cr>", desc = "Show" },
+      { mode = { "n", "v" }, "mX", "<cmd>silent BookmarkClearAll<cr>", desc = "Clear All" },
+      { mode = { "n", "v" }, "mj", "<cmd>silent BookmarkNext<cr>", desc = "Next" },
+      { mode = { "n", "v" }, "mk", "<cmd>silent BookmarkPrev<cr>", desc = "Prev" },
+    },
   },
 
   { "filipdutescu/renamer.nvim", requires = { "nvim-lua/plenary.nvim" }, opts = { border = true } },
