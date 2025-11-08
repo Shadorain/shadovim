@@ -73,4 +73,27 @@ return {
     cmd = { "CBccbox", "CBllline", "CBline", "CBllbox14", "CBd" },
     config = true,
   },
+
+  {
+    "epwalsh/pomo.nvim",
+    version = "*",
+    cmd = { "TimerStart", "TimerRepeat" },
+    opts = { notifiers = { { name = "Default", opts = { sticky = false } } } },
+  },
+
+  {
+    "tomasky/bookmarks.nvim",
+    cmd = {
+      "BookmarkAnnotate",
+      "BookmarkToggle",
+      "BookmarkClear",
+      "BookmarkShowAll",
+      "BookmarkClearAll",
+      "BookmarkNext",
+      "BookmarkPrev",
+    },
+    config = true,
+  },
+
+  { "filipdutescu/renamer.nvim", requires = { "nvim-lua/plenary.nvim" }, opts = { border = true } },
 }

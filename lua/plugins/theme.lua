@@ -14,8 +14,6 @@ return {
 
   {
     "rebelot/kanagawa.nvim",
-    -- cmd = { "KanagawaLight" },
-    -- lazy = false,
     config = function()
       require("kanagawa").setup({
         colors = {
@@ -51,7 +49,6 @@ return {
 
   {
     "xiyaowong/nvim-transparent",
-    event = "VimEnter",
     lazy = false,
     config = function()
       local transparent = require("transparent")

@@ -41,6 +41,18 @@ local theme = {
   },
 }
 
+local pomo = function()
+  local ok, pomo = pcall(require, "pomo")
+  if not ok then
+    return ""
+  end
+  local timer = pomo.get_first_to_finish()
+  if timer == nil then
+    return ""
+  end
+  return "󰄉 " .. tostring(timer)
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -68,6 +80,7 @@ return {
                   update_in_insert = false,
                   always_visible = false,
                 },
+                pomo,
               }
             end,
           }),
@@ -103,6 +116,35 @@ return {
           },
         },
         filetypes = { "lazy" },
+      }
+
+      local snacks_picker_ext = {
+        sections = {
+          lualine_a = {
+            function()
+              return "  Files"
+            end,
+          },
+          lualine_y = {},
+          lualine_z = {},
+        },
+        filetypes = { "snacks_picker_list" },
+      }
+      local snacks_dash_ext = {
+        sections = {
+          lualine_a = {
+            function()
+              return "Dashboard"
+            end,
+          },
+          lualine_y = {},
+          lualine_z = {
+            function()
+              return "  " .. os.date("%R")
+            end,
+          },
+        },
+        filetypes = { "snacks_dashboard" },
       }
 
       local function is_loclist()
@@ -148,7 +190,7 @@ return {
           "trouble",
         },
       }
-      opts.extensions = { lazy_ext, blank_ext, quickfix_ext }
+      opts.extensions = { lazy_ext, blank_ext, snacks_picker_ext, snacks_dash_ext, quickfix_ext }
       return opts
     end,
   },
