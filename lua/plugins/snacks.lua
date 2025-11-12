@@ -34,17 +34,23 @@ return {
           enabled = true,
           auto_close = false,
           actions = {
-            window_picker = function(_, item)
-              if item.dir then
+            window_picker = function(picker, item)
+              if not item then
                 return
               end
+              -- If it's a directory, toggle it open/closed
+              if item.dir then
+                require("snacks.explorer.tree"):toggle(item.file)
+                picker:refresh()
+                return
+              end
+              -- Otherwise, open file in selected window
               local window_id = require("window-picker").pick_window()
               if not window_id then
                 return
               end
               vim.api.nvim_set_current_win(window_id)
-              vim.cmd("edit " .. item._path)
-              Snacks.explorer()
+              vim.cmd("edit " .. vim.fn.fnameescape(item._path))
             end,
           },
           win = {

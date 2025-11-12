@@ -7,4 +7,12 @@ return {
       ui = { border = "rounded" },
     },
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      diagnostics = {
+        virtual_text = false,
+      },
+    },
+  },
 }
