@@ -43,10 +43,6 @@ map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
 -- General Movement
-map("n", "<C-h>", "<C-w>h", opts("Move Cursor Left Buffer"))
-map("n", "<C-j>", "<C-w>j", opts("Move Cursor Down Buffer"))
-map("n", "<C-k>", "<C-w>k", opts("Move Cursor Up Buffer"))
-map("n", "<C-l>", "<C-w>l", opts("Move Cursor Right Buffer"))
 map("i", "<C-j>", "<Down>", opts("Move Cursor Down in Insert Mode"))
 map("i", "<C-k>", "<Up>", opts("Move Cursor Up in Insert Mode"))
 map("i", "<C-h>", "<Left>", opts("Move Cursor Left in Insert Mode"))
