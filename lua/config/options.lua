@@ -52,6 +52,7 @@ local options = {
   sessionoptions = "tabpages,globals,blank,buffers,curdir,folds,help,winsize,winpos,terminal",
   conceallevel = 2,
   listchars = "space:·",
+  list = false,
   virtualedit = "block",
   mousefocus = true,
   inccommand = "split",

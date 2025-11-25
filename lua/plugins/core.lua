@@ -12,6 +12,12 @@ return {
     opts = {
       diagnostics = {
         virtual_text = false,
+        underline = false,
+        signs = true,
+        update_in_insert = false,
+        float = {
+          border = "rounded",
+        },
       },
     },
   },

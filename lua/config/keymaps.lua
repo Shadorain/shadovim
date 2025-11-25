@@ -30,9 +30,10 @@ map("n", "<leader>C", function()
 end, { desc = "LazyVim Changelog" })
 
 -- Terminals
-map({ "n", "t" }, "<c-j>", function()
+map("n", "<C-j>", function()
   Snacks.terminal(nil, { cwd = LazyVim.root() })
 end, opts("Terminal (Root Dir)"))
+map("t", "<C-j>", "<C-\\><C-n><C-/>", opts("Terminal (Root Dir)"))
 
 -- Searching
 map("n", "n", "'Nn'[v:searchforward].'zzzv'", { expr = true, desc = "Next Search Result" })
@@ -50,7 +51,7 @@ map("i", "<C-l>", "<Right>", opts("Move Cursor Right in Insert Mode"))
 
 -- Split Management
 map("t", "<C-S-h>", "<C-\\><C-N><C-w>h", opts("Move out of terminal to split left"))
-map("t", "<C-S-j>", "<C-\\><C-N><C-w>j", opts("Move out of terminal to split up"))
+-- map("t", "<C-S-j>", "<C-\\><C-N><C-w>j", opts("Move out of terminal to split up"))
 map("t", "<C-S-k>", "<C-\\><C-N><C-w>k", opts("Move out of terminal to split down"))
 map("t", "<C-S-l>", "<C-\\><C-N><C-w>l", opts("Move out of terminal to split right"))
 map("n", "<leader>h", "<C-w>h", opts("Move to split left"))

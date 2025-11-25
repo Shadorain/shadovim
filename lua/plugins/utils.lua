@@ -1,6 +1,36 @@
 return {
   { "gbprod/stay-in-place.nvim", event = "BufWinEnter", config = true },
   { "nacro90/numb.nvim", event = "BufWinEnter", config = true },
+
+  {
+    "smoka7/hop.nvim",
+    opts = { keys = "etovxqpdygfblzhckisuran", virtual_cursor = false, case_insensitive = false },
+    keys = {
+      { "s", ":HopChar1<cr>", mode = { "n", "v" } },
+      { "S", ":HopPattern<cr>", mode = { "n", "v" } },
+      {
+        "f",
+        ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>",
+        mode = { "n", "o" },
+      },
+      {
+        "F",
+        ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>",
+        mode = { "n", "o" },
+      },
+      {
+        "t",
+        ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>",
+        mode = { "n", "o" },
+      },
+      {
+        "T",
+        ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>",
+        mode = { "n", "o" },
+      },
+    },
+  },
+
   {
     "jghauser/mkdir.nvim",
     event = "BufWritePre",
