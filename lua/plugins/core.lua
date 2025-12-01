@@ -3,6 +3,7 @@ return {
   { "LazyVim/LazyVim", version = false },
   {
     "mason-org/mason.nvim",
+    commands = { "Mason", "MasonUpdate" },
     opts = {
       ui = { border = "rounded" },
     },

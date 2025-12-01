@@ -23,6 +23,12 @@ del("n", "<c-l>")
 
 --------------------------------------------------------------------------------
 
+-- Resizing
+map("n", "<Up>", ":resize +2<CR>", opts("Resize Window Up"))
+map("n", "<Down>", ":resize -2<CR>", opts("Resize Window Down"))
+map("n", "<Left>", ":vertical resize +2<CR>", opts("Resize Window Left"))
+map("n", "<Right>", ":vertical resize -2<CR>", opts("Resize Window Right"))
+
 -- Management
 map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>C", function()

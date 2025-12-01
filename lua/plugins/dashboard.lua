@@ -1,3 +1,20 @@
+function _G.UpdateAll()
+  print("Updating Neovim plugins...")
+  vim.cmd("Lazy sync")
+
+  print("Updating Mason packages...")
+  require("lazy").load({ plugins = { "mason.nvim" } })
+  vim.cmd("MasonUpdate")
+
+  print("Updating Treesitter parsers...")
+  vim.cmd("TSUpdate all")
+  print("Neovim components updated successfully!")
+end
+
+vim.api.nvim_create_user_command("ShadovimUpdate", _G.UpdateAll, {
+  desc = "Update all neovim components: plugins, Mason packages, and Treesitter parsers.",
+})
+
 return {
   "snacks.nvim",
   opts = {
@@ -31,7 +48,7 @@ __||__ |   | __||__
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
           { icon = " ", key = "s", desc = "Sessions", action = function() require("resession").load() end },
           { icon = " ", key = "l", desc = "Last Session", action = function() require("resession").load("last") end },
-          { icon = "󰒲 ", key = "U", desc = "Update Plugins", action = ":Lazy sync" },
+          { icon = "󰒲 ", key = "U", desc = "Update All", action = ":ShadovimUpdate" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
