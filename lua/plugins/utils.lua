@@ -3,6 +3,17 @@ return {
   { "nacro90/numb.nvim", event = "BufWinEnter", config = true },
 
   {
+    "nosduco/remote-sshfs.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    cmd = { "RemoteSSHFSConnect", "RemoteSSHFSEdit" },
+    opts = {},
+    config = function(_, opts)
+      require("remote-sshfs").setup(opts)
+      require("telescope").load_extension("remote-sshfs")
+    end,
+  },
+
+  {
     "smoka7/hop.nvim",
     opts = { keys = "etovxqpdygfblzhckisuran", virtual_cursor = false, case_insensitive = false },
     keys = {
