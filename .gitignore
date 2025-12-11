@@ -7,3 +7,4 @@ debug
 foo.*
 *.log
 data
+lazy-lock.json
