@@ -2,6 +2,8 @@ return {
   "romgrk/barbar.nvim",
   event = "VeryLazy",
   keys = {
+    { "<leader>bn", "<cmd>BufferPrev<cr>", desc = "Prev Buffer" },
+    { "<leader>bb", "<cmd>BufferNext<cr>", desc = "Next Buffer" },
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
     { "<leader>bP", "<Cmd>BufferCloseAllButPinned<CR>", desc = "Delete Non-Pinned Buffers" },
     { "<leader>bD", "<Cmd>BufferCloseAllButCurrent<CR>", desc = "Delete Non-Current Buffers" },
