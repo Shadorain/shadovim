@@ -12,7 +12,7 @@ return {
           include_current_win = false,
           autoselect_one = true,
           bo = { -- filter using buffer options
-            filetype = { "neo-tree", "neo-tree-popup", "notify", "JABSwindow", "fidget" },
+            filetype = { "neo-tree", "neo-tree-popup", "notify", "fidget" },
             buftype = { "terminal", "nofile", "quickfix", "help", "prompt", "notify", "float" },
           },
         },

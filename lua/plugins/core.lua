@@ -3,7 +3,7 @@ return {
   { "LazyVim/LazyVim", version = false },
   {
     "mason-org/mason.nvim",
-    commands = { "Mason", "MasonUpdate" },
+    cmd = { "Mason", "MasonUpdate", "MasonInstall", "MasonUninstall" },
     opts = {
       ui = { border = "rounded" },
     },

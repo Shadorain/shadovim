@@ -42,13 +42,6 @@ return {
     },
   },
 
-  {
-    "jghauser/mkdir.nvim",
-    event = "BufWritePre",
-    config = function()
-      require("mkdir")
-    end,
-  },
 
   {
     "folke/which-key.nvim",
@@ -67,37 +60,7 @@ return {
     end,
   },
 
-  {
-    "matbme/JABS.nvim",
-    cmd = { "JABSOpen" },
-    keys = {
-      { "<leader>J", "<cmd>JABSOpen<CR>", desc = "Open JABS" },
-    },
-    opts = {
-      border = "rounded",
-      offset = {
-        bottom = 6,
-      },
-      preview = {
-        border = "rounded",
-      },
-      keymap = {
-        close = "d",
-        preview = "p",
-      },
-      highlight = {
-        current = "Title",
-        hidden = "FloatermNC",
-        split = "EndOfBuffer",
-        alternate = "Identifier",
-      },
-    },
-  },
 
-  {
-    "LunarVim/peek.lua",
-    keys = { { "gp", ":lua require('peek').Peek('definition')<CR>", mode = { "n", "x", "o" }, desc = "Peek" } },
-  },
   {
     "willothy/flatten.nvim",
     lazy = false,
@@ -164,7 +127,6 @@ return {
     },
   },
 
-  { "filipdutescu/renamer.nvim", requires = { "nvim-lua/plenary.nvim" }, opts = { border = true } },
 
   {
     "nat-418/bufala.nvim",

@@ -86,7 +86,29 @@ map("n", "<leader>D", function()
   Snacks.dashboard.open()
 end, opts("Dashboard"))
 
--- Renaming
-map("i", "<F2>", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
-map("n", "<leader>rn", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
-map("v", "<leader>rn", '<cmd>lua require("renamer").rename()<cr>', opts("Rename"))
+-- Renaming (inc-rename extra)
+map({ "n", "v" }, "<leader>rn", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true, desc = "Rename" })
+map("i", "<F2>", function()
+  return "<Esc>:IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true, desc = "Rename" })
+
+-- Peek definition without auto-jump
+map({ "n", "x" }, "gp", function()
+  Snacks.picker.lsp_definitions({ auto_confirm = false })
+end, opts("Peek definition"))
+
+
+-- Herdr annotate: visual selection -> plugin via file (works over --remote)
+map("x", "<leader>aa", function()
+  vim.cmd('normal! "zy')
+  local base = os.getenv("XDG_RUNTIME_DIR")
+  if not base or base == "" then
+    base = vim.fn.fnamemodify(vim.fn.tempname(), ":h")
+  end
+  local dir = base .. "/herdr-annotate-" .. vim.loop.getuid()
+  vim.fn.mkdir(dir, "p", "0700")
+  vim.fn.writefile(vim.split(vim.fn.getreg("z"), "\n"), dir .. "/selection")
+  vim.fn.jobstart({ "herdr", "plugin", "action", "invoke", "annotate.capture" })
+end, opts("Annotate in Herdr"))

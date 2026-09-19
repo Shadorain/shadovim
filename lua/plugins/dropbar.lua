@@ -1,6 +1,6 @@
 return {
   "Bekaboo/dropbar.nvim",
-  -- lazy = false,
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = { build = "make", "neovim/nvim-lspconfig", "xiyaowong/nvim-transparent" },
   config = function()
     local dropbar_api = require("dropbar.api")
